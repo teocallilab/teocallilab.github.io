@@ -19,7 +19,7 @@ renderer.setSize(width, height);
 var scene = new THREE.Scene(); // <- define esto primero
 
 var loader = new THREE.ImageLoader();
-loader.load('https://venturi.space/wp-content/uploads/2024/06/programme-eu-thumb.png', function(image) {
+loader.load('https://venturi.space/wp-content/uploads/2024/06/programme-eu-thumb.webp', function(image) {
     var canvas = document.createElement('canvas');
     canvas.width = image.width;
     canvas.height = image.height;
