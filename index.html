@@ -1,56 +1,185 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Sitio oficial de Teocalli Lab. Investigación, cultura y comunidad."/>
-  <title>Teocalli Lab</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background-color: #222;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    main {
-      flex: 1;
-      padding: 2rem;
-      text-align: center;
-    }
-    footer {
-      background-color: #222;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-    }
-    a {
-      color: #fff;
-      text-decoration: underline;
-    }
-  </style>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TEOCALLI LAB | Análisis de y visualización de Datos </title>
+	<meta name="description" content="Diplomado en Analisis y Visualización de Datos">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Barlow:400,500,700|Playfair+Display" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
-  <header>
-    <h1>Bienvenido a Teocalli Lab</h1>
-    <p>Investigación, cultura y comunidad</p>
-  </header>
+<main>
+	<div class="content content--fixed">
+		<header class="teocalli-header">
+			<div class="logo-container">
+				<canvas id="spiralCanvas" class="logo-spiral"></canvas>
+				<span class="logo-text">TEOCALLI LAB</span>
+			</div>
+		</header>
+			
+		<nav class="nav-t">
+		</nav>
+	</div>
+	<div class="content">
+		<canvas class="scene scene--full" id="scene"></canvas>
 
-  <main>
-    <h2>¡Estamos construyendo algo increíble!</h2>
-    <p>Muy pronto encontrarás aquí información sobre nuestros proyectos, talleres y más.</p>
-  </main>
+		<div class="content__inner">
+			<h2 class="content__title">TEOCALLI</h2>
+			<h3 class="content__subtitle">Data Science</h2>
+			<p class="dip">Principios de Análisis &<br>Visualización de Datos</p>
+			<p class="dip">Especialízate en la análisis de datos desde cero y domínalo 
+			<br>Mejora tus habilidades de manera escalable con un programa innovador 
+			<br>Metodología de aprendizaje online y colaborativa.</p>
+		</div>
+	</div>
+</main>
+<script type="x-shader/x-vertex" id="wrapVertexShader">
+	attribute float size;
+	attribute vec3 color;
+	varying vec3 vColor;
+	void main() {
+		vColor = color;
+		vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+		gl_PointSize = size * ( 350.0 / - mvPosition.z );
+		gl_Position = projectionMatrix * mvPosition;
+	}
+</script>
+<script type="x-shader/x-fragment" id="wrapFragmentShader">
+	varying vec3 vColor;
+	uniform sampler2D texture;
+	void main(){
+		vec4 textureColor = texture2D( texture, gl_PointCoord );
+		if ( textureColor.a < 0.3 ) discard;
+		vec4 color = vec4(vColor.xyz, 1.0) * textureColor;
+		gl_FragColor = color;
+	}
+</script>
 
-  <footer>
-    <p>&copy; 2025 Teocalli Lab | <a href="mailto:contacto@teocallilab.com">Contáctanos</a></p>
-  </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var waves = new SineWaves({
+      el: document.getElementById('sineCanvas'),
+      speed: 2,
+      width: function () {
+        return window.innerWidth;
+      },
+      height: function () {
+        return window.innerHeight;
+      },
+      ease: 'SineInOut',
+      wavesWidth: '100%',
+      waves: [
+        {
+          timeModifier: 1,
+          lineWidth: 2,
+          amplitude: 150,
+          wavelength: 200,
+          segmentLength: 20,
+          strokeStyle: 'rgba(255,255,255,0.5)'
+        },
+        {
+          timeModifier: 1.5,
+          lineWidth: 2,
+          amplitude: 100,
+          wavelength: 150,
+          segmentLength: 20,
+          strokeStyle: 'rgba(255,255,255,0.3)'
+        },
+        {
+          timeModifier: 1.2,
+          lineWidth: 2,
+          amplitude: 200,
+          wavelength: 300,
+          segmentLength: 20,
+          strokeStyle: 'rgba(255,255,255,0.2)'
+        }
+      ],
+      initialize: function () {},
+      resizeEvent: function () {}
+    });
+  });
+</script>
+
+<script type="module">
+	import * as THREE from 'https://cdn.skypack.dev/three@0.152.2';
+	function createPrehispanicSpiral(canvasId, size = 100, scale = 1, color = 0xac1122) {
+  const canvas = document.getElementById(canvasId);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+  camera.position.z = 200 / scale;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+  renderer.setSize(size, size);
+  renderer.setPixelRatio(window.devicePixelRatio);
+
+  const group = new THREE.Group();
+  group.scale.set(scale, scale, scale);
+  scene.add(group);
+
+  const material = new THREE.LineBasicMaterial({
+    color: color,
+    transparent: true,
+    opacity: 1
+  });
+
+  const points = [];
+  const steps = 60;
+  let x = 0, y = 0;
+  let step = 10;
+  let dir = 0;
+
+  for (let i = 1; i <= steps; i++) {
+    switch (dir % 4) {
+      case 0: x += step; break;
+      case 1: y += step; break;
+      case 2: x -= step; break;
+      case 3: y -= step; break;
+    }
+    points.push(new THREE.Vector3(x, y, 0));
+    if (i % 2 === 0) step += 10;
+    dir++;
+  }
+
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  geometry.setDrawRange(0, 0);
+  const line = new THREE.Line(geometry, material);
+  group.add(line);
+
+  let drawCount = 0;
+  const maxDraw = points.length;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (drawCount < maxDraw) {
+      drawCount += 0.5;
+      geometry.setDrawRange(0, Math.floor(drawCount));
+    }
+    group.rotation.z += 0.0025;
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+
+	createPrehispanicSpiral("spiralCanvas",60,1,0xac1122);
+	createPrehispanicSpiral("spiralCanvas2",370,1,0xffffff);
+
+</script>
+
+
+<script src="js/three.min.js"></script>
+<script src="js/TweenMax.min.js"></script>
+<script src="js/header.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/sine-waves.min.js"></script>
+<script src="js/parallax.js"></script>
+<script src="js/card.js"></script>
+<script src="js/animaciones.js"></script>
+<script src="js/btn.js"></script>
+<script src="js/popup.js"></script>
 </body>
-    </html>
+</html>
