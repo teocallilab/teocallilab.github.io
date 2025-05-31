@@ -19,7 +19,7 @@ renderer.setSize(width, height);
 var scene = new THREE.Scene(); // <- define esto primero
 
 var loader = new THREE.ImageLoader();
-loader.load('https://images.pexels.com/photos/3910141/pexels-photo-3910141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', function(image) {
+loader.load('https://images.pexels.com/photos/2832071/pexels-photo-2832071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', function(image) {
     var canvas = document.createElement('canvas');
     canvas.width = image.width;
     canvas.height = image.height;
