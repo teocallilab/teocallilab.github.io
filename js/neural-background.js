@@ -45,7 +45,6 @@ class NeuralBackground {
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             z-index: -1;
         `;
         this.canvas.parentNode.insertBefore(fallback, this.canvas);
@@ -169,3 +168,4 @@ class NeuralBackground {
         requestAnimationFrame(this.render);
     }
 }
+
