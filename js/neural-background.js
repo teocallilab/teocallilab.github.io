@@ -131,8 +131,20 @@ class NeuralBackground {
 
     resizeCanvas() {
         const { canvas, gl, devicePixelRatio } = this;
-        canvas.width = window.innerWidth * devicePixelRatio;
-        canvas.height = window.innerHeight * devicePixelRatio;
+        
+        // En móviles, limitar la resolución para mejor rendimiento
+        const pixelRatio = this.isMobile ? 1 : devicePixelRatio;
+        
+        canvas.width = window.innerWidth * pixelRatio;
+        canvas.height = window.innerHeight * pixelRatio;
+        
+        // Asegurar que el canvas no interfiera con otros elementos
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.zIndex = '-1';
         
         if (gl && this.uniforms) {
             gl.uniform1f(this.uniforms.u_ratio, canvas.width / canvas.height);
