@@ -168,7 +168,29 @@
             <p>&copy; TEOCALLI LAB 2025. ALL RIGHTS RESERVED</p>
         </div>
     </footer>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Verificar que las secciones existen
+    const heroSection = document.querySelector('.hero-section');
+    const cursosSection = document.querySelector('.cursos-section');
+    
+    console.log('Hero section found:', !!heroSection);
+    console.log('Cursos section found:', !!cursosSection);
+    
+    if (cursosSection) {
+        console.log('Cursos section styles:', window.getComputedStyle(cursosSection));
+        console.log('Cursos section position:', cursosSection.getBoundingClientRect());
+    }
+    
+    // Forzar visibilidad de la sección de cursos
+    if (cursosSection) {
+        cursosSection.style.display = 'block';
+        cursosSection.style.visibility = 'visible';
+        cursosSection.style.position = 'relative';
+        cursosSection.style.zIndex = '10';
+    }
+});
+</script>
 <!-- Scripts externos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -180,4 +202,5 @@
 </body>
 
 </html> 
+
 
