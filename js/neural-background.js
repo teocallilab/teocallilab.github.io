@@ -5,18 +5,50 @@ class NeuralBackground {
         this.pointer = { x: 0, y: 0, tX: 0, tY: 0 };
         this.uniforms = null;
         this.gl = null;
-            
+        this.isMobile = this.detectMobile();
+        
         this.init();
     }
 
+    detectMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+    }
+
     init() {
+        // En móviles, usar un fallback más simple
+        if (this.isMobile) {
+            this.canvas.style.display = 'none';
+            this.createMobileFallback();
+            return;
+        }
+        
         this.gl = this.initShader();
-        if (!this.gl) return;
+        if (!this.gl) {
+            this.createMobileFallback();
+            return;
+        }
         
         this.setupEvents();
         this.resizeCanvas();
         window.addEventListener("resize", () => this.resizeCanvas());
         this.render();
+    }
+
+    createMobileFallback() {
+        // Crear un fondo alternativo para móviles
+        const fallback = document.createElement('div');
+        fallback.className = 'mobile-background-fallback';
+        fallback.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            z-index: -1;
+        `;
+        this.canvas.parentNode.insertBefore(fallback, this.canvas);
     }
 
     initShader() {
@@ -26,8 +58,8 @@ class NeuralBackground {
             return null;
         }
 
-        const vertexShader = this.createShader(gl, this.getVertexShaderSource(), gl.VERTEX_SHADER);
-        const fragmentShader = this.createShader(gl, this.getFragmentShaderSource(), gl.FRAGMENT_SHADER);
+        const vertexShader = this.createShader(gl, document.getElementById("vertShader").innerHTML, gl.VERTEX_SHADER);
+        const fragmentShader = this.createShader(gl, document.getElementById("fragShader").innerHTML, gl.FRAGMENT_SHADER);
         
         if (!vertexShader || !fragmentShader) return null;
 
@@ -48,75 +80,7 @@ class NeuralBackground {
         return gl;
     }
 
-    getVertexShaderSource() {
-        return `
-            precision mediump float;
-            varying vec2 vUv;
-            attribute vec2 a_position;
-            
-            void main() {
-                vUv = 0.5 * (a_position + 1.0);
-                gl_Position = vec4(a_position, 0.0, 1.0);
-            }
-        `;
-    }
 
-    getFragmentShaderSource() {
-        return `
-            precision mediump float;
-            varying vec2 vUv;
-            uniform float u_time;
-            uniform float u_ratio;
-            uniform vec2 u_pointer_position;
-
-            const int ITERATIONS = 12;
-            const float SCALE_FACTOR = 1.15;
-            const vec3 BRAND_COLOR = vec3(0.67, 0.07, 0.13);
-
-            vec2 rotate(vec2 uv, float angle) {
-                float c = cos(angle);
-                float s = sin(angle);
-                return mat2(c, s, -s, c) * uv;
-            }
-
-            float neuro_shape(vec2 uv, float t, float p) {
-                vec2 sine_acc = vec2(0.0);
-                vec2 res = vec2(0.0);
-                float scale = 8.0;
-                
-                for (int j = 0; j < ITERATIONS; j++) {
-                    uv = rotate(uv, 1.0);
-                    sine_acc = rotate(sine_acc, 1.0);
-                    vec2 layer = uv * scale + float(j) + sine_acc - t;
-                    sine_acc += sin(layer);
-                    res += (0.5 + 0.5 * cos(layer)) / scale;
-                    scale *= SCALE_FACTOR - 0.07 * p;
-                }
-                return res.x + res.y;
-            }
-
-            void main() {
-                vec2 uv = 0.5 * vUv;
-                uv.x *= u_ratio;
-                
-                vec2 pointer = vUv - u_pointer_position;
-                pointer.x *= u_ratio;
-                float p = clamp(length(pointer), 0.0, 1.0);
-                p = 0.3 * (1.0 - p) * (1.0 - p);
-                
-                float noise = neuro_shape(uv, u_time * 0.0008, p);
-                noise = 0.8 * noise * noise * noise;
-                noise += pow(noise, 12.0);
-                noise = max(0.0, noise - 0.7);
-                noise *= (1.0 - length(vUv - 0.5));
-                
-                // Efecto más sutil y menos brillante
-                vec3 color = mix(BRAND_COLOR * 0.4, vec3(0.8), noise * 0.15) * noise;
-                
-                gl_FragColor = vec4(color, noise * 0.3);
-            }
-        `;
-    }
 
     createShader(gl, source, type) {
         const shader = gl.createShader(type);
