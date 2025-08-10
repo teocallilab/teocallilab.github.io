@@ -665,17 +665,6 @@ body {
     }
 }
 
-/* Garantizar visibilidad en móviles */
-.cursos-section,
-.instructores-section,
-.site-footer {
-    display: block !important;
-    visibility: visible !important;
-    position: relative !important;
-    width: 100% !important;
-    min-height: auto !important;
-}
-
 /* Fix específico para móviles */
 @media screen and (max-width: 768px) {
     .hero-section {
@@ -701,3 +690,4 @@ body {
         pointer-events: none;
     }
 }
+
