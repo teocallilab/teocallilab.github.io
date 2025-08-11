@@ -153,7 +153,7 @@ body {
     color: #fff;
     text-decoration: none;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: clamp(1rem, 3vw, 0.8rem);
     font-weight: 600;
     letter-spacing: 0.5px;
     position: relative; 
@@ -690,4 +690,5 @@ body {
         pointer-events: none;
     }
 }
+
 
