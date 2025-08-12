@@ -766,6 +766,10 @@ body {
 
         /* Media Queries para pantallas muy pequeñas */
         @media screen and (max-width: 480px) {
+            .hero-background {
+                    width: 80%;
+                    height: 80%;
+                }
             .hero-title {
                 font-size: 2.2rem;
             }
@@ -1185,6 +1189,7 @@ body {
                 font-size: 1rem;
             }
         }
+
 
 
 
