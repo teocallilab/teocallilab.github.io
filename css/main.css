@@ -195,7 +195,14 @@ h2{
     height: 32px;
   }
 }
-
+@media screen and (max-width: 768px) {
+    .hero-background {
+        width: 70%;
+        height: 70%;
+        opacity: 0.2;
+        transform: translate(-50%, -80%); /* Cambia -50% por un valor menor */
+    }
+}
 /*Seciones de contenido*/
 .certificacion-section {
   background-color: #f9f9f9;
@@ -988,4 +995,5 @@ a.btn-outline-glow {
   color: white;
   box-shadow: 0 0 10px #ac1122;
 }
+
 
