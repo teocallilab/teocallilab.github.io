@@ -695,6 +695,7 @@ body {
             .section-description {
                 margin-bottom: 35px;
                 font-size: 1rem;
+                text-align: justify;
             }
 
             .info-section, .support-section, .registration-section {
@@ -816,6 +817,7 @@ body {
                 min-width: 44px;
             }
         }
+
 
 
 
