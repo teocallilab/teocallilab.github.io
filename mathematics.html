@@ -416,7 +416,25 @@
                 }
             });
         });
+// Funcionalidad del botón Scroll to Top
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        // Mostrar/ocultar botón basado en scroll
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
 
+        // Scroll suave al hacer clic
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
         // Funcionalidad del menú móvil (si se implementa navegación)
         document.querySelector('.mobile-menu-btn')?.addEventListener('click', function() {
             // Aquí se puede agregar la funcionalidad del menú móvil
@@ -451,6 +469,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </body>
 </html> 
+
 
 
 
