@@ -817,6 +817,263 @@ body {
                 min-width: 44px;
             }
         }
+/* Contacto Section */
+        .contacto-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+        }
+
+        .contacto-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contacto-intro {
+            margin-bottom: 50px;
+        }
+
+        .contacto-intro p {
+            font-size: 1.2rem;
+            color: #ccc;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contacto-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .contact-card {
+            background: linear-gradient(145deg, #111 0%, #1a1a1a 100%);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-card:hover {
+            border-color: #25D366;
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.2);
+        }
+
+        .email-card:hover {
+            border-color: #AC1122;
+            box-shadow: 0 20px 40px rgba(172, 17, 34, 0.2);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-icon {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+        }
+
+        .email-icon {
+            background: linear-gradient(135deg, #AC1122, #d41738);
+            color: #fff;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1);
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .contact-description {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .contact-link {
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-number, .contact-email {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-link .contact-number {
+            color: #25D366;
+        }
+
+        .email-link .contact-email {
+            color: #AC1122;
+        }
+
+        .contact-action {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .whatsapp-link .contact-action {
+            background: transparent;
+            color: #25D366;
+            border-color: #25D366;
+        }
+
+        .whatsapp-link:hover .contact-action {
+            background: #25D366;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .email-link .contact-action {
+            background: transparent;
+            color: #AC1122;
+            border-color: #AC1122;
+        }
+
+        .email-link:hover .contact-action {
+            background: #AC1122;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .contacto-footer {
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+
+        .contacto-footer p {
+            color: #999;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        /* Efectos adicionales para las cards de contacto */
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-card:hover::before {
+            left: 100%;
+        }
+
+        /* Touch targets más grandes en móvil */
+        @media (hover: none) and (pointer: coarse) {
+            .btn-primary, .btn-secondary, .contact-link {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Media Queries para Contacto */
+        @media screen and (max-width: 768px) {
+            .contacto-section {
+                padding: 60px 15px;
+            }
+
+            .contacto-intro p {
+                font-size: 1.1rem;
+            }
+
+            .contacto-methods {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-bottom: 40px;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+            }
+
+            .contact-icon {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 20px;
+            }
+
+            .contact-icon svg {
+                width: 35px;
+                height: 35px;
+            }
+
+            .contact-title {
+                font-size: 1.5rem;
+            }
+
+            .contact-number, .contact-email {
+                font-size: 1.1rem;
+            }
+
+            .contact-action {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .contact-card {
+                padding: 25px 15px;
+            }
+
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .contact-icon svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .contact-title {
+                font-size: 1.3rem;
+            }
+
+            .contact-number, .contact-email {
+                font-size: 1rem;
+            }
+        }
+
 
 
 
