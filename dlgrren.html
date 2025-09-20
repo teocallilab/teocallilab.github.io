@@ -31,7 +31,10 @@
             padding: 80px 20px;
             position: relative;
         }
-
+        .timeline-final{
+            text-align: center;
+            margin-top: 60px    ;
+        }
         /* Partículas flotantes animadas */
         .particle {
             position: absolute;
@@ -422,11 +425,13 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* Sección final épica */
-        .timeline-final {
-            margin-top: 120px;
+        /* Sección TESTING FREE independiente */
+        .testing-section {
+            margin-top: -160px;
             text-align: center;
+            padding: 0 20px;
             position: relative;
+            z-index: 1;
         }
 
         .final-badge {
@@ -471,8 +476,8 @@
             }
 
             .timeline-left, .timeline-right {
-                width: calc(100% - 80px);
-                margin-left: 80px;
+                width: calc(100% - 70px);
+                margin-left: 70px;
                 padding: 0;
                 align-items: flex-start;
                 text-align: left;
@@ -480,14 +485,19 @@
 
             .organic-badge {
                 margin-bottom: 20px;
-                min-width: 180px;
+                min-width: 160px;
                 font-size: 16px;
+                padding: 20px 30px;
+                width: 100%;
+                max-width: 280px;
             }
 
             .description-box {
                 max-width: none;
+                width: 100%;
                 padding: 25px;
                 font-size: 15px;
+                margin-bottom: 20px;
             }
 
             .connector-line {
@@ -496,38 +506,114 @@
 
             .main-title h1 {
                 font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .main-title .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .main-title {
+                margin-bottom: 80px;
             }
 
             .timeline-start-icon, .timeline-end-icon {
                 width: 80px;
                 height: 80px;
             }
+
+            .timeline-start-icon::before, .timeline-end-icon::before {
+                font-size: 32px;
+            }
+
+            .timeline-item {
+                margin: 80px 0;
+            }
+
+            .timeline {
+                padding: 80px 0;
+            }
+
+            .timeline-container {
+                padding: 40px 15px;
+            }
+
+            .testing-section {
+                margin-top: -120px;
+                padding: 0 15px;
+            }
+
+            .final-badge {
+                font-size: 20px;
+                padding: 25px 50px;
+            }
+
+            /* Asegurar que todos los elementos tengan el mismo ancho */
+            .timeline-content-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline::before {
+                left: 25px;
+            }
+
+            .timeline-marker {
+                left: 25px;
+                width: 20px;
+                height: 20px;
+            }
+
+            .timeline-left, .timeline-right {
+                width: calc(100% - 55px);
+                margin-left: 55px;
+            }
+
+            .organic-badge {
+                min-width: 140px;
+                padding: 18px 25px;
+                font-size: 15px;
+                max-width: 250px;
+            }
+
+            .description-box {
+                padding: 20px;
+                font-size: 14px;
+            }
+
+            .main-title h1 {
+                font-size: 2rem;
+            }
+
+            .main-title .subtitle {
+                font-size: 1rem;
+            }
+
+            .timeline-start-icon, .timeline-end-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .timeline-start-icon::before, .timeline-end-icon::before {
+                font-size: 28px;
+            }
+
+            .final-badge {
+                font-size: 18px;
+                padding: 20px 40px;
+                margin-left: 0;
+            }
+
+            .timeline-container {
+                padding: 30px 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Partículas flotantes -->
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-
     <div class="timeline-container">
         <div class="main-title">
             <h1>CONECTAMOS LA INSPIRACIÓN</h1>
@@ -622,99 +708,173 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- Ícono final -->
             <div class="timeline-end-icon"></div>
-        </div>
-           
+        </div>  
+        <!-- Sección final -->
+            <div class="timeline-final">
+                <div class="final-badge">
+                    TESTING FREE
+                </div>
+            </div>
     </div>
 
     <script>
-        // Animaciones avanzadas con Intersection Observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.timeline-item').forEach((item) => {
-            observer.observe(item);
-        });
-
-        // Efecto de paralaje en el scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.particle');
+        // Optimized timeline animations with performance improvements
+        document.addEventListener('DOMContentLoaded', function() {
             
-            parallaxElements.forEach((element, index) => {
-                const speed = (index + 1) * 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
+            // Enhanced Intersection Observer for timeline elements
+            const observerOptions = {
+                threshold: [0, 0.1, 0.5],
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        // Efectos hover mejorados con sonido visual
-        document.querySelectorAll('.organic-badge').forEach((badge) => {
-            badge.addEventListener('mouseenter', function() {
-                this.style.filter = 'brightness(1.2) saturate(1.3)';
-                this.style.boxShadow = '0 40px 80px rgba(0, 210, 255, 0.5), 0 0 0 15px rgba(255, 255, 255, 0.1)';
-            });
-            
-            badge.addEventListener('mouseleave', function() {
-                this.style.filter = 'brightness(1) saturate(1)';
-                this.style.boxShadow = '';
-            });
-        });
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        entry.target.style.animationPlayState = 'running';
+                        
+                        // Add staggered animation delay for smooth appearance
+                        const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
+                        entry.target.style.animationDelay = `${index * 0.15}s`;
+                    }
+                });
+            }, observerOptions);
 
-        // Efecto de ripple en clicks
-        document.querySelectorAll('.organic-badge, .final-badge').forEach(element => {
-            element.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(255, 255, 255, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple-effect 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
+            // Observe all timeline items
+            document.querySelectorAll('.timeline-item').forEach((item) => {
+                timelineObserver.observe(item);
             });
-        });
 
-        // Añadir keyframes para el ripple
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple-effect {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
+            // Enhanced hover effects for badges
+            document.querySelectorAll('.organic-badge').forEach((badge) => {
+                badge.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.05)';
+                    this.style.filter = 'brightness(1.2) saturate(1.3)';
+                    this.style.boxShadow = '0 25px 50px rgba(76, 175, 80, 0.4), 0 0 0 10px rgba(255, 255, 255, 0.1)';
+                    this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+                
+                badge.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.filter = '';
+                    this.style.boxShadow = '';
+                });
+            });
+
+            // Improved ripple effect
+            document.querySelectorAll('.organic-badge, .final-badge').forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove existing ripples
+                    const existingRipples = this.querySelectorAll('.ripple');
+                    existingRipples.forEach(ripple => ripple.remove());
+                    
+                    // Create new ripple
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height) * 1.2;
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.className = 'ripple';
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple-effect 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                        pointer-events: none;
+                        z-index: 1;
+                    `;
+                    
+                    // Ensure parent has relative positioning
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    // Remove ripple after animation
+                    setTimeout(() => {
+                        if (ripple && ripple.parentNode) {
+                            ripple.remove();
+                        }
+                    }, 600);
+                });
+            });
+
+            // Smooth scroll behavior for better UX
+            if ('scrollBehavior' in document.documentElement.style) {
+                document.documentElement.style.scrollBehavior = 'smooth';
             }
-        `;
-        document.head.appendChild(style);
+
+            // Performance optimization: Reduce unnecessary repaints
+            let ticking = false;
+            
+            function updateAnimations() {
+                // Any scroll-based animations would go here
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(updateAnimations);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Add CSS for ripple effect
+            if (!document.getElementById('ripple-styles')) {
+                const rippleStyles = document.createElement('style');
+                rippleStyles.id = 'ripple-styles';
+                rippleStyles.textContent = `
+                    @keyframes ripple-effect {
+                        0% {
+                            transform: scale(0);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: scale(1);
+                            opacity: 0;
+                        }
+                    }
+                    
+                    .timeline-item {
+                        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+                    }
+                    
+                    .timeline-item.visible {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                    
+                    /* Smooth transitions for all interactive elements */
+                    .organic-badge, .final-badge, .description-box {
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+                `;
+                document.head.appendChild(rippleStyles);
+            }
+
+            // Preload critical animations
+            const criticalElements = document.querySelectorAll('.timeline-marker, .organic-badge, .final-badge');
+            criticalElements.forEach(element => {
+                element.style.willChange = 'transform, opacity';
+            });
+
+            // Clean up will-change after animations complete
+            setTimeout(() => {
+                criticalElements.forEach(element => {
+                    element.style.willChange = 'auto';
+                });
+            }, 3000);
+
+        });
     </script>
 </body>
 </html>
