@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Espectacular - Futuro de la Iluminación</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 195, 74, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(76, 175, 80, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(46, 125, 50, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, #81C784 0%, #66BB6A 25%, #4CAF50 50%, #388E3C 75%, #2E7D32 100%);
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .timeline-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        /* Partículas flotantes animadas */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float-particle 8s infinite linear;
+        }
+
+        .particle:nth-child(1) { left: 5%; animation-delay: 0s; width: 3px; height: 3px; }
+        .particle:nth-child(2) { left: 15%; animation-delay: 1s; width: 5px; height: 5px; }
+        .particle:nth-child(3) { left: 25%; animation-delay: 2s; width: 4px; height: 4px; }
+        .particle:nth-child(4) { left: 35%; animation-delay: 3s; width: 6px; height: 6px; }
+        .particle:nth-child(5) { left: 45%; animation-delay: 4s; width: 3px; height: 3px; }
+        .particle:nth-child(6) { left: 55%; animation-delay: 5s; width: 4px; height: 4px; }
+        .particle:nth-child(7) { left: 65%; animation-delay: 6s; width: 5px; height: 5px; }
+        .particle:nth-child(8) { left: 75%; animation-delay: 7s; width: 3px; height: 3px; }
+        .particle:nth-child(9) { left: 85%; animation-delay: 1.5s; width: 4px; height: 4px; }
+        .particle:nth-child(10) { left: 95%; animation-delay: 2.5s; width: 6px; height: 6px; }
+        .particle:nth-child(11) { left: 10%; animation-delay: 3.5s; width: 3px; height: 3px; }
+        .particle:nth-child(12) { left: 20%; animation-delay: 4.5s; width: 5px; height: 5px; }
+        .particle:nth-child(13) { left: 30%; animation-delay: 5.5s; width: 4px; height: 4px; }
+        .particle:nth-child(14) { left: 40%; animation-delay: 6.5s; width: 3px; height: 3px; }
+        .particle:nth-child(15) { left: 50%; animation-delay: 7.5s; width: 4px; height: 4px; }
+        .particle:nth-child(16) { left: 60%; animation-delay: 0.5s; width: 5px; height: 5px; }
+        .particle:nth-child(17) { left: 70%; animation-delay: 1.2s; width: 3px; height: 3px; }
+        .particle:nth-child(18) { left: 80%; animation-delay: 2.8s; width: 6px; height: 6px; }
+        .particle:nth-child(19) { left: 90%; animation-delay: 4.2s; width: 4px; height: 4px; }
+        .particle:nth-child(20) { left: 8%; animation-delay: 5.8s; width: 5px; height: 5px; }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        /* Título principal con efecto holográfico */
+        .main-title {
+            text-align: center;
+            margin-bottom: 120px;
+            position: relative;
+        }
+
+        .main-title h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            background: linear-gradient(45deg, #AED581, #66BB6A, #42A5F5, #1E88E5, #0D47A1);
+            background-size: 300% 300%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: holographic 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .main-title .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            margin-top: 20px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        @keyframes holographic {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .timeline {
+            position: relative;
+            padding: 100px 0;
+        }
+
+        /* Línea central con pulso de energía */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 100px;
+            height: calc(100% - 200px);
+            width: 4px;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                #AED581 20%, 
+                #66BB6A 40%, 
+                #42A5F5 60%, 
+                #1E88E5 80%, 
+                transparent 100%);
+            transform: translateX(-50%);
+            z-index: 1;
+            animation: energy-pulse 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(102, 187, 106, 0.6);
+        }
+
+        @keyframes energy-pulse {
+            0%, 100% { 
+                opacity: 0.7;
+                box-shadow: 0 0 20px rgba(102, 187, 106, 0.6);
+            }
+            50% { 
+                opacity: 1;
+                box-shadow: 0 0 40px rgba(66, 165, 245, 1);
+            }
+        }
+
+        /* Íconos flotantes */
+        .timeline-start-icon, .timeline-end-icon {
+            position: absolute;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #66BB6A, #42A5F5);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 20px 40px rgba(102, 187, 106, 0.4),
+                0 0 0 10px rgba(255, 255, 255, 0.1),
+                0 0 0 20px rgba(255, 255, 255, 0.05);
+            animation: float-icon 6s ease-in-out infinite;
+        }
+
+        .timeline-start-icon {
+            top: 0;
+        }
+
+        .timeline-end-icon {
+            bottom: 0;
+        }
+
+        .timeline-start-icon::before {
+            content: '⚡';
+            font-size: 40px;
+            animation: rotate-icon 4s linear infinite;
+        }
+
+        .timeline-end-icon::before {
+            content: '🎯';
+            font-size: 40px;
+            animation: pulse-icon 2s ease-in-out infinite;
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @keyframes rotate-icon {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 120px 0;
+            opacity: 0;
+            animation: slide-in 1s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(odd) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(even) { animation-delay: 0.4s; }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Marcadores con efecto quantum */
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, #AED581, #1E88E5);
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            animation: quantum-pulse 2s ease-in-out infinite;
+            box-shadow: 
+                0 0 20px rgba(102, 187, 106, 0.8),
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes quantum-pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 20px rgba(102, 187, 106, 0.8);
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.3);
+                box-shadow: 0 0 40px rgba(30, 136, 229, 1);
+            }
+        }
+
+        .timeline-content-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .timeline-left, .timeline-right {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .timeline-left {
+            padding-right: 80px;
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .timeline-right {
+            padding-left: 80px;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        /* Badges con morfismo avanzado */
+        .organic-badge {
+            position: relative;
+            padding: 25px 35px;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            min-width: 220px;
+            z-index: 3;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            overflow: hidden;
+        }
+
+        .timeline-left .organic-badge {
+            background: linear-gradient(135deg, #66BB6A, #4CAF50);
+            box-shadow: 
+                0 20px 40px rgba(76, 175, 80, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-right .organic-badge {
+            background: linear-gradient(135deg, #42A5F5, #1E88E5);
+            box-shadow: 
+                0 20px 40px rgba(66, 165, 245, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .organic-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .organic-badge:hover::before {
+            left: 100%;
+        }
+
+        .organic-badge:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                0 30px 60px rgba(76, 175, 80, 0.4),
+                0 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Líneas conectoras con efecto láser */
+        .connector-line {
+            height: 3px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 80px;
+            background: linear-gradient(90deg, #66BB6A, #42A5F5);
+            box-shadow: 0 0 10px rgba(102, 187, 106, 0.6);
+            animation: laser-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes laser-pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .timeline-left .connector-line {
+            right: 0;
+        }
+
+        .timeline-right .connector-line {
+            left: 0;
+        }
+
+        /* Cajas de descripción con glassmorphism extremo */
+        .description-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 35px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ffffff;
+            width: 100%;
+            max-width: 380px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .description-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #AED581, #66BB6A, #42A5F5);
+            background-size: 200% 100%;
+            animation: rainbow-flow 3s linear infinite;
+        }
+
+        @keyframes rainbow-flow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .description-box:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-8px);
+            box-shadow: 
+                0 35px 70px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        /* Íconos flotantes en las cajas */
+        .description-box::after {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 24px;
+            animation: float-gentle 3s ease-in-out infinite;
+        }
+
+        .timeline-item:nth-child(1) .description-box::after { content: '🎨'; }
+        .timeline-item:nth-child(2) .description-box::after { content: '🌱'; }
+        .timeline-item:nth-child(3) .description-box::after { content: '♻️'; }
+        .timeline-item:nth-child(4) .description-box::after { content: '⚡'; }
+        .timeline-item:nth-child(5) .description-box::after { content: '💡'; }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Sección final épica */
+        .timeline-final {
+            margin-top: 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        .final-badge {
+            display: inline-block;
+            padding: 30px 60px;
+            background: linear-gradient(45deg, #66BB6A, #4CAF50, #42A5F5, #1E88E5);
+            background-size: 300% 300%;
+            animation: gradient-shift 4s ease infinite;
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 50px;
+            box-shadow: 
+                0 30px 60px rgba(102, 187, 106, 0.4),
+                0 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .final-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 40px 80px rgba(102, 187, 106, 0.6),
+                0 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-marker {
+                left: 30px;
+            }
+
+            .timeline-left, .timeline-right {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                padding: 0;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .organic-badge {
+                margin-bottom: 20px;
+                min-width: 180px;
+                font-size: 16px;
+            }
+
+            .description-box {
+                max-width: none;
+                padding: 25px;
+                font-size: 15px;
+            }
+
+            .connector-line {
+                display: none;
+            }
+
+            .main-title h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline-start-icon, .timeline-end-icon {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas flotantes -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <div class="timeline-container">
+        <div class="main-title">
+            <h1>CONECTAMOS LA INSPIRACIÓN</h1>
+            <div class="subtitle">CON LA ILUMINACIÓN DEL FUTURO</div>
+        </div>
+
+        <div class="timeline">
+            <!-- Ícono inicial -->
+            <div class="timeline-start-icon"></div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-wrapper">
+                    <div class="timeline-left">
+                        <div class="connector-line"></div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="organic-badge">
+                            ASESORÍA<br>EN DISEÑO
+                        </div>
+                        <div class="description-box">
+                            Integramos soluciones enfocadas en eficiencia energética y tecnología inteligente, logrando espacios funcionales, sustentables y con mayor valor agregado para el futuro.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-wrapper">
+                    <div class="timeline-left">
+                        <div class="organic-badge">
+                            CERTIFICACIÓN<br>LEED
+                        </div>
+                        <div class="description-box">
+                            Ahorro energético de hasta un 40% con sistemas de iluminación eficientes (LED + control). Reduce costos operativos sobre un 20-25% en gastos de energía anuales con tecnología de vanguardia.
+                        </div>
+                        <div class="connector-line"></div>
+                    </div>
+                    <div class="timeline-right">
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-wrapper">
+                    <div class="timeline-left">
+                        <div class="connector-line"></div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="organic-badge">
+                            AMIGABLE<br>100%
+                        </div>
+                        <div class="description-box">
+                            Reducimos el impacto ambiental y las emisiones de CO₂, cuidamos la salud visual creando espacios más confortables, productivos y completamente amigables con el medio ambiente.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-wrapper">
+                    <div class="timeline-left">
+                        <div class="organic-badge">
+                            SISTEMA Y<br>CONTROL
+                        </div>
+                        <div class="description-box">
+                            Optimiza el consumo energético hasta en un 35% adicional, ofrece automatización inteligente y flexibilidad total en cada espacio. Garantiza máximo confort, seguridad y eficiencia operativa.
+                        </div>
+                        <div class="connector-line"></div>
+                    </div>
+                    <div class="timeline-right">
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-wrapper">
+                    <div class="timeline-left">
+                        <div class="connector-line"></div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="organic-badge">
+                            ALTA<br>ESPECIALIZACIÓN<br>EN ILUMINACIÓN
+                        </div>
+                        <div class="description-box">
+                            Integramos soluciones innovadoras para garantizar las normativas con precisión absoluta, con un amplio catálogo de marcas que nos permite ofrecer soluciones flexibles y personalizadas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Ícono final -->
+            <div class="timeline-end-icon"></div>
+        </div>
+           
+    </div>
+
+    <script>
+        // Animaciones avanzadas con Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item').forEach((item) => {
+            observer.observe(item);
+        });
+
+        // Efecto de paralaje en el scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.particle');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Efectos hover mejorados con sonido visual
+        document.querySelectorAll('.organic-badge').forEach((badge) => {
+            badge.addEventListener('mouseenter', function() {
+                this.style.filter = 'brightness(1.2) saturate(1.3)';
+                this.style.boxShadow = '0 40px 80px rgba(0, 210, 255, 0.5), 0 0 0 15px rgba(255, 255, 255, 0.1)';
+            });
+            
+            badge.addEventListener('mouseleave', function() {
+                this.style.filter = 'brightness(1) saturate(1)';
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Efecto de ripple en clicks
+        document.querySelectorAll('.organic-badge, .final-badge').forEach(element => {
+            element.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple-effect 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Añadir keyframes para el ripple
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple-effect {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
