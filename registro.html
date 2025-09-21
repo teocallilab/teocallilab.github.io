@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smarter Lighting Design</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">     
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        i {
+            color: #fff;
+            font-size: 4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2)), 
+                        url('https://dlgreen.mx/wp-content/uploads/2025/01/background2-2025.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(96, 150, 128, 0.1) 0%, transparent 50%);
+            animation: heroGlow 6s ease-in-out infinite alternate;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: slideInLeft 1s ease-out 0.5s forwards;
+        }
+
+        .hero .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #64ffda, #609680, #AAC237, #64ffda);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite, slideInRight 1s ease-out 0.8s both;
+            text-shadow: 0 0 30px rgba(96, 150, 128, 0.3);
+        }
+
+        /* Deslumbrar Section */
+        .deslumbrar {
+            min-height: 50vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deslumbrar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(96, 150, 128, 0.05) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .deslumbrar-content {
+            text-align: center;
+            max-width: 900px;
+            z-index: 2;
+            color: white;
+        }   
+
+        .deslumbrar .main-word {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #609680;
+            text-shadow: 0 0 50px rgba(96, 150, 128, 0.4);
+            animation: glowPulse 3s ease-in-out infinite;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease-out;
+        }
+
+        .deslumbrar .main-word.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .deslumbrar .description {
+            font-size: 1.8rem;
+            line-height: 1.8;
+            font-weight: 300;
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+
+        .deslumbrar .description.first {
+            transform: translateX(-100px);
+        }
+
+        .deslumbrar .description.first.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .deslumbrar .description.last {
+            transform: translateX(100px);
+        }
+
+        .deslumbrar .description.last.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .deslumbrar .highlight {
+            color: #609680;
+            font-weight: 400;
+            line-height: 1.8rem;
+        }
+
+        /* Asesoramiento Section */
+        .asesoramiento {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 124, 112, 0.6), rgba(78, 143, 119, 0.7)), 
+                        url('https://dlgreen.mx/wp-content/uploads/2024/06/bg_banner.webp') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .asesoramiento::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(170, 194, 55, 0.1) 0%, transparent 50%);
+            animation: floatEffect 8s ease-in-out infinite;
+        }
+
+        .asesoramiento-content {
+            text-align: center;
+            max-width: 1000px;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .asesoramiento .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2.5rem;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(-100px) scale(0.9);
+            transition: all 1.2s ease-out;
+        }
+
+        .asesoramiento .main-title.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .asesoramiento .subtitle {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1s ease-out;
+            transition-delay: 0.3s;
+        }
+
+        .asesoramiento .subtitle.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .asesoramiento .question {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 4rem;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 1s ease-out;
+            transition-delay: 0.6s;
+        }
+
+        .asesoramiento .question.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .cta-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+            transition-delay: 0.9s;
+        }
+
+        .cta-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hazclick {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #AAC237;
+            animation: glow 2s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+        }
+
+        .hazclick:hover {
+            transform: scale(1.05);
+        }
+
+        .arrow{
+            color:#fff;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-btn {
+            color: #fff;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: floatWhatsApp 3s ease-in-out infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.2) rotate(5deg);
+            color: #25d366;
+            text-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 1;
+            transform: translateX(-50%) scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(10px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                text-shadow: 0 0 50px rgba(96, 150, 128, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 80px rgba(96, 150, 128, 0.8), 0 0 100px rgba(96, 150, 128, 0.6);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 2px 10px rgba(170, 194, 55, 0.3);
+            }
+            to {
+                text-shadow: 0 2px 20px rgba(170, 194, 55, 0.6), 0 0 30px rgba(170, 194, 55, 0.4);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        @keyframes heroGlow {
+            0% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes floatEffect {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes floatWhatsApp {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design Updates */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .deslumbrar .main-word {
+                font-size: 2rem;
+            }
+            
+            .deslumbrar .description {
+                font-size: 1.5rem;
+            }
+            
+            .asesoramiento .main-title {
+                font-size: 2rem;
+            }
+            
+            .asesoramiento .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .asesoramiento .question {
+                font-size: 1.5rem;
+            }
+            
+            .hazclick {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .deslumbrar .main-word {
+                font-size: 3rem;
+            }
+            
+            .deslumbrar .description {
+                font-size: 1rem;
+            }
+            
+            .asesoramiento .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .asesoramiento .subtitle {
+                font-size: 1rem;
+            }
+            
+            .asesoramiento .question {
+                font-size: 1rem;
+            }
+            
+            .hazclick {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Intersection Observer Classes */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Smarter Lighting Design Ambiance</h1>
+            <h2 class="main-title">CONECTAMOS LA INSPIRACIÓN<br>CON LA ILUMINACIÓN</h2>
+        </div>
+        <div class="scroll-indicator">
+            <i class="bi bi-arrow-down"></i>
+        </div>
+    </section>
+
+    <!-- Deslumbrar Section -->
+    <section class="deslumbrar">
+        <div class="deslumbrar-content">
+            <p class="description highlight first fade-in-element">Te vamos a</p>
+            <p class="main-word fade-in-element">DESLUMBRAR</p>
+            <p class="description highlight last fade-in-element">
+                La iluminación es solo el 3% del costo de construcción... <br> pero puede definir el 100% de la experiencia de un espacio.
+            </p>
+        </div>
+    </section>
+
+    <!-- Asesoramiento Section -->
+    <section class="asesoramiento">
+        <div class="asesoramiento-content">
+            <h2 class="main-title fade-in-element">¡Te ofrecemos un asesoramiento inicial y levantamiento sin costo!</h2>
+            <p class="subtitle fade-in-element">Experimenta nuestro nivel de expertise, atención personalizada e innovación en nuestras integraciones.</p>
+            <p class="question fade-in-element">¿Agendamos una breve reunión para conocer tus proyectos y mostrarte cómo podemos aportar valor?</p>
+            
+            <div class="cta-section fade-in-element">
+                <div class="hazclick">HAZCLICK <br> <!--i class="bi bi-caret-down"></i--></div>
+                <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">
+                    <i class="bi bi-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="background-overlay"></div>
+    </section>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add a small delay to make the animation more noticeable
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, 100);
+                }
+            });
+        }, observerOptions);
+
+        // Staggered animation observer for elements that should animate in sequence
+        const staggerObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const elements = entry.target.querySelectorAll('.fade-in-element');
+                    elements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, index * 200 + 200); // Stagger by 200ms each
+                    });
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -150px 0px'
+        });
+
+        // Smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observe individual fade-in elements
+            const fadeElements = document.querySelectorAll('.fade-in-element');
+            fadeElements.forEach(el => observer.observe(el));
+
+            // Observe sections for staggered animations
+            const sections = document.querySelectorAll('.deslumbrar, .asesoramiento');
+            sections.forEach(section => staggerObserver.observe(section));
+
+            // Scroll indicator functionality
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function() {
+                    document.querySelector('.deslumbrar').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Enhanced scroll effects
+            window.addEventListener('scroll', function() {
+                const currentScrollY = window.scrollY;
+                
+                // Hide/show scroll indicator
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                if (scrollIndicator) {
+                    if (currentScrollY > 100) {
+                        scrollIndicator.style.opacity = '0';
+                        scrollIndicator.style.pointerEvents = 'none';
+                    } else {
+                        scrollIndicator.style.opacity = '0.7';
+                        scrollIndicator.style.pointerEvents = 'auto';
+                    }
+                }
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>
