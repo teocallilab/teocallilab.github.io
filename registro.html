@@ -472,6 +472,157 @@
             }
         }
 
+        /* Intersection Observer Classes */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        img.cta-img{
+            margin-top: 1rem;
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .timeline-header-img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        /* --------- TIMELINE STYLES --------- */
+        .timeline-section{
+            background: #9cc83f;
+            background-image: url("img/mariposas\ 1.png"); 
+            padding: 60px 20px;
+        }
+
+        .timeline{
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* línea central */
+        .timeline::before{
+            content:'';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            transform: translateX(-50%);
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.08);
+        }
+
+        /* cada item como grid de 3 columnas: izquierda / centro / derecha */
+        .timeline-item{
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            align-items: start;
+            position: relative;
+        }
+
+        /* círculo (siempre en la columna central) */
+        .timeline-item .circle{
+            grid-column: 2;
+            justify-self: center;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255,255,255,0.9);
+        }
+
+        /* contenido a la derecha/izquierda según clase */
+        .timeline-item.right .content{
+            grid-column: 3;
+            text-align: left;
+            padding-left: 20px;
+        }
+        .timeline-item.left .content{
+            grid-column: 1;
+            text-align: right;
+            padding-right: 20px;
+        }
+        .timeline-item.right .content .asesoria{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .timeline-item.left .content .leed{
+            display: flex;
+            justify-content: flex-start;
+        }
+        .timeline-item.right .content .amigable{
+             display: flex;
+            justify-content: flex-end;
+        }
+        .timeline-item.left .content .control{
+            display: flex;
+            justify-content: flex-start;
+        }
+        .timeline-item.right .content .especificacion {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .timeline-item.right .content .asesoria img{
+            text-align: right;
+            width: 50%;
+        }
+
+        .timeline-item.left .content .leed img{
+            text-align: left;
+            width: 50%;
+        }
+
+        .timeline-item.right .content .amigable img{
+            text-align: left;
+            width: 40%;
+        }
+
+        .timeline-item.left .content .control img{
+            text-align: left;
+            width: 50%;
+        }
+
+        .timeline-item.right .content .especificacion img{
+            text-align: left;
+            width: 50%;
+        }
+      
+
+        
+        /* tarjeta debajo de la forma */
+        .card{
+            background: rgba(255,255,255,0.95);
+            color: #222;
+            padding: 22px 26px;
+            margin-top: 18px;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+            display: inline-block;
+            max-width: 520px;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        /* para el caso de la columna izquierda queremos que el contenido (card) esté alineado al borde interno */
+        .timeline-item.left .card{ 
+            text-align: left; 
+        }
+
         /* Responsive Design Updates */
         @media (max-width: 768px) {
             .hero h1 {
@@ -504,6 +655,21 @@
             
             .hazclick {
                 font-size: 2.2rem;
+            }
+            .timeline-item.right .content .asesoria{
+            justify-content: flex-start;
+            }
+            .timeline-item.left .content .leed{
+                justify-content: flex-start;
+            }
+            .timeline-item.right .content .amigable{
+                justify-content: flex-start;
+            }
+            .timeline-item.left .content .control{
+                justify-content: flex-start;
+            }
+            .timeline-item.right .content .especificacion {
+                justify-content: flex-start;
             }
         }
 
@@ -541,16 +707,115 @@
             }
         }
 
-        /* Intersection Observer Classes */
-        .fade-in-element {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+        /* ------- MOBILE TIMELINE FIX -------- */
+        @media (max-width: 880px) {
+            .timeline {
+                padding-left: 60px;
+                padding-right: 20px;
+            }
+
+            /* Línea vertical a la izquierda */
+            .timeline::before {
+                left: 30px;
+                transform: none;
+            }
+
+            /* Items en una sola columna */
+            .timeline-item {
+                display: block;
+                padding: 40px 0;
+                position: relative;
+            }
+
+            /* Círculo alineado con la línea */
+            .timeline-item .circle {
+                position: absolute;
+                left: -40px;
+                top: 60px;
+                margin: 0;
+            }
+
+            /* Contenido uniforme */
+            .timeline-item .content {
+                margin-left: 60px;
+                text-align: left;
+                padding: 0;
+                width: calc(100vw - 120px); /* Ancho fijo basado en viewport */
+                max-width: 400px; /* Máximo para no ser demasiado ancho */
+            }
+
+            /* Shapes uniformes */
+            .shape {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                min-height: 60px;
+                padding: 15px 20px;
+                margin: 0;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: left center;
+                text-align: left;
+            }
+
+            .shape h3 {
+                font-size: 0.9rem;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Tarjetas con dimensiones fijas */
+            .card {
+                width: 100%;
+                max-width: 100%;
+                min-height: 100px; /* Altura mínima para uniformidad */
+                margin: 15px 0 0 0;
+                padding: 18px 20px;
+                box-sizing: border-box;
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+
+            /* Ajuste específico para que todas las tarjetas sean del mismo ancho */
+            .timeline-item.right .content,
+            .timeline-item.left .content {
+                width: calc(100vw - 100px);
+                max-width: 380px;
+                margin-left: 0px;
+                text-align: left;
+                padding: 0;
+            }
         }
 
-        .fade-in-element.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .timeline {
+                padding-left: 50px;
+                padding-right: 15px;
+            }
+
+            .timeline-item .content {
+                margin-left: 50px;
+                width: calc(100vw - 80px);
+                max-width: 320px;
+            }
+
+            .timeline-item.right .content,
+            .timeline-item.left .content {
+                width: calc(100vw - 80px);
+                max-width: 320px;
+                margin-left: 50px;
+            }
+
+            .card {
+                min-height: 80px;
+                font-size: 0.9rem;
+                padding: 15px 18px;
+            }
+
+            .shape h3 {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -577,7 +842,91 @@
         </div>
     </section>
 
-    <!-- Asesoramiento Section -->
+    
+
+    <!-- TIMELINE: empieza aquí -->
+    <section class="timeline-section">
+        <!-- Timeline Header -->
+        <div class="timeline-header">
+          <img src="https://dlgreen.mx/wp-content/uploads/2024/06/dl_green-white.svg" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
+        </div>
+      <div class="timeline">
+        
+        <!-- Item 1: DERECHA -->
+        <article class="timeline-item right">
+          <div class="circle"></div>
+          <div class="content">
+            <div class="asesoria">
+                <img src="img/cerebro 1.png"  alt="">
+            </div>
+            <div class="card">
+              <p>Integramos soluciones enfocadas en eficiencia energética y tecnología inteligente, logrando espacios funcionales, sustentables y con mayor valor agregado.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 2: IZQUIERDA -->
+        <article class="timeline-item left">
+          <div class="circle"></div>
+          <div class="content">
+            <!--div class="shape shape-leed"></div-->
+            <div class="leed">
+                <img src="img/cerebro 2.png"  alt="">
+            </div>
+            <div class="card">
+                
+              <p>Ahorro energético de hasta un 40% con sistemas de iluminación eficientes (LED + control). Reduce costos operativos sobre un 20–25% en gastos de energía anuales.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 3: DERECHA -->
+        <article class="timeline-item right">
+          <div class="circle"></div>
+          <div class="content">
+            <div class="amigable">
+                <img src="img/cerebro 3.png"  alt="">
+            </div>
+            <div class="card">
+              <p>Reducen el impacto ambiental las emisiones de CO₂, cuidan la salud visual creando espacios más confortables, productivos y amigables con el medio ambiente.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 4: IZQUIERDA -->
+        <article class="timeline-item left">
+          <div class="circle"></div>
+          <div class="content">
+            <div class="control">
+                <img src="img/cerebro 4.png"  alt="">
+            </div>
+            <div class="card">
+              <p>Optimiza el consumo energético hasta en un 35% adicional; automatización y flexibilidad por espacio. Garantiza confort, seguridad y eficiencia operativa.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 5: DERECHA -->
+        <article class="timeline-item right">
+          <div class="circle"></div>
+          <div class="content">
+            <div class="especificacion">
+                <img src="img/cerebro 5.png"  alt="">
+            </div>
+            <div class="card">
+              <p>Integramos soluciones para garantizar normativas con precisión y un amplio catálogo de marcas que nos permite ofrecer soluciones flexibles y personalizadas.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <!-- Timeline Header -->
+        <div class="timeline-header">
+          <img src="img/cerebro.png" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
+        </div>
+    </section>
+    <!-- TIMELINE: termina aquí -->
+<!-- Asesoramiento Section -->
     <section class="asesoramiento">
         <div class="asesoramiento-content">
             <h2 class="main-title fade-in-element">¡Te ofrecemos un asesoramiento inicial y levantamiento sin costo!</h2>
@@ -585,16 +934,16 @@
             <p class="question fade-in-element">¿Agendamos una breve reunión para conocer tus proyectos y mostrarte cómo podemos aportar valor?</p>
             
             <div class="cta-section fade-in-element">
-                <div class="hazclick">HAZCLICK <br> <!--i class="bi bi-caret-down"></i--></div>
+                <div class="hazclick">HAZCLICK</div>
                 <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">
                     <i class="bi bi-whatsapp"></i>
                 </a>
+                <img src="img/think green.png" alt="Imagen centrada" class="cta-img glow-img">
             </div>
         </div>
         
         <div class="background-overlay"></div>
     </section>
-
     <script>
         // Intersection Observer for fade-in animations
         const observerOptions = {
@@ -669,4 +1018,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
