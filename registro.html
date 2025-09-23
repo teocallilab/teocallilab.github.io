@@ -19,7 +19,7 @@
       --container-pad: 1rem;
 
       /* mobile timeline line position */
-      --timeline-line-left-mobile: 30px;
+      --timeline-line-left-mobile: 10px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html,body { height: 100%; }
@@ -308,6 +308,9 @@
         .deslumbrar .desc {
             font-size: 1.8rem;
         }
+        .card{
+            font-size: 1.2rem;
+        }
         .asesoramiento .main-title{
              font-size: 2rem;
         }
@@ -317,19 +320,34 @@
         .hazclick {
             font-size: 2.5rem;
         }
+        .asesoria img{
+            width: 70%;
+        }
+        .leed img{
+            width: 70%;
+        }
+        .amigable img{
+            width: 50%;
+        }
+        .control img{
+            width: 55%;
+        }
+        .especificacion img{
+            width: 70%;
+        }
       /* move line to left and make content stacked */
       .timeline::before { left: var(--timeline-line-left-mobile); transform: none; }
 
       .timeline-item {
         display: block;
-        padding-left: calc(var(--timeline-line-left-mobile) + 44px); /* leave room for circle + gap */
+        padding-left: 10px; /* leave room for circle + gap */
         position: relative;
       }
 
       .timeline-item .circle {
         position: absolute;
         left: var(--timeline-line-left-mobile);
-        left: 16px;  
+        left: -6px;  
         top: 22px;
         transform: translateX(-50%);
       }
