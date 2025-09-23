@@ -1,1007 +1,767 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smarter Lighting Design</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smarter Lighting Design — Conectamos la inspiración con la iluminación</title>
+  <meta name="description" content="Smarter Lighting Design — Asesoramiento en iluminación, eficiencia energética y soluciones inteligentes para espacios más sustentables y confortables." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    /* ====== Variables y reset ligero ====== */
+    :root{
+      --accent: #609680;
+      --accent-2: #AAC237;
+      --muted: #333;
+      --white: #fff;
+      --max-w: 1200px;
+      --container-pad: 1rem;
 
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-        
-        i {
-            color: #fff;
-            font-size: 4rem;
-        }
+      /* mobile timeline line position */
+      --timeline-line-left-mobile: 30px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body{
+      font-family: "Arial", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      color: var(--muted);
+      line-height: 1.45;
+      background: #ffffff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2)), 
-                        url('https://dlgreen.mx/wp-content/uploads/2025/01/background2-2025.jpg') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
+    /* ====== Contenedores ====== */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      padding: 3.5rem 0;
+      background:
+        linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)),
+        url('https://dlgreen.mx/wp-content/uploads/2025/01/background2-2025.jpg') center/cover no-repeat;
+      position: relative;
+    }
+    .hero-inner { z-index: 2; width: 100%; max-width: 900px; }
+    .hero h1 {
+      font-size: clamp(1.8rem, 2.4vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      margin-bottom: 0.5rem;
+      color: #f6f6f6;
+      text-transform: uppercase;
+    }
+    .hero .main-title {
+      font-weight: 800;
+      font-size: clamp(1.5rem, 4.2vw, 2rem);
+      line-height: 1.02;
+      color: transparent;
+      background: linear-gradient(45deg, #64ffda, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    /* ====== Scroll indicator (simple anchor) ====== */
+    .scroll-indicator {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 3;
+      width: 48px;
+      height: 48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background: rgba(0,0,0,0.18);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .scroll-indicator:focus { outline: 3px solid rgba(100,255,218,0.18); outline-offset: 3px; }
+
+    /* ====== DESLUMBRAR ====== */
+    .deslumbrar {
+      background: linear-gradient(180deg, #0a0a0a 0%, #151515 50%, #0a0a0a 100%);
+      color: #fff;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .deslumbrar-inner { max-width: 1100px; margin: 0 auto; padding: 0 var(--container-pad); }
+    .deslumbrar .pre { color: var(--accent); font-weight: 600; font-size: 2rem; margin-bottom: .25rem; }
+    .deslumbrar .main-word { font-weight: 900; font-size: clamp(2rem, 5.5vw, 3.5rem); margin: .4rem 0; color: var(--accent); }
+    .deslumbrar .desc { color: var(--accent); font-size: clamp(1rem, 2.2vw, 1.5rem); margin-top: .6rem; font-weight: 300; }
+
+    /* ====== TIMELINE ====== */
+   .timeline-section { 
+      background:
+        linear-gradient(210deg,rgba(180, 200, 76, 0.7) 38%, rgba(178, 212, 103, 0.8) 70%, rgba(237, 221, 83, 0.9) 100%),
+        url("img/mariposas2.png") center center/cover repeat fixed;
+      padding: 3.25rem 0;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2rem var(--container-pad);
+    }
+
+    /* vertical line - z-index bajo para que no atraviese header/footer */
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 6px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.95);
+      z-index: 1;
+    }
+
+    .timeline-header-img { max-width: 360px; margin: 0 auto 1rem; display:block; z-index:2; position:relative; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr;
+      gap: 1rem;
+      align-items: start;
+      margin: 1.5rem 0;
+      position: relative;
+      z-index: 2; /* contenido encima de la línea */
+    }
+
+    /* circle (default desktop) */
+    .timeline-item .circle {
+      grid-column: 2;
+      justify-self: center;
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      z-index: 3; /* encima de la línea */
+      align-self: start;
+      margin-top: 6px;
+    }
+
+    .timeline-item .content { padding: 0 1rem; }
+    .timeline-item.right .content { grid-column: 3; text-align: left; }
+    .timeline-item.left .content { grid-column: 1; text-align: right; }
+
+    .card {
+      display: inline-block;
+      background: rgba(255,255,255,0.98);
+      color: #222;
+      padding: 24px 26px;
+      border-radius: 16px;
+      box-shadow: 
+        0 10px 30px rgba(0,0,0,0.12),
+        0 4px 15px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      max-width: 520px;
+      line-height: 1.5;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      font-weight: 400;
+      font-size: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Efecto de brillo animado */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255,255,255,0.4), 
+        transparent
+      );
+      transition: left 0.5s ease-in-out;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    /* Hover effects mejorados */
+    .card:hover {
+        color: #fff;
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 25px 50px rgba(0,0,0,0.18),
+        0 10px 25px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.99);
+    }
+
+    /* Efecto de glow en los bordes */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #B4C84C, #609680, #AAC237, #B4C84C);
+      border-radius: 18px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover::after {
+      opacity: 0.6;
+      animation: borderGlow 2s linear infinite;
+    }
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .timeline-item img { width: min(160px, 40%); margin: 0 auto 0.6rem; display:block; }
+
+    /* Special headline item - CORREGIDO */
+    .timeline-item.special {
+      align-items: center; /* centra verticalmente el texto y la tarjeta */
+    }
+    
+    /* Texto del headline va a la IZQUIERDA */
+    .timeline-item.special .headline-text {
+      grid-column: 1; /* columna izquierda */
+      max-width: 380px;
+      text-align: left; /* alineado a la izquierda */
+      padding-right: 1rem;
+      margin: 0;
+    }
+    
+    /* Tarjeta va a la DERECHA */
+    .timeline-item.special .card-content {
+      grid-column: 3; /* columna derecha */
+      text-align: left;
+      padding: 0 1rem;
+    }
+    
+    .timeline-item.special .headline-text h3 {
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      font-weight: 900;
+      line-height: 1.08;
+      color: #fff;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    /* ====== ASESORAMIENTO ====== */
+    .asesoramiento {
+      background:
+        linear-gradient(135deg, rgba(0,124,112,0.55), rgba(78,143,119,0.6)),
+        url('https://dlgreen.mx/wp-content/uploads/2024/06/bg_banner.webp') center/cover no-repeat;
+      padding: 4rem 0;
+      color: #fff;
+      text-align: center;
+    }
+    .asesoramiento-inner { max-width: 1000px; margin: 0 auto; padding: 0 var(--container-pad); }
+    .asesoramiento .main-title { font-weight: 800; font-size: clamp(1.25rem, 3.2vw, 2.2rem); margin-bottom: 1rem; color: var(--white); }
+    .asesoramiento .subtitle { color: #fff; font-weight: 300; margin-bottom: 1rem; font-size: 2rem; }
+    .asesoramiento .question { color: #fff; margin-bottom: 1.25rem; font-size: 2rem; }
+
+    .cta-section { display:flex; flex-direction: column; gap: 0.8rem; align-items: center; margin-top: 1rem; }
+    .hazclick { color: var(--accent-2); font-weight: 800; font-size: 3rem; }
+    .whatsapp-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:64px; height:64px; border-radius:12px; background: rgba(0,0,0,0.08);
+      color: #fff; border:1px solid rgba(255,255,255,0.1);
+    }
+
+    /* === MOBILE FIX === */
+    @media (max-width: 880px) {
+        .hero{
+            min-height: 60vh;
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 70%, rgba(96, 150, 128, 0.1) 0%, transparent 50%);
-            animation: heroGlow 6s ease-in-out infinite alternate;
-        }
-
-        .hero-content {
-            z-index: 2;
-            max-width: 800px;
-            padding: 0 20px;
-            animation: fadeInUp 1.2s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: slideInLeft 1s ease-out 0.5s forwards;
-        }
-
-        .hero .main-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #64ffda, #609680, #AAC237, #64ffda);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 4s ease-in-out infinite, slideInRight 1s ease-out 0.8s both;
-            text-shadow: 0 0 30px rgba(96, 150, 128, 0.3);
-        }
-
-        /* Deslumbrar Section */
-        .deslumbrar {
-            min-height: 50vh;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .deslumbrar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(96, 150, 128, 0.05) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        .deslumbrar-content {
-            text-align: center;
-            max-width: 900px;
-            z-index: 2;
-            color: white;
-        }   
-
         .deslumbrar .main-word {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: #609680;
-            text-shadow: 0 0 50px rgba(96, 150, 128, 0.4);
-            animation: glowPulse 3s ease-in-out infinite;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.8s ease-out;
+            font-size: 3rem;
         }
-
-        .deslumbrar .main-word.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .deslumbrar .description {
+        .deslumbrar .desc {
             font-size: 1.8rem;
-            line-height: 1.8;
-            font-weight: 300;
-            opacity: 0;
-            transition: all 0.8s ease-out;
         }
-
-        .deslumbrar .description.first {
-            transform: translateX(-100px);
+        .asesoramiento .main-title{
+             font-size: 2rem;
         }
-
-        .deslumbrar .description.first.visible {
-            opacity: 1;
-            transform: translateX(0);
+        .asesoramiento .subtitle, .asesoramiento .question{
+            font-size: 1.5rem;
         }
-
-        .deslumbrar .description.last {
-            transform: translateX(100px);
-        }
-
-        .deslumbrar .description.last.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .deslumbrar .highlight {
-            color: #609680;
-            font-weight: 400;
-            line-height: 1.8rem;
-        }
-
-        /* Asesoramiento Section */
-        .asesoramiento {
-            min-height: 100vh;
-            background: linear-gradient(135deg, rgba(0, 124, 112, 0.6), rgba(78, 143, 119, 0.7)), 
-                        url('https://dlgreen.mx/wp-content/uploads/2024/06/bg_banner.webp') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .asesoramiento::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(170, 194, 55, 0.1) 0%, transparent 50%);
-            animation: floatEffect 8s ease-in-out infinite;
-        }
-
-        .asesoramiento-content {
-            text-align: center;
-            max-width: 1000px;
-            color: white;
-            z-index: 2;
-            position: relative;
-        }
-
-        .asesoramiento .main-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 2.5rem;
-            line-height: 1.2;
-            opacity: 0;
-            transform: translateY(-100px) scale(0.9);
-            transition: all 1.2s ease-out;
-        }
-
-        .asesoramiento .main-title.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .asesoramiento .subtitle {
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-            line-height: 1.1;
-            opacity: 0;
-            transform: translateX(-100px);
-            transition: all 1s ease-out;
-            transition-delay: 0.3s;
-        }
-
-        .asesoramiento .subtitle.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .asesoramiento .question {
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 4rem;
-            line-height: 1.1;
-            opacity: 0;
-            transform: translateX(100px);
-            transition: all 1s ease-out;
-            transition-delay: 0.6s;
-        }
-
-        .asesoramiento .question.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .cta-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
-            transition-delay: 0.9s;
-        }
-
-        .cta-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .hazclick {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #AAC237;
-            animation: glow 2s ease-in-out infinite alternate;
-            transition: transform 0.3s ease;
+            font-size: 2.5rem;
         }
+      /* move line to left and make content stacked */
+      .timeline::before { left: var(--timeline-line-left-mobile); transform: none; }
 
-        .hazclick:hover {
-            transform: scale(1.05);
-        }
+      .timeline-item {
+        display: block;
+        padding-left: calc(var(--timeline-line-left-mobile) + 44px); /* leave room for circle + gap */
+        position: relative;
+      }
 
-        .arrow{
-            color:#fff;
-            text-align: center;
-            animation: bounce 2s infinite;
-        }
+      .timeline-item .circle {
+        position: absolute;
+        left: var(--timeline-line-left-mobile);
+        left: 16px;  
+        top: 22px;
+        transform: translateX(-50%);
+      }
 
-        .whatsapp-btn {
-            color: #fff;
-            text-align: center;
-            transition: all 0.3s ease;
-            animation: floatWhatsApp 3s ease-in-out infinite;
-        }
+      .timeline-item .content { margin-left: 0; padding: 0; max-width: 100%; text-align: left; }
 
-        .whatsapp-btn:hover {
-            transform: scale(1.2) rotate(5deg);
-            color: #25d366;
-            text-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
-        }
+      /* ensure left-aligned items read left in mobile */
+      .timeline-item.left .content,
+      .timeline-item.right .content { text-align: left; }
 
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            opacity: 0.7;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+      /* special headline stacks above card on mobile */
+      .timeline-item.special { padding-left: calc(var(--timeline-line-left-mobile) + 10px); }
+      .timeline-item.special .headline-text { text-align: left; padding-right: 0; margin-bottom: 0.8rem; max-width: 100%; }
+      .timeline-item.special .card-content { padding: 0; }
+    }
 
-        .scroll-indicator:hover {
-            opacity: 1;
-            transform: translateX(-50%) scale(1.2);
-        }
+    /* ====== Animaciones iniciales ====== */
+    .hero-inner { 
+      opacity: 0; 
+      transform: translateY(50px);
+    }
+    .deslumbrar-inner > * { 
+      opacity: 0; 
+      transform: translateY(30px);
+    }
+    .timeline-item {
+      opacity: 0;
+    }
+    .timeline-item.right .content {
+      transform: translateX(100px);
+    }
+    .timeline-item.left .content {
+      transform: translateX(-100px);
+    }
+    .timeline-item.special .headline-text {
+      transform: translateX(-80px);
+      opacity: 0;
+    }
+    .timeline-item.special .card-content {
+      transform: translateX(80px);
+      opacity: 0;
+    }
+    .asesoramiento-inner > * { 
+      opacity: 0; 
+      transform: translateY(40px);
+    }
+    .timeline-header-img {
+      opacity: 0;
+      transform: scale(0.8);
+    }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* ====== Focus helpers para accesibilidad ====== */
+    :focus { outline: none; }
+    .focus-ring:focus { outline: 3px solid rgba(100,255,218,0.18); outline-offset: 3px; border-radius: 6px; }
 
-        @keyframes bounceInDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-100px) scale(0.9);
-            }
-            60% {
-                opacity: 1;
-                transform: translateY(10px) scale(1.05);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes gradientShift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% {
-                text-shadow: 0 0 50px rgba(96, 150, 128, 0.4);
-            }
-            50% {
-                text-shadow: 0 0 80px rgba(96, 150, 128, 0.8), 0 0 100px rgba(96, 150, 128, 0.6);
-            }
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 2px 10px rgba(170, 194, 55, 0.3);
-            }
-            to {
-                text-shadow: 0 2px 20px rgba(170, 194, 55, 0.6), 0 0 30px rgba(170, 194, 55, 0.4);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-
-        @keyframes heroGlow {
-            0% {
-                opacity: 0.3;
-            }
-            100% {
-                opacity: 0.6;
-            }
-        }
-
-        @keyframes floatEffect {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-                opacity: 0.6;
-            }
-        }
-
-        @keyframes floatWhatsApp {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Intersection Observer Classes */
-        .fade-in-element {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .fade-in-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        img.cta-img{
-            margin-top: 1rem;
-            max-width: 200px;
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .timeline-header-img {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        /* --------- TIMELINE STYLES --------- */
-        .timeline-section{
-            background: #9cc83f;
-            background-image: url("img/mariposas\ 1.png"); 
-            padding: 60px 20px;
-        }
-
-        .timeline{
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-
-        /* línea central */
-        .timeline::before{
-            content:'';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 6px;
-            transform: translateX(-50%);
-            background: #fff;
-            box-shadow: 0 0 20px rgba(255,255,255,0.08);
-        }
-
-        /* cada item como grid de 3 columnas: izquierda / centro / derecha */
-        .timeline-item{
-            display: grid;
-            grid-template-columns: 1fr 80px 1fr;
-            align-items: start;
-            position: relative;
-        }
-
-        /* círculo (siempre en la columna central) */
-        .timeline-item .circle{
-            grid-column: 2;
-            justify-self: center;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(255,255,255,0.9);
-        }
-
-        /* contenido a la derecha/izquierda según clase */
-        .timeline-item.right .content{
-            grid-column: 3;
-            text-align: left;
-            padding-left: 20px;
-        }
-        .timeline-item.left .content{
-            grid-column: 1;
-            text-align: right;
-            padding-right: 20px;
-        }
-        .timeline-item.right .content .asesoria{
-            display: flex;
-            justify-content: flex-end;
-        }
-        .timeline-item.left .content .leed{
-            display: flex;
-            justify-content: flex-start;
-        }
-        .timeline-item.right .content .amigable{
-             display: flex;
-            justify-content: flex-end;
-        }
-        .timeline-item.left .content .control{
-            display: flex;
-            justify-content: flex-start;
-        }
-        .timeline-item.right .content .especificacion {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .timeline-item.right .content .asesoria img{
-            text-align: right;
-            width: 50%;
-        }
-
-        .timeline-item.left .content .leed img{
-            text-align: left;
-            width: 50%;
-        }
-
-        .timeline-item.right .content .amigable img{
-            text-align: left;
-            width: 40%;
-        }
-
-        .timeline-item.left .content .control img{
-            text-align: left;
-            width: 50%;
-        }
-
-        .timeline-item.right .content .especificacion img{
-            text-align: left;
-            width: 50%;
-        }
-      
-
-        
-        /* tarjeta debajo de la forma */
-        .card{
-            background: rgba(255,255,255,0.95);
-            color: #222;
-            padding: 22px 26px;
-            margin-top: 18px;
-            border-radius: 14px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.14);
-            display: inline-block;
-            max-width: 520px;
-            line-height: 1.5;
-            text-align: left;
-        }
-
-        /* para el caso de la columna izquierda queremos que el contenido (card) esté alineado al borde interno */
-        .timeline-item.left .card{ 
-            text-align: left; 
-        }
-
-        /* Responsive Design Updates */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero .main-title {
-                font-size: 1.8rem;
-            }
-            
-            .deslumbrar .main-word {
-                font-size: 2rem;
-            }
-            
-            .deslumbrar .description {
-                font-size: 1.5rem;
-            }
-            
-            .asesoramiento .main-title {
-                font-size: 2rem;
-            }
-            
-            .asesoramiento .subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .asesoramiento .question {
-                font-size: 1.5rem;
-            }
-            
-            .hazclick {
-                font-size: 2.2rem;
-            }
-            .timeline-item.right .content .asesoria{
-            justify-content: flex-start;
-            }
-            .timeline-item.left .content .leed{
-                justify-content: flex-start;
-            }
-            .timeline-item.right .content .amigable{
-                justify-content: flex-start;
-            }
-            .timeline-item.left .content .control{
-                justify-content: flex-start;
-            }
-            .timeline-item.right .content .especificacion {
-                justify-content: flex-start;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero .main-title {
-                font-size: 1.8em;
-            }
-            
-            .deslumbrar .main-word {
-                font-size: 2.5rem;
-            }
-            
-            .deslumbrar .description {
-                font-size: 1.5rem;
-            }
-            
-            .asesoramiento .main-title {
-                font-size: 1.8rem;
-            }
-            
-            .asesoramiento .subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .asesoramiento .question {
-                font-size: 1.5rem;
-            }
-            
-            .hazclick {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* ------- MOBILE TIMELINE FIX -------- */
-        @media (max-width: 880px) {
-            .timeline {
-                padding-left: 5px;
-                
-            }
-
-            /* Línea vertical a la izquierda */
-            .timeline::before {
-                left: 10px;
-                transform: none;
-            }
-
-            /* Items en una sola columna */
-            .timeline-item {
-                display: block;
-                padding: 40px 0;
-                position: relative;
-            }
-
-            /* Círculo alineado con la línea */
-            .timeline-item .circle {
-                position: absolute;
-                top: 60px;
-                left: -1px;
-                margin: 0;
-            }
-
-            /* Contenido uniforme */
-            .timeline-item .content {
-                margin-left: 60px;
-                text-align: left;
-                padding: 0;
-               /*width: calc(100vw - 120px);  Ancho fijo basado en viewport */
-                max-width: 400px; /* Máximo para no ser demasiado ancho */
-            }
-
-            
-
-            /* Tarjetas con dimensiones fijas */
-            .card {
-                width: 100%;
-                max-width: 100%;
-                min-height: 100px; /* Altura mínima para uniformidad */
-                margin: 15px 0 0 0;
-                padding: 18px 20px;
-                box-sizing: border-box;
-                font-size: 0.95rem;
-                line-height: 1.4;
-            }
-
-            /* Ajuste específico para que todas las tarjetas sean del mismo ancho */
-            .timeline-item.right .content,
-            .timeline-item.left .content {
-                width: calc(100vw - 100px);
-                max-width: 380px;
-                margin-left: 0px;
-                text-align: left;
-                padding: 0;
-            }
-        }
-
-        /* Para pantallas muy pequeñas */
-        @media (max-width: 480px) {
-            .timeline {
-                padding-left: 5px;
-              
-            }
-
-            .timeline-item .content {
-                margin-left: 50px;
-                width: calc(100vw - 80px);
-                max-width: 320px;
-            }
-
-            .timeline-item.right .content,
-            .timeline-item.left .content {
-                width: calc(100vw - 80px);
-                max-width: 320px;
-                margin-left: 50px;
-            }
-
-            .card {
-                min-height: 80px;
-                font-size: 0.9rem;
-                padding: 15px 18px;
-            }
-        }
-    </style>
+  </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Smarter Lighting Design Ambiance</h1>
-            <h2 class="main-title">CONECTAMOS LA INSPIRACIÓN<br>CON LA ILUMINACIÓN</h2>
-        </div>
-        <div class="scroll-indicator">
-            <i class="bi bi-arrow-down"></i>
-        </div>
-    </section>
-
-    <!-- Deslumbrar Section -->
-    <section class="deslumbrar">
-        <div class="deslumbrar-content">
-            <p class="description highlight first fade-in-element">Te vamos a</p>
-            <p class="main-word fade-in-element">DESLUMBRAR</p>
-            <p class="description highlight last fade-in-element">
-                La iluminación es solo el 3% del costo de construcción... <br> pero puede definir el 100% de la experiencia de un espacio.
-            </p>
-        </div>
-    </section>
-
-    
-
-    <!-- TIMELINE: empieza aquí -->
-    <section class="timeline-section">
-        <!-- Timeline Header -->
-        <div class="timeline-header">
-          <img src="https://dlgreen.mx/wp-content/uploads/2024/06/dl_green-white.svg" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
-        </div>
-      <div class="timeline">
-        
-        <!-- Item 1: DERECHA -->
-        <article class="timeline-item right">
-          <div class="circle"></div>
-          <div class="content">
-            <div class="asesoria">
-                <img src="img/cerebro 1.png"  alt="">
-            </div>
-            <div class="card">
-              <p>Integramos soluciones enfocadas en eficiencia energética y tecnología inteligente, logrando espacios funcionales, sustentables y con mayor valor agregado.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Item 2: IZQUIERDA -->
-        <article class="timeline-item left">
-          <div class="circle"></div>
-          <div class="content">
-            <!--div class="shape shape-leed"></div-->
-            <div class="leed">
-                <img src="img/cerebro 2.png"  alt="">
-            </div>
-            <div class="card">
-                
-              <p>Ahorro energético de hasta un 40% con sistemas de iluminación eficientes (LED + control). Reduce costos operativos sobre un 20–25% en gastos de energía anuales.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Item 3: DERECHA -->
-        <article class="timeline-item right">
-          <div class="circle"></div>
-          <div class="content">
-            <div class="amigable">
-                <img src="img/cerebro 3.png"  alt="">
-            </div>
-            <div class="card">
-              <p>Reducen el impacto ambiental las emisiones de CO₂, cuidan la salud visual creando espacios más confortables, productivos y amigables con el medio ambiente.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Item 4: IZQUIERDA -->
-        <article class="timeline-item left">
-          <div class="circle"></div>
-          <div class="content">
-            <div class="control">
-                <img src="img/cerebro 4.png"  alt="">
-            </div>
-            <div class="card">
-              <p>Optimiza el consumo energético hasta en un 35% adicional; automatización y flexibilidad por espacio. Garantiza confort, seguridad y eficiencia operativa.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Item 5: DERECHA -->
-        <article class="timeline-item right">
-          <div class="circle"></div>
-          <div class="content">
-            <div class="especificacion">
-                <img src="img/cerebro 5.png"  alt="">
-            </div>
-            <div class="card">
-              <p>Integramos soluciones para garantizar normativas con precisión y un amplio catálogo de marcas que nos permite ofrecer soluciones flexibles y personalizadas.</p>
-            </div>
-          </div>
-        </article>
-
+  <main>
+    <!-- HERO -->
+    <header class="hero" role="banner" aria-label="Hero">
+      <div class="hero-inner container">
+        <h1>Smarter Lighting Design Ambiance</h1>
+        <h2 class="main-title">CONECTAMOS LA INSPIRACIÓN<br>CON LA ILUMINACIÓN</h2>
       </div>
-      <!-- Timeline Header -->
-        <div class="timeline-header">
-          <img src="img/cerebro.png" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
-        </div>
+
+      <a class="scroll-indicator focus-ring" href="#deslumbrar" aria-label="Ir a Deslumbrar">
+        <i class="bi bi-arrow-down" aria-hidden="true" style="font-size:3rem; color:#fff"></i>
+      </a>
+    </header>
+
+    <!-- DESLUMBRAR -->
+    <section id="deslumbrar" class="deslumbrar" aria-labelledby="deslumbrar-title">
+      <div class="deslumbrar-inner container">
+        <p class="pre">Te vamos a</p>
+        <h3 id="deslumbrar-title" class="main-word">DESLUMBRAR</h3>
+        <p class="desc">
+          La iluminación es solo el 3% del costo de construcción...<br>
+          pero puede definir el 100% de la experiencia de un espacio.
+        </p>
+      </div>
     </section>
-    <!-- TIMELINE: termina aquí -->
-<!-- Asesoramiento Section -->
-    <section class="asesoramiento">
-        <div class="asesoramiento-content">
-            <h2 class="main-title fade-in-element">¡Te ofrecemos un asesoramiento inicial y levantamiento sin costo!</h2>
-            <p class="subtitle fade-in-element">Experimenta nuestro nivel de expertise, atención personalizada e innovación en nuestras integraciones.</p>
-            <p class="question fade-in-element">¿Agendamos una breve reunión para conocer tus proyectos y mostrarte cómo podemos aportar valor?</p>
-            
-            <div class="cta-section fade-in-element">
-                <div class="hazclick">HAZCLICK</div>
-                <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">
-                    <i class="bi bi-whatsapp"></i>
-                </a>
-                <img src="img/think green.png" alt="Imagen centrada" class="cta-img glow-img">
+
+    <!-- TIMELINE -->
+    <section class="timeline-section" aria-label="Servicios y beneficios">
+      <div class="container">
+
+        <!-- Header FUERA del timeline -->
+        <div class="timeline-header" aria-hidden="true">
+          <img src="https://dlgreen.mx/wp-content/uploads/2024/06/dl_green-white.svg"
+               class="timeline-header-img" alt="DL Green — logo" loading="lazy">
+        </div>
+
+        <div class="timeline">
+
+          <!-- Item 1 -->
+          <article class="timeline-item right">
+            <div class="circle" aria-hidden="true"></div>
+            <div class="content">
+              <div class="asesoria">
+                <img src="img/cerebro 1.png" alt="Icono asesoría" loading="lazy">
+              </div>
+              <div class="card">
+                Integramos soluciones enfocadas en eficiencia energética y tecnología inteligente, logrando espacios funcionales, sustentables y con mayor valor agregado.
+              </div>
             </div>
+          </article>
+
+          <!-- Item 2 -->
+          <article class="timeline-item left">
+            <div class="circle" aria-hidden="true"></div>
+            <div class="content">
+              <div class="leed">
+                <img src="img/cerebro 2.png" alt="Icono ahorro energético" loading="lazy">
+              </div>
+              <div class="card">
+                Ahorro energético de hasta un 40% con sistemas de iluminación eficientes (LED + control). Reduce costos operativos sobre un 20–25% en gastos de energía anuales.
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 3 -->
+          <article class="timeline-item right">
+            <div class="circle" aria-hidden="true"></div>
+            <div class="content">
+              <div class="amigable">
+                <img src="img/cerebro 3.png" alt="Icono amigable" loading="lazy">
+              </div>
+              <div class="card">
+                Reducen el impacto ambiental las emisiones de CO₂, cuidan la salud visual creando espacios más confortables, productivos y amigables con el medio ambiente.
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 4 -->
+          <article class="timeline-item left">
+            <div class="circle" aria-hidden="true"></div>
+            <div class="content">
+              <div class="control">
+                <img src="img/cerebro 4.png" alt="Icono control" loading="lazy">
+              </div>
+              <div class="card">
+                Optimiza el consumo energético hasta en un 35% adicional; automatización y flexibilidad por espacio. Garantiza confort, seguridad y eficiencia operativa.
+              </div>
+            </div>
+          </article>
+
+          <!-- Special item - CORREGIDO: texto a la izquierda, tarjeta a la derecha -->
+          <article class="timeline-item special" aria-label="Conectamos la inspiración">
+            <div class="circle" aria-hidden="true"></div>
+
+            <!-- Texto grande a la IZQUIERDA -->
+            <div class="headline-text">
+              <h3>
+                CONECTAMOS LA<br>
+                INSPIRACIÓN<br>
+                CON LA ILUMINACIÓN
+              </h3>
+            </div>
+
+            <!-- Tarjeta a la DERECHA -->
+            <div class="card-content">
+              <div class="especificacion">
+                <img src="img/cerebro 5.png" alt="Icono especificaciones" loading="lazy">
+              </div>
+              <div class="card">
+                Integramos soluciones para garantizar normativas con precisión y un amplio catálogo de marcas que nos permite ofrecer soluciones flexibles y personalizadas.
+              </div>
+            </div>
+          </article>
+
         </div>
-        
-        <div class="background-overlay"></div>
+
+        <!-- Footer FUERA del timeline -->
+        <div class="timeline-header" style="margin-top:1.5rem;" aria-hidden="true">
+          <img src="img/cerebro.png" alt="Icono general" class="timeline-header-img" loading="lazy">
+        </div>
+      </div>
     </section>
-    <script>
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px'
-        };
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Add a small delay to make the animation more noticeable
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, 100);
-                }
-            });
-        }, observerOptions);
+    <!-- ASESORAMIENTO -->
+    <section class="asesoramiento" aria-labelledby="asesoria-title">
+      <div class="asesoramiento-inner container">
+        <h2 id="asesoria-title" class="main-title">¡Te ofrecemos un asesoramiento inicial y levantamiento sin costo!</h2>
+        <p class="subtitle">Experimenta nuestro nivel de expertise, atención personalizada e innovación en nuestras integraciones.</p>
+        <p class="question">¿Agendamos una breve reunión para conocer tus proyectos y mostrarte cómo podemos aportar valor?</p>
 
-        // Staggered animation observer for elements that should animate in sequence
-        const staggerObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const elements = entry.target.querySelectorAll('.fade-in-element');
-                    elements.forEach((el, index) => {
-                        setTimeout(() => {
-                            el.classList.add('visible');
-                        }, index * 200 + 200); // Stagger by 200ms each
-                    });
-                }
-            });
-        }, {
-            threshold: 0.2,
-            rootMargin: '0px 0px -150px 0px'
-        });
+        <div class="cta-section" role="region" aria-label="Llamada a la acción">
+          <div class="hazclick">HAZCLICK</div>
+          <a class="whatsapp-btn" href="https://wa.me/1234567890" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+            <i class="bi bi-whatsapp" aria-hidden="true" style="font-size:4rem"></i>
+          </a>
+          <img src="img/think green.png" alt="Think green" loading="lazy" style="max-width:200px;">
+        </div>
+      </div>
+    </section>
 
-        // Smooth scrolling
-        document.addEventListener('DOMContentLoaded', function() {
-            // Observe individual fade-in elements
-            const fadeElements = document.querySelectorAll('.fade-in-element');
-            fadeElements.forEach(el => observer.observe(el));
+  </main>
 
-            // Observe sections for staggered animations
-            const sections = document.querySelectorAll('.deslumbrar, .asesoramiento');
-            sections.forEach(section => staggerObserver.observe(section));
+  <!-- GSAP Animations -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
 
-            // Scroll indicator functionality
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            if (scrollIndicator) {
-                scrollIndicator.addEventListener('click', function() {
-                    document.querySelector('.deslumbrar').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            }
+    // Animación inicial de carga
+    gsap.timeline()
+      .to('.hero-inner', {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power3.out'
+      })
+      .from('.scroll-indicator', {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        ease: 'bounce.out'
+      }, '-=0.3');
 
-            // Enhanced scroll effects
-            window.addEventListener('scroll', function() {
-                const currentScrollY = window.scrollY;
-                
-                // Hide/show scroll indicator
-                const scrollIndicator = document.querySelector('.scroll-indicator');
-                if (scrollIndicator) {
-                    if (currentScrollY > 100) {
-                        scrollIndicator.style.opacity = '0';
-                        scrollIndicator.style.pointerEvents = 'none';
-                    } else {
-                        scrollIndicator.style.opacity = '0.7';
-                        scrollIndicator.style.pointerEvents = 'auto';
-                    }
-                }
-            }, { passive: true });
-        });
-    </script>
+    // Animación del scroll indicator (flotante)
+    gsap.to('.scroll-indicator', {
+      y: -10,
+      duration: 2,
+      yoyo: true,
+      repeat: -1,
+      ease: 'power2.inOut'
+    });
+
+    // Sección Deslumbrar
+    const deslumbrarElements = gsap.utils.toArray('.deslumbrar-inner > *');
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.deslumbrar',
+        start: 'top 80%',
+        end: 'bottom 20%'
+      }
+    })
+    .to(deslumbrarElements, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: 'power3.out'
+    });
+
+    // Logo header del timeline
+    gsap.to('.timeline-header-img', {
+      opacity: 1,
+      scale: 1,
+      duration: 1,
+      ease: 'back.out(1.7)',
+      scrollTrigger: {
+        trigger: '.timeline-section',
+        start: 'top 90%'
+      }
+    });
+
+    // Timeline items - animación escalonada
+    const timelineItems = gsap.utils.toArray('.timeline-item');
+    
+    timelineItems.forEach((item, index) => {
+      const content = item.querySelector('.content');
+      const isSpecial = item.classList.contains('special');
+      
+      if (isSpecial) {
+        // Animación especial para el item especial
+        const headline = item.querySelector('.headline-text');
+        const cardContent = item.querySelector('.card-content');
+        
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 85%',
+            end: 'bottom 15%'
+          }
+        })
+        .to(item, { opacity: 1, duration: 0.3 })
+        .to(headline, {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: 'power3.out'
+        }, 0.1)
+        .to(cardContent, {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: 'power3.out'
+        }, 0.3)
+        .from(item.querySelector('.card'), {
+          scale: 0.9,
+          duration: 0.6,
+          ease: 'back.out(1.7)'
+        }, 0.5)
+        .from(item.querySelector('img'), {
+          scale: 0,
+          duration: 0.8,
+          ease: 'back.out(1.7)'
+        }, 0.4);
+      } else {
+        // Animación normal para otros items
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 85%',
+            end: 'bottom 15%'
+          }
+        })
+        .to(item, { opacity: 1, duration: 0.3 })
+        .to(content, {
+          x: 0,
+          duration: 1,
+          ease: 'power3.out'
+        }, 0.1)
+        .from(item.querySelector('.card'), {
+          scale: 0.9,
+          duration: 0.6,
+          ease: 'back.out(1.7)'
+        }, 0.4)
+        .from(item.querySelector('img'), {
+          scale: 0,
+          duration: 0.8,
+          ease: 'back.out(1.7)'
+        }, 0.2);
+      }
+    });
+
+    // Línea del timeline - animación de crecimiento
+    gsap.from('.timeline::before', {
+      scaleY: 0,
+      transformOrigin: 'top center',
+      duration: 2,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.timeline',
+        start: 'top 80%',
+        end: 'bottom 20%'
+      }
+    });
+
+    // Círculos del timeline - aparecen después de la línea
+    gsap.from('.timeline-item .circle', {
+      scale: 0,
+      duration: 0.5,
+      ease: 'back.out(1.7)',
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: '.timeline',
+        start: 'top 70%'
+      }
+    });
+
+    // Sección Asesoramiento
+    const asesoramientoElements = gsap.utils.toArray('.asesoramiento-inner > *');
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.asesoramiento',
+        start: 'top 80%',
+        end: 'bottom 20%'
+      }
+    })
+    .to(asesoramientoElements, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: 'power3.out'
+    });
+
+    // Animación del botón de WhatsApp - pulso
+    gsap.to('.whatsapp-btn', {
+      scale: 1.1,
+      duration: 1.5,
+      yoyo: true,
+      repeat: -1,
+      ease: 'power2.inOut',
+      scrollTrigger: {
+        trigger: '.whatsapp-btn',
+        start: 'top 90%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    // Efecto hover para las tarjetas
+    const cards = gsap.utils.toArray('.card');
+    cards.forEach(card => {
+      const hoverTl = gsap.timeline({ paused: true });
+      hoverTl.to(card, {
+        y: -5,
+        boxShadow: '0 15px 30px rgba(0,0,0,0.15)',
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+      
+      card.addEventListener('mouseenter', () => hoverTl.play());
+      card.addEventListener('mouseleave', () => hoverTl.reverse());
+    });
+
+   
+
+    // Animación de texto en "DESLUMBRAR"
+    const mainWord = document.querySelector('.main-word');
+    if (mainWord) {
+      gsap.from(mainWord, {
+        backgroundSize: '0% 100%',
+        backgroundImage: 'linear-gradient(90deg, #609680, #AAC237)',
+        backgroundClip: 'text',
+        webkitBackgroundClip: 'text',
+        duration: 1.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: mainWord,
+          start: 'top 80%'
+        }
+      });
+    }
+
+    console.log('🎨 GSAP animations loaded successfully');
+  </script>
+
+  <!-- JS mínimo: no animations. Solo mejora de accesibilidad JS opcional (foco si viene desde teclado). -->
+  <script>
+    (function () {
+      let usingKeyboard = false;
+      function handleFirstTab(e) {
+        if (e.key === 'Tab') {
+          usingKeyboard = true;
+          document.body.classList.add('user-is-tabbing');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+  </script>
 </body>
-</html> 
-
-
-
-
-
-
-
-
+</html>
