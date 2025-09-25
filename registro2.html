@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DL GREEN | Registro</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }   
+/* Rastro del mouse */
+.trail {
+  position: fixed; /* siempre en relación a la pantalla */
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(20, 157, 96, 0.7); 
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fadeTrail 0.8s forwards;
+  z-index: 999999; /* más alto que cualquier overlay */
+}
+#trail-container {
+  position: fixed;
+  inset: 0;   /* ocupa toda la pantalla */
+  pointer-events: none;
+  z-index: 999999;
+}
+
+
+  @keyframes fadeTrail {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(3);
+      opacity: 0;
+    }
+  }
+    /* Hero Section */
+    .hero { 
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url("https://dlgreen.mx/wp-content/uploads/2025/01/background2-2025.jpg") no-repeat center center/cover;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+    }
+/* Sección negra degradada */
+    .black-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, #000 0%, #111 100%);
+    }
+
+    .black-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #5b937c;
+    }
+
+    .black-section h3 {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+      font-weight: 900;
+      color: #5b937c;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      /*text-shadow: 0 0 15px #6DF75E, 0 0 30px #C1D455;*/
+    }
+
+    .black-section p {
+      font-size: 1.5rem;
+      font-weight: 600;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: #5b937c;
+    }
+
+    /* Fondo difuso animado con tus colores */
+    .animated-section {
+      min-height: 100vh;
+      position: relative;
+      padding: 5rem 2rem;
+      text-align: center;
+      overflow: hidden;
+      background: #fff  ; /* color base #70A65D */
+    }
+
+    .animated-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /*background: radial-gradient(circle at 20% 30%, rgba(109, 247, 94, 0.7), transparent 10%),
+                  radial-gradient(circle at 80% 40%, rgba(193, 212, 85, 0.7), transparent 60%),
+                  radial-gradient(circle at 50% 70%, rgba(112, 166, 93, 0.8), transparent 20%);*/
+      background-size: 200% 200%;
+      animation: moveBlobs 18s ease-in-out infinite alternate;
+      filter: blur(40px) brightness(1.5);
+      z-index: 0;
+    }
+    .timeline-header-img {
+    position: relative; 
+    z-index: 1; /* encima del fondo animado */
+    display: block;
+    margin: 0 auto;
+    max-width: 120px; /* ajusta según tu preferencia */
+    width: 100%;       /* responsivo */
+    height: auto;
+    }
+    @keyframes moveBlobs {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    .animated-section h2,
+    .animated-section p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .animated-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px #6DF75E;
+    }
+
+    .animated-section p {
+      max-width: 6rem;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      text-shadow: 0 0 5px #C1D455;
+    }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  
+  margin-top: 3rem;
+}
+/* Línea vertical del timeline */
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background-color: #000;
+  /*background: linear-gradient(180deg, #C1D455, #6DF75E);*/
+  z-index: 0;
+  border-radius: 2px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+.row {
+  position: relative;
+}
+
+.row::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  background: #000;
+  border: 3px solid #70A65D;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-img {
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  display: block;
+}
+
+.timeline-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  text-align: left;
+  overflow: hidden;
+  z-index: 0;
+
+  /* 3D */
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(109, 247, 94, 0.5),
+    0 0 40px rgba(193, 212, 85, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover: más profundidad */
+.timeline-card:hover {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(109, 247, 94, 0.8),
+    0 0 60px rgba(193, 212, 85, 0.6);
+}
+
+/* Borde glowing animado */
+.timeline-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    #6DF75E,
+    #C1D455,
+    #70A65D,
+    #6DF75E
+  );
+  background-size: 300% 300%;
+  animation: neonBorder 6s linear infinite;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+@keyframes neonBorder {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+
+
+.special-text {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: right;
+  padding-right: 1rem;
+}
+
+
+    /* Nueva sección CTA con fondo de imagen y overlay animado */
+    .cta-section {
+      position: relative;
+      padding: 6rem 2rem;
+      text-align: center;
+      background: url("https://dlgreen.mx/wp-content/uploads/2024/06/bg_banner.webp") no-repeat center center/cover;
+      color: #fff;
+      overflow: hidden;
+    }
+/*#5B937C*/
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(91, 147, 124, 0.6), transparent 90%),
+                  radial-gradient(circle at 80% 40%, rgba(91, 147, 124, 0.8), transparent 80%),
+                  radial-gradient(circle at 50% 70%, rgba(91, 147, 124, 0.6), transparent 90%);
+      background-size: 200% 200%;
+      animation: moveBlobs 5s ease-in-out infinite alternate;
+      /*filter: blur(10px) brightness(1);*/
+      z-index: 0;
+    }
+
+    .cta-section h2,
+    .cta-section p,
+    .cta-section a {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section h2 {
+      width: 800px;
+      margin: 0 auto;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      font-weight: 600;
+      /*text-shadow: 0 0 10px rgba(98, 188, 175, 0.9);*/
+    }
+
+    .cta-section p {
+      font-size: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+      color: #f1f1f1;
+      /*text-shadow: 0 0 5px rgba(0,0,0,0.7);*/
+    }
+
+    .cta-section .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(90deg, #62BCAF, #619781);
+      border: none;
+      border-radius: 50px;  
+      cursor: pointer;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 20px rgba(98, 188, 175, 0.8);
+    }
+
+    .cta-section .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(97, 151, 129, 1);
+    }
+    .think{
+        margin-top: 60px;
+    }
+    .think img{
+        width: 20%;
+        position: relative;
+        z-index: 2;
+    }
+    .col img + .timeline-card {
+        margin-top: 2rem;
+    }
+    .timeline-header-img.cerebro  {
+        margin-top: 60px;   
+        max-width: 400px;
+        width: 100%;
+    }
+    .logofinal{
+        margin-top: 60px;
+        margin-left: 200px;
+    }
+    .logofinal img{
+        width: 40%;
+        z-index: 1;
+    }
+    
+    /* RESPONSIVE TIMELINE */
+@media (max-width: 768px) {
+  /* El timeline en mobile se convierte en una sola columna */
+  .row {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+   .timeline{ 
+    gap:2rem;
+   }
+  /* Ocultar línea vertical y puntos en mobile */
+  .timeline::before,
+  .row::before {
+    display: none;
+  }
+
+  /* Imágenes más pequeñas y centradas */
+  .timeline-img {
+    max-width: 180px;
+  }
+
+  /* Tarjetas centradas */
+  .timeline-card {
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  /* Texto especial centrado */
+  .special-text {
+    text-align: center;
+    padding: 0;
+    font-size: 1.5rem;
+  }
+
+  /* Logo final ajustado */
+  .timeline-header-img.cerebro {
+    width: 100%;
+    margin: 40px auto 0 auto;
+  }
+
+  /* Hero en mobile */
+  .hero { 
+      height: 50vh;
+    }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero h2 {
+    font-size: 1.2rem;
+  }
+  .black-section h3{
+    font-size: 2.5rem;
+  }
+  .black-section p{
+    font-size: 1.5rem;
+  }
+  /* CTA en mobile */
+  .cta-section h2 {
+    width: 100%;
+    font-size: 2rem;
+  }
+  .cta-section p {
+    font-size: 1.5rem;
+  }
+  .cta-section .btn {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+  } 
+  .think img{
+        width: 50%;
+        
+    }
+    .logofinal{
+        margin-left: 0;
+    }
+    .logofinal img{
+        width: 100%;
+    }
+}
+
+  </style>
+</head>
+<body>
+<div id="trail-container"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Smarter Lighting Design Ambiance</h1>
+      <h2 class="main-title">CONECTAMOS LA INSPIRACIÓN CON LA ILUMINACIÓN</h2>
+    </div>
+  </section>
+    <!-- Sección negra degradada -->
+  <section class="black-section">
+    <h2>Te vamos a</h2>
+    <h3>DESLUMBRAR</h3>
+    <p>
+      La iluminación es solo el 3% del costo de construcción...<br>
+      pero puede definir el 100% de la experiencia de un espacio.
+    </p>
+  </section>
+  <!-- Fondo difuso animado -->
+  <section class="animated-section">
+        <img src="https://dlgreen.mx/wp-content/uploads/2023/04/icono-log-verde-limon.png" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
+<div class="timeline">
+    <!-- Fila 1: imagen | imagen -->
+    <div class="row">
+      <div class="col">
+        <img src="img/mariposas 1.png" alt="Imagen 1" class="timeline-img">
+      </div>
+      <div class="col">
+        <img src="img/cerebro 1.png" alt="Imagen 2" class="timeline-img">
+      </div>
+    </div>
+
+    <!-- Fila 2: vacío | tarjeta -->
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <div class="timeline-card">
+          Integramos soluciones enfocadas en eficiencia energética y tecnología inteligente, 
+            logrando espacios funcionales, sustentables y con mayor valor agregado.
+        </div>
+      </div>
+    </div>
+
+    <!-- Fila 3: imagen | imagen -->
+    <div class="row">
+      <div class="col">
+        <img src="img/cerebro 2.png" alt="Imagen 3" class="timeline-img">
+      </div>
+      <div class="col">
+        <img src="img/mariposas2.png" alt="Imagen 4" class="timeline-img">
+      </div>
+    </div>
+
+    <!-- Fila 4: tarjeta | vacío -->
+    <div class="row">
+      <div class="col">
+        <div class="timeline-card">
+            Ahorro energético de hasta un 40% con sistemas de iluminación eficientes (LED + control). 
+            Reduce de costos operativos sobre un 20-25% en gastos de energía anuales.
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+
+     <!-- Fila 5: imagen | imagen -->
+    <div class="row">
+      <div class="col">
+        <img src="img/mariposas 1.png" alt="Imagen 1" class="timeline-img">
+      </div>
+      <div class="col">
+        <img src="img/cerebro 3.png" alt="Imagen 2" class="timeline-img">
+      </div>
+    </div>
+
+    <!-- Fila 2: vacío | tarjeta -->
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <div class="timeline-card">
+            Reducen el impacto ambiental las emisiones de CO₂, cuidan la salud visual creando espacios 
+            más confortables, productivos y amigables con el medio ambiente.
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Fila 7: imagen | imagen -->
+    <div class="row">
+      <div class="col">
+        <img src="img/cerebro 4.png" alt="Imagen 7" class="timeline-img">
+      </div>
+      <div class="col">
+        <img src="img/mariposas2.png" alt="Imagen 8" class="timeline-img">
+      </div>
+    </div>
+
+    <!-- Fila 8: tarjeta | vacío -->
+    <div class="row">
+      <div class="col">
+        <div class="timeline-card">
+            Optimiza el consumo energético hasta en un 35% adicional; automatización y flexibilidad 
+            por espacio. Garantiza confort, seguridad y eficiencia operativa.
+
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <!-- Fila 9: texto especial | imagen + tarjeta -->
+    <div class="row">
+    <div class="col special-text">
+        CONECTAMOS LA <br> INSPIRACIÓN <br> CON LA ILUMINACIÓN
+    </div>
+    <div class="col">
+        <img src="img/cerebro 5.png" alt="Imagen extra" class="timeline-img">
+        <div class="timeline-card">
+            Integramos soluciones, para garantizar las normativas con precisión con un amplio de 
+            marcas que nos permite ofrecer soluciones flexibles y personalizadas
+        </div>
+    </div>
+    </div>
+
+  </div>
+
+  <!-- Logo final -->
+   <div class="logofinal">
+        <img src="img/cerebro.png"  alt="Logo DL Green" class="erebro">
+   </div>
+  
+  </section>
+  <!-- Nueva sección CTA -->
+  <section class="cta-section">
+    <h2>¡Te ofrecemos un asesoramiento inicial y levantamiento sin costo!</h2>
+    <p>
+      Experimenta nuestro nivel de expertise, atención personalizada e innovación en nuestras integraciones.
+    </p>
+    <p>
+      ¿Agendamos una breve reunión para conocer tus proyectos y mostrarte cómo podemos aportar valor?
+    </p>
+    <a href="#" class="btn"><i class="bi bi-whatsapp"></i> Haz Click</a> 
+    <div class="think">
+        <img src="img/think green.png" alt="">
+    </div>
+    
+  </section>
+  
+  <script>
+  const container = document.getElementById("trail-container");
+
+document.addEventListener("mousemove", (e) => {
+  const trail = document.createElement("span");
+  trail.classList.add("trail");
+  trail.style.left = e.clientX + "px";
+  trail.style.top = e.clientY + "px";
+  container.appendChild(trail);
+
+  setTimeout(() => {
+    trail.remove();
+  }, 800);
+});
+
+</script>
+
+</body>
+</html>
