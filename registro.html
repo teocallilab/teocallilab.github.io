@@ -16,7 +16,36 @@
       font-family: Arial, sans-serif;
       color: #fff;
     }   
+/* Rastro del mouse */
+.trail {
+  position: fixed; /* siempre en relación a la pantalla */
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7); 
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fadeTrail 0.8s forwards;
+  z-index: 999999; /* más alto que cualquier overlay */
+}
+#trail-container {
+  position: fixed;
+  inset: 0;   /* ocupa toda la pantalla */
+  pointer-events: none;
+  z-index: 999999;
+}
 
+
+  @keyframes fadeTrail {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(3);
+      opacity: 0;
+    }
+  }
     /* Hero Section */
     .hero { 
       height: 100vh;
@@ -109,7 +138,7 @@
     z-index: 1; /* encima del fondo animado */
     display: block;
     margin: 0 auto;
-    max-width: 300px; /* ajusta según tu preferencia */
+    max-width: 120px; /* ajusta según tu preferencia */
     width: 100%;       /* responsivo */
     height: auto;
     }
@@ -196,7 +225,7 @@
 }
 
 .timeline-card {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   padding: 1.5rem;
   border-radius: 12px;
   color: #fff;
@@ -296,9 +325,19 @@
         margin-top: 2rem;
     }
     .timeline-header-img.cerebro  {
-        margin-top: 60px;
+        margin-top: 60px;   
+        max-width: 400px;
         width: 100%;
     }
+    .logofinal{
+        margin-top: 60px;
+        margin-left: 200px;
+    }
+    .logofinal img{
+        width: 40%;
+        z-index: 1;
+    }
+    
     /* RESPONSIVE TIMELINE */
 @media (max-width: 768px) {
   /* El timeline en mobile se convierte en una sola columna */
@@ -335,7 +374,7 @@
 
   /* Logo final ajustado */
   .timeline-header-img.cerebro {
-    width: 70%;
+    width: 100%;
     margin: 40px auto 0 auto;
   }
 
@@ -358,26 +397,37 @@
   /* CTA en mobile */
   .cta-section h2 {
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   .cta-section p {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
   .cta-section .btn {
     font-size: 1.2rem;
     padding: 0.8rem 1.5rem;
-  }
+  } 
+  .think img{
+        width: 50%;
+        
+    }
+    .logofinal{
+        margin-left: 0;
+    }
+    .logofinal img{
+        width: 100%;
+    }
 }
 
   </style>
 </head>
 <body>
+<div id="trail-container"></div>
 
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <h1>Smarter Lighting Design Ambiance</h1>
-      <h2 class="main-title">CONECTAMOS LA INSPIRACIÓNnCON LA ILUMINACIÓN</h2>
+      <h2 class="main-title">CONECTAMOS LA INSPIRACIÓN CON LA ILUMINACIÓN</h2>
     </div>
   </section>
     <!-- Sección negra degradada -->
@@ -391,7 +441,7 @@
   </section>
   <!-- Fondo difuso animado -->
   <section class="animated-section">
-        <img src="https://dlgreen.mx/wp-content/uploads/2024/06/dl_green-white.svg" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
+        <img src="img/foco.png" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
 <div class="timeline">
     <!-- Fila 1: imagen | imagen -->
     <div class="row">
@@ -496,9 +546,10 @@
   </div>
 
   <!-- Logo final -->
-  <img src="img/cerebro.png" 
-       alt="Logo DL Green" 
-       class="timeline-header-img cerebro">
+   <div class="logofinal">
+        <img src="img/cerebro.png"  alt="Logo DL Green" class="erebro">
+   </div>
+  
   </section>
   <!-- Nueva sección CTA -->
   <section class="cta-section">
@@ -515,7 +566,22 @@
     </div>
     
   </section>
+  <script>
+  const container = document.getElementById("trail-container");
+
+document.addEventListener("mousemove", (e) => {
+  const trail = document.createElement("span");
+  trail.classList.add("trail");
+  trail.style.left = e.clientX + "px";
+  trail.style.top = e.clientY + "px";
+  container.appendChild(trail);
+
+  setTimeout(() => {
+    trail.remove();
+  }, 800);
+});
+
+</script>
 
 </body>
 </html>
-
