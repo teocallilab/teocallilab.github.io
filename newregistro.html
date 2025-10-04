@@ -72,7 +72,7 @@
         }
 
         .hero-logo {
-            width: 200px;
+            width: 500px;
             height: auto;
             margin-bottom: 30px;
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
@@ -193,12 +193,12 @@
             }
             #hero h1 { font-size: 2rem; }
             #hero p { font-size: 1.2rem; }
-            .hero-logo { width: 150px; }
+            .hero-logo { width: 300px; }
             .deslumbrar-content{padding: 0 30px 0 30px;}
-            .main-word { font-size: 2rem; }
+            .main-word { font-size: 2rem; padding: 0; margin: 10px; }
             .description { font-size: 1.8rem; }
             .highlight.first { font-size: 2rem; }
-            .highlight.last { font-size: 1.3rem; }
+            .highlight.last { font-size: 1.3rem; margin: 0; }
             nav { padding: 15px 20px; gap: 15px; font-size: 0.9rem; }
             .servicio-card h3 { font-size: 1.5rem; }
             .servicio-card p { font-size: 1rem; }
@@ -607,9 +607,7 @@ document.addEventListener('mousemove', e => {
 document.addEventListener('touchmove', e => {
     e.preventDefault();
     const touches = e.targetTouches;
-     if (e.target === canvas) {
-        e.preventDefault();
-    }
+    
     for (let i = 0; i < touches.length; i++) {
         if (i >= pointers.length) pointers.push(new pointerPrototype());
         let pointer = pointers[i];
@@ -630,7 +628,7 @@ document.addEventListener('touchmove', e => {
             pointer.color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3]; // Amarillo luz
         }
     }
-}, { passive: false });
+}, { passive: true });
 
 document.addEventListener('touchstart', e => {
     const touches = e.targetTouches;
