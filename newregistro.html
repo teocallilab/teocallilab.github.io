@@ -607,21 +607,27 @@ document.addEventListener('mousemove', e => {
 document.addEventListener('touchmove', e => {
     e.preventDefault();
     const touches = e.targetTouches;
+     if (e.target === canvas) {
+        e.preventDefault();
+    }
     for (let i = 0; i < touches.length; i++) {
+        if (i >= pointers.length) pointers.push(new pointerPrototype());
         let pointer = pointers[i];
+        
         pointer.down = true;
         pointer.moved = true;
         pointer.dx = (touches[i].pageX - pointer.x) * 10.0;
         pointer.dy = (touches[i].pageY - pointer.y) * 10.0;
         pointer.x = touches[i].pageX;
         pointer.y = touches[i].pageY;
+        
         const rand = Math.random();
         if (rand < 0.5) {
-            pointer.color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2];
+            pointer.color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2]; // Verde
         } else if (rand < 0.8) {
-            pointer.color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3];
+            pointer.color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3]; // Turquesa
         } else {
-            pointer.color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3];
+            pointer.color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3]; // Amarillo luz
         }
     }
 }, { passive: false });
