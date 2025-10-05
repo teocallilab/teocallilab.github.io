@@ -192,6 +192,128 @@
         padding: 8px 12px;
       }
     }
+    .posters-grid {
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* Glass Card */
+    .poster-card {
+      position: relative;
+      padding: 30px;
+      border-radius: 20px;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .poster-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .poster-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), 
+                  inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .poster-card::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      filter: url(#container-glass);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .poster-card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .poster-number {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .poster-title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+
+    .poster-author {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 15px;
+    }
+
+    .poster-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+      flex-grow: 1;
+    }
+
+    .poster-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .tag {
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      nav {
+        top: 20px;
+        padding: 12px 20px;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+
+      .posters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -224,6 +346,97 @@
       <button class="glassBtn">
         <span>Próximos Eventos</span>
       </button>
+    </div>
+  </section>
+  <!-- Posters Section -->
+  <section class="posters-section">
+    <!--h2 class="section-title">Pósters Destacados</h2-->
+    <div class="posters-grid">
+      
+      <div class="poster-card">
+        <div class="poster-card-content">
+          <div class="poster-number">Póster 01</div>
+          <h3 class="poster-title">Redes Neuronales y Sistemas Complejos Adaptativos</h3>
+          <p class="poster-author">Dra. María Rodríguez</p>
+          <p class="poster-description">Análisis de patrones emergentes en redes neuronales profundas desde la perspectiva de sistemas complejos adaptativos.</p>
+          <div class="poster-tags">
+            <span class="tag">IA</span>
+            <span class="tag">Emergencia</span>
+            <span class="tag">Redes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-card-content">
+          <div class="poster-number">Póster 02</div>
+          <h3 class="poster-title">Dinámicas No Lineales en Sistemas Económicos</h3>
+          <p class="poster-author">Dr. Carlos Mendoza</p>
+          <p class="poster-description">Modelado de comportamientos caóticos y atractores extraños en mercados financieros globales.</p>
+          <div class="poster-tags">
+            <span class="tag">Economía</span>
+            <span class="tag">Caos</span>
+            <span class="tag">Modelado</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-card-content">
+          <div class="poster-number">Póster 03</div>
+          <h3 class="poster-title">Autoorganización en Sistemas Biológicos</h3>
+          <p class="poster-author">Dra. Ana Torres</p>
+          <p class="poster-description">Estudio de patrones de autoorganización en colonias de hormigas y su aplicación en algoritmos de optimización.</p>
+          <div class="poster-tags">
+            <span class="tag">Biología</span>
+            <span class="tag">Algoritmos</span>
+            <span class="tag">Optimización</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-card-content">
+          <div class="poster-number">Póster 04</div>
+          <h3 class="poster-title">Teoría de Grafos y Redes Sociales</h3>
+          <p class="poster-author">Dr. Luis Ramírez</p>
+          <p class="poster-description">Análisis topológico de comunidades virtuales y propagación de información en plataformas digitales.</p>
+          <div class="poster-tags">
+            <span class="tag">Grafos</span>
+            <span class="tag">Social</span>
+            <span class="tag">Información</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-card-content">
+          <div class="poster-number">Póster 05</div>
+          <h3 class="poster-title">Fractales en la Naturaleza</h3>
+          <p class="poster-author">Dra. Patricia Gómez</p>
+          <p class="poster-description">Geometría fractal aplicada al estudio de estructuras naturales: costas, montañas y sistemas vasculares.</p>
+          <div class="poster-tags">
+            <span class="tag">Fractales</span>
+            <span class="tag">Geometría</span>
+            <span class="tag">Naturaleza</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-card-content">
+          <div class="poster-number">Póster 06</div>
+          <h3 class="poster-title">Sistemas Multiagente y Simulación</h3>
+          <p class="poster-author">Dr. Roberto Hernández</p>
+          <p class="poster-description">Modelado basado en agentes para el estudio de fenómenos urbanos complejos y planificación de ciudades.</p>
+          <div class="poster-tags">
+            <span class="tag">Multiagente</span>
+            <span class="tag">Simulación</span>
+            <span class="tag">Urbano</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
