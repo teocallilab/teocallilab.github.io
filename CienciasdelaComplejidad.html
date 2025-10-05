@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Congreso MCC - Maestría en Ciencias de la Complejidad</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 300;
+      background: url(https://images.pexels.com/photos/6858622/pexels-photo-6858622.jpeg?_gl=1*upejb4*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NTk2MjIxMTEkbzMyJGcxJHQxNzU5NjIzMDcwJGo1MyRsMCRoMA..) center center;
+      background-size: cover;
+      min-height: 100vh;
+      animation: moveBackground 60s linear infinite;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    @keyframes moveBackground {
+      from {
+        background-position: 0% 0%;
+      }
+      to {
+        background-position: 0% 100%;
+      }
+    }
+
+    /* Glass Navigation */
+    nav {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      padding: 15px 25px;
+      border-radius: 50px;
+      z-index: 100;
+    }
+
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: 50px;
+      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+        box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+      
+    }
+
+    nav::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      border-radius: 50px; 
+       -webkit-backdrop-filter: blur(0px);
+            backdrop-filter: blur(0px);
+        -webkit-filter: url(#container-glass);
+            filter: url(#container-glass);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    nav a {
+      position: relative;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    nav a:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 200;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 50px;
+      opacity: 0.9;
+    }
+
+    /* Glass Button */
+    .glassBtn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 20px 40px;
+      background: transparent;
+      border-radius: 50px;
+      outline: none;
+      border: none;
+      z-index: 0;
+      font-size: 16px;
+      font-weight: 400;
+      color: white;
+      transition: transform 0.2s ease;
+    }
+
+    .glassBtn:hover {
+      transform: translateY(-2px);
+    }
+
+    .glassBtn::before {
+      content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 9999px;
+    -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+            box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+
+     
+    }
+
+    .glassBtn::after {
+      content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 9999px;
+    -webkit-backdrop-filter: blur(0px);
+            backdrop-filter: blur(0px);
+    -webkit-filter: url(#btn-glass);
+            filter: url(#btn-glass);
+    overflow: hidden;
+    isolation: isolate;
+    }
+
+    .glassBtn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+      }
+
+      nav {
+        top: 20px;
+        padding: 12px 20px;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG Filters -->
+  <svg style="display: none">
+    <filter id="container-glass" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+      <feGaussianBlur in="noise" stdDeviation="0.02" result="blur" />
+      <feDisplacementMap in="SourceGraphic" in2="blur" scale="77" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="btn-glass" primitiveUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.02" result="blur"></feGaussianBlur>
+      <feDisplacementMap id="disp" in="blur" in2="map" scale="1" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+    </filter>
+  </svg>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#eventos">Eventos</a>
+    <a href="#programa">Programa</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Maestría en Ciencias de la Complejidad</h1>
+      <p class="subtitle">Explorando sistemas adaptativos y emergentes</p>
+      <button class="glassBtn">
+        <span>Próximos Eventos</span>
+      </button>
+    </div>
+  </section>
+
+</body>
+</html>
