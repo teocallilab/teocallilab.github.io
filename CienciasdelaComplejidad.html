@@ -14,7 +14,7 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-weight: 300;
-      background: url(https://images.pexels.com/photos/1272887/pexels-photo-1272887.jpeg?_gl=1*17an6lv*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NTk2MjIxMTEkbzMyJGcxJHQxNzU5NjIzOTM4JGoxOSRsMCRoMA..) center center;
+      background: url(https://images.pexels.com/photos/34054256/pexels-photo-34054256.jpeg?_gl=1*1dna0z1*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NTk2Mjc2MDUkbzMzJGcxJHQxNzU5NjI4MDg2JGo0MiRsMCRoMA..) center center;
       background-size: cover;
       min-height: 100vh;
       animation: moveBackground 60s linear infinite;
@@ -87,6 +87,9 @@
     }
 
     /* Hero Section */
+    .img_hero{
+      width: 30%;
+    }
     .hero {
       display: flex;
       flex-direction: column;
@@ -223,9 +226,9 @@
       z-index: 0;
       overflow: hidden;
       border-radius: 20px;
-      box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), 
-                  inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-      background-color: rgba(255, 255, 255, 0.1);
+      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+        box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+      
     }
 
     .poster-card::after {
@@ -234,8 +237,10 @@
       z-index: -1;
       inset: 0;
       border-radius: 20px;
-      backdrop-filter: blur(20px);
-      filter: url(#container-glass);
+      -webkit-backdrop-filter: blur(0px);
+            backdrop-filter: blur(0px);
+    -webkit-filter: url(#container-glass);
+            filter: url(#container-glass);
       overflow: hidden;
       isolation: isolate;
     }
@@ -286,7 +291,187 @@
       font-size: 0.8rem;
       background: rgba(255, 255, 255, 0.2);
     }
+        /* Info Button */
+    .info-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 10px 20px;
+      background: transparent;
+      border-radius: 25px;
+      outline: none;
+      border: none;
+      z-index: 0;
+      font-size: 14px;
+      font-weight: 400;
+      color: white;
+      transition: transform 0.2s ease;
+      margin-top: 20px;
+    }
 
+    .info-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .info-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: 25px;
+      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+      box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+      
+    }
+
+    .info-btn::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      border-radius: 25px;
+       -webkit-backdrop-filter: blur(0px);
+            backdrop-filter: blur(0px);
+    -webkit-filter: url(#btn-glass);
+            filter: url(#btn-glass);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .info-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    .img-poster{
+      width: 100%;
+    }
+    /* Modal/Popup */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 40px;
+      border-radius: 20px;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+      box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    }
+
+    .modal-content::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      border-radius: 20px;
+      -webkit-backdrop-filter: blur(0px);
+            backdrop-filter: blur(0px);
+    -webkit-filter: url(#container-glass);
+            filter: url(#container-glass);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .modal-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .modal-author {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    .modal-section {
+      margin: 25px 0;
+    }
+
+    .modal-section h4 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .modal-section p {
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    .modal-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
     @media (max-width: 768px) {
       h1 {
         font-size: 2.5rem;
@@ -341,8 +526,9 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
+      <img src="logo.png" alt="" class="img_hero">
       <h1>Maestría en Ciencias de la Complejidad</h1>
-      <p class="subtitle">Explorando sistemas adaptativos y emergentes</p>
+      <p class="subtitle">UACM Del Valle</p>
       <button class="glassBtn">
         <span>Próximos Eventos</span>
       </button>
@@ -350,7 +536,7 @@
   </section>
   <!-- Posters Section -->
   <section class="posters-section">
-    <!--h2 class="section-title">Pósters Destacados</h2-->
+    <!--  h2 class="section-title">Pósters Destacados</h2-->
     <div class="posters-grid">
       
       <div class="poster-card">
@@ -364,6 +550,9 @@
             <span class="tag">Emergencia</span>
             <span class="tag">Redes</span>
           </div>
+          <button class="info-btn" onclick="openModal('modal1')">
+            <span>Más información</span>
+          </button>
         </div>
       </div>
 
@@ -378,6 +567,9 @@
             <span class="tag">Caos</span>
             <span class="tag">Modelado</span>
           </div>
+          <button class="info-btn" onclick="openModal('modal2')">
+            <span>Más información</span>
+          </button>
         </div>
       </div>
 
@@ -392,6 +584,9 @@
             <span class="tag">Algoritmos</span>
             <span class="tag">Optimización</span>
           </div>
+          <button class="info-btn" onclick="openModal('modal3')">
+            <span>Más información</span>
+          </button>
         </div>
       </div>
 
@@ -406,6 +601,9 @@
             <span class="tag">Social</span>
             <span class="tag">Información</span>
           </div>
+          <button class="info-btn" onclick="openModal('modal4')">
+            <span>Más información</span>
+          </button>
         </div>
       </div>
 
@@ -420,6 +618,9 @@
             <span class="tag">Geometría</span>
             <span class="tag">Naturaleza</span>
           </div>
+          <button class="info-btn" onclick="openModal('modal5')">
+            <span>Más información</span>
+          </button>
         </div>
       </div>
 
@@ -434,11 +635,93 @@
             <span class="tag">Simulación</span>
             <span class="tag">Urbano</span>
           </div>
+          <button class="info-btn" onclick="openModal('modal6')">
+            <span>Más información</span>
+          </button>
         </div>
       </div>
 
     </div>
   </section>
+  <!-- Modals -->
+  <div class="modal-overlay" id="modal1" onclick="closeModal('modal1')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
+      <div class="modal-inner">
+        <img src="congreso_fisica.jpg" class="img-poster" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal2" onclick="closeModal('modal2')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
+      <div class="modal-inner">
+        <img src="congreso_fisica.jpg" class="img-poster" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal3" onclick="closeModal('modal3')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal3')">&times;</button>
+      <div class="modal-inner">
+        <img src="congreso_fisica.jpg" class="img-poster" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal4" onclick="closeModal('modal4')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal4')">&times;</button>
+      <div class="modal-inner">
+        <img src="congreso_fisica.jpg" class="img-poster" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal5" onclick="closeModal('modal5')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal5')">&times;</button>
+      <div class="modal-inner">
+        <img src="congreso_fisica.jpg" class="img-poster" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal6" onclick="closeModal('modal6')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal('modal6')">&times;</button>
+      <div class="modal-inner">
+        <img src="congreso_fisica.jpg" class="img-poster" alt="">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const activeModal = document.querySelector('.modal-overlay.active');
+        if (activeModal) {
+          activeModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>
