@@ -1337,120 +1337,101 @@ anchor.addEventListener('click', function (e) {
 <script type="module">
   import { gsap } from "https://cdn.skypack.dev/gsap@3.12.5";
   import { ScrollTrigger } from "https://cdn.skypack.dev/gsap@3.12.5/ScrollTrigger";
-
   gsap.registerPlugin(ScrollTrigger);
 
-  /* 🌅 HERO INTRO ANIMATION */
-  const heroTl = gsap.timeline();
+  // --- evitar conflictos con el CSS/IntersectionObserver anterior ---
+  document.querySelectorAll('.fade-in-element').forEach(el => {
+    el.classList.remove('visible');       // si se añadió antes
+    el.style.transition = 'none';         // anula las transiciones CSS previas
+    el.style.opacity = 0;                 // dejamos opacidad 0; GSAP la animará
+    el.style.willChange = 'transform, opacity';
+  });
 
-  heroTl
-    .from("#hero", {
-      opacity: 0,
-      scale: 1.05,
-      duration: 1.2,
-      ease: "power2.out"
-    })
-    .from("#hero h1", {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    }, "-=0.6")
-    .from("#hero p", {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out"
-    }, "-=0.5")
-    .from("#hero .hazclick", {
-      y: 30,
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.8,
-      ease: "back.out(1.7)"
-    }, "-=0.4");
+  // --- constructor de animaciones paramétrico (nos permite ajustar mobile/desktop) ---
+  function buildAnimations(settings) {
+    // Hero intro (sin parallax)
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .from('.hero-logo', { y: settings.hero.logoY, opacity: 0, scale: settings.hero.logoScale, duration: settings.hero.logoDur }, 0)
+      .from('#hero h1',   { y: settings.hero.h1Y,   opacity: 0, duration: settings.hero.h1Dur }, '-=0.65')
+      .from('#hero p',    { y: settings.hero.pY,    opacity: 0, duration: settings.hero.pDur },  '-=0.55');
 
-  /* 🌄 HERO PARALLAX al hacer scroll */
-  gsap.to("#hero h1", {
-    yPercent: -20,
-    opacity: 0.7,
-    scrollTrigger: {
-      trigger: "#hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true,
+    // Elementos genéricos fade-in (sin delay por índice)
+    gsap.utils.toArray('.fade-in-element').forEach(el => {
+      gsap.fromTo(el,
+        { y: settings.fade.yFrom, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: settings.fade.duration, ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: settings.fade.start,
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+    });
+
+    // Timeline - imágenes
+    gsap.utils.toArray('.timeline-img').forEach(img => {
+      gsap.fromTo(img,
+        { y: settings.timeline.imgY, opacity: 0, scale: settings.timeline.imgScaleFrom },
+        {
+          y: 0, opacity: 1, scale: 1, duration: settings.timeline.imgDur, ease: 'power2.out',
+          scrollTrigger: { trigger: img, start: settings.timeline.imgStart, toggleActions: 'play none none reverse' }
+        }
+      );
+    });
+
+    // Timeline - cards (slide desde izquierda/derecha)
+    gsap.utils.toArray('.timeline-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { x: i % 2 === 0 ? -settings.timeline.cardX : settings.timeline.cardX, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: settings.timeline.cardDur, ease: 'power2.out',
+          scrollTrigger: { trigger: card, start: settings.timeline.cardStart, toggleActions: 'play none none reverse' }
+        }
+      );
+    });
+
+    // Texto especial + CTA
+    gsap.fromTo('.special-text',
+      { scale: settings.special.scaleFrom, opacity: 0 },
+      { scale: 1, opacity: 1, duration: settings.special.dur, ease: 'power2.out', scrollTrigger: { trigger: '.special-text', start: settings.special.start } }
+    );
+
+    gsap.fromTo('.cta-section .hazclick',
+      { y: settings.cta.yFrom, opacity: 0, scale: settings.cta.scaleFrom },
+      { y: 0, opacity: 1, scale: 1, duration: settings.cta.dur, ease: 'back.out(1.4)', scrollTrigger: { trigger: '.cta-section', start: settings.cta.start } }
+    );
+  }
+
+  // --- Diferentes ajustes para desktop y móvil ---
+  ScrollTrigger.matchMedia({
+    // DESKTOP (>= 769px)
+    "(min-width: 769px)": function() {
+      buildAnimations({
+        hero: { logoY: 24, logoScale: 0.96, logoDur: 0.9, h1Y: 40, h1Dur: 0.9, pY: 18, pDur: 0.75 },
+        fade: { yFrom: 36, duration: 0.75, start: 'top 90%' },
+        timeline: { imgY: 50, imgScaleFrom: 0.96, imgDur: 0.7, imgStart: 'top 92%', cardX: 40, cardDur: 0.7, cardStart: 'top 92%' },
+        special: { scaleFrom: 0.98, dur: 0.85, start: 'top 88%' },
+        cta: { yFrom: 20, scaleFrom: 0.95, dur: 0.75, start: 'top 88%' }
+      });
+    },
+
+    // MOBILE (<= 768px) — más rápidas y con menor recorrido
+    "(max-width: 768px)": function() {
+      buildAnimations({
+        hero: { logoY: 12, logoScale: 0.98, logoDur: 0.6, h1Y: 18, h1Dur: 0.6, pY: 10, pDur: 0.5 },
+        fade: { yFrom: 18, duration: 0.55, start: 'top 95%' },
+        timeline: { imgY: 30, imgScaleFrom: 0.98, imgDur: 0.55, imgStart: 'top 95%', cardX: 24, cardDur: 0.55, cardStart: 'top 95%' },
+        special: { scaleFrom: 0.995, dur: 0.5, start: 'top 94%' },
+        cta: { yFrom: 12, scaleFrom: 0.98, dur: 0.6, start: 'top 94%' }
+      });
     }
   });
 
-  /* ✨ ANIMACIONES GLOBALES CON SCROLL */
-  gsap.utils.toArray(".fade-in-element").forEach((el, i) => {
-    gsap.from(el, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      delay: i * 0.1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      }
-    });
-  });
-
-  /* 🕰️ TIMELINE */
-  gsap.utils.toArray(".timeline-img").forEach((img) => {
-    gsap.from(img, {
-      opacity: 0,
-      scale: 0.8,
-      y: 100,
-      duration: 1.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: img,
-        start: "top 90%",
-        toggleActions: "play none none reverse"
-      }
-    });
-  });
-
-  gsap.utils.toArray(".timeline-card").forEach((card, i) => {
-    gsap.from(card, {
-      opacity: 0,
-      x: i % 2 === 0 ? -100 : 100,
-      duration: 1.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: card,
-        start: "top 90%",
-        toggleActions: "play none none reverse"
-      }
-    });
-  });
-
-  /* 💫 TEXTO ESPECIAL */
-  gsap.from(".special-text", {
-    scale: 0.9,
-    opacity: 0,
-    duration: 1.5,
-    ease: "elastic.out(1, 0.5)",
-    scrollTrigger: {
-      trigger: ".special-text",
-      start: "top 80%",
-    }
-  });
-
-  /* 🎯 CTA FINAL */
-  gsap.from(".hazclick", {
-    opacity: 0,
-    scale: 0.5,
-    duration: 1.2,
-    ease: "back.out(1.7)",
-    scrollTrigger: {
-      trigger: ".cta-section",
-      start: "top 80%",
-    }
-  });
+  // refresca triggers cuando todo cargue (imagenes / canvas)
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 </script>
 
 
