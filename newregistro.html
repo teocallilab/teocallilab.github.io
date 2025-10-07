@@ -1,1126 +1,1458 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DL Green - Registro</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DL Green - Registro</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+    }
+
+    #fluidCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+    }
+
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+        color: #667eea;
+    }
+
+    .section {
+        position: relative;
+        z-index: 10;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 100px 20px;
+    }
+
+    #hero {
+        text-align: center;
+        background: transparent;
+    }
+
+    .hero-logo {
+        width: 500px;
+        height: auto;
+        margin-bottom: 30px;
+        filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+    }
+
+    #hero h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
+        margin-bottom: 20px;
+    }
+
+    #hero p {
+        color: #fff;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        letter-spacing: 1.125px;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .deslumbrar-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 60px;
+    }
+
+    .description {
+        font-size: 2rem;
+        color: #fff;
+        margin: 20px 0;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+    .main-word {
+        font-size: 2.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #667eea 0%, #4ba258 50%, #93befb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 40px 0;
+        text-transform: uppercase;
+    }
+
+    .highlight.first {
+        font-size: 3rem;
+        font-weight: 400;
+    }
+
+    .highlight.last {
+        font-size: 1.8rem;
+        max-width: 900px;
+        margin: 40px auto;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+
+    .fade-in-element {
+        
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in-element.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
+    .fade-in-element:nth-child(2) { transition-delay: 0.3s; }
+    .fade-in-element:nth-child(3) { transition-delay: 0.5s; }
+
+
+
+    /* TIMELINE SECTION */
+    .timeline {
+        position: relative;
+        z-index: 10;
+        min-height: auto;
+        padding: 80px 20px;
+
+    }
+
+    .timeline-header-img {
+        display: block;
+        max-width: 100px;
+        margin: 0 auto 60px;
+        filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
+    }
+
+    .timeline .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 20px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .timeline .col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .timeline-img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        border-radius: 20px;
+        transition: transform 0.3s ease;
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+    }
+
+    .timeline-img:hover {
+        transform: scale(1.05);
+    }
+
+    .timeline-card {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid #4ba258;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.5rem;
+        line-height: 1.8;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .timeline-card:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(102, 234, 170, 0.5);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(102, 234, 170, 0.5);
+    }
+
+    .special-text {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #fff;
+        text-align: center;
+        line-height: 1.2;
+        background: linear-gradient(135deg, #667eea 0%, #4ba258 50%, #93befb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logofinal {
+        text-align: center;
+        margin-top: 80px;
+        padding: 40px 0;
+    }
+
+    .logofinal .cerebro {
+        max-width: 350px;
+        height: auto;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
         }
-
-        html {
-            scroll-behavior: smooth;
+        50% {
+            transform: translateY(-20px);
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        #fluidCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #667eea;
-        }
-
-        .section {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 20px;
-        }
-
-        #hero {
-            text-align: center;
-            background: transparent;
-        }
-
-        .hero-logo {
-            width: 500px;
-            height: auto;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
-        }
-
-        #hero h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
-            margin-bottom: 20px;
-        }
-
-        #hero p {
-            color: #fff;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-            letter-spacing: 1.125px;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .deslumbrar-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 60px;
-        }
-
-        .description {
-            font-size: 2rem;
-            color: #fff;
-            margin: 20px 0;
-            font-weight: 300;
-            line-height: 1.6;
-        }
-
-        .main-word {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #667eea 0%, #4ba258 50%, #93befb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 40px 0;
-            text-transform: uppercase;
-        }
-
-        .highlight.first {
-            font-size: 3rem;
-            font-weight: 400;
-        }
-
-        .highlight.last {
-            font-size: 1.8rem;
-            max-width: 900px;
-            margin: 40px auto;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-
-        .fade-in-element {
-            
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in-element:nth-child(1) { transition-delay: 0.1s; }
-        .fade-in-element:nth-child(2) { transition-delay: 0.3s; }
-        .fade-in-element:nth-child(3) { transition-delay: 0.5s; }
-
-
-
-        /* TIMELINE SECTION */
-        .timeline {
-            position: relative;
-            z-index: 10;
-            min-height: auto;
-            padding: 80px 20px;
-
-        }
-
-        .timeline-header-img {
-            display: block;
-            max-width: 100px;
-            margin: 0 auto 60px;
-            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
-        }
-
-        .timeline .row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 20px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .timeline .col {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .timeline-img {
-            width: 100%;
-            max-width: 250px;
-            height: auto;
-            border-radius: 20px;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
-        }
-
-        .timeline-img:hover {
-            transform: scale(1.05);
-        }
-
-        .timeline-card {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid #4ba258;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.5rem;
-            line-height: 1.8;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(102, 234, 170, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(102, 234, 170, 0.5);
-        }
-
-        .special-text {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #fff;
-            text-align: center;
-            line-height: 1.2;
-            background: linear-gradient(135deg, #667eea 0%, #4ba258 50%, #93befb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logofinal {
-            text-align: center;
-            margin-top: 80px;
-            padding: 40px 0;
-        }
-
-        .logofinal .cerebro {
-            max-width: 350px;
-            height: auto;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
+    }
 /* ASESORAMIENTO SECTION */
 .asesoramiento {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 100px 20px;
-    overflow: hidden;
+position: relative;
+z-index: 10;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 100px 20px;
+overflow: hidden;
 }
 
 .asesoramiento-content {
-    max-width: 1000px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
+max-width: 1000px;
+text-align: center;
+position: relative;
+z-index: 2;
 }
 
 .asesoramiento .main-title {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: #fff;
-    margin-bottom: 30px;
-    line-height: 1.3;
-    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+font-size: 3.5rem;
+font-weight: 900;
+color: #fff;
+margin-bottom: 30px;
+line-height: 1.3;
+text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .asesoramiento .subtitle {
-    font-size: 1.8rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 40px;
-    font-weight: 300;
-    line-height: 1.6;
+font-size: 1.8rem;
+color: rgba(255, 255, 255, 0.9);
+margin-bottom: 40px;
+font-weight: 300;
+line-height: 1.6;
 }
 
 .asesoramiento .question {
-    font-size: 2rem;
-    color: #fff;
-    margin-bottom: 60px;
-    font-weight: 500;
-    line-height: 1.5;
+font-size: 2rem;
+color: #fff;
+margin-bottom: 60px;
+font-weight: 500;
+line-height: 1.5;
 }
 
 .cta-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 40px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 30px;
+flex-wrap: wrap;
+margin-top: 40px;
 }
 
 .hazclick {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    animation: pulse 2s ease-in-out infinite;
+font-size: 2.5rem;
+font-weight: 900;
+color: #fff;
+text-transform: uppercase;
+letter-spacing: 3px;
+animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.1);
-        opacity: 0.8;
-    }
+0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+}
+50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
 }
 
 .whatsapp-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-    border-radius: 50%;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-    position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 80px;
+height: 80px;
+background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+border-radius: 50%;
+text-decoration: none;
+transition: all 0.3s ease;
+box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+position: relative;
 }
 
 .whatsapp-btn::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(37, 211, 102, 0.3);
-    animation: ripple 1.5s ease-out infinite;
+content: '';
+position: absolute;
+width: 100%;
+height: 100%;
+border-radius: 50%;
+background: rgba(37, 211, 102, 0.3);
+animation: ripple 1.5s ease-out infinite;
 }
 
 @keyframes ripple {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
+0% {
+    transform: scale(1);
+    opacity: 1;
+}
+100% {
+    transform: scale(1.5);
+    opacity: 0;
+}
 }
 
 .whatsapp-btn:hover {
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+transform: scale(1.1) rotate(10deg);
+box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
 }
 
 .whatsapp-btn i {
-    font-size: 2.5rem;
-    color: #fff;
-    z-index: 1;
+font-size: 2.5rem;
+color: #fff;
+z-index: 1;
 }
 
 .cta-img {
-    max-width: 200px;
-    height: auto;
-    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+max-width: 200px;
+height: auto;
+filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
 }
 
 .glow-img {
-    animation: glow 2s ease-in-out infinite alternate;
+animation: glow 2s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
-    from {
-        filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
-    }
-    to {
-        filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.8));
-    }
+from {
+    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5));
+}
+to {
+    filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.8));
+}
 }
 
 
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .asesoramiento .main-title {
-        font-size: 2.5rem;
-    }
-    
-    .asesoramiento .subtitle {
-        font-size: 1.4rem;
-    }
-    
-    .asesoramiento .question {
-        font-size: 1.5rem;
-    }
-    
-    .hazclick {
-        font-size: 1.8rem;
-        letter-spacing: 2px;
-    }
-    
-    .whatsapp-btn {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .whatsapp-btn i {
-        font-size: 2rem;
-    }
-    
-    .cta-img {
-        max-width: 150px;
-    }
-    
-    .cta-section {
-        gap: 20px;
-    }
+.asesoramiento .main-title {
+    font-size: 2.5rem;
+}
+
+.asesoramiento .subtitle {
+    font-size: 1.4rem;
+}
+
+.asesoramiento .question {
+    font-size: 1.5rem;
+}
+
+.hazclick {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+.whatsapp-btn {
+    width: 70px;
+    height: 70px;
+}
+
+.whatsapp-btn i {
+    font-size: 2rem;
+}
+
+.cta-img {
+    max-width: 150px;
+}
+
+.cta-section {
+    gap: 20px;
+}
 }
 
 @media (max-width: 480px) {
-    .asesoramiento .main-title {
-        font-size: 2rem;
-    }
-    
-    .asesoramiento .subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .asesoramiento .question {
-        font-size: 1.3rem;
-    }
-    
-    .hazclick {
-        font-size: 1.5rem;
-    }
-    
-    .whatsapp-btn {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .whatsapp-btn i {
-        font-size: 1.8rem;
-    }
-    
-    .cta-img {
-        max-width: 120px;
-    }
+.asesoramiento .main-title {
+    font-size: 2rem;
 }
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .timeline .row {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                margin-bottom: 30px;
-            }
-            
-            .timeline-header-img {
-                max-width: 100px;
-                margin-top: 60px;
-                
-            }
-            
-            .timeline-img {
-                max-width: 200px;
-            }
-            
-            .timeline-card {
-                padding: 20px;
-                font-size: 1rem;
-            }
-            
-            .special-text {
-                font-size: 2rem;
-                padding: 30px 20px;
-            }
-            .logofinal{
-                margin-top: 0;
-            }
-            .logofinal .cerebro {
-                max-width: 300px;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .special-text {
-                font-size: 1.5rem;
-            }
+.asesoramiento .subtitle {
+    font-size: 1.2rem;
+}
+
+.asesoramiento .question {
+    font-size: 1.3rem;
+}
+
+.hazclick {
+    font-size: 1.5rem;
+}
+
+.whatsapp-btn {
+    width: 60px;
+    height: 60px;
+}
+
+.whatsapp-btn i {
+    font-size: 1.8rem;
+}
+
+.cta-img {
+    max-width: 120px;
+}
+}
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .timeline .row {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-header-img {
+            max-width: 100px;
+            margin-top: 60px;
             
-            .timeline-card {
-                font-size: 0.95rem;
-                padding: 18px;
-            }
         }
+        
+        .timeline-img {
+            max-width: 200px;
+        }
+        
+        .timeline-card {
+            padding: 20px;
+            font-size: 1rem;
+        }
+        
+        .special-text {
+            font-size: 2rem;
+            padding: 30px 20px;
+        }
+        .logofinal{
+            margin-top: 0;
+        }
+        .logofinal .cerebro {
+            max-width: 300px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .special-text {
+            font-size: 1.5rem;
+        }
+        
+        .timeline-card {
+            font-size: 0.95rem;
+            padding: 18px;
+        }
+    }
 
 
-        @media (max-width: 768px) {
-            .section{
-                min-height: 10vh;
-            }
-            #hero h1 { font-size: 2rem; }
-            #hero p { font-size: 1.2rem; }
-            .hero-logo { width: 300px; }
-            .deslumbrar-content{padding: 0 30px 0 30px;}
-            .main-word { font-size: 2rem; padding: 0; margin: 10px; }
-            .description { font-size: 1.8rem; }
-            .highlight.first { font-size: 2rem; }
-            .highlight.last { font-size: 1.3rem; margin: 0; }
-            nav { padding: 15px 20px; gap: 15px; font-size: 0.9rem; }
+    @media (max-width: 768px) {
+        .section{
+            min-height: 10vh;
         }
-    </style>
+        #hero h1 { font-size: 2rem; }
+        #hero p { font-size: 1.2rem; }
+        .hero-logo { width: 300px; }
+        .deslumbrar-content{padding: 0 30px 0 30px;}
+        .main-word { font-size: 2rem; padding: 0; margin: 10px; }
+        .description { font-size: 1.8rem; }
+        .highlight.first { font-size: 2rem; }
+        .highlight.last { font-size: 1.3rem; margin: 0; }
+        nav { padding: 15px 20px; gap: 15px; font-size: 0.9rem; }
+    }
+
+/* TÉRMINOS Y CONDICIONES SECTION */
+.terminos {
+position: relative;
+z-index: 10;
+min-height: auto;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 80px 20px;
+}
+
+.terminos-content {
+max-width: 900px;
+width: 100%;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border-radius: 30px;
+border: 1px solid rgba(75, 162, 88, 0.3);
+padding: 50px 40px;
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.terminos-title {
+font-size: 2.5rem;
+font-weight: 900;
+text-align: center;
+color: #fff;
+margin-bottom: 10px;
+background: linear-gradient(135deg, #667eea 0%, #4ba258 50%, #93befb 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.terminos-subtitle {
+font-size: 1.3rem;
+text-align: center;
+color: rgba(255, 255, 255, 0.8);
+margin-bottom: 35px;
+font-weight: 300;
+}
+
+.terminos-list {
+display: flex;
+flex-direction: column;
+gap: 15px;
+margin-bottom: 35px;
+}
+
+.terminos-list p {
+color: rgba(255, 255, 255, 0.9);
+font-size: 1rem;
+line-height: 1.6;
+margin: 0;
+display: flex;
+align-items: flex-start;
+gap: 12px;
+}
+
+.terminos-list p i {
+font-size: 1.2rem;
+color: #4ba258;
+min-width: 20px;
+margin-top: 3px;
+}
+
+.terminos-footer {
+text-align: center;
+padding-top: 30px;
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminos-footer p {
+color: rgba(255, 255, 255, 0.8);
+font-size: 1rem;
+margin-bottom: 15px;
+}
+
+.privacy-link {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 12px 25px;
+background: linear-gradient(135deg, #667eea 0%, #4ba258 100%);
+color: #fff;
+text-decoration: none;
+border-radius: 50px;
+font-size: 1rem;
+font-weight: 600;
+transition: all 0.3s ease;
+box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.privacy-link:hover {
+transform: translateY(-3px);
+box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+color: #fff;
+}
+
+.privacy-link i {
+font-size: 1.2rem;
+}
+
+/* RESPONSIVE TÉRMINOS */
+@media (max-width: 768px) {
+.terminos {
+    padding: 60px 20px;
+}
+
+.terminos-content {
+    padding: 35px 25px;
+}
+
+.terminos-title {
+    font-size: 2rem;
+}
+
+.terminos-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.terminos-list {
+    gap: 12px;
+}
+
+.terminos-list p {
+    font-size: 0.95rem;
+    gap: 10px;
+}
+
+.terminos-list p i {
+    font-size: 1rem;
+}
+
+.terminos-footer p {
+    font-size: 0.95rem;
+}
+
+.privacy-link {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+}
+}
+
+@media (max-width: 480px) {
+.terminos {
+    padding: 50px 15px;
+}
+
+.terminos-content {
+    padding: 30px 20px;
+    border-radius: 20px;
+}
+
+.terminos-title {
+    font-size: 1.7rem;
+}
+
+.terminos-subtitle {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.terminos-list {
+    gap: 10px;
+}
+
+.terminos-list p {
+    font-size: 0.9rem;
+    gap: 8px;
+}
+
+.terminos-list p i {
+    font-size: 0.95rem;
+    min-width: 18px;
+}
+
+.privacy-link {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+}
+}
+</style>
 </head>
 <body>
-    <canvas id="fluidCanvas"></canvas>
+<canvas id="fluidCanvas"></canvas>
 
-    <!--nav>
-        <a href="#hero">Inicio</a>
-        <a href="#deslumbrar">Deslumbrar</a>
-    </nav-->
+<!--nav>
+    <a href="#hero">Inicio</a>
+    <a href="#deslumbrar">Deslumbrar</a>
+</nav-->
 
-    <section id="hero" class="section">
-        <img src="https://dlgreen.mx/wp-content/uploads/2024/06/dl_green-white.svg" alt="DL Green Logo" class="hero-logo">
-        <h1>Smarter Lighting Design Ambiance</h1>
-        <p>CONECTAMOS LA INSPIRACIÓN CON LA ILUMINACIÓN</p>
-    </section>
+<section id="hero" class="section">
+    <img src="https://dlgreen.mx/wp-content/uploads/2024/06/dl_green-white.svg" alt="DL Green Logo" class="hero-logo">
+    <h1>Smarter Lighting Design Ambiance</h1>
+    <p>CONECTAMOS LA INSPIRACIÓN CON LA ILUMINACIÓN</p>
+</section>
 
-    <section id="deslumbrar" class="deslumbrar">
-        <div class="deslumbrar-content">
-            <p class="description highlight first fade-in-element">Te vamos a</p>
-            <p class="main-word fade-in-element">DESLUMBRAR</p>
-            <p class="description highlight last fade-in-element">
-                La iluminación es solo el 3% del costo de construcción... <br> pero puede definir el 100% de la experiencia de un espacio.
-            </p>
-        </div>
-    </section>
-     <section class="timelinw">
-    
-        <img src="img/foco.png" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
+<section id="deslumbrar" class="deslumbrar">
+    <div class="deslumbrar-content">
+        <p class="description highlight first fade-in-element">Te vamos a</p>
+        <p class="main-word fade-in-element">DESLUMBRAR</p>
+        <p class="description highlight last fade-in-element">
+            La iluminación es solo el 3% del costo de construcción... <br> pero puede definir el 100% de la experiencia de un espacio.
+        </p>
+    </div>
+</section>
+    <section class="timelinw">
+
+    <img src="img/foco.png" alt="Conectamos la Inspiración con la Iluminación" class="timeline-header-img">
 <div class="timeline">
-    <!-- Fila 1: imagen | imagen -->
-    <div class="row">
-      <div class="col">
-        <img src="img/mariposas 1.png" alt="Imagen 1" class="timeline-img">
-      </div>
-      <div class="col">
-        <img src="img/cerebro 1.png" alt="Imagen 2" class="timeline-img">
-      </div>
-    </div>
-
-    <!-- Fila 2: vacío | tarjeta -->
-    <div class="row">
-      <div class="col"></div>
-      <div class="col">
-        <div class="timeline-card">
-          Integramos soluciones enfocadas en eficiencia energética y tecnología inteligente, 
-            logrando espacios funcionales, sustentables y con mayor valor agregado.
-        </div>
-      </div>
-    </div>
-
-    <!-- Fila 3: imagen | imagen -->
-    <div class="row">
-      <div class="col">
-        <img src="img/cerebro 2.png" alt="Imagen 3" class="timeline-img">
-      </div>
-      <div class="col">
-        <img src="img/mariposas2.png" alt="Imagen 4" class="timeline-img">
-      </div>
-    </div>
-
-    <!-- Fila 4: tarjeta | vacío -->
-    <div class="row">
-      <div class="col">
-        <div class="timeline-card">
-            Ahorro energético de hasta un 40% con sistemas de iluminación eficientes (LED + control). 
-            Reduce de costos operativos sobre un 20-25% en gastos de energía anuales.
-        </div>
-      </div>
-      <div class="col"></div>
-    </div>
-
-     <!-- Fila 5: imagen | imagen -->
-    <div class="row">
-      <div class="col">
-        <img src="img/mariposas 1.png" alt="Imagen 1" class="timeline-img">
-      </div>
-      <div class="col">
-        <img src="img/cerebro 3.png" alt="Imagen 2" class="timeline-img">
-      </div>
-    </div>
-
-    <!-- Fila 2: vacío | tarjeta -->
-    <div class="row">
-      <div class="col"></div>
-      <div class="col">
-        <div class="timeline-card">
-            Reducen el impacto ambiental las emisiones de CO₂, cuidan la salud visual creando espacios 
-            más confortables, productivos y amigables con el medio ambiente.
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Fila 7: imagen | imagen -->
-    <div class="row">
-      <div class="col">
-        <img src="img/cerebro 4.png" alt="Imagen 7" class="timeline-img">
-      </div>
-      <div class="col">
-        <img src="img/mariposas2.png" alt="Imagen 8" class="timeline-img">
-      </div>
-    </div>
-
-    <!-- Fila 8: tarjeta | vacío -->
-    <div class="row">
-      <div class="col">
-        <div class="timeline-card">
-            Optimiza el consumo energético hasta en un 35% adicional; automatización y flexibilidad 
-            por espacio. Garantiza confort, seguridad y eficiencia operativa.
-
-        </div>
-      </div>
-      <div class="col"></div>
-    </div>
-
-    <!-- Fila 9: texto especial | imagen + tarjeta -->
-    <div class="row">
-    <div class="col special-text">
-        CONECTAMOS LA <br> INSPIRACIÓN <br> CON LA ILUMINACIÓN
+<!-- Fila 1: imagen | imagen -->
+<div class="row">
+    <div class="col">
+    <img src="img/mariposas 1.png" alt="Imagen 1" class="timeline-img">
     </div>
     <div class="col">
-        <img src="img/cerebro 5.png" alt="Imagen extra" class="timeline-img">
-        <div class="timeline-card">
-            Integramos soluciones, para garantizar las normativas con precisión con un amplio de 
-            marcas que nos permite ofrecer soluciones flexibles y personalizadas
-        </div>
+    <img src="img/cerebro 1.png" alt="Imagen 2" class="timeline-img">
+    </div>
+</div>
+
+<!-- Fila 2: vacío | tarjeta -->
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+    <div class="timeline-card">
+        Integramos soluciones enfocadas en eficiencia energética y tecnología inteligente, 
+        logrando espacios funcionales, sustentables y con mayor valor agregado.
     </div>
     </div>
+</div>
 
-  </div>
+<!-- Fila 3: imagen | imagen -->
+<div class="row">
+    <div class="col">
+    <img src="img/cerebro 2.png" alt="Imagen 3" class="timeline-img">
+    </div>
+    <div class="col">
+    <img src="img/mariposas2.png" alt="Imagen 4" class="timeline-img">
+    </div>
+</div>
 
-  <!-- Logo final -->
-   <div class="logofinal">
-        <img src="img/cerebro.png"  alt="Logo DL Green" class="cerebro">
-   </div>
-  
-  </section>
+<!-- Fila 4: tarjeta | vacío -->
+<div class="row">
+    <div class="col">
+    <div class="timeline-card">
+        Ahorro energético de hasta un 40% con sistemas de iluminación eficientes (LED + control). 
+        Reduce de costos operativos sobre un 20-25% en gastos de energía anuales.
+    </div>
+    </div>
+    <div class="col"></div>
+</div>
+
+    <!-- Fila 5: imagen | imagen -->
+<div class="row">
+    <div class="col">
+    <img src="img/mariposas 1.png" alt="Imagen 1" class="timeline-img">
+    </div>
+    <div class="col">
+    <img src="img/cerebro 3.png" alt="Imagen 2" class="timeline-img">
+    </div>
+</div>
+
+<!-- Fila 2: vacío | tarjeta -->
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+    <div class="timeline-card">
+        Reducen el impacto ambiental las emisiones de CO₂, cuidan la salud visual creando espacios 
+        más confortables, productivos y amigables con el medio ambiente.
+
+    </div>
+    </div>
+</div>
+
+<!-- Fila 7: imagen | imagen -->
+<div class="row">
+    <div class="col">
+    <img src="img/cerebro 4.png" alt="Imagen 7" class="timeline-img">
+    </div>
+    <div class="col">
+    <img src="img/mariposas2.png" alt="Imagen 8" class="timeline-img">
+    </div>
+</div>
+
+<!-- Fila 8: tarjeta | vacío -->
+<div class="row">
+    <div class="col">
+    <div class="timeline-card">
+        Optimiza el consumo energético hasta en un 35% adicional; automatización y flexibilidad 
+        por espacio. Garantiza confort, seguridad y eficiencia operativa.
+
+    </div>
+    </div>
+    <div class="col"></div>
+</div>
+
+<!-- Fila 9: texto especial | imagen + tarjeta -->
+<div class="row">
+<div class="col special-text">
+    CONECTAMOS LA <br> INSPIRACIÓN <br> CON LA ILUMINACIÓN
+</div>
+<div class="col">
+    <img src="img/cerebro 5.png" alt="Imagen extra" class="timeline-img">
+    <div class="timeline-card">
+        Integramos soluciones, para garantizar las normativas con precisión con un amplio de 
+        marcas que nos permite ofrecer soluciones flexibles y personalizadas
+    </div>
+</div>
+</div>
+
+</div>
+
+<!-- Logo final -->
+<div class="logofinal">
+    <img src="img/FREE TESTING.png"  alt="Logo DL Green" class="cerebro">
+</div>
+
+</section>
 <!-- Asesoramiento Section -->
-    <section class="asesoramiento">
-        <div class="asesoramiento-content">
-            <h2 class="main-title fade-in-element">¡Te ofrecemos un asesoramiento inicial y levantamiento sin costo!</h2>
-            <p class="subtitle fade-in-element">Experimenta nuestro nivel de expertise, atención personalizada e innovación en nuestras integraciones.</p>
-            <p class="question fade-in-element">¿Agendamos una breve reunión para conocer tus proyectos y mostrarte cómo podemos aportar valor?</p>
-            
-            <div class="cta-section fade-in-element">
-                <div class="hazclick">HAZCLICK</div>
-                <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">
-                    <i class="bi bi-whatsapp"></i>
-                </a>
-                <img src="img/think green.png" alt="Imagen centrada" class="cta-img glow-img">
-            </div>
+<section class="asesoramiento">
+    <div class="asesoramiento-content">
+        <h2 class="main-title fade-in-element">¡Te ofrecemos un asesoramiento inicial y levantamiento sin costo!</h2>
+        <p class="subtitle fade-in-element">Experimenta nuestro nivel de expertise, atención personalizada e innovación en nuestras integraciones.</p>
+        <p class="question fade-in-element">¿Agendamos una breve reunión para conocer tus proyectos y mostrarte cómo podemos aportar valor?</p>
+        
+        <div class="cta-section fade-in-element">
+            <div class="hazclick">HAZCLICK</div>
+            <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">
+                <i class="bi bi-whatsapp"></i>
+            </a>
+            <img src="img/think green.png" alt="Imagen centrada" class="cta-img glow-img">
         </div>
-    </section>
-    <script>
-        'use strict';
+    </div>
+</section>
+
+<!-- Términos y Condiciones Section -->
+<section class="terminos">
+    <div class="terminos-content">
+        <h2 class="terminos-title fade-in-element">Términos y Condiciones</h2>
+        <p class="terminos-subtitle fade-in-element">Campaña "Free Testing"</p>
+        
+        <div class="terminos-list fade-in-element">
+            <p><i class="bi bi-check-circle-fill"></i> La asesoría y análisis sin costo aplican únicamente para proyectos nuevos dentro del territorio nacional de México.</p>
+            <p><i class="bi bi-check-circle-fill"></i> La asesoría se ofrece solo a nivel conceptual, sin incluir ingenierías, especificaciones de luminarias ni entrega de catálogos de conceptos.</p>
+            <p><i class="bi bi-check-circle-fill"></i> El alcance se limita a una propuesta conceptual general sobre el tipo de iluminación recomendado para cada área del proyecto.</p>
+            <p><i class="bi bi-check-circle-fill"></i> El proyecto deberá tener posibilidad de ejecución o suministro en un periodo no mayor a dos meses.</p>
+            <p><i class="bi bi-check-circle-fill"></i> Promoción válida solo para nuevos clientes. No aplica para clientes actuales ni para proyectos en desarrollo.</p>
+            <p><i class="bi bi-check-circle-fill"></i> La participación para la asesoría y análisis del proyecto estará sujeta a una revisión técnica y a la disponibilidad del equipo DL Green.</p>
+            <p><i class="bi bi-check-circle-fill"></i> DL Green se reserva el derecho de verificar la información proporcionada y de aceptar o rechazar proyectos que no cumplan con los criterios de elegibilidad.</p>
+        </div>
+        
+        <div class="terminos-footer fade-in-element">
+            <p>Los datos proporcionados serán tratados conforme a nuestro Aviso de Privacidad, disponible en:</p>
+            <a href="https://dlgreen.mx/politica_de_privacidad/" target="_blank" class="privacy-link">
+                <i class="bi bi-shield-check"></i> Ver Política de Privacidad
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    'use strict';
 const canvas = document.getElementById('fluidCanvas');
 
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 }
 
 resizeCanvas();
 
 const observerOptions = {
-    threshold: 0.2,
-    rootMargin: '0px 0px -100px 0px'
+threshold: 0.2,
+rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
+entries.forEach(entry => {
+    if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+    }
+});
 }, observerOptions);
 
 document.querySelectorAll('.fade-in-element').forEach(el => {
-    observer.observe(el);
+observer.observe(el);
 });
 
 let config = {
-    TEXTURE_DOWNSAMPLE: 1,
-    DENSITY_DISSIPATION: 0.98,
-    VELOCITY_DISSIPATION: 0.99,
-    PRESSURE_DISSIPATION: 0.8,
-    PRESSURE_ITERATIONS: 25,
-    CURL: 28,
-    SPLAT_RADIUS: 0.004
+TEXTURE_DOWNSAMPLE: 1,
+DENSITY_DISSIPATION: 0.98,
+VELOCITY_DISSIPATION: 0.99,
+PRESSURE_DISSIPATION: 0.8,
+PRESSURE_ITERATIONS: 25,
+CURL: 28,
+SPLAT_RADIUS: 0.004
 };
 
 let pointers = [];
 const { gl, ext } = getWebGLContext(canvas);
 
 function getWebGLContext(canvas) {
-    const params = { alpha: false, depth: false, stencil: false, antialias: false };
-    let gl = canvas.getContext('webgl2', params);
-    const isWebGL2 = !!gl;
-    if (!isWebGL2) gl = canvas.getContext('webgl', params) || canvas.getContext('experimental-webgl', params);
+const params = { alpha: false, depth: false, stencil: false, antialias: false };
+let gl = canvas.getContext('webgl2', params);
+const isWebGL2 = !!gl;
+if (!isWebGL2) gl = canvas.getContext('webgl', params) || canvas.getContext('experimental-webgl', params);
 
-    let halfFloat, supportLinearFiltering;
-    if (isWebGL2) {
-        gl.getExtension('EXT_color_buffer_float');
-        supportLinearFiltering = gl.getExtension('OES_texture_float_linear');
-    } else {
-        halfFloat = gl.getExtension('OES_texture_half_float');
-        supportLinearFiltering = gl.getExtension('OES_texture_half_float_linear');
-    }
+let halfFloat, supportLinearFiltering;
+if (isWebGL2) {
+    gl.getExtension('EXT_color_buffer_float');
+    supportLinearFiltering = gl.getExtension('OES_texture_float_linear');
+} else {
+    halfFloat = gl.getExtension('OES_texture_half_float');
+    supportLinearFiltering = gl.getExtension('OES_texture_half_float_linear');
+}
 
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    const halfFloatTexType = isWebGL2 ? gl.HALF_FLOAT : halfFloat.HALF_FLOAT_OES;
-    let formatRGBA, formatRG, formatR;
+gl.clearColor(0.0, 0.0, 0.0, 1.0);
+const halfFloatTexType = isWebGL2 ? gl.HALF_FLOAT : halfFloat.HALF_FLOAT_OES;
+let formatRGBA, formatRG, formatR;
 
-    if (isWebGL2) {
-        formatRGBA = getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, halfFloatTexType);
-        formatRG = getSupportedFormat(gl, gl.RG16F, gl.RG, halfFloatTexType);
-        formatR = getSupportedFormat(gl, gl.R16F, gl.RED, halfFloatTexType);
-    } else {
-        formatRGBA = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
-        formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
-        formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
-    }
+if (isWebGL2) {
+    formatRGBA = getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, halfFloatTexType);
+    formatRG = getSupportedFormat(gl, gl.RG16F, gl.RG, halfFloatTexType);
+    formatR = getSupportedFormat(gl, gl.R16F, gl.RED, halfFloatTexType);
+} else {
+    formatRGBA = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+    formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+    formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+}
 
-    return { gl, ext: { formatRGBA, formatRG, formatR, halfFloatTexType, supportLinearFiltering } };
+return { gl, ext: { formatRGBA, formatRG, formatR, halfFloatTexType, supportLinearFiltering } };
 }
 
 function getSupportedFormat(gl, internalFormat, format, type) {
-    if (!supportRenderTextureFormat(gl, internalFormat, format, type)) {
-        switch (internalFormat) {
-            case gl.R16F: return getSupportedFormat(gl, gl.RG16F, gl.RG, type);
-            case gl.RG16F: return getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, type);
-            default: return null;
-        }
+if (!supportRenderTextureFormat(gl, internalFormat, format, type)) {
+    switch (internalFormat) {
+        case gl.R16F: return getSupportedFormat(gl, gl.RG16F, gl.RG, type);
+        case gl.RG16F: return getSupportedFormat(gl, gl.RGBA16F, gl.RGBA, type);
+        default: return null;
     }
-    return { internalFormat, format };
+}
+return { internalFormat, format };
 }
 
 function supportRenderTextureFormat(gl, internalFormat, format, type) {
-    let texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, 4, 4, 0, format, type, null);
-    let fbo = gl.createFramebuffer();
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
-    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
-    return gl.checkFramebufferStatus(gl.FRAMEBUFFER) == gl.FRAMEBUFFER_COMPLETE;
+let texture = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, texture);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, 4, 4, 0, format, type, null);
+let fbo = gl.createFramebuffer();
+gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+return gl.checkFramebufferStatus(gl.FRAMEBUFFER) == gl.FRAMEBUFFER_COMPLETE;
 }
 
 function pointerPrototype() {
-    this.id = -1;
-    this.x = 0;
-    this.y = 0;
-    this.dx = 0;
-    this.dy = 0;
-    this.down = false;
-    this.moved = false;
-    this.color = [0.3, 15, 5]; // Verde DL Green
+this.id = -1;
+this.x = 0;
+this.y = 0;
+this.dx = 0;
+this.dy = 0;
+this.down = false;
+this.moved = false;
+this.color = [0.3, 15, 5]; // Verde DL Green
 }
 
 pointers.push(new pointerPrototype());
 
 class GLProgram {
-    constructor(vertexShader, fragmentShader) {
-        this.uniforms = {};
-        this.program = gl.createProgram();
-        gl.attachShader(this.program, vertexShader);
-        gl.attachShader(this.program, fragmentShader);
-        gl.linkProgram(this.program);
-        const uniformCount = gl.getProgramParameter(this.program, gl.ACTIVE_UNIFORMS);
-        for (let i = 0; i < uniformCount; i++) {
-            const uniformName = gl.getActiveUniform(this.program, i).name;
-            this.uniforms[uniformName] = gl.getUniformLocation(this.program, uniformName);
-        }
+constructor(vertexShader, fragmentShader) {
+    this.uniforms = {};
+    this.program = gl.createProgram();
+    gl.attachShader(this.program, vertexShader);
+    gl.attachShader(this.program, fragmentShader);
+    gl.linkProgram(this.program);
+    const uniformCount = gl.getProgramParameter(this.program, gl.ACTIVE_UNIFORMS);
+    for (let i = 0; i < uniformCount; i++) {
+        const uniformName = gl.getActiveUniform(this.program, i).name;
+        this.uniforms[uniformName] = gl.getUniformLocation(this.program, uniformName);
     }
-    bind() { gl.useProgram(this.program); }
+}
+bind() { gl.useProgram(this.program); }
 }
 
 function compileShader(type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    return shader;
+const shader = gl.createShader(type);
+gl.shaderSource(shader, source);
+gl.compileShader(shader);
+return shader;
 }
 
 const baseVertexShader = compileShader(gl.VERTEX_SHADER, `
-    precision highp float;
-    attribute vec2 aPosition;
-    varying vec2 vUv;
-    varying vec2 vL;
-    varying vec2 vR;
-    varying vec2 vT;
-    varying vec2 vB;
-    uniform vec2 texelSize;
-    void main () {
-        vUv = aPosition * 0.5 + 0.5;
-        vL = vUv - vec2(texelSize.x, 0.0);
-        vR = vUv + vec2(texelSize.x, 0.0);
-        vT = vUv + vec2(0.0, texelSize.y);
-        vB = vUv - vec2(0.0, texelSize.y);
-        gl_Position = vec4(aPosition, 0.0, 1.0);
-    }
+precision highp float;
+attribute vec2 aPosition;
+varying vec2 vUv;
+varying vec2 vL;
+varying vec2 vR;
+varying vec2 vT;
+varying vec2 vB;
+uniform vec2 texelSize;
+void main () {
+    vUv = aPosition * 0.5 + 0.5;
+    vL = vUv - vec2(texelSize.x, 0.0);
+    vR = vUv + vec2(texelSize.x, 0.0);
+    vT = vUv + vec2(0.0, texelSize.y);
+    vB = vUv - vec2(0.0, texelSize.y);
+    gl_Position = vec4(aPosition, 0.0, 1.0);
+}
 `);
 
 const shaders = {
-    display: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uTexture; void main () { gl_FragColor = texture2D(uTexture, vUv); }`),
-    splat: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uTarget; uniform float aspectRatio; uniform vec3 color; uniform vec2 point; uniform float radius; void main () { vec2 p = vUv - point.xy; p.x *= aspectRatio; vec3 splat = exp(-dot(p, p) / radius) * color; vec3 base = texture2D(uTarget, vUv).xyz; gl_FragColor = vec4(base + splat, 1.0); }`),
-    advection: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uVelocity; uniform sampler2D uSource; uniform vec2 texelSize; uniform float dt; uniform float dissipation; void main () { vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize; gl_FragColor = dissipation * texture2D(uSource, coord); gl_FragColor.a = 1.0; }`),
-    divergence: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uVelocity; vec2 sampleVelocity (in vec2 uv) { vec2 multiplier = vec2(1.0, 1.0); if (uv.x < 0.0) { uv.x = 0.0; multiplier.x = -1.0; } if (uv.x > 1.0) { uv.x = 1.0; multiplier.x = -1.0; } if (uv.y < 0.0) { uv.y = 0.0; multiplier.y = -1.0; } if (uv.y > 1.0) { uv.y = 1.0; multiplier.y = -1.0; } return multiplier * texture2D(uVelocity, uv).xy; } void main () { float L = sampleVelocity(vL).x; float R = sampleVelocity(vR).x; float T = sampleVelocity(vT).y; float B = sampleVelocity(vB).y; float div = 0.5 * (R - L + T - B); gl_FragColor = vec4(div, 0.0, 0.0, 1.0); }`),
-    curl: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uVelocity; void main () { float L = texture2D(uVelocity, vL).y; float R = texture2D(uVelocity, vR).y; float T = texture2D(uVelocity, vT).x; float B = texture2D(uVelocity, vB).x; float vorticity = R - L - T + B; gl_FragColor = vec4(vorticity, 0.0, 0.0, 1.0); }`),
-    vorticity: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vT; varying vec2 vB; uniform sampler2D uVelocity; uniform sampler2D uCurl; uniform float curl; uniform float dt; void main () { float T = texture2D(uCurl, vT).x; float B = texture2D(uCurl, vB).x; float C = texture2D(uCurl, vUv).x; vec2 force = vec2(abs(T) - abs(B), 0.0); force *= 1.0 / length(force + 0.00001) * curl * C; vec2 vel = texture2D(uVelocity, vUv).xy; gl_FragColor = vec4(vel + force * dt, 0.0, 1.0); }`),
-    pressure: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uPressure; uniform sampler2D uDivergence; vec2 boundary (in vec2 uv) { return min(max(uv, 0.0), 1.0); } void main () { float L = texture2D(uPressure, boundary(vL)).x; float R = texture2D(uPressure, boundary(vR)).x; float T = texture2D(uPressure, boundary(vT)).x; float B = texture2D(uPressure, boundary(vB)).x; float divergence = texture2D(uDivergence, vUv).x; float pressure = (L + R + B + T - divergence) * 0.25; gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0); }`),
-    gradientSubtract: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uPressure; uniform sampler2D uVelocity; vec2 boundary (in vec2 uv) { return min(max(uv, 0.0), 1.0); } void main () { float L = texture2D(uPressure, boundary(vL)).x; float R = texture2D(uPressure, boundary(vR)).x; float T = texture2D(uPressure, boundary(vT)).x; float B = texture2D(uPressure, boundary(vB)).x; vec2 velocity = texture2D(uVelocity, vUv).xy; velocity.xy -= vec2(R - L, T - B); gl_FragColor = vec4(velocity, 0.0, 1.0); }`),
-    clear: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uTexture; uniform float value; void main () { gl_FragColor = value * texture2D(uTexture, vUv); }`)
+display: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uTexture; void main () { gl_FragColor = texture2D(uTexture, vUv); }`),
+splat: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uTarget; uniform float aspectRatio; uniform vec3 color; uniform vec2 point; uniform float radius; void main () { vec2 p = vUv - point.xy; p.x *= aspectRatio; vec3 splat = exp(-dot(p, p) / radius) * color; vec3 base = texture2D(uTarget, vUv).xyz; gl_FragColor = vec4(base + splat, 1.0); }`),
+advection: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uVelocity; uniform sampler2D uSource; uniform vec2 texelSize; uniform float dt; uniform float dissipation; void main () { vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize; gl_FragColor = dissipation * texture2D(uSource, coord); gl_FragColor.a = 1.0; }`),
+divergence: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uVelocity; vec2 sampleVelocity (in vec2 uv) { vec2 multiplier = vec2(1.0, 1.0); if (uv.x < 0.0) { uv.x = 0.0; multiplier.x = -1.0; } if (uv.x > 1.0) { uv.x = 1.0; multiplier.x = -1.0; } if (uv.y < 0.0) { uv.y = 0.0; multiplier.y = -1.0; } if (uv.y > 1.0) { uv.y = 1.0; multiplier.y = -1.0; } return multiplier * texture2D(uVelocity, uv).xy; } void main () { float L = sampleVelocity(vL).x; float R = sampleVelocity(vR).x; float T = sampleVelocity(vT).y; float B = sampleVelocity(vB).y; float div = 0.5 * (R - L + T - B); gl_FragColor = vec4(div, 0.0, 0.0, 1.0); }`),
+curl: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uVelocity; void main () { float L = texture2D(uVelocity, vL).y; float R = texture2D(uVelocity, vR).y; float T = texture2D(uVelocity, vT).x; float B = texture2D(uVelocity, vB).x; float vorticity = R - L - T + B; gl_FragColor = vec4(vorticity, 0.0, 0.0, 1.0); }`),
+vorticity: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vT; varying vec2 vB; uniform sampler2D uVelocity; uniform sampler2D uCurl; uniform float curl; uniform float dt; void main () { float T = texture2D(uCurl, vT).x; float B = texture2D(uCurl, vB).x; float C = texture2D(uCurl, vUv).x; vec2 force = vec2(abs(T) - abs(B), 0.0); force *= 1.0 / length(force + 0.00001) * curl * C; vec2 vel = texture2D(uVelocity, vUv).xy; gl_FragColor = vec4(vel + force * dt, 0.0, 1.0); }`),
+pressure: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uPressure; uniform sampler2D uDivergence; vec2 boundary (in vec2 uv) { return min(max(uv, 0.0), 1.0); } void main () { float L = texture2D(uPressure, boundary(vL)).x; float R = texture2D(uPressure, boundary(vR)).x; float T = texture2D(uPressure, boundary(vT)).x; float B = texture2D(uPressure, boundary(vB)).x; float divergence = texture2D(uDivergence, vUv).x; float pressure = (L + R + B + T - divergence) * 0.25; gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0); }`),
+gradientSubtract: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB; uniform sampler2D uPressure; uniform sampler2D uVelocity; vec2 boundary (in vec2 uv) { return min(max(uv, 0.0), 1.0); } void main () { float L = texture2D(uPressure, boundary(vL)).x; float R = texture2D(uPressure, boundary(vR)).x; float T = texture2D(uPressure, boundary(vT)).x; float B = texture2D(uPressure, boundary(vB)).x; vec2 velocity = texture2D(uVelocity, vUv).xy; velocity.xy -= vec2(R - L, T - B); gl_FragColor = vec4(velocity, 0.0, 1.0); }`),
+clear: compileShader(gl.FRAGMENT_SHADER, `precision highp float; varying vec2 vUv; uniform sampler2D uTexture; uniform float value; void main () { gl_FragColor = value * texture2D(uTexture, vUv); }`)
 };
 
 let textureWidth, textureHeight, density, velocity, divergence, curl, pressure;
 
 function initFramebuffers() {
-    textureWidth = gl.drawingBufferWidth >> config.TEXTURE_DOWNSAMPLE;
-    textureHeight = gl.drawingBufferHeight >> config.TEXTURE_DOWNSAMPLE;
-    const texType = ext.halfFloatTexType;
-    const rgba = ext.formatRGBA;
-    const rg = ext.formatRG;
-    const r = ext.formatR;
+textureWidth = gl.drawingBufferWidth >> config.TEXTURE_DOWNSAMPLE;
+textureHeight = gl.drawingBufferHeight >> config.TEXTURE_DOWNSAMPLE;
+const texType = ext.halfFloatTexType;
+const rgba = ext.formatRGBA;
+const rg = ext.formatRG;
+const r = ext.formatR;
 
-    density = createDoubleFBO(2, textureWidth, textureHeight, rgba.internalFormat, rgba.format, texType, ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST);
-    velocity = createDoubleFBO(0, textureWidth, textureHeight, rg.internalFormat, rg.format, texType, ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST);
-    divergence = createFBO(4, textureWidth, textureHeight, r.internalFormat, r.format, texType, gl.NEAREST);
-    curl = createFBO(5, textureWidth, textureHeight, r.internalFormat, r.format, texType, gl.NEAREST);
-    pressure = createDoubleFBO(6, textureWidth, textureHeight, r.internalFormat, r.format, texType, gl.NEAREST);
+density = createDoubleFBO(2, textureWidth, textureHeight, rgba.internalFormat, rgba.format, texType, ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST);
+velocity = createDoubleFBO(0, textureWidth, textureHeight, rg.internalFormat, rg.format, texType, ext.supportLinearFiltering ? gl.LINEAR : gl.NEAREST);
+divergence = createFBO(4, textureWidth, textureHeight, r.internalFormat, r.format, texType, gl.NEAREST);
+curl = createFBO(5, textureWidth, textureHeight, r.internalFormat, r.format, texType, gl.NEAREST);
+pressure = createDoubleFBO(6, textureWidth, textureHeight, r.internalFormat, r.format, texType, gl.NEAREST);
 }
 
 function createFBO(texId, w, h, internalFormat, format, type, param) {
-    gl.activeTexture(gl.TEXTURE0 + texId);
-    let texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, w, h, 0, format, type, null);
-    let fbo = gl.createFramebuffer();
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
-    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
-    gl.viewport(0, 0, w, h);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    return [texture, fbo, texId];
+gl.activeTexture(gl.TEXTURE0 + texId);
+let texture = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, texture);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, w, h, 0, format, type, null);
+let fbo = gl.createFramebuffer();
+gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+gl.viewport(0, 0, w, h);
+gl.clear(gl.COLOR_BUFFER_BIT);
+return [texture, fbo, texId];
 }
 
 function createDoubleFBO(texId, w, h, internalFormat, format, type, param) {
-    let fbo1 = createFBO(texId, w, h, internalFormat, format, type, param);
-    let fbo2 = createFBO(texId + 1, w, h, internalFormat, format, type, param);
-    return {
-        get read() { return fbo1; },
-        get write() { return fbo2; },
-        swap() { let temp = fbo1; fbo1 = fbo2; fbo2 = temp; }
-    };
+let fbo1 = createFBO(texId, w, h, internalFormat, format, type, param);
+let fbo2 = createFBO(texId + 1, w, h, internalFormat, format, type, param);
+return {
+    get read() { return fbo1; },
+    get write() { return fbo2; },
+    swap() { let temp = fbo1; fbo1 = fbo2; fbo2 = temp; }
+};
 }
 
 initFramebuffers();
 const programs = {
-    clear: new GLProgram(baseVertexShader, shaders.clear),
-    display: new GLProgram(baseVertexShader, shaders.display),
-    splat: new GLProgram(baseVertexShader, shaders.splat),
-    advection: new GLProgram(baseVertexShader, shaders.advection),
-    divergence: new GLProgram(baseVertexShader, shaders.divergence),
-    curl: new GLProgram(baseVertexShader, shaders.curl),
-    vorticity: new GLProgram(baseVertexShader, shaders.vorticity),
-    pressure: new GLProgram(baseVertexShader, shaders.pressure),
-    gradientSubtract: new GLProgram(baseVertexShader, shaders.gradientSubtract)
+clear: new GLProgram(baseVertexShader, shaders.clear),
+display: new GLProgram(baseVertexShader, shaders.display),
+splat: new GLProgram(baseVertexShader, shaders.splat),
+advection: new GLProgram(baseVertexShader, shaders.advection),
+divergence: new GLProgram(baseVertexShader, shaders.divergence),
+curl: new GLProgram(baseVertexShader, shaders.curl),
+vorticity: new GLProgram(baseVertexShader, shaders.vorticity),
+pressure: new GLProgram(baseVertexShader, shaders.pressure),
+gradientSubtract: new GLProgram(baseVertexShader, shaders.gradientSubtract)
 };
 
 const blit = (() => {
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
-    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(0);
-    return dest => {
-        gl.bindFramebuffer(gl.FRAMEBUFFER, dest);
-        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
-    };
+gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
+gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(0);
+return dest => {
+    gl.bindFramebuffer(gl.FRAMEBUFFER, dest);
+    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+};
 })();
 
 let lastTime = Date.now();
 multipleSplats(parseInt(Math.random() * 20) + 5);
 
 function update() {
-    const dt = Math.min((Date.now() - lastTime) / 1000, 0.016);
-    lastTime = Date.now();
-    gl.viewport(0, 0, textureWidth, textureHeight);
+const dt = Math.min((Date.now() - lastTime) / 1000, 0.016);
+lastTime = Date.now();
+gl.viewport(0, 0, textureWidth, textureHeight);
 
-    programs.advection.bind();
-    gl.uniform2f(programs.advection.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
-    gl.uniform1i(programs.advection.uniforms.uVelocity, velocity.read[2]);
-    gl.uniform1i(programs.advection.uniforms.uSource, velocity.read[2]);
-    gl.uniform1f(programs.advection.uniforms.dt, dt);
-    gl.uniform1f(programs.advection.uniforms.dissipation, config.VELOCITY_DISSIPATION);
-    blit(velocity.write[1]);
-    velocity.swap();
+programs.advection.bind();
+gl.uniform2f(programs.advection.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
+gl.uniform1i(programs.advection.uniforms.uVelocity, velocity.read[2]);
+gl.uniform1i(programs.advection.uniforms.uSource, velocity.read[2]);
+gl.uniform1f(programs.advection.uniforms.dt, dt);
+gl.uniform1f(programs.advection.uniforms.dissipation, config.VELOCITY_DISSIPATION);
+blit(velocity.write[1]);
+velocity.swap();
 
-    gl.uniform1i(programs.advection.uniforms.uVelocity, velocity.read[2]);
-    gl.uniform1i(programs.advection.uniforms.uSource, density.read[2]);
-    gl.uniform1f(programs.advection.uniforms.dissipation, config.DENSITY_DISSIPATION);
-    blit(density.write[1]);
-    density.swap();
+gl.uniform1i(programs.advection.uniforms.uVelocity, velocity.read[2]);
+gl.uniform1i(programs.advection.uniforms.uSource, density.read[2]);
+gl.uniform1f(programs.advection.uniforms.dissipation, config.DENSITY_DISSIPATION);
+blit(density.write[1]);
+density.swap();
 
-    for (let i = 0; i < pointers.length; i++) {
-        const pointer = pointers[i];
-        if (pointer.moved) {
-            splat(pointer.x, pointer.y, pointer.dx, pointer.dy, pointer.color);
-            pointer.moved = false;
-        }
+for (let i = 0; i < pointers.length; i++) {
+    const pointer = pointers[i];
+    if (pointer.moved) {
+        splat(pointer.x, pointer.y, pointer.dx, pointer.dy, pointer.color);
+        pointer.moved = false;
     }
+}
 
-    programs.curl.bind();
-    gl.uniform2f(programs.curl.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
-    gl.uniform1i(programs.curl.uniforms.uVelocity, velocity.read[2]);
-    blit(curl[1]);
+programs.curl.bind();
+gl.uniform2f(programs.curl.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
+gl.uniform1i(programs.curl.uniforms.uVelocity, velocity.read[2]);
+blit(curl[1]);
 
-    programs.vorticity.bind();
-    gl.uniform2f(programs.vorticity.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
-    gl.uniform1i(programs.vorticity.uniforms.uVelocity, velocity.read[2]);
-    gl.uniform1i(programs.vorticity.uniforms.uCurl, curl[2]);
-    gl.uniform1f(programs.vorticity.uniforms.curl, config.CURL);
-    gl.uniform1f(programs.vorticity.uniforms.dt, dt);
-    blit(velocity.write[1]);
-    velocity.swap();
+programs.vorticity.bind();
+gl.uniform2f(programs.vorticity.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
+gl.uniform1i(programs.vorticity.uniforms.uVelocity, velocity.read[2]);
+gl.uniform1i(programs.vorticity.uniforms.uCurl, curl[2]);
+gl.uniform1f(programs.vorticity.uniforms.curl, config.CURL);
+gl.uniform1f(programs.vorticity.uniforms.dt, dt);
+blit(velocity.write[1]);
+velocity.swap();
 
-    programs.divergence.bind();
-    gl.uniform2f(programs.divergence.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
-    gl.uniform1i(programs.divergence.uniforms.uVelocity, velocity.read[2]);
-    blit(divergence[1]);
+programs.divergence.bind();
+gl.uniform2f(programs.divergence.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
+gl.uniform1i(programs.divergence.uniforms.uVelocity, velocity.read[2]);
+blit(divergence[1]);
 
-    programs.clear.bind();
-    let pressureTexId = pressure.read[2];
-    gl.activeTexture(gl.TEXTURE0 + pressureTexId);
+programs.clear.bind();
+let pressureTexId = pressure.read[2];
+gl.activeTexture(gl.TEXTURE0 + pressureTexId);
+gl.bindTexture(gl.TEXTURE_2D, pressure.read[0]);
+gl.uniform1i(programs.clear.uniforms.uTexture, pressureTexId);
+gl.uniform1f(programs.clear.uniforms.value, config.PRESSURE_DISSIPATION);
+blit(pressure.write[1]);
+pressure.swap();
+
+programs.pressure.bind();
+gl.uniform2f(programs.pressure.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
+gl.uniform1i(programs.pressure.uniforms.uDivergence, divergence[2]);
+pressureTexId = pressure.read[2];
+gl.uniform1i(programs.pressure.uniforms.uPressure, pressureTexId);
+gl.activeTexture(gl.TEXTURE0 + pressureTexId);
+for (let i = 0; i < config.PRESSURE_ITERATIONS; i++) {
     gl.bindTexture(gl.TEXTURE_2D, pressure.read[0]);
-    gl.uniform1i(programs.clear.uniforms.uTexture, pressureTexId);
-    gl.uniform1f(programs.clear.uniforms.value, config.PRESSURE_DISSIPATION);
     blit(pressure.write[1]);
     pressure.swap();
+}
 
-    programs.pressure.bind();
-    gl.uniform2f(programs.pressure.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
-    gl.uniform1i(programs.pressure.uniforms.uDivergence, divergence[2]);
-    pressureTexId = pressure.read[2];
-    gl.uniform1i(programs.pressure.uniforms.uPressure, pressureTexId);
-    gl.activeTexture(gl.TEXTURE0 + pressureTexId);
-    for (let i = 0; i < config.PRESSURE_ITERATIONS; i++) {
-        gl.bindTexture(gl.TEXTURE_2D, pressure.read[0]);
-        blit(pressure.write[1]);
-        pressure.swap();
-    }
+programs.gradientSubtract.bind();
+gl.uniform2f(programs.gradientSubtract.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
+gl.uniform1i(programs.gradientSubtract.uniforms.uPressure, pressure.read[2]);
+gl.uniform1i(programs.gradientSubtract.uniforms.uVelocity, velocity.read[2]);
+blit(velocity.write[1]);
+velocity.swap();
 
-    programs.gradientSubtract.bind();
-    gl.uniform2f(programs.gradientSubtract.uniforms.texelSize, 1.0 / textureWidth, 1.0 / textureHeight);
-    gl.uniform1i(programs.gradientSubtract.uniforms.uPressure, pressure.read[2]);
-    gl.uniform1i(programs.gradientSubtract.uniforms.uVelocity, velocity.read[2]);
-    blit(velocity.write[1]);
-    velocity.swap();
+gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+programs.display.bind();
+gl.uniform1i(programs.display.uniforms.uTexture, density.read[2]);
+blit(null);
 
-    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-    programs.display.bind();
-    gl.uniform1i(programs.display.uniforms.uTexture, density.read[2]);
-    blit(null);
-
-    requestAnimationFrame(update);
+requestAnimationFrame(update);
 }
 
 function splat(x, y, dx, dy, color) {
-    programs.splat.bind();
-    gl.uniform1i(programs.splat.uniforms.uTarget, velocity.read[2]);
-    gl.uniform1f(programs.splat.uniforms.aspectRatio, canvas.width / canvas.height);
-    gl.uniform2f(programs.splat.uniforms.point, x / canvas.width, 1.0 - y / canvas.height);
-    gl.uniform3f(programs.splat.uniforms.color, dx, -dy, 1.0);
-    gl.uniform1f(programs.splat.uniforms.radius, config.SPLAT_RADIUS);
-    blit(velocity.write[1]);
-    velocity.swap();
+programs.splat.bind();
+gl.uniform1i(programs.splat.uniforms.uTarget, velocity.read[2]);
+gl.uniform1f(programs.splat.uniforms.aspectRatio, canvas.width / canvas.height);
+gl.uniform2f(programs.splat.uniforms.point, x / canvas.width, 1.0 - y / canvas.height);
+gl.uniform3f(programs.splat.uniforms.color, dx, -dy, 1.0);
+gl.uniform1f(programs.splat.uniforms.radius, config.SPLAT_RADIUS);
+blit(velocity.write[1]);
+velocity.swap();
 
-    gl.uniform1i(programs.splat.uniforms.uTarget, density.read[2]);
-    gl.uniform3f(programs.splat.uniforms.color, color[0] * 0.3, color[1] * 0.3, color[2] * 0.3);
-    blit(density.write[1]);
-    density.swap();
+gl.uniform1i(programs.splat.uniforms.uTarget, density.read[2]);
+gl.uniform3f(programs.splat.uniforms.color, color[0] * 0.3, color[1] * 0.3, color[2] * 0.3);
+blit(density.write[1]);
+density.swap();
 }
 
 function multipleSplats(amount) {
-    for (let i = 0; i < amount; i++) {
-        // Paleta DL Green: Verde brillante, turquesa, amarillo luz
-        let color;
-        const rand = Math.random();
-        if (rand < 0.5) {
-            color = [Math.random() * 3, Math.random() * 15 + 8, Math.random() * 5 + 3]; // Verde
-        } else if (rand < 0.8) {
-            color = [Math.random() * 3, Math.random() * 10 + 5, Math.random() * 12 + 8]; // Turquesa
-        } else {
-            color = [Math.random() * 12 + 8, Math.random() * 10 + 8, Math.random() * 5]; // Amarillo luz
-        }
-        const x = canvas.width * Math.random();
-        const y = canvas.height * Math.random();
-        const dx = 1000 * (Math.random() - 0.5);
-        const dy = 1000 * (Math.random() - 0.5);
-        splat(x, y, dx, dy, color);
+for (let i = 0; i < amount; i++) {
+    // Paleta DL Green: Verde brillante, turquesa, amarillo luz
+    let color;
+    const rand = Math.random();
+    if (rand < 0.5) {
+        color = [Math.random() * 3, Math.random() * 15 + 8, Math.random() * 5 + 3]; // Verde
+    } else if (rand < 0.8) {
+        color = [Math.random() * 3, Math.random() * 10 + 5, Math.random() * 12 + 8]; // Turquesa
+    } else {
+        color = [Math.random() * 12 + 8, Math.random() * 10 + 8, Math.random() * 5]; // Amarillo luz
     }
+    const x = canvas.width * Math.random();
+    const y = canvas.height * Math.random();
+    const dx = 1000 * (Math.random() - 0.5);
+    const dy = 1000 * (Math.random() - 0.5);
+    splat(x, y, dx, dy, color);
+}
 }
 
 document.addEventListener('mousemove', e => {
-    pointers[0].down = true;
-    pointers[0].moved = true;
-    pointers[0].dx = (e.clientX - pointers[0].x) * 10.0;
-    pointers[0].dy = (e.clientY - pointers[0].y) * 10.0;
-    pointers[0].x = e.clientX;
-    pointers[0].y = e.clientY;
-    // Paleta DL Green: Verde brillante, turquesa, amarillo luz
-    const rand = Math.random();
-    if (rand < 0.5) {
-        pointers[0].color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2]; // Verde
-    } else if (rand < 0.8) {
-        pointers[0].color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3]; // Turquesa
-    } else {
-        pointers[0].color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3]; // Amarillo luz
-    }
+pointers[0].down = true;
+pointers[0].moved = true;
+pointers[0].dx = (e.clientX - pointers[0].x) * 10.0;
+pointers[0].dy = (e.clientY - pointers[0].y) * 10.0;
+pointers[0].x = e.clientX;
+pointers[0].y = e.clientY;
+// Paleta DL Green: Verde brillante, turquesa, amarillo luz
+const rand = Math.random();
+if (rand < 0.5) {
+    pointers[0].color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2]; // Verde
+} else if (rand < 0.8) {
+    pointers[0].color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3]; // Turquesa
+} else {
+    pointers[0].color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3]; // Amarillo luz
+}
 });
 
 document.addEventListener('touchmove', e => {
-    e.preventDefault();
-    const touches = e.targetTouches;
+e.preventDefault();
+const touches = e.targetTouches;
+
+for (let i = 0; i < touches.length; i++) {
+    if (i >= pointers.length) pointers.push(new pointerPrototype());
+    let pointer = pointers[i];
     
-    for (let i = 0; i < touches.length; i++) {
-        if (i >= pointers.length) pointers.push(new pointerPrototype());
-        let pointer = pointers[i];
-        
-        pointer.down = true;
-        pointer.moved = true;
-        pointer.dx = (touches[i].pageX - pointer.x) * 10.0;
-        pointer.dy = (touches[i].pageY - pointer.y) * 10.0;
-        pointer.x = touches[i].pageX;
-        pointer.y = touches[i].pageY;
-        
-        const rand = Math.random();
-        if (rand < 0.5) {
-            pointer.color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2]; // Verde
-        } else if (rand < 0.8) {
-            pointer.color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3]; // Turquesa
-        } else {
-            pointer.color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3]; // Amarillo luz
-        }
+    pointer.down = true;
+    pointer.moved = true;
+    pointer.dx = (touches[i].pageX - pointer.x) * 10.0;
+    pointer.dy = (touches[i].pageY - pointer.y) * 10.0;
+    pointer.x = touches[i].pageX;
+    pointer.y = touches[i].pageY;
+    
+    const rand = Math.random();
+    if (rand < 0.5) {
+        pointer.color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2]; // Verde
+    } else if (rand < 0.8) {
+        pointer.color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3]; // Turquesa
+    } else {
+        pointer.color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3]; // Amarillo luz
     }
+}
 }, { passive: true });
 
 document.addEventListener('touchstart', e => {
-    const touches = e.targetTouches;
-    for (let i = 0; i < touches.length; i++) {
-        if (i >= pointers.length) pointers.push(new pointerPrototype());
-        pointers[i].id = touches[i].identifier;
-        pointers[i].down = true;
-        pointers[i].x = touches[i].pageX;
-        pointers[i].y = touches[i].pageY;
-        const rand = Math.random();
-        if (rand < 0.5) {
-            pointers[i].color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2];
-        } else if (rand < 0.8) {
-            pointers[i].color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3];
-        } else {
-            pointers[i].color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3];
-        }
+const touches = e.targetTouches;
+for (let i = 0; i < touches.length; i++) {
+    if (i >= pointers.length) pointers.push(new pointerPrototype());
+    pointers[i].id = touches[i].identifier;
+    pointers[i].down = true;
+    pointers[i].x = touches[i].pageX;
+    pointers[i].y = touches[i].pageY;
+    const rand = Math.random();
+    if (rand < 0.5) {
+        pointers[i].color = [0.2, 0.8 + Math.random() * 0.3, 0.3 + Math.random() * 0.2];
+    } else if (rand < 0.8) {
+        pointers[i].color = [0.2, 0.6 + Math.random() * 0.3, 0.7 + Math.random() * 0.3];
+    } else {
+        pointers[i].color = [0.8 + Math.random() * 0.2, 0.9 + Math.random() * 0.1, 0.3];
     }
+}
 });
 
 document.addEventListener('touchend', e => {
-    const touches = e.changedTouches;
-    for (let i = 0; i < touches.length; i++) {
-        for (let j = 0; j < pointers.length; j++) {
-            if (touches[i].identifier == pointers[j].id) pointers[j].down = false;
-        }
+const touches = e.changedTouches;
+for (let i = 0; i < touches.length; i++) {
+    for (let j = 0; j < pointers.length; j++) {
+        if (touches[i].identifier == pointers[j].id) pointers[j].down = false;
     }
+}
 });
 
 window.addEventListener('resize', () => {
-    resizeCanvas();
-    initFramebuffers();
+resizeCanvas();
+initFramebuffers();
 });
 
 update();
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
     });
 });
-    </script>
+});
+</script>
+<!-- GSAP y ScrollTrigger -->
+<script type="module">
+  import { gsap } from "https://cdn.skypack.dev/gsap@3.12.5";
+  import { ScrollTrigger } from "https://cdn.skypack.dev/gsap@3.12.5/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* 🌅 HERO INTRO ANIMATION */
+  const heroTl = gsap.timeline();
+
+  heroTl
+    .from("#hero", {
+      opacity: 0,
+      scale: 1.05,
+      duration: 1.2,
+      ease: "power2.out"
+    })
+    .from("#hero h1", {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    }, "-=0.6")
+    .from("#hero p", {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.5")
+    .from("#hero .hazclick", {
+      y: 30,
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.8,
+      ease: "back.out(1.7)"
+    }, "-=0.4");
+
+  /* 🌄 HERO PARALLAX al hacer scroll */
+  gsap.to("#hero h1", {
+    yPercent: -20,
+    opacity: 0.7,
+    scrollTrigger: {
+      trigger: "#hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+    }
+  });
+
+  /* ✨ ANIMACIONES GLOBALES CON SCROLL */
+  gsap.utils.toArray(".fade-in-element").forEach((el, i) => {
+    gsap.from(el, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      delay: i * 0.1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      }
+    });
+  });
+
+  /* 🕰️ TIMELINE */
+  gsap.utils.toArray(".timeline-img").forEach((img) => {
+    gsap.from(img, {
+      opacity: 0,
+      scale: 0.8,
+      y: 100,
+      duration: 1.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: img,
+        start: "top 90%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  });
+
+  gsap.utils.toArray(".timeline-card").forEach((card, i) => {
+    gsap.from(card, {
+      opacity: 0,
+      x: i % 2 === 0 ? -100 : 100,
+      duration: 1.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  });
+
+  /* 💫 TEXTO ESPECIAL */
+  gsap.from(".special-text", {
+    scale: 0.9,
+    opacity: 0,
+    duration: 1.5,
+    ease: "elastic.out(1, 0.5)",
+    scrollTrigger: {
+      trigger: ".special-text",
+      start: "top 80%",
+    }
+  });
+
+  /* 🎯 CTA FINAL */
+  gsap.from(".hazclick", {
+    opacity: 0,
+    scale: 0.5,
+    duration: 1.2,
+    ease: "back.out(1.7)",
+    scrollTrigger: {
+      trigger: ".cta-section",
+      start: "top 80%",
+    }
+  });
+</script>
+
+
 </body>
 </html>
