@@ -508,7 +508,7 @@ header.scrolled {
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
   border-radius: 4px;
   display: grid;
-  grid-template-columns: 120px 1fr 190px 180px 1fr;
+  grid-template-columns: 120px 1fr 190px 130px 1fr;
   gap: 24px;
   align-items: center;
 }
@@ -542,7 +542,7 @@ header.scrolled {
 .result-number {
   font-family: "Sansation", sans-serif;
   color: #20375a;
-  font-size: 3rem;
+  font-size: 2.5rem;
   line-height: 1;
   font-weight: 700;
 }
@@ -579,7 +579,29 @@ header.scrolled {
   .col-stat.center-stat .result-number { font-size: 56px; }
   .result-label { font-size: 16px; }
 }
+/* 💛 efecto de brillo dorado */
+@keyframes glowEffect {
+  0% {
+    text-shadow: 0 0 0px rgba(253, 216, 53, 0);
+    transform: scale(1);
+    color: #20375a;
+  }
+  40% {
+    text-shadow: 0 0 25px rgba(253, 216, 53, 0.9);
+    color: #fdd835;
+    transform: scale(1.08);
+  }
+  100% {
+    text-shadow: 0 0 0px rgba(253, 216, 53, 0);
+    color: #20375a;
+    transform: scale(1);
+  }
+}
 
+.glow {
+  animation: glowEffect 1.3s ease-in-out;
+}
+/*-----------------------*/
         /* Responsive */
         @media (max-width: 1024px) {
             .services-grid {
@@ -831,38 +853,180 @@ header.scrolled {
     </div>
   </div>
 </section>
-<!-- Resultados / Métricas (estilo igual a la imagen) -->
+<!-- Resultados / Métricas con animación y brillo -->
 <section class="results-section">
   <div class="results-card">
-    <!-- Columna 1: número + etiqueta -->
+    <!-- 1 -->
     <div class="col-stat">
-      <div class="result-number">+100</div>
+      <div class="result-number" data-target="100">+0</div>
       <div class="result-label">Clientes</div>
     </div>
 
-    <!-- Columna 2: texto descriptivo (con divisor a la izquierda) -->
+    <!-- 2 -->
     <div class="col-desc divider-left">
-      La confianza de más de 100 clientes nos avala, historias de éxito nos respaldan, expertos con la confianza de más de nuestros socios.
+      La confianza de más de 100 clientes nos avala, historias de éxito nos respaldan,
+      expertos con la confianza de más de nuestros socios.
     </div>
 
-    <!-- Columna 3: número central -->
+    <!-- 3 -->
     <div class="col-stat divider-left center-stat">
-      <div class="result-number">+1,200</div>
+      <div class="result-number" data-target="1200">+0</div>
       <div class="result-label">Operaciones</div>
     </div>
 
-    <!-- Columna 4: número + etiqueta (derecha) -->
+    <!-- 4 -->
     <div class="col-stat divider-left">
-      <div class="result-number">3K</div>
+      <div class="result-number" data-target="3" data-suffix="K ">0</div>
       <div class="result-label">Proyectos</div>
     </div>
 
-    <!-- Columna 5: texto descriptivo final (con divisor a la izquierda) -->
+    <!-- 5 -->
     <div class="col-desc divider-left">
-      Proyectos que impulsan el éxito. A lo largo de nuestra trayectoria, hemos colaborado con empresas líderes del sector público y privado. Nuestro trabajo se traduce en resultados tangibles.
+      Proyectos que impulsan el éxito. A lo largo de nuestra trayectoria, hemos colaborado
+      con empresas líderes del sector público y privado. Nuestro trabajo se traduce en resultados tangibles.
     </div>
   </div>
 </section>
+<!-- Imagen corporativa superior del footer -->
+<section style="background-image: url('img/banner_sien.jpg'); background-size: cover; background-position: center; height: 400px;"></section>
+
+<!-- Footer principal de contacto -->
+<footer style="background-color: #0b2240; color: white; padding: 60px 20px 40px;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-direction: column; gap: 40px;">
+
+    <!-- Logo y Contacto -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
+      <!-- Logo -->
+      <div style="flex: 1 1 200px;">
+        <img src="img/Logo_SIEN_Header.svg" alt="SIEN Logo" style="width: 300px; margin-bottom: 20px;">
+        <p style="font-size: 14px;">
+          Al contratar los servicios de la Firma se ofrece una infraestructura física y de profesionales en toda la república.
+        </p>
+        <p style="margin-top: 15px; font-weight: bold;">EMAIL:</p>
+        <p><a href="mailto:contacto@solucionesintegralesennegocios.com" style="color: white;">contacto@solucionesintegralesennegocios.com</a></p>
+      </div>
+
+      <!-- Direcciones -->
+      <div style="flex: 3 1 600px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; font-size: 13px;">
+        <div>
+          <strong>MONTERREY</strong><br>
+          Av. Lázaro Cárdenas 208 Interior P1, Col. Residencial San Agustín<br>
+          Monterrey, Nuevo León, C.P. 66260<br>
+          Tel. (81) 2312-8900
+        </div>
+        <div>
+          <strong>PUEBLA</strong><br>
+          Av. Retorno Osa menor 43-3, Piso 3 Oficina 4D, Reserva territorial Atlixcáyotl, San Andrés Cholula<br>
+          C.P. 72810<br>
+          Tel. (222) 210-7965
+        </div>
+        <div>
+          <strong>QUERÉTARO</strong><br>
+          Av. Manuel Gómez Morín 3870, Piso 8 Oficina 1002<br>
+          Querétaro, Qro.<br>
+          C.P. 76190<br>
+          Tel. (442) 299-5220
+        </div>
+        <div>
+          <strong>GUADALAJARA</strong><br>
+          Av. Ludwig Van Beethoven 4914, Lomas del Seminario<br>
+          Zapopan, Jalisco<br>
+          C.P. 45038<br>
+          Tel. (33) 2262-2450
+        </div>
+        <div>
+          <strong>MÉXICO</strong><br>
+          Calle Petrarca 223, Piso 6, Despacho 601<br>
+          Col. Polanco, CDMX<br>
+          C.P. 11560<br>
+          Tel. (55) 5203-9471
+        </div>
+        <div>
+          <strong>PACHUCA</strong><br>
+          Calle del Valle de Abajo 240, Fracc. Valle de San Javier<br>
+          Pachuca de Soto, Hidalgo<br>
+          C.P. 42086<br>
+          Tels. (771) 1719-6372 / (771) 1719-8436
+        </div>
+        <div>
+          <strong>OAXACA</strong><br>
+          Pensamientos 906, Col. Reforma<br>
+          Oaxaca, Oaxaca<br>
+          C.P. 68050<br>
+          Tel. (951) 132-7603 / (951) 132-7600
+        </div>
+        <div>
+          <strong>SAN LUIS POTOSÍ</strong><br>
+          Calle Nube 421, Col. Garita de Jalisco<br>
+          San Luis Potosí, S.L.P.<br>
+          C.P. 78289<br>
+          Tels. (444) 4248-9815 / (444) 4475-8898
+        </div>
+      </div>
+    </div>
+
+    <!-- Redes sociales -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 14px; border-top: 1px solid #2c3e50; padding-top: 20px;">
+      <p style="margin: 0;">Copyright © Derechos Reservados Octubre 2025</p>
+      <p><a href="#" style="color: white; text-decoration: underline;">Aviso de privacidad</a></p>
+      <div style="display: flex; gap: 15px; font-size: 20px;">
+        <a href="#" style="color: white;"><i class="bi bi-facebook"></i></a>
+        <a href="#" style="color: white;"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" style="color: white;"><i class="bi bi-instagram"></i></a>
+        <a href="#" style="color: white;"><i class="bi bi-linkedin"></i></a>
+        <a href="#" style="color: white;"><i class="bi bi-youtube"></i></a>
+        <a href="#" style="color: white;"><i class="bi bi-tiktok"></i></a>
+        <a href="#" style="color: white;"><i class="bi bi-whatsapp"></i></a>
+        <a href="#" style="color: white;"><i class="bi bi-telegram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* --- Animación de conteo --- */
+function animateCount(el, duration = 2000) {
+  const target = parseInt(el.getAttribute("data-target"));
+  const suffix = el.getAttribute("data-suffix") || "";
+  const start = 0;
+  const startTime = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const value = Math.floor(progress * target);
+    el.textContent = `+${value.toLocaleString()}${suffix}`;
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.classList.add("glow"); // 💎 activa el brillo al terminar
+      setTimeout(() => el.classList.remove("glow"), 1500); // se desvanece suave
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+/* --- Dispara animación al hacer scroll --- */
+function initCounterAnimation() {
+  const counters = document.querySelectorAll(".result-number");
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  counters.forEach((c) => observer.observe(c));
+}
+
+document.addEventListener("DOMContentLoaded", initCounterAnimation);
+</script>
+
+
 
     <script>
   window.addEventListener('scroll', function() {
