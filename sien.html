@@ -538,6 +538,7 @@ nav {
     animation: glowEffect 1.3s ease-in-out;
 }
 
+
 /* ======================
    FOOTER
    ====================== */
@@ -549,78 +550,151 @@ nav {
 }
 
 .main-footer {
-    background-color: #0b2240;
+    background-color: #2c4666;
     color: white;
-    padding: 60px 20px 40px;
+    padding: 60px 40px 50px;
 }
 
 .footer-container {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.footer-top {
+.footer-content {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
     gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.footer-logo-section {
-    flex: 1 1 200px;
+.footer-left {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex: 1;
 }
 
 .footer-logo {
     width: 300px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.footer-contact-box {
+    max-width: 500px;
+}
+
+.footer-title {
+    font-size: 20px;
+    letter-spacing: 2px;
     margin-bottom: 20px;
+    color: white;
 }
 
 .footer-description {
     font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-email-section {
+    margin-top: 20px;
 }
 
 .footer-email-label {
-    margin-top: 15px;
-    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: white;
 }
 
 .footer-email-link {
     color: white;
     text-decoration: none;
+    font-size: 14px;
 }
 
 .footer-email-link:hover {
     text-decoration: underline;
 }
 
+.footer-right {
+    text-align: right;
+}
+
+.footer-social-title {
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.footer-social {
+    display: flex;
+    gap: 12px;
+    font-size: 22px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.social-link {
+    color: white;
+    transition: opacity 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.social-link:hover {
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.2);
+}
+
 .footer-locations {
-    flex: 3 1 600px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 30px;
     font-size: 13px;
+    line-height: 1.7;
 }
 
 .location-item {
-    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.footer-bottom {
+.location-item strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.footer-bottom-bar {
+    background-color: #1a2b3d;
+    padding: 20px 40px;
+}
+
+.footer-bottom-container {
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    font-size: 14px;
-    border-top: 1px solid #2c3e50;
-    padding-top: 20px;
-    gap: 20px;
+    font-size: 13px;
 }
 
 .footer-copyright {
     margin: 0;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footer-privacy-link {
@@ -632,21 +706,71 @@ nav {
     opacity: 0.8;
 }
 
-.footer-social {
-    display: flex;
-    gap: 15px;
-    font-size: 20px;
+/* ======================
+   RESPONSIVE FOOTER
+   ====================== */
+@media (max-width: 1200px) {
+    .footer-locations {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-.social-link {
-    color: white;
-    transition: opacity 0.3s ease;
+@media (max-width: 992px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-left {
+        flex-direction: column;
+    }
+
+    .footer-right {
+        text-align: left;
+    }
+
+    .footer-social {
+        justify-content: flex-start;
+    }
+
+    .footer-locations {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.social-link:hover {
-    opacity: 0.7;
-}
+@media (max-width: 768px) {
+    .footer-banner {
+        height: 250px;
+    }
 
+    .main-footer {
+        padding: 40px 20px 30px;
+    }
+
+    .footer-logo {
+        width: 350px;
+    }
+
+    .footer-locations {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-bottom-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .footer-social {
+        font-size: 20px;
+        gap: 10px;
+    }
+
+    .social-link {
+        width: 28px;
+        height: 28px;
+    }
+}
 /* ======================
    RESPONSIVE
    ====================== */
@@ -794,37 +918,7 @@ nav {
         font-size: 15px;
     }
 
-    .footer-banner {
-        height: 250px;
-    }
-
-    .main-footer {
-        padding: 40px 20px 30px;
-    }
-
-    .footer-logo {
-        width: 200px;
-    }
-
-    .footer-top {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .footer-locations {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .footer-social {
-        justify-content: center;
-    }
+    
 }
     </style>
 </head>
@@ -1037,98 +1131,137 @@ nav {
 <!-- Imagen corporativa superior del footer -->
 <section class="footer-banner"></section>
 
+
 <!-- Footer principal de contacto -->
 <footer class="main-footer">
   <div class="footer-container">
-
-    <!-- Logo y Contacto -->
-    <div class="footer-top">
-      <!-- Logo -->
-      <div class="footer-logo-section">
+    <!-- Sección superior con logo y contenido principal -->
+    <div class="footer-content">
+      <!-- Logo y descripción -->
+      <div class="footer-left">
         <img src="img/Logo_SIEN_Header.svg" alt="SIEN Logo" class="footer-logo">
-        <p class="footer-description">
-          Al contratar los servicios de la Firma se ofrece una infraestructura física y de profesionales en toda la república.
-        </p>
-        <p class="footer-email-label">EMAIL:</p>
-        <p><a href="mailto:contacto@solucionesintegralesennegocios.com" class="footer-email-link">contacto@solucionesintegralesennegocios.com</a></p>
+        <div class="footer-contact-box">
+          <h3 class="footer-title sansation-bold">CONTACTO</h3>
+          <p class="footer-description sansation-regular">
+            Al contratar los servicios de la Firma se ofrece una infraestructura física y de profesionales en toda la república.
+          </p>
+          <div class="footer-email-section">
+            <p class="footer-email-label sansation-bold">EMAIL:</p>
+            <p><a href="mailto:contacto@solucionesintegralesennegocios.com" class="footer-email-link sansation-regular">contacto@solucionesintegralesennegocios.com</a></p>
+          </div>
+        </div>
       </div>
 
-      <!-- Direcciones -->
-      <div class="footer-locations">
-        <div class="location-item">
-          <strong>MONTERREY</strong><br>
-          Av. Lázaro Cárdenas 208 Interior P1, Col. Residencial San Agustín<br>
-          Monterrey, Nuevo León, C.P. 66260<br>
-          Tel. (81) 2312-8900
-        </div>
-        <div class="location-item">
-          <strong>PUEBLA</strong><br>
-          Av. Retorno Osa menor 43-3, Piso 3 Oficina 4D, Reserva territorial Atlixcáyotl, San Andrés Cholula<br>
-          C.P. 72810<br>
-          Tel. (222) 210-7965
-        </div>
-        <div class="location-item">
-          <strong>QUERÉTARO</strong><br>
-          Av. Manuel Gómez Morín 3870, Piso 8 Oficina 1002<br>
-          Querétaro, Qro.<br>
-          C.P. 76190<br>
-          Tel. (442) 299-5220
-        </div>
-        <div class="location-item">
-          <strong>GUADALAJARA</strong><br>
-          Av. Ludwig Van Beethoven 4914, Lomas del Seminario<br>
-          Zapopan, Jalisco<br>
-          C.P. 45038<br>
-          Tel. (33) 2262-2450
-        </div>
-        <div class="location-item">
-          <strong>MÉXICO</strong><br>
-          Calle Petrarca 223, Piso 6, Despacho 601<br>
-          Col. Polanco, CDMX<br>
-          C.P. 11560<br>
-          Tel. (55) 5203-9471
-        </div>
-        <div class="location-item">
-          <strong>PACHUCA</strong><br>
-          Calle del Valle de Abajo 240, Fracc. Valle de San Javier<br>
-          Pachuca de Soto, Hidalgo<br>
-          C.P. 42086<br>
-          Tels. (771) 1719-6372 / (771) 1719-8436
-        </div>
-        <div class="location-item">
-          <strong>OAXACA</strong><br>
-          Pensamientos 906, Col. Reforma<br>
-          Oaxaca, Oaxaca<br>
-          C.P. 68050<br>
-          Tel. (951) 132-7603 / (951) 132-7600
-        </div>
-        <div class="location-item">
-          <strong>SAN LUIS POTOSÍ</strong><br>
-          Calle Nube 421, Col. Garita de Jalisco<br>
-          San Luis Potosí, S.L.P.<br>
-          C.P. 78289<br>
-          Tels. (444) 4248-9815 / (444) 4475-8898
+      <!-- Redes sociales (lado derecho superior) -->
+      <div class="footer-right">
+        <p class="footer-social-title sansation-bold">SÍGUENOS:</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="#" class="social-link" aria-label="Threads"><i class="bi bi-threads"></i></a>
+          <a href="#" class="social-link" aria-label="Google"><i class="bi bi-google"></i></a>
+          <a href="#" class="social-link" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+          <a href="#" class="social-link" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
         </div>
       </div>
     </div>
 
-    <!-- Redes sociales -->
-    <div class="footer-bottom">
-      <p class="footer-copyright">Copyright © Derechos Reservados Octubre 2025</p>
-      <p><a href="#" class="footer-privacy-link">Aviso de privacidad</a></p>
-      <div class="footer-social">
-        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
-        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
-        <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
-        <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
-        <a href="#" class="social-link"><i class="bi bi-whatsapp"></i></a>
-        <a href="#" class="social-link"><i class="bi bi-telegram"></i></a>
+    <!-- Direcciones -->
+    <div class="footer-locations">
+      <div class="location-item">
+        <strong class="sansation-bold">MONTERREY</strong><br>
+        <span class="sansation-regular">
+          Av. Lázaro Cárdenas 208 Interior P1<br>
+          Colonia Residencial San Agustín 1er. Sector,<br>
+          San Pedro Garza García,<br>
+          Monterrey, Nuevo León, CP. 66260<br>
+          Tel. (81) 2139-4452 - (81) 2316-9009
+        </span>
+      </div>
+      <div class="location-item">
+        <strong class="sansation-bold">QUERÉTARO</strong><br>
+        <span class="sansation-regular">
+          Av. Manuel Gómez Morín 3870, Piso 8 oficina 1002,<br>
+          Colonia Centro Sur,<br>
+          Querétaro, Querétaro,<br>
+          CP. 76090<br>
+          Tel. (44) 2199-5220
+        </span>
+      </div>
+      <div class="location-item">
+        <strong class="sansation-bold">MÉXICO</strong><br>
+        <span class="sansation-regular">
+          Calle Petrarca 223 Piso 6 Despacho 601,<br>
+          Colonia Polanco, Ciudad de México,<br>
+          C.P.11560,<br>
+          Tel. (55) 5203-9471
+        </span>
+      </div>
+      <div class="location-item">
+        <strong class="sansation-bold">SAN LUIS POTOSÍ</strong><br>
+        <span class="sansation-regular">
+          Calle Nube 421,<br>
+          Col. Garita de Jalisco,<br>
+          San Luis Potosí, SLP,<br>
+          C.P. 78299<br>
+          Tels. (44) 4246-8915 / (44) 4475-8896
+        </span>
+      </div>
+      <div class="location-item">
+        <strong class="sansation-bold">PUEBLA</strong><br>
+        <span class="sansation-regular">
+          6to retorno osa menor 43-3, Piso 3 oficina 4D,<br>
+          Reserva territorial Atlixcáyotl,<br>
+          San Andrés Cholula, Puebla,<br>
+          C.P. 72820<br>
+          Tel. (22) 2210-7965
+        </span>
+      </div>
+      <div class="location-item">
+        <strong class="sansation-bold">GUADALAJARA</strong><br>
+        <span class="sansation-regular">
+          Av. Ludwig Van Beethoven 4914,<br>
+          Col. Lomas del Seminario,<br>
+          Zapopan, Jalisco,<br>
+          C.P.45038<br>
+          Tel. (33) 2262-2450
+        </span>
+      </div>
+      <div class="location-item">
+        <strong class="sansation-bold">PACHUCA</strong><br>
+        <span class="sansation-regular">
+          Calle de Valle de Abajo 240,<br>
+          Fracc. Valle de san Javier,<br>
+          Pachuca de Soto, Hidalgo,<br>
+          C.P. 42086<br>
+          Tels. (77) 1719-6372 / (77) 1719-6436
+        </span>
+      </div>
+      <div class="location-item">
+        <strong class="sansation-bold">OAXACA</strong><br>
+        <span class="sansation-regular">
+          Pensamientos 906,<br>
+          Col. Reforma,<br>
+          Oaxaca, Oaxaca,<br>
+          C.P. 68050<br>
+          Tel. (951) 132-7603 / (951) 132-7600
+        </span>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- Footer inferior -->
+<div class="footer-bottom-bar">
+  <div class="footer-bottom-container">
+    <p class="footer-copyright sansation-regular">Copyright © Derechos Reservados Octubre 2025</p>
+    <p><a href="#" class="footer-privacy-link sansation-regular">Aviso de privacidad</a></p>
+  </div>
+</div>
 
 <script>
 /* --- Animación de conteo --- */
