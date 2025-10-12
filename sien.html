@@ -151,6 +151,8 @@ nav {
     align-items: flex-end;
     justify-content: center;
     padding-bottom: 80px;
+    z-index: 1;
+    overflow: visible;
 }
 
 .hero::before {
@@ -168,6 +170,7 @@ nav {
     text-align: center;
     color: white;
     z-index: 1;
+    margin-bottom: 100px;
 }
 
 .hero-text h1 {
@@ -202,13 +205,15 @@ nav {
    ====================== */
 .services-card {
     max-width: 1200px;
-    margin: -120px auto 80px;
+    margin: 0 auto 10px;
     background: white;
     border-radius: 20px;
     padding: 60px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     position: relative;
+    top: -120px; /* Este reemplaza el margen negativo */
     z-index: 2;
+    
 }
 
 .services-grid {
@@ -538,6 +543,96 @@ nav {
     animation: glowEffect 1.3s ease-in-out;
 }
 
+.admin-section {
+  position: relative;
+  background-image: url('https://images.pexels.com/photos/7876197/pexels-photo-7876197.jpeg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 80px 20px;
+  z-index: 1;
+}
+
+.admin-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(3, 25, 51, 0.85);
+  z-index: 2;
+}
+
+.admin-container {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.admin-title {
+  flex: 1 1 300px;
+  font-size: 32px;
+}
+
+.admin-title h2 {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.admin-description {
+  flex: 2 1 500px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.admin-benefits-title h3 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.admin-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.benefit-box {
+  border: 1px solid white;
+  padding: 20px;
+  text-align: center;
+  background-color: transparent;
+}
+
+.benefit-box img {
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+.benefit-box p {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.admin-footer {
+  margin-top: 40px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.admin-footer ul {
+  list-style: none;
+  padding-left: 0;
+}
 
 /* ======================
    FOOTER
@@ -1128,6 +1223,77 @@ nav {
     </div>
   </div>
 </section>
+
+<!-- SECCIÓN: Administración de Personal -->
+<section id="admin-personal" class="admin-section">
+  <div class="admin-overlay"></div>
+  <div class="admin-container">
+
+    <!-- Título y descripción principal -->
+    <div class="admin-header">
+      <div class="admin-title">
+        <h2>Administración<br>de personal</h2>
+      </div>
+      <div class="admin-description">
+        <p>
+          El recurso humano es lo más importante en su empresa, por eso lo apoyamos con la contratación temporal o de planta en todo el proceso, búsqueda, altas y bajas del IMSS, cálculo de incidencias, dispersión de pagos, negociación con sindicatos, finiquitos y liquidaciones; aplicable a cualquier área y nivel de personal de su empresa.
+        </p>
+        <p>
+          Procesamos las nóminas de nuestros clientes, de manera rápida y eficiente con la más alta tecnología que garantiza la elaboración de la nómina al 100%.
+        </p>
+      </div>
+    </div>
+
+    <!-- Beneficios -->
+    <div class="admin-benefits-title">
+      <h3>Beneficios para usted.</h3>
+    </div>
+
+    <div class="admin-benefits">
+      <div class="benefit-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Especialistas">
+        <p>Seguridad de que está elaborada por especialistas.</p>
+      </div>
+
+      <div class="benefit-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" alt="Jurídico">
+        <p>Cubre el marco jurídico vigente.</p>
+      </div>
+
+      <div class="benefit-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/535/535239.png" alt="Control">
+        <p>Control que elimina desviaciones de pago.</p>
+      </div>
+
+      <div class="benefit-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Organización">
+        <p>Permite mantener delgada su organización.</p>
+      </div>
+
+      <div class="benefit-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/1183/1183813.png" alt="Software">
+        <p>Evita inversiones altas en la compra e implementación de software especializado.</p>
+      </div>
+
+      <div class="benefit-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Confidencialidad">
+        <p>Resguardo de la información proporcionada y confidencialidad de toda la operación.</p>
+      </div>
+    </div>
+
+    <!-- Lista inferior -->
+    <div class="admin-footer">
+      <strong>Lo que usted recibirá:</strong>
+      <ul>
+        <li>• Reporte al sistema de pagos,</li>
+        <li>• La administración de las nóminas quincenales, semanales y especiales (PTU y aguinaldos);</li>
+        <li>• Proporcionando la información para el pago oportuno de nómina.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
 <!-- Imagen corporativa superior del footer -->
 <section class="footer-banner"></section>
 
@@ -1154,7 +1320,19 @@ nav {
 
       <!-- Redes sociales (lado derecho superior) -->
       <div class="footer-right">
-        
+        <p class="footer-social-title sansation-bold">SÍGUENOS:</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-link" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="#" class="social-link" aria-label="Threads"><i class="bi bi-threads"></i></a>
+          <a href="#" class="social-link" aria-label="Google"><i class="bi bi-google"></i></a>
+          <a href="#" class="social-link" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+          <a href="#" class="social-link" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+        </div>
       </div>
     </div>
 
@@ -1309,4 +1487,3 @@ document.addEventListener("DOMContentLoaded", initCounterAnimation);
 
 </body>
 </html>
-
