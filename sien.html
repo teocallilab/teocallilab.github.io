@@ -1,1297 +1,1656 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIEN - Negocios Exitosos</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIEN - Negocios Exitosos</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<style>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* ======================
-   FUENTES
-   ====================== */
+FUENTES
+====================== */
 .sansation-light {
-    font-family: "Sansation", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+font-family: "Sansation", sans-serif;
+font-weight: 300;
+font-style: normal;
 }
 
 .sansation-regular {
-    font-family: "Sansation", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+font-family: "Sansation", sans-serif;
+font-weight: 400;
+font-style: normal;
 }
 
 .sansation-bold {
-    font-family: "Sansation", sans-serif;
-    font-weight: 700;
-    font-style: normal;
+font-family: "Sansation", sans-serif;
+font-weight: 700;
+font-style: normal;
 }
 
 /* ======================
-   HEADER
-   ====================== */
+HEADER
+====================== */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: transparent;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 1000;
+background: transparent;
+transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 header.scrolled {
-    background-color: black;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+background-color: black;
+box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 60px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 60px;
 }
 
 .logo {
-    height: 60px;
+height: 60px;
 }
 
 .contact-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color: white;
+display: flex;
+align-items: center;
+gap: 15px;
+color: white;
 }
 
 .phone-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 .bi-telephone {
-    font-size: 2em;
+font-size: 2em;
 }
 
 .contact-text {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+display: flex;
+flex-direction: column;
+text-align: left;
 }
 
 .contact-label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 2px;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 1px;
+margin-bottom: 2px;
 }
 
 .contact-number {
-    font-size: 16px;
-    font-weight: 700;
+font-size: 16px;
+font-weight: 700;
 }
 
 .header-divider {
-    height: 1px;
-    background: white;
-    width: 100%;
+height: 1px;
+background: white;
+width: 100%;
 }
 
 /* ======================
-   NAVEGACIÓN
-   ====================== */
+NAVEGACIÓN
+====================== */
 nav {
-    padding: 15px 60px;
+padding: 15px 60px;
 }
 
 .menu {
-    display: flex;
-    list-style: none;
-    gap: 40px;
-    align-items: center;
+display: flex;
+list-style: none;
+gap: 40px;
+align-items: center;
 }
 
 .menu li a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: opacity 0.3s ease;
+color: white;
+text-decoration: none;
+font-size: 16px;
+font-weight: 600;
+letter-spacing: 1px;
+transition: opacity 0.3s ease;
 }
 
 .menu li a:hover {
-    opacity: 0.7;
+opacity: 0.7;
 }
 
 /* ======================
-   HERO SECTION
-   ====================== */
+HERO SECTION
+====================== */
 .hero {
-    position: relative;
-    height: 100vh;
-    background-image: url('img/banner_sien.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 80px;
-    z-index: 1;
-    overflow: visible;
+position: relative;
+height: 100vh;
+background-image: url('img/banner_sien.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+padding-bottom: 80px;
+z-index: 1;
+overflow: visible;
 }
 
 .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.4);
 }
 
 .hero-text {
-    position: relative;
-    text-align: center;
-    color: white;
-    z-index: 1;
-    margin-bottom: 100px;
+position: relative;
+text-align: center;
+color: white;
+z-index: 1;
+margin-bottom: 100px;
 }
 
 .hero-text h1 {
-    font-size: 56px;
-    font-weight: 700;
-    line-height: 1.2;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    letter-spacing: 2px;
-    margin-bottom: 30px;
+font-size: 56px;
+font-weight: 700;
+line-height: 1.2;
+text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+letter-spacing: 2px;
+margin-bottom: 30px;
 }
 
 .btn-ver-mas {
-    display: inline-block;
-    padding: 15px 40px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+display: inline-block;
+padding: 15px 40px;
+background: white;
+color: black;
+text-decoration: none;
+font-size: 18px;
+font-weight: 600;
+border-radius: 30px;
+transition: all 0.3s ease;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-ver-mas:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+transform: translateY(-2px);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* ======================
-   SERVICES CARD
-   ====================== */
+SERVICES CARD
+====================== */
 .services-card {
-    max-width: 1200px;
-    margin: 0 auto 10px;
-    background: white;
-    border-radius: 20px;
-    padding: 60px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    position: relative;
-    top: -120px; /* Este reemplaza el margen negativo */
-    z-index: 2;
-    
+max-width: 1200px;
+margin: 0 auto 10px;
+background: white;
+border-radius: 20px;
+padding: 60px;
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+position: relative;
+top: -120px; /* Este reemplaza el margen negativo */
+z-index: 2;
+
 }
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    gap: 0;
-    align-items: center;
+display: grid;
+grid-template-columns: repeat(11, 1fr);
+gap: 0;
+align-items: center;
 }
 
 .service-item {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    grid-column: span 1;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 15px;
+grid-column: span 1;
 }
 
 .service-icon img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
+width: 80px;
+height: 80px;
+object-fit: contain;
 }
 
 .bi-amazon {
-    color: black;
+color: black;
 }
 
 .service-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1e3a5f;
-    line-height: 1.3;
+font-size: 14px;
+font-weight: 700;
+color: #1e3a5f;
+line-height: 1.3;
 }
 
 .service-separator {
-    width: 1px;
-    background: #1e3a5f;
-    height: 120px;
-    grid-column: span 1;
-    justify-self: center;
+width: 1px;
+background: #1e3a5f;
+height: 120px;
+grid-column: span 1;
+justify-self: center;
 }
 
 /* ======================
-   VALUES SECTION
-   ====================== */
+VALUES SECTION
+====================== */
 .values-section {
-    background: #1e3a5f;
-    color: white;
-    padding: 0 60px 80px 60px;
-    position: relative;
+background: #1e3a5f;
+color: white;
+padding: 0 60px 80px 60px;
+position: relative;
 }
 
 .values-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-bottom: 100px;
+max-width: 1200px;
+margin: 0 auto;
+padding-bottom: 100px;
 }
 
 .values-title {
-    text-align: center;
-    margin-bottom: 50px;
+text-align: center;
+margin-bottom: 50px;
 }
 
 .values-title h3 {
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 5px;
+font-size: 22px;
+font-weight: 400;
+margin-bottom: 5px;
 }
 
 .values-title h2 {
-    font-size: 38px;
-    font-weight: 700;
+font-size: 38px;
+font-weight: 700;
 }
 
 /* ======================
-   TIMELINE
-   ====================== */
+TIMELINE
+====================== */
 .timeline {
-    --line-y: 72px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    max-width: 1100px;
-    margin: 80px auto 0;
+--line-y: 72px;
+position: relative;
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+width: 100%;
+max-width: 1100px;
+margin: 80px auto 0;
 }
 
 .timeline::before {
-    content: "";
-    position: absolute;
-    top: var(--line-y);
-    left: 5%;
-    right: 5%;
-    height: 4px;
-    background: white;
-    transform: translateY(-50%);
-    z-index: 0;
+content: "";
+position: absolute;
+top: var(--line-y);
+left: 5%;
+right: 5%;
+height: 4px;
+background: white;
+transform: translateY(-50%);
+z-index: 0;
 }
 
 .timeline-item {
-    position: relative;
-    flex: 1;
-    text-align: center;
-    z-index: 2;
+position: relative;
+flex: 1;
+text-align: center;
+z-index: 2;
 }
 
 .timeline-label {
-    display: block;
-    margin-bottom: 22px;
-    font-size: 18px;
-    font-weight: 700;
-    color: white;
+display: block;
+margin-bottom: 22px;
+font-size: 18px;
+font-weight: 700;
+color: white;
 }
 
 .timeline-circle {
-    position: absolute;
-    top: var(--line-y);
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 4px solid white;
-    background: #1e3a5f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
+position: absolute;
+top: var(--line-y);
+left: 50%;
+transform: translate(-50%, -50%);
+width: 34px;
+height: 34px;
+border-radius: 50%;
+border: 4px solid white;
+background: #1e3a5f;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 3;
 }
 
 .timeline-inner {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background: white;
 }
 
 /* ======================
-   ABOUT SECTION
-   ====================== */
+ABOUT SECTION
+====================== */
 .about-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    margin-top: 60px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 60px;
+align-items: center;
+margin-top: 60px;
 }
 
 .about-image {
-    width: 100%;
-    border-radius: 10px;
+width: 100%;
+border-radius: 10px;
 }
 
 .about-content h3 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 30px;
+font-size: 28px;
+font-weight: 700;
+margin-bottom: 30px;
 }
 
 .about-content p {
-    font-size: 16px;
-    line-height: 1.8;
-    margin-bottom: 20px;
-    text-align: justify;
+font-size: 16px;
+line-height: 1.8;
+margin-bottom: 20px;
+text-align: justify;
 }
 
 /* ======================
-   MISIÓN Y VISIÓN
-   ====================== */
+MISIÓN Y VISIÓN
+====================== */
 .mission-vision-section {
-    background: #f8f9fb;
-    padding: 100px 60px;
-    display: flex;
-    justify-content: center;
+background: #f8f9fb;
+padding: 100px 60px;
+display: flex;
+justify-content: center;
 }
 
 .mv-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 60px;
-    max-width: 1100px;
-    width: 100%;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 60px;
+max-width: 1200px;
+width: 100%;
 }
 
 .mv-card {
-    position: relative;
-    background: white;
-    border: 2px solid #1e3a5f;
-    border-radius: 8px;
-    text-align: center;
-    padding: 50px 40px 50px 40px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+position: relative;
+background: white;
+border: 2px solid #1e3a5f;
+border-radius: 8px;
+text-align: center;
+padding: 50px 40px 50px 40px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .mv-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+transform: translateY(-5px);
+box-shadow: 0 12px 35px rgba(0,0,0,0.15);
 }
 
 .mv-icon {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 3px solid #1e3a5f;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    color: #1e3a5f;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+position: absolute;
+top: 0;
+left: 50%;
+transform: translate(-50%, -50%);
+background: white;
+border: 3px solid #1e3a5f;
+border-radius: 50%;
+width: 80px;
+height: 80px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 40px;
+color: #1e3a5f;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .mv-title {
-    font-size: 28px;
-    color: #1e3a5f;
-    margin-top: 40px;
-    margin-bottom: 20px;
+font-size: 28px;
+color: #1e3a5f;
+margin-top: 40px;
+margin-bottom: 20px;
 }
 
 .mv-text {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #333;
-    max-width: 90%;
-    margin: 0 auto;
+font-size: 16px;
+line-height: 1.8;
+color: #333;
+max-width: 90%;
+margin: 0 auto;
 }
 
 /* ======================
-   RESULTADOS / MÉTRICAS
-   ====================== */
+RESULTADOS / MÉTRICAS
+====================== */
 .results-section {
-    background: #20375a;
-    padding: 70px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+background: #20375a;
+padding: 70px 20px;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .results-card {
-    width: 100%;
-    max-width: 1200px;
-    background: #ffffff;
-    padding: 16px 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    border-radius: 4px;
-    display: grid;
-    grid-template-columns: 120px 1fr 190px 130px 1fr;
-    gap: 24px;
-    align-items: center;
+width: 100%;
+max-width: 1200px;
+background: #ffffff;
+padding: 16px 20px;
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+border-radius: 4px;
+display: grid;
+grid-template-columns: 120px 1fr 190px 130px 1fr;
+gap: 24px;
+align-items: center;
 }
 
 .col-stat {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 0 18px;
+text-align: left;
+display: flex;
+flex-direction: column;
+gap: 6px;
+padding: 0 18px;
 }
 
 .col-stat.center-stat {
-    text-align: center;
+text-align: center;
 }
 
 .col-desc {
-    color: #000;
-    font-size: 12px;
-    line-height: 1.6;
-    padding: 0 28px;
-    text-align: left;
+color: #000;
+font-size: 12px;
+line-height: 1.6;
+padding: 0 28px;
+text-align: left;
 }
 
 .divider-left {
-    border-left: 1px solid #d7d7d7;
-    padding-left: 28px;
+border-left: 1px solid #d7d7d7;
+padding-left: 28px;
 }
 
 .result-number {
-    font-family: "Sansation", sans-serif;
-    color: #20375a;
-    font-size: 2.5rem;
-    line-height: 1;
-    font-weight: 700;
+font-family: "Sansation", sans-serif;
+color: #20375a;
+font-size: 2.5rem;
+line-height: 1;
+font-weight: 700;
 }
 
 .result-label {
-    font-family: "Sansation", sans-serif;
-    color: #20375a;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-top: 2px;
+font-family: "Sansation", sans-serif;
+color: #20375a;
+font-size: 1.2rem;
+font-weight: 600;
+margin-top: 2px;
 }
 
 .col-stat.center-stat .result-number {
-    font-size: 3.5rem;
+font-size: 3.5rem;
 }
 
 /* ======================
-   ANIMACIÓN DE BRILLO
-   ====================== */
+ANIMACIÓN DE BRILLO
+====================== */
 @keyframes glowEffect {
-    0% {
-        text-shadow: 0 0 0px rgba(73, 61, 208, 0);
-        transform: scale(1);
-        color: #20375a;
-    }
-    40% {
-        text-shadow: 0 0 25px rgba(71, 116, 168, 0.9);
-        color: #3f5aa5;
-        transform: scale(1.08);
-    }
-    100% {
-        text-shadow: 0 0 0px rgba(79, 73, 130, 0);
-        color: #20375a;
-        transform: scale(1);
-    }
+0% {
+    text-shadow: 0 0 0px rgba(73, 61, 208, 0);
+    transform: scale(1);
+    color: #20375a;
+}
+40% {
+    text-shadow: 0 0 25px rgba(71, 116, 168, 0.9);
+    color: #3f5aa5;
+    transform: scale(1.08);
+}
+100% {
+    text-shadow: 0 0 0px rgba(79, 73, 130, 0);
+    color: #20375a;
+    transform: scale(1);
+}
 }
 
 .glow {
-    animation: glowEffect 1.3s ease-in-out;
+animation: glowEffect 1.3s ease-in-out;
 }
 
 .admin-section {
-  position: relative;
-  background-image: url('https://images.pexels.com/photos/7876197/pexels-photo-7876197.jpeg');
-  background-size: cover;
-  background-position: center;
-  color: white;
-  padding: 80px 20px;
-  z-index: 1;
+position: relative;
+background-image: url('https://images.pexels.com/photos/7876197/pexels-photo-7876197.jpeg');
+background-size: cover;
+background-position: center;
+color: white;
+padding: 80px 20px;
+z-index: 1;
 }
 
 .admin-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(3, 25, 51, 0.85);
-  z-index: 2;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(3, 25, 51, 0.85);
+z-index: 2;
 }
 
 .admin-container {
-  position: relative;
-  z-index: 3;
-  max-width: 1200px;
-  margin: 0 auto;
+position: relative;
+z-index: 3;
+max-width: 1200px;
+margin: 0 auto;
 }
 
 .admin-header {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-bottom: 40px;
+display: flex;
+flex-wrap: wrap;
+gap: 40px;
+margin-bottom: 40px;
 }
 
 .admin-title {
-  flex: 1 1 300px;
-  font-size: 32px;
+flex: 1 1 300px;
+font-size: 32px;
 }
 
 .admin-title h2 {
-  font-size: 36px;
-  font-weight: bold;
-  line-height: 1.2;
+font-size: 36px;
+font-weight: bold;
+line-height: 1.2;
 }
 
 .admin-description {
-  flex: 2 1 500px;
-  font-size: 16px;
-  line-height: 1.6;
+flex: 2 1 500px;
+font-size: 16px;
+line-height: 1.6;
 }
 
 .admin-benefits-title h3 {
-  font-size: 26px;
-  margin-bottom: 20px;
-  font-weight: bold;
+font-size: 26px;
+margin-bottom: 20px;
+font-weight: bold;
 }
 
 .admin-benefits {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 20px;
 }
 
 .benefit-box {
-  border: 1px solid white;
-  padding: 20px;
-  text-align: center;
-  background-color: transparent;
+border: 1px solid white;
+padding: 20px;
+text-align: center;
+background-color: transparent;
 }
 
-.benefit-box img {
-  width: 40px;
-  margin-bottom: 10px;
+.benefit-box .bi{
+font-size: 2.5rem;
 }
 
 .benefit-box p {
-  font-size: 15px;
-  line-height: 1.4;
+font-size: 15px;
+line-height: 1.4;
 }
 
 .admin-footer {
-  margin-top: 40px;
-  font-size: 15px;
-  line-height: 1.6;
+margin-top: 40px;
+font-size: 15px;
+line-height: 1.6;
 }
 
 .admin-footer ul {
-  list-style: none;
-  padding-left: 0;
+list-style: none;
+padding-left: 0;
+}
+
+
+/* --- Valuación de empresas --- */
+.valuacion-empresas {
+  background: url('https://images.pexels.com/photos/7876197/pexels-photo-7876197.jpeg?_gl=1*1n7z2g3*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjA0Mzc3NTAkbzM3JGcxJHQxNzYwNDM3NzcyJGozOCRsMCRoMA..') center/cover no-repeat;
+  color: #fff;
+  padding: 60px 40px;
+  position: relative;
+}
+
+.valuacion-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #fff;
+  padding: 40px;
+  backdrop-filter: blur(4px);
+}
+
+.valuacion-content h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.valuacion-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.valuacion-col {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* --- Planes de Negocios (2 filas x 2 columnas) --- */
+.planes-negocios {
+  background-color: #f2f2f2;
+  padding: 60px 40px;
+}
+
+.planes-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.planes-content h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.planes-content h2 span {
+  color: #1a3a5a;
+}
+
+.planes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 40px;
+  align-items: center;
+}
+
+.planes-item img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.planes-item.text {
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.planes-item.text h3 {
+  color: #1a3a5a;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.planes-item.text strong {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .planes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planes-item img {
+    max-width: 100%;
+  }
+}
+/* --- Marketing y Estrategias Digitales --- */
+.marketing {
+  margin: 0 auto;
+  background: #000;
+  color: #fff;
+  padding: 80px 40px;
+}
+
+.marketing-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.marketing-content p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.marketing-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.marketing-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.marketing-content li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+/* --- Nuestros Clientes --- */
+.clientes {
+  background-color: #1a3a5a;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.clientes h2 {
+  font-size: 1.8rem;
+  color: #bfcde2;
+  margin-bottom: 40px;
+}
+
+.clientes-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.clientes-logos img {
+  max-height: 50px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  filter: grayscale(100%);
+}
+
+.clientes-logos img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+/* --- Responsivo --- */
+@media (max-width: 900px) {
+  .marketing-overlay {
+    padding: 40px 20px;
+  }
+
+  .clientes-logos {
+    gap: 30px;
+  }
+
+  .clientes-logos img {
+    max-height: 40px;
+  }
 }
 
 /* ======================
-   FOOTER
-   ====================== */
+FOOTER
+====================== */
 .footer-banner {
-    background-image: url('img/banner_sien.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 400px;
+background-image: url('img/banner_sien.jpg');
+background-size: cover;
+background-position: center;
+height: 400px;
 }
 
 .main-footer {
-    background-color: #2c4666;
-    color: white;
-    padding: 60px 40px 50px;
+background-color: #2c4666;
+color: white;
+padding: 60px 40px 50px;
 }
 
 .footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
+max-width: 1400px;
+margin: 0 auto;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 60px;
-    gap: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 60px;
+gap: 40px;
+padding-bottom: 40px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .footer-left {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-    flex: 1;
+display: flex;
+gap: 40px;
+align-items: flex-start;
+flex: 1;
 }
 
 .footer-logo {
-    width: 300px;
-    height: auto;
-    flex-shrink: 0;
+width: 300px;
+height: auto;
+flex-shrink: 0;
 }
 
 .footer-contact-box {
-    max-width: 500px;
+max-width: 500px;
 }
 
 .footer-title {
-    font-size: 20px;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    color: white;
+font-size: 20px;
+letter-spacing: 2px;
+margin-bottom: 20px;
+color: white;
 }
 
 .footer-description {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    color: rgba(255, 255, 255, 0.9);
+font-size: 14px;
+line-height: 1.6;
+margin-bottom: 25px;
+color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-email-section {
-    margin-top: 20px;
+margin-top: 20px;
 }
 
 .footer-email-label {
-    font-size: 14px;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-    color: white;
+font-size: 14px;
+letter-spacing: 1px;
+margin-bottom: 5px;
+color: white;
 }
 
 .footer-email-link {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
+color: white;
+text-decoration: none;
+font-size: 14px;
 }
 
 .footer-email-link:hover {
-    text-decoration: underline;
+text-decoration: underline;
 }
 
 .footer-right {
-    text-align: right;
+text-align: right;
 }
 
 .footer-social-title {
-    font-size: 16px;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-    color: white;
+font-size: 16px;
+letter-spacing: 2px;
+margin-bottom: 15px;
+color: white;
 }
 
 .footer-social {
-    display: flex;
-    gap: 12px;
-    font-size: 22px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+display: flex;
+gap: 12px;
+font-size: 22px;
+flex-wrap: wrap;
+justify-content: flex-end;
 }
 
 .social-link {
-    color: white;
-    transition: opacity 0.3s ease;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
+color: white;
+transition: opacity 0.3s ease;
+width: 32px;
+height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 50%;
 }
 
 .social-link:hover {
-    opacity: 0.7;
-    background: rgba(255, 255, 255, 0.2);
+opacity: 0.7;
+background: rgba(255, 255, 255, 0.2);
 }
 
 .footer-locations {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px 30px;
-    font-size: 13px;
-    line-height: 1.7;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 40px 30px;
+font-size: 13px;
+line-height: 1.7;
 }
 
 .location-item {
-    color: rgba(255, 255, 255, 0.9);
+color: rgba(255, 255, 255, 0.9);
 }
 
 .location-item strong {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: white;
+display: block;
+margin-bottom: 8px;
+font-size: 14px;
+letter-spacing: 1px;
+color: white;
 }
 
 .footer-bottom-bar {
-    background-color: #1a2b3d;
-    padding: 20px 40px;
+background-color: #1a2b3d;
+padding: 20px 40px;
 }
 
 .footer-bottom-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
+max-width: 1400px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 13px;
 }
 
 .footer-copyright {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.8);
+margin: 0;
+color: rgba(255, 255, 255, 0.8);
 }
 
 .footer-privacy-link {
-    color: white;
-    text-decoration: underline;
+color: white;
+text-decoration: underline;
 }
 
 .footer-privacy-link:hover {
-    opacity: 0.8;
+opacity: 0.8;
 }
 
 /* ======================
-   RESPONSIVE FOOTER
-   ====================== */
+RESPONSIVE FOOTER
+====================== */
 @media (max-width: 1200px) {
-    .footer-locations {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.footer-locations {
+    grid-template-columns: repeat(3, 1fr);
+}
 }
 
 @media (max-width: 992px) {
-    .footer-content {
-        flex-direction: column;
-    }
+.footer-content {
+    flex-direction: column;
+}
 
-    .footer-left {
-        flex-direction: column;
-    }
+.footer-left {
+    flex-direction: column;
+}
 
-    .footer-right {
-        text-align: left;
-    }
+.footer-right {
+    text-align: left;
+}
 
-    .footer-social {
-        justify-content: flex-start;
-    }
+.footer-social {
+    justify-content: flex-start;
+}
 
-    .footer-locations {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.footer-locations {
+    grid-template-columns: repeat(2, 1fr);
+}
 }
 
 @media (max-width: 768px) {
-    .footer-banner {
-        height: 250px;
-    }
+.footer-banner {
+    height: 250px;
+}
 
-    .main-footer {
-        padding: 40px 20px 30px;
-    }
+.main-footer {
+    padding: 40px 20px 30px;
+}
 
-    .footer-logo {
-        width: 350px;
-    }
+.footer-logo {
+    width: 350px;
+}
 
-    .footer-locations {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
+.footer-locations {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
 
-    .footer-bottom-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
+.footer-bottom-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+}
 
-    .footer-social {
-        font-size: 20px;
-        gap: 10px;
-    }
+.footer-social {
+    font-size: 20px;
+    gap: 10px;
+}
 
-    .social-link {
-        width: 28px;
-        height: 28px;
-    }
+.social-link {
+    width: 28px;
+    height: 28px;
+}
 }
 /* ======================
-   RESPONSIVE
-   ====================== */
+RESPONSIVE
+====================== */
 @media (max-width: 1100px) {
-    .results-card {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 28px;
-    }
+.results-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px;
+}
 
-    .col-stat, .col-desc {
-        text-align: center;
-        padding: 0;
-        border-left: none;
-    }
+.col-stat, .col-desc {
+    text-align: center;
+    padding: 0;
+    border-left: none;
+}
 
-    .col-desc {
-        font-size: 15px;
-        color: #6b6b6b;
-    }
+.col-desc {
+    font-size: 15px;
+    color: #6b6b6b;
+}
 
-    .result-number {
-        font-size: 48px;
-    }
+.result-number {
+    font-size: 48px;
+}
 
-    .col-stat.center-stat .result-number {
-        font-size: 56px;
-    }
+.col-stat.center-stat .result-number {
+    font-size: 56px;
+}
 
-    .result-label {
-        font-size: 16px;
-    }
+.result-label {
+    font-size: 16px;
+}
 }
 
 @media (max-width: 1024px) {
-    .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.services-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
 
-    .service-separator:nth-child(2),
-    .service-separator:nth-child(6),
-    .service-separator:nth-child(10) {
-        display: none;
-    }
+.service-separator:nth-child(2),
+.service-separator:nth-child(6),
+.service-separator:nth-child(10) {
+    display: none;
+}
 }
 
 @media (max-width: 768px) {
-    .header-top {
-        padding: 15px 30px;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    nav {
-        padding: 15px 30px;
-    }
-
-    .menu {
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .menu li a {
-        font-size: 10px;
-    }
-
-    .logo {
-        height: 50px;
-    }
-
-    .hero-text h1 {
-        font-size: 32px;
-        padding: 0 20px;
-    }
-
-    .values-section {
-        padding: 0 20px 40px 20px;
-    }
-
-    .services-card {
-        padding: 30px 20px;
-        margin: -50px 20px 40px 20px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .service-separator {
-        display: none;
-    }
-
-    .timeline {
-        flex-wrap: wrap;
-        font-size: 10px;
-        align-items: center;
-        padding-top: 0;
-        margin-top: 30px;
-    }
-
-    .timeline::before {
-        display: none;
-    }
-
-    .timeline-item {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .timeline-circle {
-        display: none;
-    }
-
-    .about-section {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        margin-top: 0px;
-    }
-
-    .mission-vision-section {
-        padding: 60px 20px;
-    }
-
-    .mv-container {
-        gap: 40px;
-    }
-
-    .mv-card {
-        padding: 70px 25px 40px 25px;
-    }
-
-    .mv-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 32px;
-    }
-
-    .mv-title {
-        font-size: 24px;
-    }
-
-    .mv-text {
-        font-size: 15px;
-    }
-
-    
+.header-top {
+    padding: 15px 30px;
+    flex-direction: column;
+    gap: 15px;
 }
-    </style>
+
+nav {
+    padding: 15px 30px;
+}
+
+.menu {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.menu li a {
+    font-size: 10px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.hero-text h1 {
+    font-size: 32px;
+    padding: 0 20px;
+}
+
+.values-section {
+    padding: 0 20px 40px 20px;
+}
+
+.services-card {
+    position:relative;
+    top: 0;
+    padding: 30px 20px;
+    margin: -50px 20px 40px 20px;
+}
+
+.services-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.service-separator {
+    display: none;
+}
+
+.timeline {
+    flex-wrap: wrap;
+    font-size: 10px;
+    align-items: center;
+    padding-top: 0;
+    margin-top: 30px;
+}
+
+.timeline::before {
+    display: none;
+}
+
+.timeline-item {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.timeline-circle {
+    display: none;
+}
+
+.about-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 0px;
+}
+
+.mission-vision-section {
+    padding: 60px 20px;
+}
+
+.mv-container {
+    gap: 40px;
+}
+
+.mv-card {
+    padding: 70px 25px 40px 25px;
+}
+
+.mv-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
+}
+
+.mv-title {
+    font-size: 24px;
+}
+
+.mv-text {
+    font-size: 15px;
+}
+
+
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-top">
-            <img src="img/Logo_SIEN_Header.svg" alt="SIEN Logo" class="logo">
-            <!--div class="contact-info">
-                <div class="phone-icon"><i class="bi bi-telephone"></i></div>
-                <div class="contact-text">
-                    <div class="contact-label sansation-regular">CONTACTO:</div>
-                    <div class="contact-number sansation-regular">+52 81 2110 0000</div>
-                </div>
-            </div-->
-        </div>
-        
-        <div class="header-divider"></div>
-        
-        <nav>
-            <ul class="menu sansation-regular">
-                <li><a href="index.html">INICIO</a></li>
-                <li><a href="#nosotros">NOSOTROS</a></li>
-                <li><a href="#servicios">SERVICIOS</a></li>
-                <li><a href="#negocios">NEGOCIOS</a></li>
-                <li><a href="#contacto">CONTACTO</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1 class="sansation-bold">NEGOCIOS EXITOSOS,<br>RESPALDO LEGAL SEGURO.</h1>
-            <a href="#servicios" class="btn-ver-mas">Ver más <i class="bi bi-hand-index-thumb"></i></a>
-        </div>
-    </section>
-
-    <!-- Values Section (Azul) -->
-    <section class="values-section">
-        <!-- Tarjeta Blanca de Servicios -->
-        <div class="services-card">
-            <div class="services-grid">
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="bi bi-amazon"></i>
-                    </div>
-                    <div class="service-title sansation-bold">Defensa Fiscal<br>y Laboral</div>
-                </div>
-
-                <div class="service-separator"></div>
-
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="bi bi-amazon"></i>
-                    </div>
-                    <div class="service-title sansation-bold">Asesorías</div>
-                </div>
-
-                <div class="service-separator"></div>
-
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="bi bi-amazon"></i>
-                    </div>
-                    <div class="service-title sansation-bold">Impuestos<br>y Planificación<br>Fiscal</div>
-                </div>
-
-                <div class="service-separator"></div>
-
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="bi bi-amazon"></i>
-                    </div>
-                    <div class="service-title sansation-bold">Administración<br>de Personal</div>
-                </div>
-
-                <div class="service-separator"></div>
-
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="bi bi-amazon"></i>
-                    </div>
-                    <div class="service-title sansation-bold">Valuación de<br>Empresas</div>
-                </div>
-
-                <div class="service-separator"></div>
-
-                <div class="service-item">
-                    <div class="service-icon">
-                        <i class="bi bi-amazon"></i>
-                    </div>
-                    <div class="service-title sansation-bold">Planes<br>de Negocios</div>
-                </div>
+<!-- Header -->
+<header>
+    <div class="header-top">
+        <img src="img/Logo_SIEN_Header.svg" alt="SIEN Logo" class="logo">
+        <!--div class="contact-info">
+            <div class="phone-icon"><i class="bi bi-telephone"></i></div>
+            <div class="contact-text">
+                <div class="contact-label sansation-regular">CONTACTO:</div>
+                <div class="contact-number sansation-regular">+52 81 2110 0000</div>
             </div>
-        </div>
+        </div-->
+    </div>
+    
+    <div class="header-divider"></div>
+    
+    <nav>
+        <ul class="menu sansation-regular">
+            <li><a href="index.html">INICIO</a></li>
+            <li><a href="#nosotros">NOSOTROS</a></li>
+            <li><a href="#servicios">SERVICIOS</a></li>
+            <li><a href="#negocios">NEGOCIOS</a></li>
+            <li><a href="#contacto">CONTACTO</a></li>
+        </ul>
+    </nav>
+</header>
 
-        <div class="values-container">
-            <div class="values-title">
-                <h3 class="sansation-regular">¿Por qué elegirnos?</h3>
-                <h2 class="sansation-bold">Nuestros Valores</h2>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1 class="sansation-bold">NEGOCIOS EXITOSOS,<br>RESPALDO LEGAL SEGURO.</h1>
+        <a href="#servicios" class="btn-ver-mas">Ver más <i class="bi bi-hand-index-thumb"></i></a>
+    </div>
+</section>
+
+<!-- Values Section (Azul) -->
+<section class="values-section">
+    <!-- Tarjeta Blanca de Servicios -->
+    <div class="services-card">
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-amazon"></i>
+                </div>
+                <div class="service-title sansation-bold">Defensa Fiscal<br>y Laboral</div>
             </div>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                <span class="timeline-label sansation-bold">Flexibilidad</span>
-                <span class="timeline-circle"><span class="timeline-inner"></span></span>
+            <div class="service-separator"></div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-amazon"></i>
                 </div>
-                <div class="timeline-item">
-                <span class="timeline-label sansation-bold">Profesionalismo</span>
-                <span class="timeline-circle"><span class="timeline-inner"></span></span>
+                <div class="service-title sansation-bold">Asesorías</div>
+            </div>
+
+            <div class="service-separator"></div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-amazon"></i>
                 </div>
-                <div class="timeline-item">
-                <span class="timeline-label sansation-bold">Honestidad</span>
-                <span class="timeline-circle"><span class="timeline-inner"></span></span>
+                <div class="service-title sansation-bold">Impuestos<br>y Planificación<br>Fiscal</div>
+            </div>
+
+            <div class="service-separator"></div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-amazon"></i>
                 </div>
-                <div class="timeline-item">
-                <span class="timeline-label sansation-bold">Innovación</span>
-                <span class="timeline-circle"><span class="timeline-inner"></span></span>
+                <div class="service-title sansation-bold">Administración<br>de Personal</div>
+            </div>
+
+            <div class="service-separator"></div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-amazon"></i>
                 </div>
-                <div class="timeline-item">
-                <span class="timeline-label sansation-bold">Excelencia</span>
-                <span class="timeline-circle"><span class="timeline-inner"></span></span>
+                <div class="service-title sansation-bold">Valuación de<br>Empresas</div>
+            </div>
+
+            <div class="service-separator"></div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="bi bi-amazon"></i>
                 </div>
+                <div class="service-title sansation-bold">Planes<br>de Negocios</div>
             </div>
         </div>
+    </div>
 
+    <div class="values-container">
+        <div class="values-title">
+            <h3 class="sansation-regular">¿Por qué elegirnos?</h3>
+            <h2 class="sansation-bold">Nuestros Valores</h2>
+        </div>
 
-
-            <!-- About Section -->
-            <div class="about-section">
-                <img src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?_gl=1*x0tmx9*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjAxNjcyNjIkbzM1JGcxJHQxNzYwMTY3Mjc0JGo0OCRsMCRoMA.." alt="Nuestra Firma" class="about-image">
-                <div class="about-content">
-                    <h3 class="sansation-bold">Nuestra firma</h3>
-                    <p class="sansation-regular">
-                        Soluciones Integrales en Negocios es una firma de líderes en Asesoría Legal y Negocios, que proporciona servicios Integrales en el sector público y privado, brindando una eficiente asesoría jurídica, fiscal y económico-financiera, conformados con experimentados especialistas, que cuentan con la visión empresarial necesaria para enfocarlo al éxito de su negocio y respaldados con más de 20 años de experiencia.
-                    </p>
-                    <p class="sansation-regular">
-                        Creemos en aportar tranquilidad a nuestros clientes y en la rentabilidad de su empresa, como pilares fundamentales en el desarrollo de nuestro trabajo. Profesionalizamos la gestión de su negocio poniendo todo nuestro foco en la persona, trabajando desde adentro para asegurar que la consultoría se convierte en una realidad.
-                    </p>
-                </div>
+        <div class="timeline">
+            <div class="timeline-item">
+            <span class="timeline-label sansation-bold">Flexibilidad</span>
+            <span class="timeline-circle"><span class="timeline-inner"></span></span>
+            </div>
+            <div class="timeline-item">
+            <span class="timeline-label sansation-bold">Profesionalismo</span>
+            <span class="timeline-circle"><span class="timeline-inner"></span></span>
+            </div>
+            <div class="timeline-item">
+            <span class="timeline-label sansation-bold">Honestidad</span>
+            <span class="timeline-circle"><span class="timeline-inner"></span></span>
+            </div>
+            <div class="timeline-item">
+            <span class="timeline-label sansation-bold">Innovación</span>
+            <span class="timeline-circle"><span class="timeline-inner"></span></span>
+            </div>
+            <div class="timeline-item">
+            <span class="timeline-label sansation-bold">Excelencia</span>
+            <span class="timeline-circle"><span class="timeline-inner"></span></span>
             </div>
         </div>
-    </section>
-    <!-- Misión y Visión Section -->
+    </div>
+
+
+
+        <!-- About Section -->
+        <div class="about-section">
+            <img src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?_gl=1*x0tmx9*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjAxNjcyNjIkbzM1JGcxJHQxNzYwMTY3Mjc0JGo0OCRsMCRoMA.." alt="Nuestra Firma" class="about-image">
+            <div class="about-content">
+                <h3 class="sansation-bold">Nuestra firma</h3>
+                <p class="sansation-regular">
+                    Soluciones Integrales en Negocios es una firma de líderes en Asesoría Legal y Negocios, que proporciona servicios Integrales en el sector público y privado, brindando una eficiente asesoría jurídica, fiscal y económico-financiera, conformados con experimentados especialistas, que cuentan con la visión empresarial necesaria para enfocarlo al éxito de su negocio y respaldados con más de 20 años de experiencia.
+                </p>
+                <p class="sansation-regular">
+                    Creemos en aportar tranquilidad a nuestros clientes y en la rentabilidad de su empresa, como pilares fundamentales en el desarrollo de nuestro trabajo. Profesionalizamos la gestión de su negocio poniendo todo nuestro foco en la persona, trabajando desde adentro para asegurar que la consultoría se convierte en una realidad.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Misión y Visión Section -->
 <section class="mission-vision-section">
-  <div class="mv-container">
-    <!-- Misión -->
-    <div class="mv-card">
-      <div class="mv-icon">
-        <i class="bi bi-bullseye"></i>
-      </div>
-      <h3 class="mv-title sansation-bold">Misión</h3>
-      <p class="mv-text sansation-regular">
-        Colaborar con el sector empresarial en el cumplimiento de obligaciones legales,
-        administrativas y fiscales, otorgando los servicios de consultoría integral en negocios,
-        generando beneficios tangibles para nuestros clientes.
-      </p>
+<div class="mv-container">
+<!-- Misión -->
+<div class="mv-card">
+    <div class="mv-icon">
+    <i class="bi bi-bullseye"></i>
     </div>
+    <h3 class="mv-title sansation-bold">Misión</h3>
+    <p class="mv-text sansation-regular">
+    Colaborar con el sector empresarial en el cumplimiento de obligaciones legales,
+    administrativas y fiscales, otorgando los servicios de consultoría integral en negocios,
+    generando beneficios tangibles para nuestros clientes.
+    </p>
+</div>
 
-    <!-- Visión -->
-    <div class="mv-card">
-      <div class="mv-icon">
-        <i class="bi bi-eye"></i>
-      </div>
-      <h3 class="mv-title sansation-bold">Visión</h3>
-      <p class="mv-text sansation-regular">
-        Ser un equipo vanguardista, líder y de especialistas en el mercado nacional, a través de un
-        servicio integral que otorgue seguridad jurídica para nuestros clientes, diferenciándonos por
-        el profesionalismo, responsabilidad y eficacia, contribuyendo al crecimiento empresarial de
-        nuestros clientes.
-      </p>
+<!-- Visión -->
+<div class="mv-card">
+    <div class="mv-icon">
+    <i class="bi bi-eye"></i>
     </div>
-  </div>
+    <h3 class="mv-title sansation-bold">Visión</h3>
+    <p class="mv-text sansation-regular">
+    Ser un equipo vanguardista, líder y de especialistas en el mercado nacional, a través de un
+    servicio integral que otorgue seguridad jurídica para nuestros clientes, diferenciándonos por
+    el profesionalismo, responsabilidad y eficacia, contribuyendo al crecimiento empresarial de
+    nuestros clientes.
+    </p>
+</div>
+</div>
 </section>
 <!-- Resultados / Métricas con animación y brillo -->
 <section class="results-section">
-  <div class="results-card">
-    <!-- 1 -->
-    <div class="col-stat">
-      <div class="result-number" data-target="100">+0</div>
-      <div class="result-label">Clientes</div>
-    </div>
+<div class="results-card">
+<!-- 1 -->
+<div class="col-stat">
+    <div class="result-number" data-target="100">+0</div>
+    <div class="result-label">Clientes</div>
+</div>
 
-    <!-- 2 -->
-    <div class="col-desc divider-left">
-      La confianza de más de 100 clientes nos avala, historias de éxito nos respaldan,
-      expertos con la confianza de más de nuestros socios.
-    </div>
+<!-- 2 -->
+<div class="col-desc divider-left">
+    La confianza de más de 100 clientes nos avala, historias de éxito nos respaldan,
+    expertos con la confianza de más de nuestros socios.
+</div>
 
-    <!-- 3 -->
-    <div class="col-stat divider-left center-stat">
-      <div class="result-number" data-target="1200">+0</div>
-      <div class="result-label">Operaciones</div>
-    </div>
+<!-- 3 -->
+<div class="col-stat divider-left center-stat">
+    <div class="result-number" data-target="1200">+0</div>
+    <div class="result-label">Operaciones</div>
+</div>
 
-    <!-- 4 -->
-    <div class="col-stat divider-left">
-      <div class="result-number" data-target="3" data-suffix="K ">0</div>
-      <div class="result-label">Proyectos</div>
-    </div>
+<!-- 4 -->
+<div class="col-stat divider-left">
+    <div class="result-number" data-target="3" data-suffix="K ">0</div>
+    <div class="result-label">Proyectos</div>
+</div>
 
-    <!-- 5 -->
-    <div class="col-desc divider-left">
-      Proyectos que impulsan el éxito. A lo largo de nuestra trayectoria, hemos colaborado
-      con empresas líderes del sector público y privado. Nuestro trabajo se traduce en resultados tangibles.
-    </div>
-  </div>
+<!-- 5 -->
+<div class="col-desc divider-left">
+    Proyectos que impulsan el éxito. A lo largo de nuestra trayectoria, hemos colaborado
+    con empresas líderes del sector público y privado. Nuestro trabajo se traduce en resultados tangibles.
+</div>
+</div>
 </section>
 
 <!-- SECCIÓN: Administración de Personal -->
 <section id="admin-personal" class="admin-section">
-  <div class="admin-overlay"></div>
-  <div class="admin-container">
+<div class="admin-overlay"></div>
+<div class="admin-container">
 
-    <!-- Título y descripción principal -->
-    <div class="admin-header">
-      <div class="admin-title">
-        <h2>Administración<br>de personal</h2>
-      </div>
-      <div class="admin-description">
-        <p>
-          El recurso humano es lo más importante en su empresa, por eso lo apoyamos con la contratación temporal o de planta en todo el proceso, búsqueda, altas y bajas del IMSS, cálculo de incidencias, dispersión de pagos, negociación con sindicatos, finiquitos y liquidaciones; aplicable a cualquier área y nivel de personal de su empresa.
-        </p>
-        <p>
-          Procesamos las nóminas de nuestros clientes, de manera rápida y eficiente con la más alta tecnología que garantiza la elaboración de la nómina al 100%.
-        </p>
+<!-- Título y descripción principal -->
+<div class="admin-header">
+    <div class="admin-title">
+    <h2>Administración<br>de personal</h2>
+    </div>
+    <div class="admin-description">
+    <p>
+        El recurso humano es lo más importante en su empresa, por eso lo apoyamos con la contratación temporal o de planta en todo el proceso, búsqueda, altas y bajas del IMSS, cálculo de incidencias, dispersión de pagos, negociación con sindicatos, finiquitos y liquidaciones; aplicable a cualquier área y nivel de personal de su empresa.
+    </p>
+    <p>
+        Procesamos las nóminas de nuestros clientes, de manera rápida y eficiente con la más alta tecnología que garantiza la elaboración de la nómina al 100%.
+    </p>
+    </div>
+</div>
+
+<!-- Beneficios -->
+<div class="admin-benefits-title">
+    <h3>Beneficios para usted.</h3>
+</div>
+
+<div class="admin-benefits">
+    <div class="benefit-box">
+    <i class="bi bi-person-gear"></i>
+    <p>Seguridad de que está elaborada por especialistas.</p>
+    </div>
+
+    <div class="benefit-box">
+    <i class="bi bi-pip"></i>
+    <p>Cubre el marco jurídico vigente.</p>
+    </div>
+
+    <div class="benefit-box">
+    <i class="bi bi-coin"></i>
+    <p>Control que elimina desviaciones de pago.</p>
+    </div>
+
+    <div class="benefit-box">
+    <i class="bi bi-diagram-2-fill"></i>
+    <p>Permite mantener delgada su organización.</p>
+    </div>
+
+    <div class="benefit-box">
+    <i class="bi bi-wallet2"></i>
+    <p>Evita inversiones altas en la compra e implementación de software especializado.</p>
+    </div>
+
+    <div class="benefit-box">
+    <i class="bi bi-safe"></i>
+    <p>Resguardo de la información proporcionada y confidencialidad de toda la operación.</p>
+    </div>
+</div>
+
+<!-- Lista inferior -->
+<div class="admin-footer">
+    <strong>Lo que usted recibirá:</strong>
+    <ul>
+    <li>• Reporte al sistema de pagos,</li>
+    <li>• La administración de las nóminas quincenales, semanales y especiales (PTU y aguinaldos);</li>
+    <li>• Proporcionando la información para el pago oportuno de nómina.</li>
+    </ul>
+</div>
+</div>
+</section>
+
+<!-- Sección: Nuestros Servicios -->
+<section id="servicios" class="services-main-section" style="background-color:#f8f9fb; padding:100px 60px;">
+  <div class="services-container" style="max-width:1200px; margin:0 auto;">
+
+    <h2 style="text-align:center; color:#20375a; font-weight:700; font-size:38px; margin-bottom:20px;">
+      Nuestros Servicios
+    </h2>
+
+    <!-- ASESORÍA LEGAL -->
+    <div style="text-align:center; margin-top:60px;">
+      <h3 style="font-size:28px; color:#20375a; font-weight:700; margin-bottom:10px;">Asesoría Legal</h3>
+      <p style="color:#444; max-width:800px; margin:0 auto 40px; line-height:1.8;">
+        Le ofrecemos orientación y soluciones jurídicas en todos los aspectos de su negocio.
+        Nuestro grupo le ayuda a prevenir riesgos, resolver conflictos y tomar decisiones seguras.
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; margin-top:30px;">
+        <div style="background:white; padding:30px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+          <i class="bi bi-shield-lock" style="font-size:40px; color:#1e3a5f;"></i>
+          <h4 style="margin-top:20px; font-weight:700; color:#1e3a5f;">Defensa fiscal</h4>
+          <p style="font-size:15px; color:#555; line-height:1.6;">Defendemos a nuestros clientes ante cualquier acto de autoridad fiscal, asegurando sus derechos y tranquilidad jurídica.</p>
+        </div>
+
+        <div style="background:white; padding:30px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+          <i class="bi bi-people" style="font-size:40px; color:#1e3a5f;"></i>
+          <h4 style="margin-top:20px; font-weight:700; color:#1e3a5f;">Defensa laboral</h4>
+          <p style="font-size:15px; color:#555; line-height:1.6;">Brindamos asesoría especializada en derecho laboral, ayudando a cumplir normativas y evitar contingencias.</p>
+        </div>
+
+        <div style="background:white; padding:30px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+          <i class="bi bi-building" style="font-size:40px; color:#1e3a5f;"></i>
+          <h4 style="margin-top:20px; font-weight:700; color:#1e3a5f;">Asesoría corporativa</h4>
+          <p style="font-size:15px; color:#555; line-height:1.6;">Ofrecemos servicios legales para constitución, operación y crecimiento de empresas con decisiones seguras.</p>
+        </div>
+
+        <div style="background:white; padding:30px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+          <i class="bi bi-briefcase" style="font-size:40px; color:#1e3a5f;"></i>
+          <h4 style="margin-top:20px; font-weight:700; color:#1e3a5f;">Asesoría ante la STPS</h4>
+          <p style="font-size:15px; color:#555; line-height:1.6;">Apoyamos para afrontar auditorías de la Secretaría del Trabajo y asegurar el cumplimiento de la normativa laboral.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Beneficios -->
-    <div class="admin-benefits-title">
-      <h3>Beneficios para usted.</h3>
-    </div>
+    <!-- IMPUESTOS Y PLANIFICACIÓN FISCAL -->
+    <div style="text-align:center; margin-top:100px;">
+      <h3 style="font-size:28px; color:#20375a; font-weight:700; margin-bottom:10px;">Impuestos y planificación fiscal</h3>
+      <p style="color:#444; max-width:900px; margin:0 auto 40px; line-height:1.8;">
+        Contamos con especialistas dedicados a la asesoría e interpretación de leyes fiscales, buscando estructuras idóneas
+        para optimizar su carga tributaria dentro del marco legal vigente.
+      </p>
 
-    <div class="admin-benefits">
-      <div class="benefit-box">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Especialistas">
-        <p>Seguridad de que está elaborada por especialistas.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px;">
+        <div style="background:white; padding:30px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+          <i class="bi bi-cash-coin" style="font-size:40px; color:#1e3a5f;"></i>
+          <h4 style="margin-top:20px; font-weight:700; color:#1e3a5f;">Asesoría fiscal</h4>
+          <p style="font-size:15px; color:#555; line-height:1.6;">Diseñamos estrategias que aseguren el cumplimiento fiscal eficiente y con beneficios económicos sostenibles.</p>
+        </div>
+
+        <div style="background:white; padding:30px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+          <i class="bi bi-diagram-3" style="font-size:40px; color:#1e3a5f;"></i>
+          <h4 style="margin-top:20px; font-weight:700; color:#1e3a5f;">Diseño de estructuras fiscales</h4>
+          <p style="font-size:15px; color:#555; line-height:1.6;">Creamos estructuras legales que optimizan la carga tributaria, fortaleciendo la seguridad y rentabilidad empresarial.</p>
+        </div>
+
+        <div style="background:white; padding:30px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+          <i class="bi bi-clipboard-check" style="font-size:40px; color:#1e3a5f;"></i>
+          <h4 style="margin-top:20px; font-weight:700; color:#1e3a5f;">Auditoría</h4>
+          <p style="font-size:15px; color:#555; line-height:1.6;">Revisamos y validamos el cumplimiento de las obligaciones fiscales y financieras de manera profesional y confidencial.</p>
+        </div>
       </div>
-
-      <div class="benefit-box">
-        <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png" alt="Jurídico">
-        <p>Cubre el marco jurídico vigente.</p>
-      </div>
-
-      <div class="benefit-box">
-        <img src="https://cdn-icons-png.flaticon.com/512/535/535239.png" alt="Control">
-        <p>Control que elimina desviaciones de pago.</p>
-      </div>
-
-      <div class="benefit-box">
-        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Organización">
-        <p>Permite mantener delgada su organización.</p>
-      </div>
-
-      <div class="benefit-box">
-        <img src="https://cdn-icons-png.flaticon.com/512/1183/1183813.png" alt="Software">
-        <p>Evita inversiones altas en la compra e implementación de software especializado.</p>
-      </div>
-
-      <div class="benefit-box">
-        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Confidencialidad">
-        <p>Resguardo de la información proporcionada y confidencialidad de toda la operación.</p>
-      </div>
-    </div>
-
-    <!-- Lista inferior -->
-    <div class="admin-footer">
-      <strong>Lo que usted recibirá:</strong>
-      <ul>
-        <li>• Reporte al sistema de pagos,</li>
-        <li>• La administración de las nóminas quincenales, semanales y especiales (PTU y aguinaldos);</li>
-        <li>• Proporcionando la información para el pago oportuno de nómina.</li>
-      </ul>
     </div>
   </div>
 </section>
+
+
+
+<!-- Sección: Valuación de empresas -->
+<section class="valuacion-empresas">
+  <div class="valuacion-content">
+    <h2>Valuación de empresas</h2>
+    <div class="valuacion-info">
+      <div class="valuacion-col">
+        <h3>Descripción del servicio</h3>
+        <p>En el sentido financiero, valorar una entidad o activo implica pronosticar los resultados futuros de los mismos durante un periodo de tiempo determinado. El valor económico o de mercado de una empresa se expresa por su capacidad de generar flujos en el futuro, considerados a valor presente.</p>
+      </div>
+      <div class="valuacion-col">
+        <h3>Beneficios para el Cliente</h3>
+        <p>La valuación permite conocer el valor de mercado o valor económico de la empresa (cuánto se está dispuesto a pagar por su adquisición), lo cual representa una importante herramienta de gestión al establecer los objetivos de crecimiento y poder evaluarlos. De hecho, es la respuesta correcta a las constantes preguntas que hacen socios, clientes, familiares y amigos: ¿Cómo vas, cómo va el negocio?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección: Elaboración de Planes de Negocios -->
+<section class="planes-negocios">
+  <div class="planes-content">
+    <h2>Elaboración de <span>Planes de Negocios</span></h2>
+
+    <div class="planes-grid">
+      <!-- Fila 1 -->
+      <div class="planes-item">
+        <img src="https://images.pexels.com/photos/7876197/pexels-photo-7876197.jpeg?_gl=1*1n7z2g3*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjA0Mzc3NTAkbzM3JGcxJHQxNzYwNDM3NzcyJGozOCRsMCRoMA.." alt="Análisis financiero">
+      </div>
+      <div class="planes-item text">
+        <h3>Descripción del servicio</h3>
+        <p>
+          <strong>Plan de negocio:</strong> Documento guía que establece la visión y estrategia de su empresa.<br>
+          <strong>Contenido integral:</strong> Incluye estudios de mercado, financieros, organización y aspectos legales.<br>
+          <strong>Herramienta clave:</strong> Útil para la gestión interna y fundamental para conseguir financiamiento.
+        </p>
+      </div>
+
+      <!-- Fila 2 -->
+      <div class="planes-item">
+                <img src="https://images.pexels.com/photos/7876197/pexels-photo-7876197.jpeg?_gl=1*1n7z2g3*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjA0Mzc3NTAkbzM3JGcxJHQxNzYwNDM3NzcyJGozOCRsMCRoMA.." alt="Gestión de proyectos">
+
+      </div>
+      <div  class="planes-item text" >
+        <h3>Beneficios para el Cliente</h3>
+        <p>
+          <strong>Claridad:</strong> Explica su concepto de negocio y define objetivos.<br>
+          <strong>Recursos:</strong> Identifica y optimiza la forma de conseguir recursos financieros.<br>
+          <strong>Control:</strong> Proporciona una medida para evaluar y controlar la gestión y el éxito.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Sección: Marketing y Estrategias Digitales -->
+<section class="marketing">
+  
+    <div class="marketing-content">
+      <h2>Marketing y estrategias digitales</h2>
+      <p>
+        Realizamos estrategias de marketing digital basadas en la metodología Inbound Marketing,
+        que busca atraer, convertir, cerrar y fidelizar prospectos hasta transformarlos en clientes.
+        Su enfoque está orientado al crecimiento empresarial, generando oportunidades de venta,
+        mejorando la identidad corporativa, posicionando en buscadores (SEO) y gestionando redes sociales.
+      </p>
+
+      <h3>Servicios principales:</h3>
+      <ul>
+        <li>Inbound Marketing</li>
+        <li>Diseño y desarrollo web</li>
+        <li>Videos y presentaciones corporativas</li>
+        <li>Email marketing y campañas digitales (Facebook Ads, Google Ads)</li>
+        <li>Creación de contenido personalizado (blogs, revistas, sitios para base de datos)</li>
+        <li>Optimización SEO y calificación de contactos</li>
+        <li>Estrategias con realidad aumentada</li>
+      </ul>
+    </div>
+  
+</section>
+
+<!-- Sección: Nuestros Clientes -->
+<section class="clientes">
+  <h2>Nuestros Clientes</h2>
+  <div class="clientes-logos">
+    <img src="img/3m.png" alt="3M">
+    <img src="img/cbre.png" alt="CBRE">
+    <img src="img/emerson.png" alt="Emerson">
+    <img src="img/eh.png" alt="EH">
+    <img src="img/gates.png" alt="Gates">
+    <img src="img/totalplay.png" alt="Totalplay">
+  </div>
+</section>
+
 
 
 <!-- Imagen corporativa superior del footer -->
@@ -1300,173 +1659,173 @@ nav {
 
 <!-- Footer principal de contacto -->
 <footer class="main-footer">
-  <div class="footer-container">
-    <!-- Sección superior con logo y contenido principal -->
-    <div class="footer-content">
-      <!-- Logo y descripción -->
-      <div class="footer-left">
-        <img src="img/Logo_SIEN_Header.svg" alt="SIEN Logo" class="footer-logo">
-        <div class="footer-contact-box">
-          <h3 class="footer-title sansation-bold">CONTACTO</h3>
-          <p class="footer-description sansation-regular">
-            Al contratar los servicios de la Firma se ofrece una infraestructura física y de profesionales en toda la república.
-          </p>
-          <div class="footer-email-section">
-            <p class="footer-email-label sansation-bold">EMAIL:</p>
-            <p><a href="mailto:contacto@solucionesintegralesennegocios.com" class="footer-email-link sansation-regular">contacto@solucionesintegralesennegocios.com</a></p>
-          </div>
+<div class="footer-container">
+<!-- Sección superior con logo y contenido principal -->
+<div class="footer-content">
+    <!-- Logo y descripción -->
+    <div class="footer-left">
+    <img src="img/Logo_SIEN_Header.svg" alt="SIEN Logo" class="footer-logo">
+    <div class="footer-contact-box">
+        <h3 class="footer-title sansation-bold">CONTACTO</h3>
+        <p class="footer-description sansation-regular">
+        Al contratar los servicios de la Firma se ofrece una infraestructura física y de profesionales en toda la república.
+        </p>
+        <div class="footer-email-section">
+        <p class="footer-email-label sansation-bold">EMAIL:</p>
+        <p><a href="mailto:contacto@solucionesintegralesennegocios.com" class="footer-email-link sansation-regular">contacto@solucionesintegralesennegocios.com</a></p>
         </div>
-      </div>
-
-      <!-- Redes sociales (lado derecho superior) -->
-      <div class="footer-right">
-        <p class="footer-social-title sansation-bold">SÍGUENOS:</p>
-        <div class="footer-social">
-          <a href="#" class="social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="social-link" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-          <a href="#" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-          <a href="#" class="social-link" aria-label="Threads"><i class="bi bi-threads"></i></a>
-          <a href="#" class="social-link" aria-label="Google"><i class="bi bi-google"></i></a>
-          <a href="#" class="social-link" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-          <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
-          <a href="#" class="social-link" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
-        </div>
-      </div>
+    </div>
     </div>
 
-    <!-- Direcciones -->
-    <div class="footer-locations">
-      <div class="location-item">
-        <strong class="sansation-bold">MONTERREY</strong><br>
-        <span class="sansation-regular">
-          Av. Lázaro Cárdenas 208 Interior P1<br>
-          Colonia Residencial San Agustín 1er. Sector,<br>
-          San Pedro Garza García,<br>
-          Monterrey, Nuevo León, CP. 66260<br>
-          Tel. (81) 2139-4452 - (81) 2316-9009
-        </span>
-      </div>
-      <div class="location-item">
-        <strong class="sansation-bold">QUERÉTARO</strong><br>
-        <span class="sansation-regular">
-          Av. Manuel Gómez Morín 3870, Piso 8 oficina 1002,<br>
-          Colonia Centro Sur,<br>
-          Querétaro, Querétaro,<br>
-          CP. 76090<br>
-          Tel. (44) 2199-5220
-        </span>
-      </div>
-      <div class="location-item">
-        <strong class="sansation-bold">MÉXICO</strong><br>
-        <span class="sansation-regular">
-          Calle Petrarca 223 Piso 6 Despacho 601,<br>
-          Colonia Polanco, Ciudad de México,<br>
-          C.P.11560,<br>
-          Tel. (55) 5203-9471
-        </span>
-      </div>
-      <div class="location-item">
-        <strong class="sansation-bold">SAN LUIS POTOSÍ</strong><br>
-        <span class="sansation-regular">
-          Calle Nube 421,<br>
-          Col. Garita de Jalisco,<br>
-          San Luis Potosí, SLP,<br>
-          C.P. 78299<br>
-          Tels. (44) 4246-8915 / (44) 4475-8896
-        </span>
-      </div>
-      <div class="location-item">
-        <strong class="sansation-bold">PUEBLA</strong><br>
-        <span class="sansation-regular">
-          6to retorno osa menor 43-3, Piso 3 oficina 4D,<br>
-          Reserva territorial Atlixcáyotl,<br>
-          San Andrés Cholula, Puebla,<br>
-          C.P. 72820<br>
-          Tel. (22) 2210-7965
-        </span>
-      </div>
-      <div class="location-item">
-        <strong class="sansation-bold">GUADALAJARA</strong><br>
-        <span class="sansation-regular">
-          Av. Ludwig Van Beethoven 4914,<br>
-          Col. Lomas del Seminario,<br>
-          Zapopan, Jalisco,<br>
-          C.P.45038<br>
-          Tel. (33) 2262-2450
-        </span>
-      </div>
-      <div class="location-item">
-        <strong class="sansation-bold">PACHUCA</strong><br>
-        <span class="sansation-regular">
-          Calle de Valle de Abajo 240,<br>
-          Fracc. Valle de san Javier,<br>
-          Pachuca de Soto, Hidalgo,<br>
-          C.P. 42086<br>
-          Tels. (77) 1719-6372 / (77) 1719-6436
-        </span>
-      </div>
-      <div class="location-item">
-        <strong class="sansation-bold">OAXACA</strong><br>
-        <span class="sansation-regular">
-          Pensamientos 906,<br>
-          Col. Reforma,<br>
-          Oaxaca, Oaxaca,<br>
-          C.P. 68050<br>
-          Tel. (951) 132-7603 / (951) 132-7600
-        </span>
-      </div>
+    <!-- Redes sociales (lado derecho superior) -->
+    <div class="footer-right">
+    <p class="footer-social-title sansation-bold">SÍGUENOS:</p>
+    <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="social-link" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        <a href="#" class="social-link" aria-label="Threads"><i class="bi bi-threads"></i></a>
+        <a href="#" class="social-link" aria-label="Google"><i class="bi bi-google"></i></a>
+        <a href="#" class="social-link" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+        <a href="#" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        <a href="#" class="social-link" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
     </div>
-  </div>
+    </div>
+</div>
+
+<!-- Direcciones -->
+<div class="footer-locations">
+    <div class="location-item">
+    <strong class="sansation-bold">MONTERREY</strong><br>
+    <span class="sansation-regular">
+        Av. Lázaro Cárdenas 208 Interior P1<br>
+        Colonia Residencial San Agustín 1er. Sector,<br>
+        San Pedro Garza García,<br>
+        Monterrey, Nuevo León, CP. 66260<br>
+        Tel. (81) 2139-4452 - (81) 2316-9009
+    </span>
+    </div>
+    <div class="location-item">
+    <strong class="sansation-bold">QUERÉTARO</strong><br>
+    <span class="sansation-regular">
+        Av. Manuel Gómez Morín 3870, Piso 8 oficina 1002,<br>
+        Colonia Centro Sur,<br>
+        Querétaro, Querétaro,<br>
+        CP. 76090<br>
+        Tel. (44) 2199-5220
+    </span>
+    </div>
+    <div class="location-item">
+    <strong class="sansation-bold">MÉXICO</strong><br>
+    <span class="sansation-regular">
+        Calle Petrarca 223 Piso 6 Despacho 601,<br>
+        Colonia Polanco, Ciudad de México,<br>
+        C.P.11560,<br>
+        Tel. (55) 5203-9471
+    </span>
+    </div>
+    <div class="location-item">
+    <strong class="sansation-bold">SAN LUIS POTOSÍ</strong><br>
+    <span class="sansation-regular">
+        Calle Nube 421,<br>
+        Col. Garita de Jalisco,<br>
+        San Luis Potosí, SLP,<br>
+        C.P. 78299<br>
+        Tels. (44) 4246-8915 / (44) 4475-8896
+    </span>
+    </div>
+    <div class="location-item">
+    <strong class="sansation-bold">PUEBLA</strong><br>
+    <span class="sansation-regular">
+        6to retorno osa menor 43-3, Piso 3 oficina 4D,<br>
+        Reserva territorial Atlixcáyotl,<br>
+        San Andrés Cholula, Puebla,<br>
+        C.P. 72820<br>
+        Tel. (22) 2210-7965
+    </span>
+    </div>
+    <div class="location-item">
+    <strong class="sansation-bold">GUADALAJARA</strong><br>
+    <span class="sansation-regular">
+        Av. Ludwig Van Beethoven 4914,<br>
+        Col. Lomas del Seminario,<br>
+        Zapopan, Jalisco,<br>
+        C.P.45038<br>
+        Tel. (33) 2262-2450
+    </span>
+    </div>
+    <div class="location-item">
+    <strong class="sansation-bold">PACHUCA</strong><br>
+    <span class="sansation-regular">
+        Calle de Valle de Abajo 240,<br>
+        Fracc. Valle de san Javier,<br>
+        Pachuca de Soto, Hidalgo,<br>
+        C.P. 42086<br>
+        Tels. (77) 1719-6372 / (77) 1719-6436
+    </span>
+    </div>
+    <div class="location-item">
+    <strong class="sansation-bold">OAXACA</strong><br>
+    <span class="sansation-regular">
+        Pensamientos 906,<br>
+        Col. Reforma,<br>
+        Oaxaca, Oaxaca,<br>
+        C.P. 68050<br>
+        Tel. (951) 132-7603 / (951) 132-7600
+    </span>
+    </div>
+</div>
+</div>
 </footer>
 
 <!-- Footer inferior -->
 <div class="footer-bottom-bar">
-  <div class="footer-bottom-container">
-    <p class="footer-copyright sansation-regular">Copyright © Derechos Reservados Octubre 2025</p>
-    <p><a href="#" class="footer-privacy-link sansation-regular">Aviso de privacidad</a></p>
-  </div>
+<div class="footer-bottom-container">
+<p class="footer-copyright sansation-regular">Copyright © Derechos Reservados Octubre 2025</p>
+<p><a href="#" class="footer-privacy-link sansation-regular">Aviso de privacidad</a></p>
+</div>
 </div>
 
 <script>
 /* --- Animación de conteo --- */
 function animateCount(el, duration = 2000) {
-  const target = parseInt(el.getAttribute("data-target"));
-  const suffix = el.getAttribute("data-suffix") || "";
-  const start = 0;
-  const startTime = performance.now();
+const target = parseInt(el.getAttribute("data-target"));
+const suffix = el.getAttribute("data-suffix") || "";
+const start = 0;
+const startTime = performance.now();
 
-  function update(now) {
-    const progress = Math.min((now - startTime) / duration, 1);
-    const value = Math.floor(progress * target);
-    el.textContent = `+${value.toLocaleString()}${suffix}`;
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    } else {
-      el.classList.add("glow"); // 💎 activa el brillo al terminar
-      setTimeout(() => el.classList.remove("glow"), 1500); // se desvanece suave
-    }
-  }
+function update(now) {
+const progress = Math.min((now - startTime) / duration, 1);
+const value = Math.floor(progress * target);
+el.textContent = `+${value.toLocaleString()}${suffix}`;
+if (progress < 1) {
+    requestAnimationFrame(update);
+} else {
+    el.classList.add("glow"); // 💎 activa el brillo al terminar
+    setTimeout(() => el.classList.remove("glow"), 1500); // se desvanece suave
+}
+}
 
-  requestAnimationFrame(update);
+requestAnimationFrame(update);
 }
 
 /* --- Dispara animación al hacer scroll --- */
 function initCounterAnimation() {
-  const counters = document.querySelectorAll(".result-number");
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCount(entry.target);
-          obs.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-  counters.forEach((c) => observer.observe(c));
+const counters = document.querySelectorAll(".result-number");
+const observer = new IntersectionObserver(
+(entries, obs) => {
+    entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+        animateCount(entry.target);
+        obs.unobserve(entry.target);
+    }
+    });
+},
+{ threshold: 0.4 }
+);
+counters.forEach((c) => observer.observe(c));
 }
 
 document.addEventListener("DOMContentLoaded", initCounterAnimation);
@@ -1474,15 +1833,15 @@ document.addEventListener("DOMContentLoaded", initCounterAnimation);
 
 
 
-    <script>
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
+<script>
+window.addEventListener('scroll', function() {
+const header = document.querySelector('header');
+if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+} else {
+    header.classList.remove('scrolled');
+}
+});
 </script>
 
 </body>
