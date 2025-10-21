@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Congreso MCC - Maestría en Ciencias de la Complejidad</title>
+  <meta name="description" content="Maestría en Ciencias de la Complejidad - UACM Del Valle">
+  <title>Maestría en Ciencias de la Complejidad - UACM</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <style>
     * {
       margin: 0;
@@ -11,723 +13,967 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-weight: 300;
-      /*background-image: linear-gradient(to right, #f83600 0%, #f9d423 100%);*/
-      background: url(https://assets.science.nasa.gov/content/dam/science/cds/creative/calendars/2025/nasa-july-2025-4k-3840x2160.jpg) center center;*/
-      background-size: cover;
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+                  url(https://assets.science.nasa.gov/dynamicimage/assets/science/cds/creative/calendars/2025/nasa-july-2025-web-banner.jpg)
+                  center center / cover fixed;
       min-height: 100vh;
-      animation: moveBackground 60s linear infinite;
-      margin: 0;
-      padding: 0;
       color: white;
+      line-height: 1.6;
     }
 
-    @keyframes moveBackground {
-      from {
-        background-position: 0% 0%;
-      }
-      to {
-        background-position: 0% 100%;
-      }
-    }
-
-    /* Glass Navigation */
-    nav {
+    /* === NAVBAR === */
+    .navbar {
       position: fixed;
       top: 30px;
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      padding: 15px 25px;
-      border-radius: 50px;
       z-index: 100;
+      width: auto;
+      transition: top 0.3s ease;
     }
 
-    nav::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px 25px;
       border-radius: 50px;
-      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-        box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-      
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px) saturate(150%);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
-    nav::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      border-radius: 50px; 
-       -webkit-backdrop-filter: blur(0px);
-            backdrop-filter: blur(0px);
-        -webkit-filter: url(#container-glass);
-            filter: url(#container-glass);
-      overflow: hidden;
-      isolation: isolate;
+    .nav-logo img {
+      width: 30%;
+      max-width: 120px;
+      height: auto;
+      display: block;
     }
 
-    nav a {
-      position: relative;
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      list-style: none;
+    }
+
+    .nav-links a {
       color: white;
       text-decoration: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: 400;
+      padding: 8px 14px;
+      border-radius: 25px;
       transition: all 0.3s ease;
-      z-index: 1;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
-    nav a:hover {
-      color: rgba(255, 255, 255, 0.8);
+    .nav-links a:hover,
+    .nav-links a:focus {
+      background: rgba(255, 255, 255, 0.2);
+      outline: 2px solid rgba(255, 255, 255, 0.3);
     }
 
-    /* Hero Section */
-    .img_hero{
-      width: 30%;
+    .nav-toggle {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      z-index: 1001;
+      padding: 5px;
     }
+
+    /* === MOBILE MENU === */
+    @media (max-width: 768px) {
+      .navbar {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        transform: none;
+        width: auto;
+      }
+      .nav-logo img{
+        width: 60%;
+      }
+
+      .nav-container {
+        width: 100%;
+        padding: 10px 18px;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 500px;
+        width: 75%;
+        max-width: 300px;
+        background: rgba(28, 27, 27, 0.5);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-right: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 4px 0 25px rgba(0, 0, 0, 0.35);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 45px 25px 40px;
+        gap: 25px;
+        transition: left 0.4s ease;
+        z-index: 1000;
+      }
+
+      .nav-links.show {
+        left: 0;
+      }
+
+      .nav-links a {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+      }
+
+      .nav-logo img {
+        max-width: 80px;
+      }
+    }
+
+    /* === HERO === */
     .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 120px 20px 60px;
       text-align: center;
     }
 
     .hero-content {
-      position: relative;
       max-width: 800px;
     }
 
+    .img-hero {
+      width: 30%;
+      max-width: 200px;
+      margin-bottom: 30px;
+      filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.3));
+    }
+
     h1 {
-      font-size: 4rem;
+      font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 200;
       letter-spacing: -2px;
       margin-bottom: 20px;
       line-height: 1.1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .subtitle {
-      font-size: 1.5rem;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
       font-weight: 300;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       opacity: 0.9;
     }
 
-    /* Glass Button */
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 300;
+      margin-bottom: 30px;
+      letter-spacing: -1px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 200;
+    }
+
+    /* === GLASS BUTTON === */
     .glassBtn {
-      position: relative;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 10px;
       cursor: pointer;
-      padding: 20px 40px;
-      background: transparent;
+      padding: 18px 35px;
       border-radius: 50px;
-      outline: none;
-      border: none;
-      z-index: 0;
-      font-size: 16px;
-      font-weight: 400;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
-      transition: transform 0.2s ease;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      font-size: 1rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
 
-    .glassBtn:hover {
+    .glassBtn:hover,
+    .glassBtn:focus {
       transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      outline: 2px solid rgba(255, 255, 255, 0.4);
     }
 
-    .glassBtn::before {
-      content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    border-radius: 9999px;
-    -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-            box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-
-     
+    .bi-play {
+      font-size: 1.5em;
     }
 
-    .glassBtn::after {
-      content: '';
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    border-radius: 9999px;
-    -webkit-backdrop-filter: blur(0px);
-            backdrop-filter: blur(0px);
-    -webkit-filter: url(#btn-glass);
-            filter: url(#btn-glass);
-    overflow: hidden;
-    isolation: isolate;
-    }
-
-    .glassBtn span {
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      .subtitle {
-        font-size: 1.2rem;
-      }
-
-      nav {
-        top: 20px;
-        padding: 12px 20px;
-      }
-
-      nav a {
-        font-size: 12px;
-        padding: 8px 12px;
-      }
-    }
-    .posters-grid {
+    /* === SECTIONS === */
+    section {
+      padding: 80px 5%;
+      max-width: 1400px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      max-width: 1200px;
-      width: 100%;
     }
 
-    /* Glass Card */
+    #presentacion,
+    #objetivos {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    #presentacion p,
+    #objetivos p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    /* === RESEARCH CARDS === */
+    .posters-section {
+      padding: 100px 5%;
+    }
+
+    .posters-section > p {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 50px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .posters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
     .poster-card {
       position: relative;
-      padding: 30px;
+      padding: 35px;
       border-radius: 20px;
       min-height: 350px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
     .poster-card:hover {
       transform: translateY(-5px);
-    }
-
-    .poster-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      border-radius: 20px;
-      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-        box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-      
-    }
-
-    .poster-card::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      border-radius: 20px;
-      -webkit-backdrop-filter: blur(0px);
-            backdrop-filter: blur(0px);
-    -webkit-filter: url(#container-glass);
-            filter: url(#container-glass);
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .poster-card-content {
-      position: relative;
-      z-index: 1;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .poster-number {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       opacity: 0.7;
       margin-bottom: 10px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      font-weight: 400;
     }
 
     .poster-title {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 400;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       line-height: 1.3;
     }
 
-    .poster-author {
-      font-size: 1rem;
-      opacity: 0.8;
-      margin-bottom: 15px;
-    }
-
-    .poster-description {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      opacity: 0.85;
-      flex-grow: 1;
-    }
-
-    .poster-tags {
+    /* === PERFIL CARDS === */
+    .perfil-card {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 20px;
+      flex-direction: column;
     }
 
-    .tag {
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 0.8rem;
-      background: rgba(255, 255, 255, 0.2);
-    }
-        /* Info Button */
-    .info-btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      cursor: pointer;
-      padding: 10px 20px;
-      background: transparent;
+    .perfil-badge {
+      display: inline-block;
+      padding: 8px 20px;
       border-radius: 25px;
-      outline: none;
-      border: none;
-      z-index: 0;
-      font-size: 14px;
-      font-weight: 400;
-      color: white;
-      transition: transform 0.2s ease;
-      margin-top: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+      width: fit-content;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    .info-btn:hover {
-      transform: translateY(-1px);
+    .perfil-a {
+      background: linear-gradient(135deg, rgba(170, 175, 183, 0.8), rgba(235, 67, 37, 0.8));
+      border: 1px solid rgba(147, 197, 253, 0.3);
     }
 
-    .info-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      border-radius: 25px;
-      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-      box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-      
+    .perfil-b {
+      background: linear-gradient(135deg, rgba(170, 175, 183, 0.8), rgba(235, 67, 37, 0.8));
+      border: 1px solid rgba(196, 181, 253, 0.3);
     }
 
-    .info-btn::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      border-radius: 25px;
-       -webkit-backdrop-filter: blur(0px);
-            backdrop-filter: blur(0px);
-    -webkit-filter: url(#btn-glass);
-            filter: url(#btn-glass);
-      overflow: hidden;
-      isolation: isolate;
+    ul {
+      margin-left: 20px;
+      margin-top: 15px;
     }
 
-    .info-btn span {
-      position: relative;
-      z-index: 1;
-    }
-    .img-poster{
-      width: 100%;
-    }
-    /* Modal/Popup */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(5px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .modal-content {
-      position: relative;
-      max-width: 600px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 40px;
-      border-radius: 20px;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-
-    .modal-overlay.active .modal-content {
-      transform: scale(1);
-    }
-
-    .modal-content::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      border-radius: 20px;
-      -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-      box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
-    }
-
-    .modal-content::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      border-radius: 20px;
-      -webkit-backdrop-filter: blur(0px);
-            backdrop-filter: blur(0px);
-    -webkit-filter: url(#container-glass);
-            filter: url(#container-glass);
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .modal-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 30px;
-      cursor: pointer;
-      z-index: 2;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: background 0.2s ease;
-    }
-
-    .modal-close:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .modal-title {
-      font-size: 2rem;
-      font-weight: 400;
+    li {
       margin-bottom: 10px;
+      line-height: 1.6;
     }
 
-    .modal-author {
-      font-size: 1.1rem;
-      opacity: 0.8;
+    ul ul {
+      margin-top: 10px;
+      margin-left: 25px;
+    }
+
+    ol {
+      margin-left: 20px;
+      margin-top: 20px;
+    }
+
+    ol li {
       margin-bottom: 20px;
     }
 
-    .modal-section {
-      margin: 25px 0;
+    /* === COMPETENCIAS (PERFIL EGRESADO) === */
+    .competencias-grid {
+      display: grid;
+      gap: 25px;
+      margin-top: 40px;
     }
 
-    .modal-section h4 {
+    .competencia-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      border-left: 3px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .competencia-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-left-color: rgba(255, 255, 255, 0.5);
+      transform: translateX(5px);
+    }
+
+    .competencia-numero {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.6), rgba(139, 92, 246, 0.6));
+      border-radius: 50%;
       font-size: 1.2rem;
-      font-weight: 400;
-      margin-bottom: 10px;
+      font-weight: 600;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .competencia-item p {
+      margin: 0;
+      line-height: 1.7;
       opacity: 0.9;
     }
 
-    .modal-section p {
+    .opcion-box {
+      padding: 15px 20px;
+      margin: 10px 0;
+      border-radius: 12px;
+      font-size: 0.95rem;
       line-height: 1.6;
-      opacity: 0.85;
+      border-left: 3px solid;
     }
 
-    .modal-tags {
+    .opcion-a-box {
+      background: rgba(88, 2, 2, 0.15);
+      border-left-color: rgba(219, 91, 82, 0.6);
+    }
+
+    .opcion-b-box {
+      background: rgba(88, 2, 2, 0.15);
+      border-left-color: rgba(219, 91, 82, 0.6);
+    }
+
+    .opcion-box strong {
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    /* === DOCUMENTS BUTTONS === */
+    .docs-buttons {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
-      margin-top: 20px;
+      gap: 15px;
+      margin-top: 40px;
     }
+
+    .docs-buttons a {
+      text-decoration: none;
+    }
+
+    /* === CONTACT === */
+    #contacto {
+      text-align: center;
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 50px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #contacto p {
+      font-size: 1.1rem;
+      margin: 15px 0;
+    }
+
+    #contacto a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    #contacto a:hover {
+      border-bottom-color: white;
+      opacity: 1;
+    }
+
+    /* === RESPONSIVE === */
     @media (max-width: 768px) {
-      body{
-          background: url(https://assets.science.nasa.gov/dynamicimage/assets/science/cds/creative/calendars/2025/nasa-july-2025-web-banner.jpg) center center;*/
-
-      }
-      h1 {
-        font-size: 2.5rem;
+      section {
+        padding: 60px 5%;
       }
 
-      .subtitle {
-        font-size: 1.2rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      nav {
-        top: 20px;
-        padding: 12px 20px;
-      }
-
-      nav a {
-        font-size: 12px;
-        padding: 8px 12px;
+      #presentacion,
+      #objetivos {
+        padding: 30px 25px;
+        margin: 40px auto;
       }
 
       .posters-grid {
         grid-template-columns: 1fr;
+        gap: 25px;
       }
+
+      .poster-card {
+        padding: 25px;
+      }
+
+      .docs-buttons {
+        flex-direction: column;
+      }
+
+      .glassBtn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      #contacto {
+        padding: 35px 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .img-hero {
+        width: 50%;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    /* === ACCESSIBILITY === */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: white;
+      color: black;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Focus visible para mejor accesibilidad */
+    *:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.8);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
-  <!-- SVG Filters -->
-  <svg style="display: none">
-    <filter id="container-glass" x="0%" y="0%" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
-      <feGaussianBlur in="noise" stdDeviation="0.02" result="blur" />
-      <feDisplacementMap in="SourceGraphic" in2="blur" scale="77" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-    <filter id="btn-glass" primitiveUnits="objectBoundingBox">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="0.02" result="blur"></feGaussianBlur>
-      <feDisplacementMap id="disp" in="blur" in2="map" scale="1" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
-    </filter>
-  </svg>
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
   <!-- Navigation -->
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#eventos">Eventos</a>
-    <a href="#programa">Programa</a>
-    <a href="#contacto">Contacto</a>
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="logo_uacm.png" alt="Logo UACM">
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <i class="bi bi-three-dots" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="#presentacion">Presentación</a></li>
+        <li><a href="#investigacion">Investigación</a></li>
+        <li><a href="#objetivos">Programa</a></li>
+        <li><a href="#perfiles">Perfiles</a></li>
+        <li><a href="#grupos">Grupos de Trabajo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <header class="hero">
     <div class="hero-content">
-      <img src="img/logo_uacm.png" alt="" class="img_hero">
+      <img src="logo_uacm.png" alt="Logo UACM" class="img-hero">
       <h1>Maestría en Ciencias de la Complejidad</h1>
       <p class="subtitle">UACM Del Valle</p>
-      <button class="glassBtn">
-        <span>Próximos Eventos</span>
-      </button>
+      <a href="https://www.youtube.com/watch?v=_fCD3mMDXLk" target="_blank" rel="noopener noreferrer" class="glassBtn">
+        <i class="bi bi-play" aria-hidden="true"></i>
+        <span>Ver Presentación</span>
+      </a>
     </div>
-  </section>
-  <!-- Posters Section -->
-  <section class="posters-section">
-    <!--  h2 class="section-title">Pósters Destacados</h2-->
-    <div class="posters-grid">
+  </header>
+
+  <main id="main-content">
+    <!-- Presentación -->
+    <section id="presentacion">
+      <h2>Presentación</h2>
+      <p>
+        Las ciencias de la complejidad han surgido en los últimos veinticinco o treinta años como herramienta para entender 
+        procesos cuyo estudio no puede reducirse al de sus componentes. Su desarrollo ha dado lugar a la constitución de 
+        grupos de trabajo en los grandes centros de investigación del mundo que aplican la teoría de los sistemas complejos 
+        a la búsqueda de soluciones en muy distintos campos del conocimiento.
+      </p>
+      <p>
+        Así, las ciencias de la complejidad son un espacio para el trabajo interdisciplinario; un lugar de encuentro donde se 
+        tiene la posibilidad de conjuntar el interés de estudiosos de la vida, lo social y lo humano, en sus distintos niveles 
+        de organización, con técnicos y científicos cuyo lenguaje y método de investigación fundamental es la matemática.
+      </p>
+      <p>
+        Por el vigor con que se desarrollan las ciencias de la complejidad en el mundo, por las posibilidades que ofrecen para 
+        buscar soluciones a los ingentes problemas de la Ciudad de México y del país, es preciso impulsar la formación de 
+        investigadores y de profesionistas capaces de incorporar sus conceptos, métodos y resultados en sus campos de trabajo.
+      </p>
+    </section>
+
+    <!-- Líneas de investigación -->
+    <section id="investigacion" class="posters-section">
+      <h2 class="section-title">Líneas de Investigación</h2>
+      <p>
+        Las líneas de investigación pueden agruparse en dos líneas de generación o aplicación de conocimiento: 
+        Sociocomplejidad y Biología Teórica; bajo estos dos rubros se enlistan los proyectos de investigación 
+        en los que se trabaja en la MCC.
+      </p>
       
-      <div class="poster-card">
-        <div class="poster-card-content">
-          <div class="poster-number">Póster 01</div>
-          <h3 class="poster-title">Redes Neuronales y Sistemas Complejos Adaptativos</h3>
-          <p class="poster-author">Dra. María Rodríguez</p>
-          <p class="poster-description">Análisis de patrones emergentes en redes neuronales profundas desde la perspectiva de sistemas complejos adaptativos.</p>
-          <div class="poster-tags">
-            <span class="tag">IA</span>
-            <span class="tag">Emergencia</span>
-            <span class="tag">Redes</span>
-          </div>
-          <button class="info-btn" onclick="openModal('modal1')">
-            <span>Más información</span>
+      <div class="posters-grid">
+        <article class="poster-card">
+          <div class="poster-number">UACM</div>
+          <h3 class="poster-title">Sociocomplejidad</h3>
+          <ul>
+            <li>Simulación computacional de dinámicas sociales</li>
+            <li>Dinámica de la economía y los mercados financieros</li>
+            <li>Aplicaciones de la teoría de los sistemas complejos a la organización de los servicios públicos:
+              <ul>
+                <li>Promoción de la salud y enfermedades complejas</li>
+                <li>Red hidráulica</li>
+                <li>Vialidad y transporte</li>
+                <li>Educación</li>
+                <li>Sustentabilidad y medioambiente</li>
+                <li>Seguridad</li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+
+        <article class="poster-card">
+          <div class="poster-number">UACM</div>
+          <h3 class="poster-title">Física No Lineal</h3>
+          <ul>
+            <li>Formación de patrones</li>
+            <li>Dinámica estocástica</li>
+            <li>Mecánica estadística fuera del equilibrio</li>
+            <li>Fluidos complejos</li>
+          </ul>
+        </article>
+
+        <article class="poster-card">
+          <div class="poster-number">UACM</div>
+          <h3 class="poster-title">Biología Teórica</h3>
+          <ul>
+            <li>Dinámicas en conflicto, frustración y emergencia de patrones</li>
+            <li>Morfogénesis y evolución biológicas</li>
+            <li>Genómica computacional y reconocimiento de patrones</li>
+            <li>Dinámica de medios excitables</li>
+            <li>Epidemiología, inmunología y ecología matemáticas</li>
+            <li>Modelos matemáticos de la evolución de genes y proteínas</li>
+            <li>Máquinas moleculares biológicas</li>
+            <li>Medioambiente y complejidad</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Objetivos -->
+    <section id="objetivos">
+      <h2>Objetivos del Programa</h2>
+      <p>
+        El programa de la MCC tiene el propósito de propiciar que los profesionistas de distintos campos que se formen en él 
+        desarrollen aptitudes para la investigación en ciencias de la complejidad orientadas a y aplicables en sus respectivos 
+        campos de interés.
+      </p>
+      <p>Lograr el propósito general implica que quienes accedan al programa deberán:</p>
+      <ol>
+        <li>Comprender los fundamentos, alcances y significado de la modelación de procesos y fenómenos no lineales como 
+        herramienta de representación necesaria en la solución de problemas.</li>
+        <li>Identificar en la realidad las posibilidades de aplicar la teoría de los sistemas complejos a la comprensión de 
+        procesos físicos, biológicos o sociales que tengan lugar en su ámbito de trabajo.</li>
+        <li>Apropiarse de una cultura científica y humanística que les permita comunicarse adecuadamente con técnicos y 
+        profesionistas de distintos campos del conocimiento y transformar su práctica profesional para contribuir a resolver 
+        los problemas de la sociedad.</li>
+      </ol>
+
+      <div class="docs-buttons">
+        <a href="https://www.uacm.edu.mx/Portals/0/Images/userfiles/16/MCC_Master_Doc_marzo_2014.pdf" 
+           target="_blank" rel="noopener noreferrer">
+          <button class="glassBtn">
+            <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+            <span>Documento Maestro</span>
           </button>
-        </div>
+        </a>
       </div>
+    </section>
 
-      <div class="poster-card">
-        <div class="poster-card-content">
-          <div class="poster-number">Póster 02</div>
-          <h3 class="poster-title">Dinámicas No Lineales en Sistemas Económicos</h3>
-          <p class="poster-author">Dr. Carlos Mendoza</p>
-          <p class="poster-description">Modelado de comportamientos caóticos y atractores extraños en mercados financieros globales.</p>
-          <div class="poster-tags">
-            <span class="tag">Economía</span>
-            <span class="tag">Caos</span>
-            <span class="tag">Modelado</span>
-          </div>
-          <button class="info-btn" onclick="openModal('modal2')">
-            <span>Más información</span>
+    <!-- Perfiles de Ingreso -->
+    <section id="perfiles" class="posters-section">
+      <h2 class="section-title">Perfiles de Ingreso</h2>
+      <p>
+        Por su carácter interdisciplinario y en concordancia con las orientaciones curriculares del plan de estudios, 
+        se establecen dos perfiles de ingreso a la MCC según la formación matemática que tengan quienes deseen formarse 
+        en ella. En ambos casos, se requiere dominio suficiente del inglés para comprender sin dificultad textos científicos 
+        y académicos en ese idioma.
+      </p>
+      
+      <div class="posters-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); max-width: 1000px;">
+        <article class="poster-card perfil-card">
+          <div class="perfil-badge perfil-a">Perfil A</div>
+          <h3 class="poster-title">Ciencias e Ingeniería</h3>
+          <p style="margin-bottom: 25px; opacity: 0.9;">
+            Dirigido a egresados de licenciaturas en ciencias o ingeniería con formación matemática avanzada.
+          </p>
+          
+          <h4 style="font-size: 1.1rem; font-weight: 400; margin-bottom: 15px; opacity: 0.95;">
+            Conocimientos requeridos:
+          </h4>
+          <ul>
+            <li>Cálculo diferencial e integral de una y varias variables</li>
+            <li>Álgebra superior y álgebra lineal</li>
+            <li>Ecuaciones diferenciales ordinarias</li>
+            <li>Fundamentos de análisis matemático</li>
+          </ul>
+          
+          <h4 style="font-size: 1rem; font-weight: 400; margin: 20px 0 10px; opacity: 0.9;">
+            Recomendable:
+          </h4>
+          <ul style="opacity: 0.85;">
+            <li>Lenguaje de programación</li>
+            <li>Métodos numéricos</li>
+            <li>Probabilidad y estadística</li>
+          </ul>
+          <br>
+          <a href="https://www.uacm.edu.mx/Portals/0/Images/Guia_Opcion_A.pdf" 
+           target="_blank" rel="noopener noreferrer">
+          <button class="glassBtn">
+            <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+            <span>Guía Opción A</span>
           </button>
-        </div>
-      </div>
+        </a>
+        </article>
 
-      <div class="poster-card">
-        <div class="poster-card-content">
-          <div class="poster-number">Póster 03</div>
-          <h3 class="poster-title">Autoorganización en Sistemas Biológicos</h3>
-          <p class="poster-author">Dra. Ana Torres</p>
-          <p class="poster-description">Estudio de patrones de autoorganización en colonias de hormigas y su aplicación en algoritmos de optimización.</p>
-          <div class="poster-tags">
-            <span class="tag">Biología</span>
-            <span class="tag">Algoritmos</span>
-            <span class="tag">Optimización</span>
+        <article class="poster-card perfil-card">
+          <div class="perfil-badge perfil-b">Perfil B</div>
+          <h3 class="poster-title">Formación Básica</h3>
+          <p style="margin-bottom: 25px; opacity: 0.9;">
+            Dirigido a profesionistas de diversas áreas con formación matemática básica a nivel bachillerato.
+          </p>
+          
+          <h4 style="font-size: 1.1rem; font-weight: 400; margin-bottom: 15px; opacity: 0.95;">
+            Conocimientos requeridos:
+          </h4>
+          <ul>
+            <li>Álgebra y trigonometría</li>
+            <li>Geometría analítica</li>
+            <li>Nociones de cálculo diferencial e integral</li>
+          </ul>
+          
+          <div style="margin-top: 30px; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; border-left: 3px solid rgba(255, 255, 255, 0.4);">
+            <p style="margin: 0; font-size: 0.95rem; opacity: 0.9;">
+              <strong>Nota:</strong> Este perfil permite el acceso a profesionistas de áreas sociales, humanísticas, 
+              biológicas y de la salud que deseen incorporar las ciencias de la complejidad a su campo de trabajo.
+            </p>
+            
           </div>
-          <button class="info-btn" onclick="openModal('modal3')">
-            <span>Más información</span>
+          <br>
+          <a href="https://www.uacm.edu.mx/Portals/0/Images/Guia_Opcion_B.pdf" 
+           target="_blank" rel="noopener noreferrer">
+          <button class="glassBtn">
+            <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+            <span>Guía Opción B</span>
           </button>
-        </div>
+        </a>
+        </article>
       </div>
 
-      <div class="poster-card">
-        <div class="poster-card-content">
-          <div class="poster-number">Póster 04</div>
-          <h3 class="poster-title">Teoría de Grafos y Redes Sociales</h3>
-          <p class="poster-author">Dr. Luis Ramírez</p>
-          <p class="poster-description">Análisis topológico de comunidades virtuales y propagación de información en plataformas digitales.</p>
-          <div class="poster-tags">
-            <span class="tag">Grafos</span>
-            <span class="tag">Social</span>
-            <span class="tag">Información</span>
+      <div style="text-align: center; margin-top: 50px; padding: 30px; background: rgba(255, 255, 255, 0.08); border-radius: 15px; max-width: 900px; margin-left: auto; margin-right: auto;">
+        <i class="bi bi-info-circle" style="font-size: 2rem; margin-bottom: 15px; opacity: 0.8;"></i>
+        <p style="margin: 0; font-size: 1.05rem; opacity: 0.9;">
+          <strong>Requisito común:</strong> Dominio suficiente del inglés para comprender textos científicos y 
+          académicos, desde artículos técnicos hasta ensayos filosóficos.
+        </p>
+      </div>
+    </section>
+
+    <!-- Perfil del Egresado -->
+    <section id="egresado" class="poster-card" style="max-width: 1200px; margin: 80px auto;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2>Perfil del Egresado</h2>
+      </div>
+      
+      <p style="margin-bottom: 30px; font-size: 1.05rem; text-align: center; opacity: 0.95;">
+        Los egresados de la Maestría en Ciencias de la Complejidad de la UACM se capacitarán para trabajar en la 
+        operación o toma de decisiones de instancias académicas públicas o privadas, institutos de investigación 
+        científica o técnica, instituciones de salud, organismos civiles o internacionales, empresas o secretarías 
+        de gobierno locales o federales donde:
+      </p>
+      <ol>
+        <li>Identificarán procesos representables como sistemas complejos en la naturaleza y la sociedad.</li>
+        <li>Reconocerán, sobre la base del principio de modularidad de los sistemas complejos, la necesidad de 
+          establecer un nivel adecuado de análisis para modelarlos.</li>
+        <li>Incorporarán a su cultura científica el conocimiento de cómo se construyen 
+            modelos mediante sistemas dinámicos no lineales (SDNL) de procesos físicos, biológicos y sociales. En particular:
+        <div class="opcion-box opcion-a-box">
+              <strong>Opción A:</strong> Comprenderán cabalmente los formalismos matemáticos involucrados.
+            </div>
+            <div class="opcion-box opcion-b-box">
+              <strong>Opción B:</strong> Comprenderán el significado dinámico de los términos de cada modelo.
+            </div></li>
+        <li>Reconocerán que la producción científica, en particular la relacionada con las teorías de los SDNL y 
+          de los sistemas complejos, se da en contextos históricos específicos y tiene consecuencias en distintos 
+          ámbitos sociales.</li>
+        <li>Serán capaces de aplicar las herramientas de análisis de la teoría de 
+            los SDNL a la comprensión de los sistemas complejos. En particular:
+            <div class="opcion-box opcion-a-box">
+              <strong>Opción A:</strong> Podrán construir los modelos desde sus supuestos y aplicar los fundamentos 
+              teóricos del análisis de sistemas dinámicos no lineales para deducir sus consecuencias y establecer 
+              sus limitaciones.
+            </div>
+            <div class="opcion-box opcion-b-box">
+              <strong>Opción B:</strong> Aportarán elementos fenomenológicos para la construcción de los modelos y 
+              podrán evaluar la pertinencia de los resultados.
+            </div>
+        </li>
+        <li>Podrán establecer relaciones entre diversos campos del conocimiento, aprender a discriminar la información 
+          y conjeturar explicaciones coherentes en relación con fenómenos críticos de diversa índole para los cuales 
+          sea factible la modelación con las herramientas de la teoría de los SDNL.</li>
+        <li>Podrán participar en proyectos de investigación o de resolución de problemas interdisciplinarios en los 
+          cuales aplicarán los fundamentos de la teoría de los sistemas complejos.</li>
+          <li>Tendrán las bases necesarias para proseguir su formación en ciencias de la complejidad tanto formalmente 
+          –con estudios de doctorado o especialización– como para mantenerse al día por cuenta propia.</li>
+          <li>Podrán transformar su práctica profesional en el ámbito que les corresponda y aplicar la visión 
+          integradora –científica, humanística y social– de la teoría de los sistemas complejos.</li>
+      </ol>
+      
+    </section>
+
+    <!-- Grupos de Trabajo -->
+    <section id="grupos" class="posters-section">
+      <h2 class="section-title">Grupos de Trabajo</h2>
+      <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1rem; opacity: 0.9;">
+        La Maestría en Ciencias de la Complejidad cuenta con grupos de investigación especializados en diferentes áreas del conocimiento.
+      </p>
+      
+      <div class="posters-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); max-width: 1200px;">
+        <article class="poster-card">
+          <div class="poster-number">Grupo</div>
+          <h3 class="poster-title">DNLySC</h3>
+          <p style="margin-bottom: 25px; opacity: 0.85; font-size: 0.95rem;">
+            Dinámica No Lineal y Sistemas Complejos
+          </p>
+          
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(170, 175, 183, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">M. en C. José Luis Gutiérrez Sánchez</p>
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(170, 175, 183, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">Dr. Jorge Fernando Camacho Pérez</p>
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(170, 175, 183, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">M. en F. Maruxa Armijo Canto</p>
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(170, 175, 183, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">Dr. Fernando Ramírez Alatriste</p>
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(170, 175, 183, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">Dr. Damián Hernández Herrán</p>
+            </div>
           </div>
-          <button class="info-btn" onclick="openModal('modal4')">
-            <span>Más información</span>
-          </button>
-        </div>
-      </div>
+        </article>
 
-      <div class="poster-card">
-        <div class="poster-card-content">
-          <div class="poster-number">Póster 05</div>
-          <h3 class="poster-title">Fractales en la Naturaleza</h3>
-          <p class="poster-author">Dra. Patricia Gómez</p>
-          <p class="poster-description">Geometría fractal aplicada al estudio de estructuras naturales: costas, montañas y sistemas vasculares.</p>
-          <div class="poster-tags">
-            <span class="tag">Fractales</span>
-            <span class="tag">Geometría</span>
-            <span class="tag">Naturaleza</span>
+        <article class="poster-card">
+          <div class="poster-number">Grupo</div>
+          <h3 class="poster-title">DNLGyT</h3>
+          <p style="margin-bottom: 25px; opacity: 0.85; font-size: 0.95rem;">
+            Dinámica No Lineal, Geometría y Topología
+          </p>
+          
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(235, 67, 37, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">M. en C. Juan Luis Martínez Ledesma</p>
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(235, 67, 37, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">Dr. Felipe Humberto Contreras Alcalá</p>
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(235, 67, 37, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">Dr. Carlos Islas Moreno</p>
+            </div>
+            
+            <div style="padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border-left: 3px solid rgba(235, 67, 37, 0.6);">
+              <p style="margin: 0; font-weight: 400; font-size: 1rem;">Dr. Juan Antonio Nido Valencia</p>
+            </div>
           </div>
-          <button class="info-btn" onclick="openModal('modal5')">
-            <span>Más información</span>
-          </button>
-        </div>
+        </article>
       </div>
+    </section>
 
-      <div class="poster-card">
-        <div class="poster-card-content">
-          <div class="poster-number">Póster 06</div>
-          <h3 class="poster-title">Sistemas Multiagente y Simulación</h3>
-          <p class="poster-author">Dr. Roberto Hernández</p>
-          <p class="poster-description">Modelado basado en agentes para el estudio de fenómenos urbanos complejos y planificación de ciudades.</p>
-          <div class="poster-tags">
-            <span class="tag">Multiagente</span>
-            <span class="tag">Simulación</span>
-            <span class="tag">Urbano</span>
-          </div>
-          <button class="info-btn" onclick="openModal('modal6')">
-            <span>Más información</span>
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-  <!-- Modals -->
-  <div class="modal-overlay" id="modal1" onclick="closeModal('modal1')">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
-      <div class="modal-inner">
-        <img src="congreso_fisica.jpg" class="img-poster" alt="">
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal2" onclick="closeModal('modal2')">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal('modal2')">&times;</button>
-      <div class="modal-inner">
-        <img src="congreso_fisica.jpg" class="img-poster" alt="">
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal3" onclick="closeModal('modal3')">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal('modal3')">&times;</button>
-      <div class="modal-inner">
-        <img src="congreso_fisica.jpg" class="img-poster" alt="">
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal4" onclick="closeModal('modal4')">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal('modal4')">&times;</button>
-      <div class="modal-inner">
-        <img src="congreso_fisica.jpg" class="img-poster" alt="">
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal5" onclick="closeModal('modal5')">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal('modal5')">&times;</button>
-      <div class="modal-inner">
-        <img src="congreso_fisica.jpg" class="img-poster" alt="">
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="modal6" onclick="closeModal('modal6')">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal('modal6')">&times;</button>
-      <div class="modal-inner">
-        <img src="congreso_fisica.jpg" class="img-poster" alt="">
-      </div>
-    </div>
-  </div>
+    <!-- Contacto -->
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p><strong>Correo:</strong> complejidad@uacm.edu.mx</p>
+      <p><strong>Sede:</strong> UACM Plantel Del Valle, Ciudad de México</p>
+      <p>
+        <a href="https://www.uacm.edu.mx/Oferta_academica/CCyH/Posgrados/cienciasdelacomplejidad" 
+           target="_blank" rel="noopener noreferrer">
+          Sitio oficial del posgrado
+        </a>
+      </p>
+      <a href="https://franklueza.github.io/" target="_blank"><p>Sitio web hecho por FILM</p></a>
+      
+    </section>
+  </main>
 
   <script>
-    function openModal(modalId) {
-      const modal = document.getElementById(modalId);
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+    // Navigation toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
 
-    function closeModal(modalId) {
-      const modal = document.getElementById(modalId);
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('show');
+      const icon = navToggle.querySelector('i');
+      
+      // Update aria-expanded
+      navToggle.setAttribute('aria-expanded', isOpen);
+      
+      // Toggle icon
+      icon.classList.toggle('bi-three-dots');
+      icon.classList.toggle('bi-x-lg');
+      
+      // Update aria-label
+      navToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    });
 
-    // Close modal with ESC key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        const activeModal = document.querySelector('.modal-overlay.active');
-        if (activeModal) {
-          activeModal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Abrir menú');
+        
+        const icon = navToggle.querySelector('i');
+        icon.classList.add('bi-three-dots');
+        icon.classList.remove('bi-x-lg');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        navLinks.classList.remove('show');
+        navToggle.setAttribute('aria-expanded', 'false');
+        
+        const icon = navToggle.querySelector('i');
+        icon.classList.add('bi-three-dots');
+        icon.classList.remove('bi-x-lg');
       }
     });
-  </script>
 
+    // Smooth scroll for better UX
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
