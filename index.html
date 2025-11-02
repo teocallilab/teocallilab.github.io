@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
+  <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>TEOCALLI LAB | Análisis de y visualización de Datos </title>
 	<meta name="description" content="Diplomado en Analisis y Visualización de Datos">
@@ -18,226 +18,1012 @@
 	  gtag('config', 'G-DMBX24SMFX');
 	</script>
     <style>
-        * {margin: 0;padding: 0;box-sizing: border-box;}
-        body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;overflow-x: hidden;}
-        .hero {position: relative;min-height: 100vh;display: flex;flex-direction: column;align-items: center;justify-content: center;padding: 2rem;z-index: 1;overflow: hidden;background: #0a0a0a;}
-        #canvas-container {position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 0;}
-        .hero-content {text-align: center;max-width: 1000px;animation: fadeInUp 1.2s ease-out;z-index: 2;position: relative;}
-        @keyframes fadeInUp {from {opacity: 0;transform: translateY(40px);}to {opacity: 1;transform: translateY(0);}}
-        #title {font-size: 5rem;font-weight: 900;color: white;letter-spacing: 0.15em;margin-bottom: 2rem;text-shadow: 0 0 40px rgba(196, 30, 58, 0.8), 0 0 80px rgba(196, 30, 58, 0.4);animation: glow 3s ease-in-out infinite alternate;}
-        @keyframes glow {from {text-shadow: 0 0 40px rgba(196, 30, 58, 0.8), 0 0 80px rgba(196, 30, 58, 0.4);}to {text-shadow: 0 0 60px rgba(196, 30, 58, 1), 0 0 120px rgba(196, 30, 58, 0.6);}}
-        #quote {font-size: 1.5rem;line-height: 1.8;color: #e0e0e0;font-weight: 300;font-style: italic;margin-bottom: 3rem;text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);}
-        .buttons-container {display: flex;gap: 2rem;justify-content: center;flex-wrap: wrap;margin-bottom: 3rem;}
-        .btn {position: relative;padding: 1.2rem 3rem;font-size: 1.1rem;font-weight: 600;letter-spacing: 0.1em;text-transform: uppercase;border: 2px solid;background: transparent;cursor: pointer;overflow: hidden;transition: all 0.4s ease;text-decoration: none;display: inline-block;}
-        .btn-programa {color: white;border-color: #c41e3a;box-shadow: 0 0 20px rgba(196, 30, 58, 0.3);}
-        .btn-programa::before {content: '';position: absolute;top: 0;left: -100%;width: 100%;height: 100%;background: linear-gradient(90deg, transparent, rgba(196, 30, 58, 0.8), transparent);transition: left 0.5s ease;}
-        .btn-programa:hover {background: #c41e3a;box-shadow: 0 0 40px rgba(196, 30, 58, 0.8), 0 0 80px rgba(196, 30, 58, 0.4);transform: translateY(-3px);}
-        .btn-programa:hover::before {left: 100%;}
-        .btn-cursos {color: #c41e3a;border-color: white;box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);}
-        .btn-cursos::before {content: '';position: absolute;top: 0;left: -100%;width: 100%;height: 100%;background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);transition: left 0.5s ease;}
-        .btn-cursos:hover {background: white;color: #0a0a0a;box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 80px rgba(255, 255, 255, 0.3);transform: translateY(-3px);}
-        .btn-cursos:hover::before {left: 100%;}
-        .scroll-indicator {position: absolute;bottom: 2rem;left: 50%;transform: translateX(-50%);animation: bounce 2s infinite;z-index: 2;}
-        @keyframes bounce {0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}40% {transform: translateX(-50%) translateY(-10px);}60% {transform: translateX(-50%) translateY(-5px);}}
-        .scroll-text {color: white;font-size: 0.9rem;font-weight: 600;letter-spacing: 0.3em;text-shadow: 0 0 10px rgba(196, 30, 58, 0.8);}
-        .program-section {position: relative;min-height: 100vh;background: #ffffff;padding: 6rem 2rem;z-index: 2;}
-        .program-container {max-width: 1200px;margin: 0 auto;}
-        .program-header {text-align: center;margin-bottom: 4rem;padding-bottom: 2rem;border-bottom: 1px solid rgba(196, 30, 58, 0.2);}
-        .program-title {font-size: 2.5rem;font-weight: 700;color: #0a0a0a;margin-bottom: 2rem;letter-spacing: 0.02em;}
-        .program-objective {font-size: 0.9rem;font-weight: 600;color: #c41e3a;text-transform: uppercase;letter-spacing: 0.15em;margin-bottom: 1rem;}
-        .program-description {font-size: 1.1rem;color: #666;font-weight: 300;line-height: 1.6;}
-        .program-content {display: flex;flex-direction: column;gap: 3rem;}
-        .program-intro {text-align: center;max-width: 800px;margin: 0 auto;}
-        .program-intro p {font-size: 1.2rem;line-height: 1.8;color: #333;font-weight: 300;}
-        .courses-grid {margin: 2rem 0;}
-        .courses-title {font-size: 1.5rem;font-weight: 600;color: #0a0a0a;margin-bottom: 2rem;text-align: center;}
-        .courses-list {display: grid;grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));gap: 1.5rem;max-width: 900px;margin: 0 auto;}
-        .course-item {display: flex;align-items: center;gap: 1rem;padding: 1.5rem;background: #fafafa;border-left: 3px solid #c41e3a;transition: all 0.3s ease;}
-        .course-item:hover {background: #f5f5f5;transform: translateX(10px);box-shadow: 0 4px 20px rgba(196, 30, 58, 0.1);}
-        .course-number {font-size: 1.5rem;font-weight: 700;color: #c41e3a;min-width: 40px;}
-        .course-name {font-size: 1rem;color: #333;font-weight: 400;}
-        .download-container {text-align: center;margin-top: 2.5rem;}
-        .btn-download {display: inline-flex;align-items: center;gap: 0.8rem;padding: 1rem 2.5rem;font-size: 1rem;font-weight: 600;letter-spacing: 0.05em;text-transform: uppercase;background: transparent;color: #c41e3a;border: 2px solid #c41e3a;cursor: pointer;transition: all 0.3s ease;text-decoration: none;}
-        .btn-download:hover {background: #c41e3a;color: white;transform: translateY(-2px);box-shadow: 0 6px 25px rgba(196, 30, 58, 0.4);}
-        .download-icon {width: 20px;height: 20px;transition: transform 0.3s ease;}
-        .btn-download:hover .download-icon {transform: translateY(3px);}
-        .btn-syllabus {margin-top: auto;padding: 0.8rem 1.5rem;font-size: 0.9rem;font-weight: 600;letter-spacing: 0.05em;text-transform: uppercase;background: transparent;color: #c41e3a;border: 2px solid #c41e3a;cursor: pointer;transition: all 0.3s ease;align-self: flex-start;}
-        .btn-syllabus:hover {background: #c41e3a;color: white;box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);}
-        .modal-overlay {position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.8);display: flex;align-items: center;justify-content: center;z-index: 9999;opacity: 0;pointer-events: none;transition: opacity 0.3s ease;padding: 2rem;}
-        .modal-overlay.active {opacity: 1;pointer-events: all;}
-        .modal-content {background: white;border-radius: 8px;max-width: 700px;width: 100%;max-height: 80vh;overflow-y: auto;position: relative;padding: 3rem 2.5rem;transform: scale(0.9);transition: transform 0.3s ease;}
-        .modal-overlay.active .modal-content {transform: scale(1);}
-        .modal-close {position: absolute;top: 1rem;right: 1rem;background: transparent;border: none;cursor: pointer;padding: 0.5rem;transition: all 0.3s ease;z-index: 1;}
-        .modal-close svg {width: 24px;height: 24px;stroke: #666;transition: stroke 0.3s ease;}
-        .modal-close:hover svg {stroke: #c41e3a;transform: rotate(90deg);}
-        .modal-title {font-size: 2rem;font-weight: 700;color: #0a0a0a;margin-bottom: 1.5rem;padding-right: 2rem;}
-        .modal-body {color: #333;line-height: 1.8;}
-        .modal-body h3 {font-size: 1.3rem;color: #c41e3a;margin: 1.5rem 0 1rem 0;font-weight: 600;}
-        .modal-body ul {margin-left: 1.5rem;margin-bottom: 1rem;}
-        .modal-body li {margin-bottom: 0.5rem;color: #555;}
-        .modal-body p {margin-bottom: 1rem;}
-        .program-details {display: flex;flex-direction: column;gap: 1.5rem;max-width: 800px;margin: 2rem auto;padding: 2rem;background: #fafafa;border-radius: 4px;}
-        .detail-item {display: flex;flex-direction: column;gap: 0.5rem;padding-bottom: 1rem;border-bottom: 1px solid #e0e0e0;}
-        .detail-item:last-child {border-bottom: none;padding-bottom: 0;}
-        .detail-label {font-size: 0.85rem;font-weight: 600;color: #c41e3a;text-transform: uppercase;letter-spacing: 0.1em;}
-        .detail-value {font-size: 1.1rem;color: #333;font-weight: 300;}
-        .cta-container {text-align: center;margin-top: 2rem;}
-        .btn-cta {padding: 1.5rem 4rem;font-size: 1.1rem;font-weight: 600;letter-spacing: 0.05em;text-transform: uppercase;background: #c41e3a;color: white;border: none;cursor: pointer;transition: all 0.3s ease;box-shadow: 0 4px 20px rgba(196, 30, 58, 0.3);}
-        .btn-cta:hover {background: #a01830;transform: translateY(-3px);box-shadow: 0 8px 30px rgba(196, 30, 58, 0.5);}
-        .btn-cta:active {transform: translateY(-1px);}
-        .divider-section {position: relative;height: 70vh;min-height: 500px;overflow: hidden;z-index: 2;}
-        .divider-video {position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;z-index: 1;}
-        .courses-section {position: relative;min-height: 100vh;background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);padding: 6rem 2rem;z-index: 2;}
-        .courses-container {max-width: 1200px;margin: 0 auto;}
-        .courses-header {text-align: center;margin-bottom: 4rem;padding-bottom: 2rem;border-bottom: 1px solid rgba(196, 30, 58, 0.2);}
-        .courses-main-title {font-size: 2.5rem;font-weight: 700;color: #0a0a0a;margin-bottom: 2rem;letter-spacing: 0.02em;}
-        .courses-objective {font-size: 0.9rem;font-weight: 600;color: #c41e3a;text-transform: uppercase;letter-spacing: 0.15em;margin-bottom: 1rem;}
-        .courses-description {font-size: 1.1rem;color: #666;font-weight: 300;line-height: 1.6;}
-        .courses-content {display: flex;flex-direction: column;gap: 3rem;}
-        .complementary-courses {display: grid;grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));gap: 2rem;margin-bottom: 2rem;}
-        .complementary-course {background: white;text-align: left;transition: all 0.4s ease;border: 1px solid #e0e0e0;position: relative;overflow: hidden;display: flex;flex-direction: column;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);}
-        .complementary-course::before {content: '';position: absolute;top: 0;left: 0;width: 100%;height: 4px;background: linear-gradient(90deg, #c41e3a, #8b1538);transform: scaleX(0);transition: transform 0.4s ease;z-index: 1;}
-        .complementary-course:hover {transform: translateY(-10px);box-shadow: 0 10px 40px rgba(196, 30, 58, 0.3);border-color: #c41e3a;}
-        .complementary-course:hover::before {transform: scaleX(1);}
-        .course-image-container {width: 100%;height: 240px;overflow: hidden;position: relative;background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);}
-        
-        .course-image-container::before {content: '';position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 40px;height: 40px;border: 3px solid #c41e3a;border-top-color: transparent;border-radius: 50%;animation: spin 1s linear infinite;z-index: 1;}
-        
-        @keyframes spin {to {transform: translate(-50%, -50%) rotate(360deg);}}
-        .course-image {width: 100%;height: 100%;object-fit: cover;transition: all 0.5s ease;filter: grayscale(20%);opacity: 0;z-index: 2;position: relative;}
-        
-        .course-image.loaded {opacity: 1;}
-        .complementary-course:hover .course-image {transform: scale(1.1);filter: grayscale(0%);}
-        .course-image-container::after {content: '';position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.5) 100%);pointer-events: none;}
-        .course-text-content {padding: 2rem;flex: 1;display: flex;flex-direction: column;gap: 1rem;}
-        .complementary-title {font-size: 1.3rem;font-weight: 600;color: #0a0a0a;letter-spacing: 0.01em;line-height: 1.4;}
-        .complementary-description {font-size: 1rem;color: #666;line-height: 1.6;font-weight: 300;}
-        .courses-info {display: flex;justify-content: center;gap: 4rem;flex-wrap: wrap;max-width: 800px;margin: 2rem auto;padding: 2.5rem;background: white;border: 1px solid #e0e0e0;}
-        .courses-detail-item {display: flex;flex-direction: column;gap: 0.5rem;text-align: center;}
-        .courses-detail-label {font-size: 0.85rem;font-weight: 600;color: #c41e3a;text-transform: uppercase;letter-spacing: 0.1em;}
-        .courses-detail-value {font-size: 1.1rem;color: #333;font-weight: 300;}
-        .courses-cta-container {text-align: center;margin-top: 2rem;}
-        .btn-courses-cta {padding: 1.5rem 4rem;font-size: 1.1rem;font-weight: 600;letter-spacing: 0.05em;text-transform: uppercase;background: #c41e3a;color: white;border: none;cursor: pointer;transition: all 0.3s ease;box-shadow: 0 4px 20px rgba(196, 30, 58, 0.3);}
-        .btn-courses-cta:hover {background: #a01830;transform: translateY(-3px);box-shadow: 0 8px 30px rgba(196, 30, 58, 0.5);}
-        .btn-courses-cta:active {transform: translateY(-1px);}
-        
-        /* Sección de Equipo */
-        .team-section {position: relative;min-height: 100vh;background: #ffffff;padding: 6rem 2rem;z-index: 2;}
-        .team-container {max-width: 1400px;margin: 0 auto;}
-        .team-header {text-align: center;margin-bottom: 5rem;}
-        .team-title {font-size: 3rem;font-weight: 700;color: #0a0a0a;margin-bottom: 1rem;letter-spacing: 0.02em;}
-        .team-subtitle {font-size: 1.3rem;color: #c41e3a;font-weight: 300;letter-spacing: 0.05em;}
-        
-        .team-grid {display: grid;grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));gap: 3rem;max-width: 1200px;margin: 0 auto;}
-        
-        .team-card {position: relative;height: 500px;border-radius: 12px;overflow: hidden;cursor: pointer;box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);transition: all 0.4s ease;}
-        
-        .team-card::before {content: '';position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.4) 50%, rgba(10, 10, 10, 0.95) 100%);z-index: 1;transition: all 0.4s ease;}
-        
-        .team-card:hover::before {background: linear-gradient(180deg, rgba(196, 30, 58, 0.3) 0%, rgba(139, 21, 56, 0.7) 50%, rgba(10, 10, 10, 0.95) 100%);}
-        
-        .team-card:hover {transform: translateY(-10px);box-shadow: 0 20px 50px rgba(196, 30, 58, 0.3);}
-        
-        .team-card-image {width: 100%;height: 100%;object-fit: cover;transition: transform 0.4s ease;}
-        
-        .team-card:hover .team-card-image {transform: scale(1.1);}
-        
-        .team-card-info {position: absolute;bottom: 0;left: 0;right: 0;padding: 2.5rem;z-index: 2;transform: translateY(0);transition: all 0.4s ease;}
-        
-        .team-card:hover .team-card-info {transform: translateY(-10px);}
-        
-        .team-card-name {font-size: 2rem;font-weight: 700;color: white;margin-bottom: 0.5rem;text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);transition: all 0.3s ease;}
-        
-        .team-card:hover .team-card-name {color: white;text-shadow: 0 0 20px rgba(196, 30, 58, 0.8);}
-        
-        .team-card-position {font-size: 1.1rem;color: #c41e3a;font-weight: 600;text-transform: uppercase;letter-spacing: 0.1em;text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);transition: all 0.3s ease;}
-        
-        .team-card:hover .team-card-position {color: white;letter-spacing: 0.15em;}
-        
-        .team-card-decoration {position: absolute;top: 1.5rem;right: 1.5rem;width: 60px;height: 60px;border: 3px solid rgba(255, 255, 255, 0.3);border-radius: 50%;z-index: 2;transition: all 0.4s ease;}
-        
-        .team-card:hover .team-card-decoration {border-color: #c41e3a;transform: rotate(90deg) scale(1.1);box-shadow: 0 0 20px rgba(196, 30, 58, 0.6);}
-        
-        /* Footer Compacto */
-        .footer {background: #0a0a0a;padding: 2rem 2rem;border-top: 3px solid #c41e3a;}
-        
-        .footer-container {max-width: 1400px;margin: 0 auto;display: flex;align-items: center;justify-content: space-between;flex-wrap: wrap;gap: 2rem;}
-        
-        .footer-logo h3 {font-size: 1.5rem;font-weight: 900;color: white;letter-spacing: 0.1em;}
-        
-        .footer-nav {display: flex;gap: 2rem;flex-wrap: wrap;}
-        
-        .footer-nav a {color: #e0e0e0;text-decoration: none;font-size: 0.95rem;font-weight: 500;transition: all 0.3s ease;position: relative;}
-        
-        .footer-nav a::after {content: '';position: absolute;bottom: -3px;left: 0;width: 0;height: 2px;background: #c41e3a;transition: width 0.3s ease;}
-        
-        .footer-nav a:hover {color: #c41e3a;}
-        
-        .footer-nav a:hover::after {width: 100%;}
-        
-        .footer-social {display: flex;gap: 1rem;}
-        
-        .footer-social a {width: 40px;height: 40px;display: flex;align-items: center;justify-content: center;background: rgba(255, 255, 255, 0.1);border-radius: 50%;color: white;transition: all 0.3s ease;}
-        
-        .footer-social a:hover {background: #c41e3a;transform: translateY(-3px);box-shadow: 0 5px 15px rgba(196, 30, 58, 0.4);}
-        
-        .footer-social svg {width: 20px;height: 20px;}
-        
-        .footer-copyright {width: 100%;text-align: center;margin-top: 1.5rem;padding-top: 1.5rem;border-top: 1px solid rgba(255, 255, 255, 0.1);}
-        
-        .footer-copyright p {color: #999;font-size: 0.85rem;}
-        
-        @media (max-width: 768px) {
-            #title {font-size: 3rem;margin-bottom: 1.5rem;}
-            #quote {font-size: 1.1rem;margin-bottom: 2rem;}
-            .buttons-container {gap: 1rem;}
-            .btn {padding: 1rem 2rem;font-size: 0.95rem;}
-            .program-section {padding: 4rem 1.5rem;}
-            .program-title {font-size: 1.8rem;}
-            .program-intro p {font-size: 1rem;}
-            .courses-list {grid-template-columns: 1fr;}
-            .program-details {padding: 1.5rem;}
-            .btn-cta {padding: 1.2rem 2.5rem;font-size: 1rem;}
-            .divider-section {height: 60vh;min-height: 400px;}
-            .courses-section {padding: 4rem 1.5rem;}
-            .courses-main-title {font-size: 1.8rem;}
-            .complementary-courses {grid-template-columns: 1fr;}
-            .courses-info {flex-direction: column;gap: 2rem;padding: 2rem;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        @media (max-width: 480px) {
-            #title {font-size: 2rem;letter-spacing: 0.1em;}
-            #quote {font-size: 0.95rem;}
-            .btn {padding: 0.8rem 1.5rem;font-size: 0.85rem;}
-            .divider-section {height: 50vh;min-height: 300px;}
-            .team-grid {grid-template-columns: 1fr;gap: 2rem;}
-            .team-card {height: 500px;}
-            .team-title {font-size: 2rem;}
-            .card-content {padding: 1.5rem;}
-            .card-name {padding: 2rem;}
-            .team-card-name {font-size: 1.6rem;}
-            .team-card-position {font-size: 0.95rem;}
-            .team-card-info {padding: 2rem;}
-            .footer-container {flex-direction: column;text-align: center;gap: 1.5rem;}
-            .footer-nav {flex-direction: column;gap: 1rem;}
-            .footer-logo h3 {font-size: 1.2rem;}
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+            background: #ffffff;
+            color: #000000;
+            padding-top: 80px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 1.1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 70px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #721C31;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #721C31;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-nav {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-nav-outline {
+            background: transparent;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .btn-nav-outline:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .btn-nav-solid {
+            background: #721C31;
+            color: white;
+        }
+
+        .btn-nav-solid:hover {
+            background: #8a2340;
+            box-shadow: 0 4px 12px rgba(114, 28, 49, 0.3);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            z-index: 99;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: space-between;
+                gap: 1rem;
+            }
+
+            .nav-left {
+                order: 1;
+                flex: 0;
+            }
+
+            .nav-logo {
+                order: 2;
+                flex: 1;
+                justify-content: center;
+            }
+
+            .nav-logo img {
+                height: 40px;
+            }
+
+            .nav-links,
+            .nav-right {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                order: 3;
+            }
+
+            .btn-nav {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow: hidden;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(114, 28, 49, 0.3), transparent);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, #000000 0%, transparent 50%, #000000 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: white;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #721C31;
+            color: white;
+            box-shadow: 0 0 40px rgba(114, 28, 49, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(114, 28, 49, 0.8);
+            background: #8a2340;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #000000;
+            transform: translateY(-2px);
+        }
+
+        /* Program Section */
+        .program-section {
+            padding: 8rem 2rem;
+            background: #ffffff;
+        }
+
+        .program-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .program-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+
+        .program-objective {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #721C31;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-description {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 1rem;
+        }
+
+        .program-intro {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(0, 0, 0, 0.8);
+            margin-bottom: 4rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .courses-grid {
+            margin-bottom: 4rem;
+        }
+
+        .courses-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #000000;
+        }
+
+        .courses-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover {
+            background: #f9f9f9;
+            border-color: #721C31;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(114, 28, 49, 0.1);
+        }
+
+        .course-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #721C31;
+            min-width: 50px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            color: #000000;
+        }
+
+        .download-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: #000000;
+            border: 2px solid #000000;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .download-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .program-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: #f9f9f9;
+            border-radius: 12px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #721C31;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            color: #000000;
+        }
+
+        .cta-container {
+            text-align: center;
+        }
+
+        .btn-cta {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #721C31;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            background: #8a2340;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(114, 28, 49, 0.3);
+        }
+
+        /* Divider Section */
+        .divider-section {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .divider-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            
+        }
+
+        /* Courses Section */
+        .courses-section {
+            padding: 8rem 2rem;
+            background: #ffffff;
+        }
+
+        .courses-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .courses-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .courses-main-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+
+        .courses-objective {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #721C31;
+            margin-bottom: 0.5rem;
+        }
+
+        .courses-description {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 1rem;
+        }
+
+        .complementary-courses {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .complementary-course {
+            position: relative;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .course-image-container {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .course-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .complementary-course:hover .course-image {
+            transform: scale(1.05);
+        }
+
+        .course-text-content {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .complementary-course:hover .course-text-content {
+            opacity: 1;
+        }
+
+        .complementary-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .complementary-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-syllabus {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .btn-syllabus:hover {
+            background: white;
+            color: #000000;
+        }
+
+        .courses-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: #f9f9f9;
+            border-radius: 12px;
+        }
+
+        .courses-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .courses-detail-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #721C31;
+        }
+
+        .courses-detail-value {
+            font-size: 1.1rem;
+            color: #000000;
+        }
+
+        .courses-cta-container {
+            text-align: center;
+        }
+
+        .btn-courses-cta {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: #721C31;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-courses-cta:hover {
+            background: #8a2340;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(114, 28, 49, 0.3);
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 8rem 2rem;
+            background: #ffffff;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .team-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+
+        .team-subtitle {
+            font-size: 1.2rem;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            border-color: #721C31;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .team-card-decoration {
+            height: 4px;
+            background: linear-gradient(90deg, #721C31, #DD335C, #1E67C6);
+        }
+
+        .team-card-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .team-card-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #000000;
+        }
+
+        .team-card-position {
+            font-size: 1rem;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 2rem 2rem;
+            background: #000000;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: #DD335C;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: #721C31;
+        }
+
+        .footer-social svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: #000000;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .modal-close svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #000000;
+        }
+
+        .modal-body {
+            color: rgba(0, 0, 0, 0.8);
+            line-height: 1.8;
+        }
+
+        .modal-body h3 {
+            color: #721C31;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .program-details,
+            .courses-info {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <a href="#" class="nav-logo">
+                <img src="img/logo color blanco.png" alt="Teocalli Lab">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#programa">Programa</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#equipo">Equipo</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+
+            <!--div class="nav-right">
+                <a href="#" class="btn-nav btn-nav-outline">Iniciar Sesión</a>
+                <a href="#" class="btn-nav btn-nav-solid">Inscríbete</a>
+            </div-->
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#programa">Programa</a></li>
+            <li><a href="#cursos">Cursos</a></li>
+            <li><a href="#equipo">Equipo</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <!--div class="mobile-nav-buttons">
+            <a href="#" class="btn-nav btn-nav-outline">Iniciar Sesión</a>
+            <a href="#" class="btn-nav btn-nav-solid">Inscríbete</a>
+        </div-->
+    </div>
+
     <section class="hero">
-        <div id="canvas-container"></div>
-        <div class="hero-content">
-            <h1 id="title">TEOCALLI LAB</h1>
-            <p id="quote">"Un analista de datos es un explorador, un detective y un artista, todo en uno"</p>
-            <div class="buttons-container">
-                <button class="btn btn-programa">Programa</button>
-                <button class="btn btn-cursos">Cursos</button>
+        <canvas id="aurora"></canvas>
+
+        <div class="content">
+            <div class="badge">Teocalli Lab</div>
+            <h1>Data Science</h1>
+            <p class="subtitle">Programa de Análisis y Visualización de Datos</p>
+            <p class="description">
+                Transforma datos en conocimiento. Aprende las herramientas y técnicas esenciales para el análisis profesional de datos.
+            </p>
+            <div class="cta-buttons">
+                <a href="#programa" class="btn btn-primary">Programa</a>
+                <a href="#cursos" class="btn btn-secondary">Cursos</a>
             </div>
         </div>
-        <div class="scroll-indicator"><span class="scroll-text">SCROLL</span></div>
     </section>
 
-    <section class="program-section">
+    <section id="programa" class="program-section">
         <div class="program-container">
             <div class="program-header">
                 <h2 class="program-title">Programa de Análisis y Visualización de Datos</h2>
@@ -284,7 +1070,7 @@
         <video class="divider-video" autoplay muted loop playsinline><source src="vdeot.mp4" type="video/mp4"></video>
     </section>
 
-    <section class="courses-section">
+    <section id="cursos" class="courses-section">
         <div class="courses-container">
             <div class="courses-header">
                 <h2 class="courses-main-title">Cursos</h2>
@@ -331,8 +1117,7 @@
         <video class="divider-video" autoplay muted loop playsinline><source src="videot.mp4" type="video/mp4"></video>
     </section>
 
-    <!-- Sección de Equipo -->
-    <section class="team-section">
+    <section id="equipo" class="team-section">
         <div class="team-container">
             <div class="team-header">
                 <h2 class="team-title">Nuestro Equipo</h2>
@@ -370,8 +1155,7 @@
         </div>
     </section>
 
-    <!-- Footer Compacto -->
-    <footer class="footer">
+    <footer id="contacto" class="footer">
         <div class="footer-container">
             <div class="footer-logo">
                 <h3>TEOCALLI LAB</h3>
@@ -385,27 +1169,7 @@
             </nav>
             
             <div class="footer-social">
-                
-                <!--a href="#" aria-label="Facebook">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </a>
-                <a href="#" aria-label="Twitter">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                    </svg>
-                </a>
-                <a href="#" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="#" aria-label="Instagram">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
-                    </svg>
-                </a-->
+                <!-- Social icons can be added here -->
             </div>
             
             <div class="footer-copyright">
@@ -427,301 +1191,232 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
+        const canvas = document.getElementById('aurora');
+        const ctx = canvas.getContext('2d');
 
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 3000;
-        const posArray = new Float32Array(particlesCount * 3);
-        const colors = new Float32Array(particlesCount * 3);
-
-        for(let i = 0; i < particlesCount * 3; i += 3) {
-            posArray[i] = (Math.random() - 0.5) * 100;
-            posArray[i + 1] = (Math.random() - 0.5) * 100;
-            posArray[i + 2] = (Math.random() - 0.5) * 100;
-
-            const colorChoice = Math.random();
-            if (colorChoice < 0.5) {
-                colors[i] = 1;
-                colors[i + 1] = 1;
-                colors[i + 2] = 1;
-            } else {
-                colors[i] = 0.77;
-                colors[i + 1] = 0.12;
-                colors[i + 2] = 0.23;
-            }
-        }
-
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.15,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-
-        const waveGeometry = new THREE.PlaneGeometry(80, 80, 50, 50);
-        const waveMaterial = new THREE.MeshBasicMaterial({
-            color: 0xc41e3a,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-        const waveMesh = new THREE.Mesh(waveGeometry, waveMaterial);
-        waveMesh.rotation.x = -Math.PI / 2;
-        waveMesh.position.y = -20;
-        scene.add(waveMesh);
-
-        for(let i = 0; i < 5; i++) {
-            const ringGeometry = new THREE.TorusGeometry(10 + i * 5, 0.1, 16, 100);
-            const ringMaterial = new THREE.MeshBasicMaterial({
-                color: i % 2 === 0 ? 0xffffff : 0xc41e3a,
-                transparent: true,
-                opacity: 0.2
-            });
-            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-            ring.position.z = -30 - i * 10;
-            ring.rotation.x = Math.PI / 2;
-            scene.add(ring);
-        }
-
-        camera.position.z = 30;
-
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        let time = 0;
-        function animate() {
-            requestAnimationFrame(animate);
-            time += 0.01;
-
-            particlesMesh.rotation.y += 0.001;
-            particlesMesh.rotation.x = mouseY * 0.3;
-            particlesMesh.rotation.y = mouseX * 0.3;
-
-            const positions = waveMesh.geometry.attributes.position.array;
-            for(let i = 0; i < positions.length; i += 3) {
-                const x = positions[i];
-                const y = positions[i + 1];
-                positions[i + 2] = Math.sin(x * 0.2 + time) * 2 + Math.cos(y * 0.2 + time) * 2;
-            }
-            waveMesh.geometry.attributes.position.needsUpdate = true;
-            waveMesh.rotation.z += 0.001;
-
-            scene.children.forEach((child, index) => {
-                if(child.geometry && child.geometry.type === 'TorusGeometry') {
-                    child.rotation.z += 0.002 * (index % 2 === 0 ? 1 : -1);
-                }
-            });
-
-            targetX = mouseX * 5;
-            targetY = mouseY * 5;
-            camera.position.x += (targetX - camera.position.x) * 0.05;
-            camera.position.y += (targetY - camera.position.y) * 0.05;
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         });
 
-        const buttons = document.querySelectorAll('.btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'translateY(-3px)';
-                }, 100);
+        // Aurora colors
+        const colors = [
+            { r: 30, g: 103, b: 198 },    // #1E67C6
+            { r: 221, g: 51, b: 92 },     // #DD335C
+            { r: 114, g: 28, b: 49 }      // #721C31 (vino)
+        ];
+
+        class AuroraWave {
+            constructor(index, totalWaves) {
+                this.index = index;
+                this.offset = (index / totalWaves) * Math.PI * 2;
+                this.colorIndex = 0;
+                this.nextColorIndex = 1;
+                this.colorTransition = 0;
+                this.speed = 0.0002 + (index * 0.0001);
+                this.amplitude = 60 + (index * 20);
+                this.frequency = 0.002 + (index * 0.0005);
+                this.yPosition = height * 0.6 + (index * 40);
+            }
+
+            update(time) {
+                this.colorTransition += this.speed;
+                
+                if (this.colorTransition >= 1) {
+                    this.colorTransition = 0;
+                    this.colorIndex = this.nextColorIndex;
+                    this.nextColorIndex = (this.nextColorIndex + 1) % colors.length;
+                }
+            }
+
+            draw(time) {
+                const currentColor = colors[this.colorIndex];
+                const nextColor = colors[this.nextColorIndex];
+                const t = this.easeInOutCubic(this.colorTransition);
+
+                const r = Math.floor(currentColor.r + (nextColor.r - currentColor.r) * t);
+                const g = Math.floor(currentColor.g + (nextColor.g - currentColor.g) * t);
+                const b = Math.floor(currentColor.b + (nextColor.b - currentColor.b) * t);
+
+                ctx.beginPath();
+                
+                for (let x = 0; x < width + 10; x += 10) {
+                    const y = this.yPosition + 
+                              Math.sin(x * this.frequency + time * 0.001 + this.offset) * this.amplitude +
+                              Math.sin(x * this.frequency * 0.5 + time * 0.0005) * (this.amplitude * 0.5);
+                    
+                    if (x === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+
+                ctx.lineTo(width, height);
+                ctx.lineTo(0, height);
+                ctx.closePath();
+
+                const gradient = ctx.createLinearGradient(0, this.yPosition - this.amplitude, 0, height);
+                gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.15)`);
+                gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.08)`);
+                gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.3)`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            easeInOutCubic(x) {
+                return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+            }
+        }
+
+        const waves = [];
+        const numWaves = 4;
+
+        for (let i = 0; i < numWaves; i++) {
+            waves.push(new AuroraWave(i, numWaves));
+        }
+
+        function animate(currentTime) {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            waves.forEach(wave => {
+                wave.update(currentTime);
+                wave.draw(currentTime);
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate(0);
+
+        // Navigation functionality
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
             });
         });
 
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Modal functionality
         const modal = document.getElementById('modal-overlay');
+        const modalClose = document.getElementById('modal-close');
         const modalTitle = document.getElementById('modal-title');
         const modalBody = document.getElementById('modal-body');
-        const modalClose = document.getElementById('modal-close');
-        const syllabusButtons = document.querySelectorAll('.btn-syllabus');
 
-        const syllabusContent = {
+        const syllabusData = {
             'taller-matematicas': {
                 title: 'Taller de Matemáticas',
                 content: `
-                    <p>Un repaso práctico y aplicado de conceptos matemáticos fundamentales para el análisis de datos.</p>
-                    
-                    <h3>Módulo 1: Fundamentos Numéricos</h3>
+                    <h3>Contenido del curso:</h3>
                     <ul>
-                        <li>Operaciones básicas y propiedades</li>
-                        <li>Fracciones, decimales y porcentajes</li>
-                        <li>Potencias y raíces</li>
-                        <li>Notación científica</li>
+                        <li>Aritmética básica y operaciones</li>
+                        <li>Álgebra fundamental</li>
+                        <li>Ecuaciones y sistemas de ecuaciones</li>
+                        <li>Funciones y gráficas</li>
+                        <li>Geometría aplicada</li>
+                        <li>Introducción a la estadística descriptiva</li>
                     </ul>
-
-                    <h3>Módulo 2: Álgebra Básica</h3>
-                    <ul>
-                        <li>Variables y expresiones algebraicas</li>
-                        <li>Ecuaciones lineales</li>
-                        <li>Sistemas de ecuaciones</li>
-                        <li>Funciones básicas</li>
-                    </ul>
-
-                    <h3>Módulo 3: Geometría Aplicada</h3>
-                    <ul>
-                        <li>Figuras geométricas y medidas</li>
-                        <li>Teorema de Pitágoras</li>
-                        <li>Coordenadas cartesianas</li>
-                        <li>Gráficas de funciones</li>
-                    </ul>
+                    <p><strong>Duración:</strong> 4 semanas</p>
+                    <p><strong>Requisitos:</strong> Ninguno, curso introductorio</p>
                 `
             },
             'matematicas-ciencia-datos': {
                 title: 'Matemáticas para Ciencia de Datos',
                 content: `
-                    <p>Fundamentos matemáticos esenciales aplicados a problemas reales de ciencia de datos.</p>
-                    
-                    <h3>Módulo 1: Álgebra Lineal</h3>
+                    <h3>Contenido del curso:</h3>
                     <ul>
-                        <li>Vectores y operaciones vectoriales</li>
-                        <li>Matrices y sus propiedades</li>
-                        <li>Determinantes y sistemas lineales</li>
-                        <li>Espacios vectoriales</li>
-                        <li>Valores y vectores propios</li>
+                        <li>Álgebra lineal: vectores, matrices y operaciones</li>
+                        <li>Cálculo diferencial e integral aplicado</li>
+                        <li>Probabilidad y distribuciones</li>
+                        <li>Estadística inferencial</li>
+                        <li>Optimización matemática</li>
+                        <li>Aplicaciones en machine learning</li>
                     </ul>
-
-                    <h3>Módulo 2: Cálculo</h3>
-                    <ul>
-                        <li>Límites y continuidad</li>
-                        <li>Derivadas y sus aplicaciones</li>
-                        <li>Optimización de funciones</li>
-                        <li>Integrales básicas</li>
-                        <li>Gradientes y derivadas parciales</li>
-                    </ul>
-
-                    <h3>Módulo 3: Probabilidad</h3>
-                    <ul>
-                        <li>Conceptos básicos de probabilidad</li>
-                        <li>Variables aleatorias</li>
-                        <li>Distribuciones de probabilidad</li>
-                        <li>Teorema de Bayes</li>
-                        <li>Esperanza y varianza</li>
-                    </ul>
+                    <p><strong>Duración:</strong> 6 semanas</p>
+                    <p><strong>Requisitos:</strong> Conocimientos básicos de matemáticas</p>
                 `
             },
             'estadistica-python': {
                 title: 'Estadística Descriptiva con Python',
                 content: `
-                    <p>Análisis estadístico de datos utilizando las principales bibliotecas de Python.</p>
-                    
-                    <h3>Módulo 1: Introducción a Python para Datos</h3>
+                    <h3>Contenido del curso:</h3>
                     <ul>
-                        <li>Configuración del entorno (Jupyter, Anaconda)</li>
-                        <li>Fundamentos de Python</li>
-                        <li>NumPy: arrays y operaciones numéricas</li>
-                        <li>Pandas: DataFrames y Series</li>
+                        <li>Introducción a Python y entornos de trabajo</li>
+                        <li>Pandas para manipulación de datos</li>
+                        <li>NumPy para cálculos numéricos</li>
+                        <li>Medidas de tendencia central y dispersión</li>
+                        <li>Visualización con Matplotlib y Seaborn</li>
+                        <li>Análisis exploratorio de datos (EDA)</li>
+                        <li>Proyecto final integrador</li>
                     </ul>
-
-                    <h3>Módulo 2: Estadística Descriptiva</h3>
-                    <ul>
-                        <li>Medidas de tendencia central</li>
-                        <li>Medidas de dispersión</li>
-                        <li>Distribuciones de frecuencia</li>
-                        <li>Percentiles y cuartiles</li>
-                        <li>Detección de outliers</li>
-                    </ul>
-
-                    <h3>Módulo 3: Visualización de Datos</h3>
-                    <ul>
-                        <li>Matplotlib: gráficos básicos</li>
-                        <li>Seaborn: visualizaciones estadísticas</li>
-                        <li>Histogramas y box plots</li>
-                        <li>Gráficos de dispersión y correlación</li>
-                        <li>Mapas de calor</li>
-                    </ul>
-
-                    <h3>Módulo 4: Análisis Exploratorio</h3>
-                    <ul>
-                        <li>Limpieza y preparación de datos</li>
-                        <li>Análisis de datos faltantes</li>
-                        <li>Agrupaciones y agregaciones</li>
-                        <li>Correlaciones entre variables</li>
-                        <li>Reportes estadísticos</li>
-                    </ul>
+                    <p><strong>Duración:</strong> 5 semanas</p>
+                    <p><strong>Requisitos:</strong> Conocimientos básicos de programación (recomendado)</p>
                 `
             }
         };
 
-        syllabusButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const course = button.getAttribute('data-course');
-                const syllabus = syllabusContent[course];
+        document.querySelectorAll('.btn-syllabus').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const courseKey = this.getAttribute('data-course');
+                const courseData = syllabusData[courseKey];
                 
-                if (syllabus) {
-                    modalTitle.textContent = syllabus.title;
-                    modalBody.innerHTML = syllabus.content;
+                if (courseData) {
+                    modalTitle.textContent = courseData.title;
+                    modalBody.innerHTML = courseData.content;
                     modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
                 }
             });
         });
 
         modalClose.addEventListener('click', () => {
             modal.classList.remove('active');
-            document.body.style.overflow = '';
         });
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.remove('active');
-                document.body.style.overflow = '';
             }
         });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Lazy loading de imágenes
-        const courseImages = document.querySelectorAll('.course-image');
-        courseImages.forEach(img => {
-            img.addEventListener('load', function() {
-                this.classList.add('loaded');
-                // Ocultar spinner
-                const container = this.parentElement;
-                if (container.classList.contains('course-image-container')) {
-                    container.style.setProperty('--loaded', '1');
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
-            
-            // Si la imagen ya está cargada (cache)
-            if (img.complete) {
-                img.classList.add('loaded');
-            }
         });
     </script>
 </body>
