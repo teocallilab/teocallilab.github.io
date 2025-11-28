@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>TEOCALLI LAB | Análisis y visualización de Datos </title>
-	<meta name="description" content="Programa en Analisis y Visualización de Datos">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link href="https://fonts.googleapis.com/css?family=Barlow:400,500,700|Playfair+Display" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/main.css" />
-	<!-- Google tag (gtag.js) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEOCALLI LAB - Data Analysis and Visualization</title>
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBX24SMFX"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
@@ -25,1395 +23,1468 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            overflow-x: hidden;
-            background: #ffffff;
-            color: #000000;
-            padding-top: 80px;
+            font-family: 'Arial', sans-serif;
         }
 
-        /* Navigation */
-        .navbar {
+        /* Header/Navegación */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            background: #000000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            padding: 1.1rem 2rem;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex: 1;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .nav-logo img {
-            height: 60px;
-            width: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #721C31;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #721C31;
-        }
-
-        .nav-links a:hover::after {
             width: 100%;
+            background-color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
-        .nav-right {
+        .header-content {
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
-        .btn-nav {
-            padding: 0.6rem 1.5rem;
-            font-size: 0.95rem;
-            font-weight: 600;
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #FF5722;
             border: none;
-            border-radius: 50px;
+            border-radius: 30px;
+            padding: 8px 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
-            white-space: nowrap;
         }
 
-        .btn-nav-outline {
-            background: transparent;
-            color: #000000;
-            border: 2px solid #000000;
+        .theme-toggle:hover {
+            opacity: 0.8;
         }
 
-        .btn-nav-outline:hover {
-            background: #000000;
-            color: #ffffff;
+        .theme-icon {
+            font-size: 1.2rem;
+            color: white;
+            transition: transform 0.3s ease;
         }
 
-        .btn-nav-solid {
-            background: #721C31;
+        .theme-toggle.dark .sun-icon {
+            transform: scale(0);
+        }
+
+        .theme-toggle.dark .moon-icon {
+            transform: scale(1.2);
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
             color: white;
         }
 
-        .btn-nav-solid:hover {
-            background: #8a2340;
-            box-shadow: 0 4px 12px rgba(114, 28, 49, 0.3);
+        body.dark-mode .header {
+            background-color: #2a2a2a;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .programa-section,
+        body.dark-mode .formato-section,
+        body.dark-mode .talento-section {
+            background-color: #2a2a2a;
+        }
+
+        body.dark-mode .footer-brand-section {
+            background-color: #FF5722;
+            border-top: 2px solid #1a0066;
+            border-bottom: 2px solid #1a0066;
+        }
+
+        body.dark-mode .cursos-section {
+            background-color: #FF5722;
+        }
+
+        body.dark-mode .programa-content h2,
+        body.dark-mode .formato-item p,
+        body.dark-mode .talento-section h2 {
+            color: white;
+        }
+
+        body.dark-mode .footer-brand-left,
+        body.dark-mode .footer-brand-right {
+            color: #1a0066;
+        }
+
+        body.dark-mode .curso-tag {
+            border-color: #1a0066;
+            color: #1a0066;
+        }
+
+        body.dark-mode .curso-title {
+            color: #1a0066;
+        }
+
+        body.dark-mode .curso-link {
+            background-color: #1a0066;
+            color: white;
+        }
+
+        body.dark-mode .curso-link:hover {
+            background-color: #2a0088;
+        }
+
+        body.dark-mode .formato-item h4 {
+            color: #999;
+        }
+
+        body.dark-mode .mobile-menu {
+            background-color: #2a2a2a;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #FF5722;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        .logot{
+            width: 15%;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #FF5722;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.7;
         }
 
         .menu-toggle {
             display: none;
-            background: transparent;
+            background: none;
             border: none;
+            font-size: 2rem;
             cursor: pointer;
-            padding: 0.5rem;
+            color: #FF5722;
         }
 
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Mobile Menu */
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 80px;
+            top: 75px;
             left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            z-index: 99;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 999;
         }
 
         .mobile-menu.active {
             display: block;
         }
 
-        .mobile-nav-links {
+        .mobile-menu ul {
             list-style: none;
-            padding: 0;
-            margin: 0 0 2rem 0;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            text-align: center;
+            gap: 20px;
         }
 
-        .mobile-nav-links a {
+        .mobile-menu a {
+            color: #FF5722;
             text-decoration: none;
-            color: #000000;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 1.1rem;
             display: block;
-            padding: 0.5rem;
-        }
-
-        .mobile-nav-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            padding: 10px;
         }
 
         @media (max-width: 768px) {
-            .nav-container {
-                justify-content: space-between;
-                gap: 1rem;
+            .header-content {
+                padding: 20px 30px;
             }
 
-            .nav-left {
-                order: 1;
-                flex: 0;
-            }
-
-            .nav-logo {
-                order: 2;
-                flex: 1;
-                justify-content: center;
-            }
-
-            .nav-logo img {
-                height: 40px;
-            }
-
-            .nav-links,
-            .nav-right {
+            .nav-menu {
                 display: none;
             }
 
             .menu-toggle {
                 display: block;
-                order: 3;
             }
 
-            .btn-nav {
-                width: 100%;
+            .theme-toggle {
+                order: -1;
+            }
+
+            .nav-wrapper {
+                gap: 20px;
+            }
+        }
+
+        /* Primera Sección: Hero */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 75px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                margin-top: 0;
+            }
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .hero-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0066 0%, #FF5722 100%);
+            display: none;
+        }
+
+        .hero-video:not([src]) ~ .hero-fallback,
+        .hero-video[src=""]:not([poster]) ~ .hero-fallback {
+            display: block;
+        }
+
+      
+
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+            padding: 100px 0px;
+            
+        }
+
+        .hero-content h1 {
+            color: white;
+            font-size: 6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            line-height: 1;
+            margin: 0;
+        }
+
+        /* Segunda Sección */
+        .programa-section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 80px;
+            background-color: #f5f5f5;
+        }
+
+        .programa-content {
+            max-width: 800px;
+        }
+
+        .programa-content h2 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #FF5722;
+            margin-bottom: 40px;
+        }
+
+        .btn-saber-mas {
+            display: inline-block;
+            padding: 18px 45px;
+            background-color: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-saber-mas:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Tercera Sección */
+        .analisis-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+            background-color: #FF5722;
+        }
+
+        .analisis-section h2 {
+            font-size: 5.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #1a0066;
+            margin-bottom: 50px;
+            max-width: 100%;
+        }
+
+        .btn-ver-programa {
+            display: inline-block;
+            padding: 18px 45px;
+            background-color: transparent;
+            color: #1a0066;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 3px solid #1a0066;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            margin-bottom: 60px;
+            width: fit-content;
+        }
+
+        .btn-ver-programa:hover {
+            background-color: #1a0066;
+            color: #FF5722;
+            transform: translateY(-2px);
+        }
+
+        .analisis-description {
+            font-size: 2.8rem;
+            line-height: 1.4;
+            color: #1a0066;
+            font-weight: 400;
+            max-width: 100%;
+        }
+
+        /* Cuarta Sección: Contenido del Programa */
+        .contenido-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+            background-color: #FF5722;
+        }
+
+        .contenido-header {
+            border-top: 3px solid #1a0066;
+            padding-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        .contenido-header h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a0066;
+            margin-bottom: 40px;
+        }
+
+        .contenido-intro {
+            font-size: 2rem;
+            line-height: 1.4;
+            color: #1a0066;
+            margin-bottom: 60px;
+            max-width: 90%;
+        }
+
+        .accordion-item {
+            border-bottom: 2px solid #1a0066;
+            padding: 30px 0;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .accordion-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a0066;
+            min-width: 80px;
+        }
+
+        .accordion-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a0066;
+            flex-grow: 1;
+        }
+
+        .accordion-icon {
+            font-size: 3rem;
+            color: #1a0066;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .accordion-header:hover .accordion-title {
+            opacity: 0.7;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 80px;
+        }
+
+        .accordion-content.active {
+            max-height: 500px;
+            padding-top: 20px;
+        }
+
+        .accordion-content p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #1a0066;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Quinta Sección: Formato del Programa */
+        .formato-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+            background-color: #f5f5f5;
+        }
+
+        .formato-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .formato-item {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .formato-icon {
+            font-size: 3rem;
+            color: #FF5722;
+        }
+
+        .formato-item h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .formato-item p {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.3;
+        }
+
+        /* Sexta Sección: Inscripción */
+        .inscripcion-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px;
+            background-color: #FF5722;
+        }
+
+        .inscripcion-content {
+            max-width: 60%;
+        }
+
+        .inscripcion-content h2 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #1a0066;
+            line-height: 1.1;
+        }
+
+        .inscripcion-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #1a0066;
+            font-size: 1.8rem;
+            font-weight: 600;
+            border-bottom: 2px solid #1a0066;
+            padding-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .inscripcion-link:hover {
+            opacity: 0.7;
+            transform: translateX(5px);
+        }
+
+        .inscripcion-arrow {
+            font-size: 2.5rem;
+            margin-left: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .inscripcion-link:hover .inscripcion-arrow {
+            transform: translateX(10px) translateY(-10px);
+        }
+
+        /* Séptima Sección: Talento */
+        .talento-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 40px;
+            background-color: #fff;
+        }
+
+        .talento-section h2 {
+            font-size: 6rem;
+            font-weight: 800;
+            color: #FF5722;
+            text-align: center;
+            margin-bottom: 100px;
+            letter-spacing: 4px;
+        }
+
+        .talento-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .talento-card {
+            flex: 1 1 300px;
+            max-width: 320px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .talento-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: opacity 0.3s ease, transform 0.8s ease;
+        }
+
+        .talento-card:hover::after {
+            opacity: 1;
+            transform: translateX(100%);
+        }
+
+        .talento-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateZ(0);
+        }
+
+        .talento-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .talento-info h3 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #FF5722;
+            font-weight: 700;
+            transform: translateZ(80px);
+            text-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+        }
+
+        .talento-info p {
+            margin: 0;
+            font-size: 16px;
+            color: #FF5722;
+            font-weight: 600;
+            transform: translateZ(60px);
+            text-shadow: 0 2px 8px rgba(255, 87, 34, 0.3);
+        }
+
+        /* Posiciones iniciales inclinadas */
+        .talento-card:nth-child(1) { 
+            transform: rotateY(-12deg); 
+        }
+        
+        .talento-card:nth-child(2) { 
+            transform: rotateY(0deg); 
+        }
+        
+        .talento-card:nth-child(3) { 
+            transform: rotateY(12deg); 
+        }
+
+        /* Efecto al pasar el mouse */
+        .talento-card:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+            box-shadow: 0 25px 60px rgba(255, 87, 34, 0.25);
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .talento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 30px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 3.5rem;
+                letter-spacing: 8px;
+            }
+
+            .programa-section {
+                padding: 0 30px;
+            }
+
+            .programa-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .btn-saber-mas {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+
+            .analisis-section {
+                padding: 50px 30px;
+            }
+
+            .analisis-section h2 {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+            }
+
+            .btn-ver-programa {
+                padding: 15px 35px;
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+
+            .analisis-description {
+                font-size: 1.4rem;
+            }
+
+            .contenido-section {
+                padding: 50px 30px;
+            }
+
+            .contenido-header h3 {
+                font-size: 2rem;
+            }
+
+            .contenido-intro {
+                font-size: 1.3rem;
+            }
+
+            .accordion-number {
+                font-size: 1.5rem;
+                min-width: 50px;
+            }
+
+            .accordion-title {
+                font-size: 1.5rem;
+            }
+
+            .accordion-icon {
+                font-size: 2rem;
+            }
+
+            .accordion-content {
+                padding-left: 50px;
+            }
+
+            .accordion-content p {
+                font-size: 1.1rem;
+            }
+
+            .formato-section {
+                padding: 50px 30px;
+            }
+
+            .formato-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                margin-top: 50px;
+            }
+
+            .formato-item h4 {
+                font-size: 1.1rem;
+            }
+
+            .formato-item p {
+                font-size: 1.8rem;
+            }
+
+            .inscripcion-section {
+                padding: 50px 30px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .inscripcion-content {
+                max-width: 100%;
+            }
+
+            .inscripcion-content h2 {
+                font-size: 2.5rem;
+                margin-bottom: 40px;
+            }
+
+            .inscripcion-link {
+                font-size: 1.3rem;
+            }
+
+            .inscripcion-arrow {
+                font-size: 2rem;
+            }
+
+            .talento-section {
+                padding: 60px 30px;
+            }
+
+            .talento-section h2 {
+                font-size: 3rem;
+                margin-bottom: 60px;
+            }
+
+            .talento-card {
+                max-width: 90%;
+                height: 350px;
+            }
+
+            .talento-info h3 {
+                font-size: 20px;
+            }
+
+            .talento-info p {
+                font-size: 14px;
+            }
+        }
+
+        /* Octava Sección: Footer Brand */
+        .footer-brand-section {
+            width: 100%;
+            padding: 60px 80px;
+            background-color: #fff;
+            border-top: 2px solid #1a1a1a;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        .footer-brand-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-brand-left {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #1a1a1a;
+            letter-spacing: 2px;
+        }
+
+        .footer-brand-right {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .footer-brand-section {
+                padding: 40px 30px;
+            }
+
+            .footer-brand-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-brand-left,
+            .footer-brand-right {
+                font-size: 1.8rem;
                 text-align: center;
             }
         }
 
-        /* Hero Section */
-        .hero {
-            position: relative;
+        /* Novena Sección: Cursos */
+        .cursos-section {
+            width: 100%;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            overflow: hidden;
-            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(114, 28, 49, 0.3), transparent);
+            padding: 100px 80px;
+            background-color: #f5f5f5;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, #000000 0%, transparent 50%, #000000 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 900px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: white;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .description {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 3rem;
-            line-height: 1.6;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: #721C31;
-            color: white;
-            box-shadow: 0 0 40px rgba(114, 28, 49, 0.5);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 60px rgba(114, 28, 49, 0.8);
-            background: #8a2340;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #000000;
-            transform: translateY(-2px);
-        }
-
-        /* Program Section */
-        .program-section {
-            padding: 8rem 2rem;
-            background: #ffffff;
-        }
-
-        .program-container {
-            max-width: 1200px;
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .program-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .program-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000;
-        }
-
-        .program-objective {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #721C31;
-            margin-bottom: 0.5rem;
-        }
-
-        .program-description {
-            color: rgba(0, 0, 0, 0.6);
-            font-size: 1rem;
-        }
-
-        .program-intro {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: rgba(0, 0, 0, 0.8);
-            margin-bottom: 4rem;
-            text-align: center;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .courses-grid {
-            margin-bottom: 4rem;
-        }
-
-        .courses-title {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: #000000;
-        }
-
-        .courses-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .course-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .course-item:hover {
-            background: #f9f9f9;
-            border-color: #721C31;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(114, 28, 49, 0.1);
-        }
-
-        .course-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #721C31;
-            min-width: 50px;
-        }
-
-        .course-name {
-            font-size: 1.1rem;
-            color: #000000;
-        }
-
-        .download-container {
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: transparent;
-            color: #000000;
-            border: 2px solid #000000;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-download:hover {
-            background: #000000;
-            color: #ffffff;
-        }
-
-        .download-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .program-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-            padding: 3rem;
-            background: #f9f9f9;
-            border-radius: 12px;
-        }
-
-        .detail-item {
+        .curso-item {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 25px;
         }
 
-        .detail-label {
+        .curso-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FF5722 0%, #ff7849 100%);
+            transition: transform 0.3s ease;
+        }
+
+        .curso-item:hover .curso-image {
+            transform: scale(1.02);
+        }
+
+        .curso-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .curso-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .curso-tag {
+            display: inline-block;
+            width: fit-content;
+            padding: 8px 20px;
+            border: 2px solid #1a0066;
+            border-radius: 25px;
+            color: #1a0066;
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #721C31;
-        }
-
-        .detail-value {
-            font-size: 1.1rem;
-            color: #000000;
-        }
-
-        .cta-container {
-            text-align: center;
-        }
-
-        .btn-cta {
-            padding: 1.2rem 3rem;
-            font-size: 1.1rem;
             font-weight: 600;
-            background: #721C31;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            text-transform: capitalize;
         }
 
-        .btn-cta:hover {
-            background: #8a2340;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(114, 28, 49, 0.3);
-        }
-
-        /* Divider Section */
-        .divider-section {
-            height: 400px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .divider-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            
-        }
-
-        /* Courses Section */
-        .courses-section {
-            padding: 8rem 2rem;
-            background: #ffffff;
-        }
-
-        .courses-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .courses-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .courses-main-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000;
-        }
-
-        .courses-objective {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #721C31;
-            margin-bottom: 0.5rem;
-        }
-
-        .courses-description {
-            color: rgba(0, 0, 0, 0.6);
-            font-size: 1rem;
-        }
-
-        .complementary-courses {
-            display: grid;
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .complementary-course {
-            position: relative;
-            height: 400px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-
-        .course-image-container {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .course-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .complementary-course:hover .course-image {
-            transform: scale(1.05);
-        }
-
-        .course-text-content {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .complementary-course:hover .course-text-content {
-            opacity: 1;
-        }
-
-        .complementary-title {
+        .curso-title {
             font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .complementary-description {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .btn-syllabus {
-            padding: 0.8rem 2rem;
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            align-self: flex-start;
-        }
-
-        .btn-syllabus:hover {
-            background: white;
-            color: #000000;
-        }
-
-        .courses-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-            padding: 3rem;
-            background: #f9f9f9;
-            border-radius: 12px;
-        }
-
-        .courses-detail-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .courses-detail-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #721C31;
-        }
-
-        .courses-detail-value {
-            font-size: 1.1rem;
-            color: #000000;
-        }
-
-        .courses-cta-container {
-            text-align: center;
-        }
-
-        .btn-courses-cta {
-            padding: 1.2rem 3rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            background: #721C31;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-courses-cta:hover {
-            background: #8a2340;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(114, 28, 49, 0.3);
-        }
-
-        /* Team Section */
-        .team-section {
-            padding: 8rem 2rem;
-            background: #ffffff;
-        }
-
-        .team-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .team-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .team-title {
-            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: #000000;
+            color: #1a1a1a;
+            line-height: 1.3;
+            margin: 0;
         }
 
-        .team-subtitle {
-            font-size: 1.2rem;
-            color: rgba(0, 0, 0, 0.6);
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-        }
-
-        .team-card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+        .curso-link {
+            display: inline-block;
+            width: fit-content;
+            padding: 12px 30px;
+            background-color: #1a0066;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
             transition: all 0.3s ease;
         }
 
-        .team-card:hover {
-            border-color: #721C31;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .curso-link:hover {
+            background-color: #FF5722;
+            transform: translateY(-2px);
         }
 
-        .team-card-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
+        @media (max-width: 1024px) {
+            .cursos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .team-card-decoration {
-            height: 4px;
-            background: linear-gradient(90deg, #721C31, #DD335C, #1E67C6);
-        }
+        @media (max-width: 768px) {
+            .cursos-section {
+                padding: 60px 30px;
+            }
 
-        .team-card-info {
-            padding: 2rem;
-            text-align: center;
-        }
+            .cursos-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
 
-        .team-card-name {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #000000;
-        }
-
-        .team-card-position {
-            font-size: 1rem;
-            color: rgba(0, 0, 0, 0.6);
+            .curso-title {
+                font-size: 1.5rem;
+            }
         }
 
         /* Footer */
         .footer {
-            padding: 4rem 2rem 2rem;
-            background: #000000;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .footer-logo h3 {
-            font-size: 1.5rem;
+            background-color: #1a1a1a;
             color: white;
+            padding: 80px 80px 40px 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-about h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
             letter-spacing: 2px;
         }
 
-        .footer-nav {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
+        .footer-about p {
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        .footer-nav a {
-            color: rgba(255, 255, 255, 0.7);
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FF5722;
+            text-transform: uppercase;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #bbb;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .footer-nav a:hover {
-            color: #DD335C;
+        .footer-section a:hover {
+            color: #FF5722;
         }
 
-        .footer-social {
+        .social-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .footer-social a {
-            width: 40px;
-            height: 40px;
+        .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
 
-        .footer-social a:hover {
-            background: #721C31;
+        .social-links a:hover {
+            background-color: #FF5722;
+            transform: translateY(-3px);
         }
 
-        .footer-social svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
-        .footer-copyright {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
             text-align: center;
+            color: #777;
         }
 
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #ffffff;
-            padding: 3rem;
-            border-radius: 12px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: transparent;
-            border: none;
-            color: #000000;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .modal-close svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .modal-title {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #000000;
-        }
-
-        .modal-body {
-            color: rgba(0, 0, 0, 0.8);
-            line-height: 1.8;
-        }
-
-        .modal-body h3 {
-            color: #721C31;
-            margin-bottom: 1rem;
-        }
-
-        .modal-body ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-body li {
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-body p {
-            margin-bottom: 0.5rem;
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
+            .footer {
+                padding: 50px 30px 30px 30px;
             }
 
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .program-details,
-            .courses-info {
+            .footer-content {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-left">
-                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo"><img src="img/logoteo.png" alt="" class="logot"></a>
+            <div class="nav-wrapper">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#programa">Programa</a></li>
+                        <li><a href="#contenido">Contenido</a></li>
+                        <li><a href="#talento">Talento</a></li>
+                        <li><a href="#cursos">Cursos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+                    <i class="bi bi-sun-fill theme-icon sun-icon"></i>
+                    <i class="bi bi-moon-fill theme-icon moon-icon"></i>
+                </button>
+                <button class="menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="bi bi-list"></i>
                 </button>
             </div>
-            
-            <a href="#" class="nav-logo">
-                <img src="img/logo-blanco-teocalli.png" alt="Teocalli Lab">
-            </a>
-
-            <ul class="nav-links">
-                <li><a href="#programa">Programa</a></li>
-                <li><a href="#cursos">Cursos</a></li>
-                <li><a href="#equipo">Equipo</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-
-            <!--div class="nav-right">
-                <a href="#" class="btn-nav btn-nav-outline">Iniciar Sesión</a>
-                <a href="#" class="btn-nav btn-nav-solid">Inscríbete</a>
-            </div-->
         </div>
-    </nav>
+    </header>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-        <ul class="mobile-nav-links">
-            <li><a href="#programa">Programa</a></li>
-            <li><a href="#cursos">Cursos</a></li>
-            <li><a href="#equipo">Equipo</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#programa" onclick="toggleMobileMenu()">Programa</a></li>
+            <li><a href="#contenido" onclick="toggleMobileMenu()">Contenido</a></li>
+            <li><a href="#talento" onclick="toggleMobileMenu()">Talento</a></li>
+            <li><a href="#cursos" onclick="toggleMobileMenu()">Cursos</a></li>
+            <li><a href="#contacto" onclick="toggleMobileMenu()">Contacto</a></li>
         </ul>
-        <!--div class="mobile-nav-buttons">
-            <a href="#" class="btn-nav btn-nav-outline">Iniciar Sesión</a>
-            <a href="#" class="btn-nav btn-nav-solid">Inscríbete</a>
-        </div-->
     </div>
 
     <section class="hero">
-        <canvas id="aurora"></canvas>
-
-        <div class="content">
-            <div class="badge">Teocalli Lab</div>
-            <h1>Data Science</h1>
-            <p class="subtitle">Programa de Análisis y Visualización de Datos</p>
-            <p class="description">
-                Transforma datos en conocimiento. Aprende las herramientas y técnicas esenciales para el análisis profesional de datos.
-            </p>
-            <div class="cta-buttons">
-                <a href="#programa" class="btn btn-primary">Programa</a>
-                <a href="#cursos" class="btn btn-secondary">Cursos</a>
-            </div>
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="img/video.mp4" type="video/mp4">
+        </video>
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>TEOCALLI LAB School</h1>
         </div>
     </section>
 
-    <section id="programa" class="program-section">
-        <div class="program-container">
-            <div class="program-header">
-                <h2 class="program-title">Programa de Análisis y Visualización de Datos</h2>
-                <p class="program-objective">Objetivo</p>
-                <p class="program-description">Presentar el programa principal como una ruta de aprendizaje integral.</p>
-            </div>
-            <div class="program-content">
-                <div class="program-intro">
-                    <p>Un programa diseñado para introducirte en el mundo del análisis y visualización de datos. Aprende paso a paso las herramientas y el pensamiento analítico que utilizan los profesionales en ciencia de datos.</p>
-                </div>
-                <div class="courses-grid">
-                    <h3 class="courses-title">Cursos que incluye</h3>
-                    <div class="courses-list">
-                        <div class="course-item"><span class="course-number">01</span><span class="course-name">Pensamiento Estadístico</span></div>
-                        <div class="course-item"><span class="course-number">02</span><span class="course-name">Excel</span></div>
-                        <div class="course-item"><span class="course-number">03</span><span class="course-name">Bases de Datos con SQL</span></div>
-                        <div class="course-item"><span class="course-number">04</span><span class="course-name">Tableau</span></div>
-                        <div class="course-item"><span class="course-number">05</span><span class="course-name">Power BI</span></div>
-                        <div class="course-item"><span class="course-number">06</span><span class="course-name">R para análisis de datos</span></div>
-                        <div class="course-item"><span class="course-number">07</span><span class="course-name">Python para análisis de datos</span></div>
-                    </div>
-                    <div class="download-container">
-                        <a href="#" class="btn-download" download>
-                            <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="7 10 12 15 17 10"></polyline>
-                                <line x1="12" y1="15" x2="12" y2="3"></line>
-                            </svg>
-                            Ver Programa Completo
-                        </a>
-                    </div>
-                </div>
-                <div class="program-details">
-                    <div class="detail-item"><span class="detail-label">Formato</span><span class="detail-value">En línea, vía Google Meet</span></div>
-                    <div class="detail-item"><span class="detail-label">Duración</span><span class="detail-value">6 meses</span></div>
-                    <div class="detail-item"><span class="detail-label">Modalidad</span><span class="detail-value">Clases en vivo + materiales prácticos + acompañamiento</span></div>
-                </div>
-                <div class="cta-container"><button class="btn-cta">Quiero Inscribirme</button></div>
-            </div>
+    <section class="programa-section" id="programa">
+        <div class="programa-content">
+            <h2>Programa de Análisis y<br>Visualización de Datos.</h2>
+            <a href="#" class="btn-saber-mas">Saber más</a>
         </div>
     </section>
 
-    <section class="divider-section">
-        <video class="divider-video" autoplay muted loop playsinline><source src="videot.mp4" type="video/mp4"></video>
+    <section class="analisis-section">
+        <h2>Programa de Análisis y<br>Visualización de Datos</h2>
+        <a href="#" class="btn-ver-programa">Ver programa</a>
+        <p class="analisis-description">
+            Un programa diseñado para introducirte en el mundo del análisis y visualización de datos. Aprende paso a paso las herramientas y el pensamiento analítico que utilizan los profesionales en ciencia de datos.
+        </p>
     </section>
 
-    <section id="cursos" class="courses-section">
-        <div class="courses-container">
-            <div class="courses-header">
-                <h2 class="courses-main-title">Cursos</h2>
-                <p class="courses-objective">Objetivo</p>
-                <p class="courses-description">Mostrar los cursos complementarios que se pueden tomar por separado.</p>
-            </div>
-            <div class="courses-content">
-                <div class="complementary-courses">
-                    <div class="complementary-course">
-                        <div class="course-image-container"><img src="https://images.pexels.com/photos/18069241/pexels-photo-18069241.png" alt="Taller de Matemáticas" class="course-image"></div>
-                        <div class="course-text-content">
-                            <h3 class="complementary-title">Taller de Matemáticas</h3>
-                            <p class="complementary-description">Repaso práctico y aplicado para fortalecer tus bases.</p>
-                            <button class="btn-syllabus" data-course="taller-matematicas">Ver Temario</button>
-                        </div>
-                    </div>
-                    <div class="complementary-course">
-                        <div class="course-image-container"><img src="https://images.pexels.com/photos/17485608/pexels-photo-17485608.png" alt="Matemáticas para Ciencia de Datos" class="course-image"></div>
-                        <div class="course-text-content">
-                            <h3 class="complementary-title">Matemáticas para Ciencia de Datos</h3>
-                            <p class="complementary-description">Fundamentos de álgebra lineal, cálculo y probabilidad con ejemplos de datos reales.</p>
-                            <button class="btn-syllabus" data-course="matematicas-ciencia-datos">Ver Temario</button>
-                        </div>
-                    </div>
-                    <div class="complementary-course">
-                        <div class="course-image-container"><img src="https://images.pexels.com/photos/17483906/pexels-photo-17483906.png" alt="Estadística Descriptiva con Python" class="course-image"></div>
-                        <div class="course-text-content">
-                            <h3 class="complementary-title">Estadística Descriptiva con Python</h3>
-                            <p class="complementary-description">Análisis de datos con pandas, numpy y visualizaciones en matplotlib o seaborn.</p>
-                            <button class="btn-syllabus" data-course="estadistica-python">Ver Temario</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="courses-info">
-                    <div class="courses-detail-item"><span class="courses-detail-label">Formato</span><span class="courses-detail-value">En línea vía Google Meet</span></div>
-                    <div class="courses-detail-item"><span class="courses-detail-label">Duración</span><span class="courses-detail-value">4 a 6 semanas</span></div>
-                </div>
-                <div class="courses-cta-container"><button class="btn-courses-cta">Quiero Inscribirme</button></div>
-            </div>
+    <section class="contenido-section" id="contenido">
+        <div class="contenido-header">
+            <h3>TEOCALLI LAB</h3>
         </div>
-    </section>
-    
-    <section class="divider-section">
-        <video class="divider-video" autoplay muted loop playsinline><source src="videot.mp4" type="video/mp4"></video>
-    </section>
+        
+        <p class="contenido-intro">
+            Transforma datos en conocimiento. Aprende las herramientas y técnicas esenciales para el análisis profesional de datos.
+        </p>
 
-    <section id="equipo" class="team-section">
-        <div class="team-container">
-            <div class="team-header">
-                <h2 class="team-title">Nuestro Equipo</h2>
-                <p class="team-subtitle">Expertos apasionados por la educación en datos</p>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-number">01</span>
+                    <span class="accordion-title">Pensamiento estadístico</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Desarrolla tu capacidad analítica con fundamentos estadísticos sólidos. Aprende a interpretar datos, identificar patrones y tomar decisiones basadas en evidencia cuantitativa.</p>
+                </div>
             </div>
 
-            <div class="team-grid">
-                <div class="team-card">
-                    <img src="img/FILM.jpg" alt="Israel Lueza" class="team-card-image">
-                    <div class="team-card-decoration"></div>
-                    <div class="team-card-info">
-                        <h3 class="team-card-name">Ing. Israel Lueza</h3>
-                        <p class="team-card-position">Director Académico</p>
-                    </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-number">02</span>
+                    <span class="accordion-title">Excel</span>
+                    <span class="accordion-icon">+</span>
                 </div>
-
-                <div class="team-card">
-                    <img src="img/Myr_Arroyo.jpg" alt="Psc. Myriam Arroyo" class="team-card-image">
-                    <div class="team-card-decoration"></div>
-                    <div class="team-card-info">
-                        <h3 class="team-card-name">Myriam Arroyo</h3>
-                        <p class="team-card-position">Coordinadora de Programas</p>
-                    </div>
+                <div class="accordion-content">
+                    <p>Domina Excel más allá de lo básico. Fórmulas avanzadas, tablas dinámicas, visualizaciones y automatización con macros para análisis de datos profesional.</p>
                 </div>
+            </div>
 
-                <div class="team-card">
-                    <img src="img/Alberto.jpg" alt="Dr. Alberto Quezada" class="team-card-image">
-                    <div class="team-card-decoration"></div>
-                    <div class="team-card-info">
-                        <h3 class="team-card-name">Dr. Alberto Quezada</h3>
-                        <p class="team-card-position">Instructor Invitado</p>
-                    </div>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-number">03</span>
+                    <span class="accordion-title">Base de Datos SQL</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Aprende a consultar, manipular y gestionar bases de datos relacionales. Desde queries básicos hasta optimización de consultas complejas.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-number">04</span>
+                    <span class="accordion-title">Tableau</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Crea visualizaciones de datos impactantes e interactivas. Aprende a contar historias con datos y crear dashboards profesionales.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-number">05</span>
+                    <span class="accordion-title">Power BI</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Domina la herramienta de Business Intelligence de Microsoft. Conecta múltiples fuentes de datos, modela información y crea reportes dinámicos.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-number">06</span>
+                    <span class="accordion-title">R Studio</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Programa en R para análisis estadístico avanzado. Manipulación de datos, modelado predictivo y visualizaciones con ggplot2.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span class="accordion-number">07</span>
+                    <span class="accordion-title">Python</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Aprende Python para ciencia de datos. Pandas, NumPy, análisis exploratorio, machine learning y automatización de procesos analíticos.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contacto" class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
+    <section class="formato-section">
+        <div class="formato-grid">
+            <div class="formato-item">
+                <h4>Formato</h4>
+                <p>En línea, vía Google Meet</p>
+            </div>
+            <div class="formato-item">
+                <h4>Duración</h4>
+                <p>6 meses</p>
+            </div>
+            <div class="formato-item">
+                <h4>Modalidad</h4>
+                <p>Clases en vivo + materiales prácticos + acompañamiento</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="inscripcion-section" id="contacto">
+        <div class="inscripcion-content">
+            <h2>Inscríbete ahora y comienza tu camino en el análisis de datos.</h2>
+        </div>
+        <a href="https://wa.me/5215512345678?text=Hola,%20quiero%20inscribirme%20al%20programa%20de%20análisis%20de%20datos" class="inscripcion-link" target="_blank">
+            Inscríbete vía WhatsApp
+            <span class="inscripcion-arrow">↗</span>
+        </a>
+    </section>
+
+    <section class="talento-section" id="talento">
+        <h2>Talento</h2>
+        
+        <div class="talento-grid">
+            <div class="talento-card">
+                <img src="img/FILM.jpg" alt="Ing. Israel Lueza">
+                <div class="talento-info">
+                    <h3>Maestrante Israel Lueza</h3>
+                    <p>Instructor</p>
+                </div>
+            </div>
+
+            <div class="talento-card">
+                <img src="img/Myr_Arroyo.jpg" alt="Dra. María González">
+                <div class="talento-info">
+                    <h3>Mtra. Myriam Arroyo</h3>
+                    <p>Coordinadora de admisiones</p>
+                </div>
+            </div>
+
+            <div class="talento-card">
+                <img src="img/Alberto.jpg" alt="Mtro. Carlos Ramírez">
+                <div class="talento-info">
+                    <h3>Dr. Alberto Quezada Téllez</h3>
+                    <p>Invitado especial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Octava Sección: Footer Brand -->
+    <section class="footer-brand-section">
+        <div class="footer-brand-content">
+            <div class="footer-brand-left">TEOCALLI LAB</div>
+            <div class="footer-brand-right">Matemáticas para<br>Ciencia de Datos</div>
+        </div>
+    </section>
+
+    <!-- Novena Sección: Cursos -->
+    <section class="cursos-section" id="cursos">
+        <div class="cursos-grid">
+            <div class="curso-item">
+                <div class="curso-image">
+                    <img src="https://images.pexels.com/photos/1198828/pexels-photo-1198828.jpeg?_gl=1*icn5zm*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjM1MDg1NjYkbzUyJGcxJHQxNzYzNTA5MDkzJGo0NCRsMCRoMA.." alt="Taller de matemáticas">
+                </div>
+                <div class="curso-content">
+                    <span class="curso-tag">Curso</span>
+                    <h3 class="curso-title">Taller de matemáticas</h3>
+                    <a href="https://wa.me/5215512345678?text=Hola,%20quiero%20más%20información%20sobre%20el%20Taller%20de%20matemáticas" class="curso-link" target="_blank">Más información</a>
+                </div>
+            </div>
+
+            <div class="curso-item">
+                <div class="curso-image">
+                    <img src="https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?_gl=1*1knv0sw*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjM1MDg1NjYkbzUyJGcxJHQxNzYzNTA4Njg2JGo1OSRsMCRoMA.." alt="Estadística Descriptiva">
+                </div>
+                <div class="curso-content">
+                    <span class="curso-tag">Curso</span>
+                    <h3 class="curso-title">Estadística Descriptiva con Python</h3>
+                    <a href="https://wa.me/5215512345678?text=Hola,%20quiero%20más%20información%20sobre%20Estadística%20Descriptiva%20con%20Python" class="curso-link" target="_blank">Más información</a>
+                </div>
+            </div>
+
+            <div class="curso-item">
+                <div class="curso-image">
+                    <img src="https://images.pexels.com/photos/17484901/pexels-photo-17484901.png?_gl=1*1ipydhv*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjM1MDg1NjYkbzUyJGcxJHQxNzYzNTA4NTg3JGozOSRsMCRoMA.." alt="Matemáticas para Ciencia de Datos">
+                </div>
+                <div class="curso-content">
+                    <span class="curso-tag">Curso</span>
+                    <h3 class="curso-title">Matemáticas para Ciencia de Datos</h3>
+                    <a href="https://wa.me/5215512345678?text=Hola,%20quiero%20más%20información%20sobre%20Matemáticas%20para%20Ciencia%20de%20Datos" class="curso-link" target="_blank">Más información</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-about">
                 <h3>TEOCALLI LAB</h3>
+                <p>Transformamos datos en conocimiento. Somos especialistas en análisis y visualización de datos, ofreciendo programas educativos de alta calidad.</p>
+                <div class="social-links">
+                    <a href="#" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                </div>
             </div>
-            
-            <nav class="footer-nav">
-                <a href="#programa">Programa</a>
-                <a href="#cursos">Cursos</a>
-                <a href="#equipo">Equipo</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
-            
-            <div class="footer-social">
-                <!-- Social icons can be added here -->
+
+            <div class="footer-section">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#programa">Programa</a></li>
+                    <li><a href="#contenido">Contenido</a></li>
+                    <li><a href="#talento">Talento</a></li>
+                    <li><a href="#cursos">Cursos</a></li>
+                </ul>
             </div>
-            
-            <div class="footer-copyright">
-                <p>&copy; 2025 Teocalli Lab. Todos los derechos reservados.</p>
+
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="mailto:info@teocallilab.com"><i class="bi bi-envelope"></i> info@teocallilab.com</a></li>
+                    <li><a href="tel:+5215512345678"><i class="bi bi-telephone"></i> +52 55 1234 5678</a></li>
+                    <li><a href="https://wa.me/5215512345678" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp</a></li>
+                </ul>
             </div>
+
+            <div class="footer-section">
+                <h4>Horarios</h4>
+                <ul>
+                    <li>Lunes a Viernes</li>
+                    <li>9:00 AM - 6:00 PM</li>
+                    <li>Sábados</li>
+                    <li>10:00 AM - 2:00 PM</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 TEOCALLI LAB. Todos los derechos reservados. | <a href="#" style="color: #777;">Política de Privacidad</a> | <a href="#" style="color: #777;">Términos y Condiciones</a></p>
         </div>
     </footer>
 
-    <div class="modal-overlay" id="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close" id="modal-close">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <h2 class="modal-title" id="modal-title">Temario del Curso</h2>
-            <div class="modal-body" id="modal-body"></div>
-        </div>
-    </div>
-
     <script>
-        const canvas = document.getElementById('aurora');
-        const ctx = canvas.getContext('2d');
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        // Aurora colors
-        const colors = [
-            { r: 30, g: 103, b: 198 },    // #1E67C6
-            { r: 221, g: 51, b: 92 },     // #DD335C
-            { r: 114, g: 28, b: 49 }      // #721C31 (vino)
-        ];
-
-        class AuroraWave {
-            constructor(index, totalWaves) {
-                this.index = index;
-                this.offset = (index / totalWaves) * Math.PI * 2;
-                this.colorIndex = 0;
-                this.nextColorIndex = 1;
-                this.colorTransition = 0;
-                this.speed = 0.0002 + (index * 0.0001);
-                this.amplitude = 60 + (index * 20);
-                this.frequency = 0.002 + (index * 0.0005);
-                this.yPosition = height * 0.6 + (index * 40);
-            }
-
-            update(time) {
-                this.colorTransition += this.speed;
-                
-                if (this.colorTransition >= 1) {
-                    this.colorTransition = 0;
-                    this.colorIndex = this.nextColorIndex;
-                    this.nextColorIndex = (this.nextColorIndex + 1) % colors.length;
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const content = item.querySelector('.accordion-content');
+            
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.accordion-content').classList.remove('active');
                 }
-            }
-
-            draw(time) {
-                const currentColor = colors[this.colorIndex];
-                const nextColor = colors[this.nextColorIndex];
-                const t = this.easeInOutCubic(this.colorTransition);
-
-                const r = Math.floor(currentColor.r + (nextColor.r - currentColor.r) * t);
-                const g = Math.floor(currentColor.g + (nextColor.g - currentColor.g) * t);
-                const b = Math.floor(currentColor.b + (nextColor.b - currentColor.b) * t);
-
-                ctx.beginPath();
-                
-                for (let x = 0; x < width + 10; x += 10) {
-                    const y = this.yPosition + 
-                              Math.sin(x * this.frequency + time * 0.001 + this.offset) * this.amplitude +
-                              Math.sin(x * this.frequency * 0.5 + time * 0.0005) * (this.amplitude * 0.5);
-                    
-                    if (x === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-
-                ctx.lineTo(width, height);
-                ctx.lineTo(0, height);
-                ctx.closePath();
-
-                const gradient = ctx.createLinearGradient(0, this.yPosition - this.amplitude, 0, height);
-                gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.15)`);
-                gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, 0.08)`);
-                gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
-
-                ctx.fillStyle = gradient;
-                ctx.fill();
-
-                ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.3)`;
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            }
-
-            easeInOutCubic(x) {
-                return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-            }
-        }
-
-        const waves = [];
-        const numWaves = 4;
-
-        for (let i = 0; i < numWaves; i++) {
-            waves.push(new AuroraWave(i, numWaves));
-        }
-
-        function animate(currentTime) {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, width, height);
-
-            waves.forEach(wave => {
-                wave.update(currentTime);
-                wave.draw(currentTime);
             });
-
-            requestAnimationFrame(animate);
+            
+            item.classList.toggle('active');
+            content.classList.toggle('active');
         }
 
-        animate(0);
-
-        // Navigation functionality
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const icon = menuToggle.querySelector('i');
+            
             mobileMenu.classList.toggle('active');
+            
+            // Cambiar icono entre hamburguesa y X
+            if (mobileMenu.classList.contains('active')) {
+                icon.className = 'bi bi-x';
+            } else {
+                icon.className = 'bi bi-list';
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            body.classList.toggle('dark-mode');
+            themeToggle.classList.toggle('dark');
+            
+            // Guardar preferencia en localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Cargar tema guardado al iniciar
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.classList.add('dark');
+            }
         });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
+        // Cerrar menú móvil al hacer scroll
+        window.addEventListener('scroll', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-                menuToggle.classList.remove('active');
-                mobileMenu.classList.remove('active');
             }
         });
 
-        // Modal functionality
-        const modal = document.getElementById('modal-overlay');
-        const modalClose = document.getElementById('modal-close');
-        const modalTitle = document.getElementById('modal-title');
-        const modalBody = document.getElementById('modal-body');
-
-        const syllabusData = {
-            'taller-matematicas': {
-                title: 'Taller de Matemáticas',
-                content: `
-                    <h3>Contenido del curso:</h3>
-                    <ul>
-                        <li>Aritmética básica y operaciones</li>
-                        <li>Álgebra fundamental</li>
-                        <li>Ecuaciones y sistemas de ecuaciones</li>
-                        <li>Funciones y gráficas</li>
-                        <li>Geometría aplicada</li>
-                        <li>Introducción a la estadística descriptiva</li>
-                    </ul>
-                    <p><strong>Duración:</strong> 4 semanas</p>
-                    <p><strong>Requisitos:</strong> Ninguno, curso introductorio</p>
-                `
-            },
-            'matematicas-ciencia-datos': {
-                title: 'Matemáticas para Ciencia de Datos',
-                content: `
-                    <h3>Contenido del curso:</h3>
-                    <ul>
-                        <li>Álgebra lineal: vectores, matrices y operaciones</li>
-                        <li>Cálculo diferencial e integral aplicado</li>
-                        <li>Probabilidad y distribuciones</li>
-                        <li>Estadística inferencial</li>
-                        <li>Optimización matemática</li>
-                        <li>Aplicaciones en machine learning</li>
-                    </ul>
-                    <p><strong>Duración:</strong> 6 semanas</p>
-                    <p><strong>Requisitos:</strong> Conocimientos básicos de matemáticas</p>
-                `
-            },
-            'estadistica-python': {
-                title: 'Estadística Descriptiva con Python',
-                content: `
-                    <h3>Contenido del curso:</h3>
-                    <ul>
-                        <li>Introducción a Python y entornos de trabajo</li>
-                        <li>Pandas para manipulación de datos</li>
-                        <li>NumPy para cálculos numéricos</li>
-                        <li>Medidas de tendencia central y dispersión</li>
-                        <li>Visualización con Matplotlib y Seaborn</li>
-                        <li>Análisis exploratorio de datos (EDA)</li>
-                        <li>Proyecto final integrador</li>
-                    </ul>
-                    <p><strong>Duración:</strong> 5 semanas</p>
-                    <p><strong>Requisitos:</strong> Conocimientos básicos de programación (recomendado)</p>
-                `
-            }
-        };
-
-        document.querySelectorAll('.btn-syllabus').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const courseKey = this.getAttribute('data-course');
-                const courseData = syllabusData[courseKey];
-                
-                if (courseData) {
-                    modalTitle.textContent = courseData.title;
-                    modalBody.innerHTML = courseData.content;
-                    modal.classList.add('active');
-                }
-            });
-        });
-
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-
-        // Smooth scroll
+        // Smooth scroll para los enlaces de navegación
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
