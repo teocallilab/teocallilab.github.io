@@ -1233,7 +1233,8 @@
             height: 500px;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 80%;
+            width: 100%;
+            height: 700px;
             margin: 0 auto 40px auto;
         }
 
@@ -1255,15 +1256,14 @@
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
 
             .row {
                 flex-direction: column;
             }
-
-            .course-card {
+            .featured-card {
+                width: 100%;
+            }
+           .course-card {
                 height: 450px;
             }
 
@@ -1376,6 +1376,155 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
+            }
+        }
+
+        /* Tarjeta emergente lateral */
+        .popup-card {
+            position: fixed;
+            left: -400px;
+            bottom: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .popup-card.show {
+            left: 20px;
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, #1A0066 0%, #FF5722 100%);
+            padding: 20px;
+            position: relative;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .popup-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .popup-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .popup-body {
+            padding: 20px;
+        }
+
+        .popup-text {
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: #f5f5f5;
+            padding: 12px 8px;
+            border-radius: 8px;
+        }
+
+        .countdown-value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1A0066;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            display: block;
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .popup-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1A0066 0%, #FF5722 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .popup-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 1200px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+            .course-card {
+                height: 450px;
+            }
+
+            .course-card.collapsed {
+                flex: 1;
+                height: 150px;
+            }
+
+            .course-card.expanded {
+                flex: 1;
+                height: 500px;
             }
         }
     </style>
@@ -1545,7 +1694,7 @@
             </div>
             <div class="formato-item">
                 <h4>Modalidad</h4>
-                <p>Clases en vivo + materiales prácticos + acompañamiento</p>
+                <p>Clases en vivo</p>
             </div>
         </div>
     </section>
@@ -1821,7 +1970,38 @@
             <p>&copy; 2024 TEOCALLI LAB. Todos los derechos reservados. | <a href="#" style="color: #777;">Política de Privacidad</a> | <a href="#" style="color: #777;">Términos y Condiciones</a></p>
         </div>
     </footer>
-
+<!-- Tarjeta emergente -->
+    <div class="popup-card" id="popupCard">
+        <div class="popup-header">
+            <button class="popup-close" onclick="closePopup()">×</button>
+            <div class="popup-title">¡Próximo Inicio!</div>
+            <div class="popup-subtitle">Programa de Análisis y Visualización de Datos</div>
+        </div>
+        <div class="popup-body">
+            <p class="popup-text">
+                El registro para nuestra próxima generación abre el <strong>1 de junio de 2026</strong>. ¡Asegura tu lugar en la lista de espera!
+            </p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">0</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">0</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">0</span>
+                    <span class="countdown-label">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">0</span>
+                    <span class="countdown-label">Seg</span>
+                </div>
+            </div>
+            <a href="URL_DE_TU_FORMULARIO" class="popup-btn" target="_blank">Unirme a la lista de espera</a>
+        </div>
+    </div>
     <script>
         function toggleAccordion(element) {
             const item = element.parentElement;
@@ -1920,6 +2100,56 @@
                 }
             });
         }
+        // Fecha objetivo: 1 de junio de 2026
+        const targetDate = new Date('June 1, 2026 00:00:00').getTime();
+
+        // Actualizar contador cada segundo
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="text-align: center; color: #667eea; font-weight: 600;">¡El registro ya está abierto!</p>';
+            }
+        }
+
+        // Actualizar cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Mostrar popup
+        let popupClosed = false;
+        
+        function showPopup() {
+            if (!popupClosed) {
+                document.getElementById('popupCard').classList.add('show');
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('popupCard').classList.remove('show');
+            popupClosed = true;
+            
+            // Reaparecer después de 30 segundos
+            setTimeout(() => {
+                popupClosed = false;
+                showPopup();
+            }, 30000);
+        }
+
+        // Mostrar el popup después de 3 segundos al cargar la página
+        setTimeout(showPopup, 3000);
+
     </script>
 </body>
 </html>
