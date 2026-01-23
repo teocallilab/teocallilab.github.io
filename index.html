@@ -893,7 +893,7 @@
         }
 
         /* Novena Sección: Cursos */
-        .cursos-section {
+        /*.cursos-section {
             width: 100%;
             min-height: 100vh;
             padding: 100px 80px;
@@ -996,8 +996,287 @@
             .curso-title {
                 font-size: 1.5rem;
             }
+        }*/
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px 60px 30px;
+        }
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
         }
 
+        .course-card {
+            background: #1a1a1a;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            height: 500px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .course-card.collapsed {
+            flex: 0.5;
+            filter: brightness(0.6);
+        }
+
+        .course-card.expanded {
+            flex: 2;
+            filter: brightness(1);
+        }
+
+        .card-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+        }
+
+        .course-tag {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            transition: all 0.5s ease;
+        }
+
+        .course-card.collapsed .course-tag {
+            font-size: 1.4rem;
+        }
+
+        .course-subtitle {
+            font-size: 2.2rem;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            opacity: 0.95;
+            transition: all 0.5s ease;
+        }
+
+        .course-card.collapsed .course-subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .course-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 1;
+            max-height: 200px;
+            transition: all 0.5s ease;
+        }
+
+        .course-card.collapsed .course-description {
+            opacity: 0;
+            max-height: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 30px;
+            opacity: 1;
+            max-height: 200px;
+            transition: all 0.5s ease;
+        }
+
+        .course-card.collapsed .course-features {
+            opacity: 0;
+            max-height: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+        }
+
+        .course-features li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 20px;
+            font-weight: 300;
+        }
+
+        .course-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: 400;
+        }
+
+        .btn-learn {
+            background: white;
+            color: #1a1a1a;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            font-weight: 500;
+            opacity: 1;
+            max-height: 50px;
+        }
+
+        .course-card.collapsed .btn-learn {
+            opacity: 0;
+            max-height: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .btn-learn:hover {
+            background: #f0f0f0;
+            gap: 15px;
+        }
+
+        .btn-learn::after {
+            content: "→";
+            font-size: 1.2rem;
+        }
+
+                /* Imágenes de fondo para cada curso */
+        .python-bg {
+            background-image: url('https://fmcn.org/uploads/project/nt0agebqo8z8se35f3sqbihtzycp6ezq.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .geometria-bg {
+            background-image: url('https://fmcn.org/uploads/project/72vc4nkr1w39ajwz6acrw5knabw11lwp.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .diferencial-bg {
+            background-image: url('https://www.lobomexicano.org.mx/images/lobo021.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .integral-bg {
+            background-image: url('https://www.gob.mx/cms/uploads/article/main_image/65513/Jaguar_-_Selva__CONANP.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ecuaciones-bg {
+            background-image: url('https://mxc.com.mx/wp-content/uploads/2024/08/Calupoh-perro-lobo-mexicano-e1625204396297.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .algebra-bg {
+            background-image: url('https://www.gob.mx/cms/uploads/article/main_image/66871/quetzal.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .estadistica-bg {
+            background-image: url('https://content-historia.nationalgeographic.com.es/medio/2024/04/16/un-quetzal-macho-vuela-en-las-selvas-de-costa-rica-luciendo-su-hermoso-plumaje-verde-y-rojo-tan-apreciado-por-mayas-y-aztecas_c3f9f800_240416122154_1280x853.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .taller-bg {
+            background-image: url('https://www.lobomexicano.org.mx/images/lobo021.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ia-ninos-bg {
+            background-image: url('https://www.lobomexicano.org.mx/images/lobo021.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Tarjeta destacada */
+        .featured-card {
+            background: #1a1a1a;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            height: 500px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 80%;
+            margin: 0 auto 40px auto;
+        }
+
+        .featured-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Responsive para fila 1 (3 cards) */
+        .row {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 1200px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+            .course-card {
+                height: 450px;
+            }
+
+            .course-card.collapsed {
+                flex: 1;
+                height: 150px;
+            }
+
+            .course-card.expanded {
+                flex: 1;
+                height: 500px;
+            }
+        }
         /* Footer */
         .footer {
             background-color: #1a1a1a;
@@ -1315,12 +1594,12 @@
     <section class="footer-brand-section">
         <div class="footer-brand-content">
             <div class="footer-brand-left">TEOCALLI LAB</div>
-            <div class="footer-brand-right">Matemáticas para<br>Ciencia de Datos</div>
+            <div class="footer-brand-right">Más cursos</div>
         </div>
     </section>
 
     <!-- Novena Sección: Cursos -->
-    <section class="cursos-section" id="cursos">
+    <!--section class="cursos-section" id="cursos">
         <div class="cursos-grid">
             <div class="curso-item">
                 <div class="curso-image">
@@ -1355,8 +1634,162 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section-->
+    <div class="container">
+        <!--h1>Cursos Especializados</h1-->
+        <!-- Tarjeta destacada: Taller de Matemáticas -->
+        <div class="featured-card">
+            <div class="card-image taller-bg"></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+                <div class="course-tag">Python</div>
+                <div class="course-subtitle">Introducción a la programación</div>
+                <!--p class="course-description">Refuerza tus conocimientos matemáticos con ejercicios prácticos y resolución de problemas. Ideal para estudiantes que buscan mejorar sus habilidades fundamentales.</p>
+                <ul class="course-features">
+                    <li>Aritmética y álgebra básica</li>
+                    <li>Resolución de problemas paso a paso</li>
+                    <li>Ejercicios prácticos y aplicados</li>
+                </ul-->
+                <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20el%20Taller%20de%20Matemáticas" class="btn-learn">Más información</a>
+            </div>
+        </div>
+        <!-- Fila 1: Python, Geometría, Cálculo Diferencial -->
+        <div class="row" id="row1">
+            <div class="course-card expanded" onclick="expandCard(this, 'row1')">
+                <div class="card-image python-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="course-tag">Taller</div>
+                    <div class="course-subtitle">de Matemáticas</div>
+                    <!--p class="course-description">Aprende los fundamentos de la programación con uno de los lenguajes más versátiles y demandados del mercado.</p>
+                    <ul class="course-features">
+                        <li>Sintaxis y estructuras de datos</li>
+                        <li>Control de flujo y funciones</li>
+                        <li>Programación orientada a objetos</li>
+                    </ul-->
+                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Introducción%20a%20Python" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
+                </div>
+            </div>
 
+            <div class="course-card collapsed" onclick="expandCard(this, 'row1')">
+                <div class="card-image geometria-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="course-tag">Geometría</div>
+                    <div class="course-subtitle">Analítica</div>
+                    <!--p class="course-description">Domina los conceptos fundamentales de la geometría analítica y su aplicación en el análisis de datos.</p>
+                    <ul class="course-features">
+                        <li>Sistemas de coordenadas</li>
+                        <li>Ecuaciones de rectas y curvas</li>
+                        <li>Cónicas y transformaciones</li>
+                    </ul-->
+                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Geometría%20Analítica" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
+                </div>
+            </div>
+
+            <div class="course-card collapsed" onclick="expandCard(this, 'row1')">
+                <div class="card-image diferencial-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="course-tag">Cálculo</div>
+                    <div class="course-subtitle">Diferencial</div>
+                    <!--p class="course-description">Comprende los conceptos de límites, continuidad y derivadas para modelar y resolver problemas reales.</p>
+                    <ul class="course-features">
+                        <li>Límites y continuidad</li>
+                        <li>Derivadas y aplicaciones</li>
+                        <li>Optimización de funciones</li>
+                    </ul-->
+                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Cálculo%20Diferencial" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fila 2: Cálculo Integral, Ecuaciones, Álgebra -->
+        <div class="row" id="row2">
+            <div class="course-card expanded" onclick="expandCard(this, 'row2')">
+                <div class="card-image integral-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="course-tag">Cálculo</div>
+                    <div class="course-subtitle">Integral</div>
+                    <!--p class="course-description">Explora las técnicas de integración y su aplicación en el cálculo de áreas, volúmenes y probabilidades.</p>
+                    <ul class="course-features">
+                        <li>Integrales definidas e indefinidas</li>
+                        <li>Técnicas de integración</li>
+                        <li>Aplicaciones en ciencia de datos</li>
+                    </ul-->
+                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Cálculo%20Integral" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
+                </div>
+            </div>
+
+            <div class="course-card collapsed" onclick="expandCard(this, 'row2')">
+                <div class="card-image ecuaciones-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="course-tag">Ecuaciones</div>
+                    <div class="course-subtitle">Diferenciales Ordinarias</div>
+                    <!--p class="course-description">Aprende a modelar fenómenos dinámicos y sistemas complejos mediante ecuaciones diferenciales.</p>
+                    <ul class="course-features">
+                        <li>Ecuaciones de primer orden</li>
+                        <li>Ecuaciones lineales superiores</li>
+                        <li>Modelado de fenómenos reales</li>
+                    </ul-->
+                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Ecuaciones%20Diferenciales" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
+                </div>
+            </div>
+
+            <div class="course-card collapsed" onclick="expandCard(this, 'row2')">
+                <div class="card-image algebra-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="course-tag">Álgebra</div>
+                    <div class="course-subtitle">Lineal</div>
+                    <!--p class="course-description">Fundamentos esenciales del álgebra lineal aplicados a la ciencia de datos y machine learning.</p>
+                    <ul class="course-features">
+                        <li>Vectores y matrices</li>
+                        <li>Sistemas de ecuaciones lineales</li>
+                        <li>Valores y vectores propios</li>
+                    </ul>
+                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Álgebra%20Lineal" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fila 3: Estadística (centrada) -->
+        <!--div class="row" id="row3" style="justify-content: center;">
+            <div class="course-card expanded" onclick="expandCard(this, 'row3')" style="max-width: 450px;">
+                <div class="card-image estadistica-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="course-tag">Estadística™</div>
+                    <div class="course-subtitle">inferencial</div>
+                    <p class="course-description">Aprende a hacer inferencias y tomar decisiones basadas en datos mediante técnicas estadísticas avanzadas.</p>
+                    <ul class="course-features">
+                        <li>Distribuciones de probabilidad</li>
+                        <li>Pruebas de hipótesis</li>
+                        <li>Intervalos de confianza</li>
+                    </ul-->
+                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Estadística%20Inferencial" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta destacada: IA para niños -->
+        <div class="featured-card">
+            <div class="card-image ia-ninos-bg"></div>
+            <div class="card-overlay"></div>
+            <div class="card-content">
+                <div class="course-tag">Inteligencia Artificial™</div>
+                <div class="course-subtitle">para niños</div>
+                <!--p class="course-description">Introducción divertida y educativa al mundo de la Inteligencia Artificial, diseñada especialmente para niños de 11 a 14 años. Aprende sobre IA de forma práctica y creativa.</p>
+                <ul class="course-features">
+                    <li>¿Qué es la Inteligencia Artificial?</li>
+                    <li>Proyectos interactivos y juegos</li>
+                    <li>Ética y uso responsable de la IA</li>
+                </ul-->
+                <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20IA%20para%20niños" class="btn-learn">Más información</a>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -1489,6 +1922,21 @@
                 }
             });
         });
+        
+        function expandCard(card, rowId) {
+            const row = document.getElementById(rowId);
+            const cards = row.querySelectorAll('.course-card');
+            
+            cards.forEach(c => {
+                if (c === card) {
+                    c.classList.remove('collapsed');
+                    c.classList.add('expanded');
+                } else {
+                    c.classList.remove('expanded');
+                    c.classList.add('collapsed');
+                }
+            });
+        }
     </script>
 </body>
 </html>
