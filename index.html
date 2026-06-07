@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEOCALLI LAB - Data Analysis and Visualization</title>
+    <title>TEOCALLI LAB SCHOOL - Data Analysis and Visualization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- Google tag (gtag.js) -->
@@ -15,2145 +18,1132 @@
 	
 	  gtag('config', 'G-DMBX24SMFX');
 	</script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Header/Navegación */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 80px;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .nav-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #FF5722;
-            border: none;
-            border-radius: 30px;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            opacity: 0.8;
-        }
-
-        .theme-icon {
-            font-size: 1.2rem;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle.dark .sun-icon {
-            transform: scale(0);
-        }
-
-        .theme-toggle.dark .moon-icon {
-            transform: scale(1.2);
-        }
-
-        body.dark-mode {
-            background-color: #1a1a1a;
-            color: white;
-        }
-
-        body.dark-mode .header {
-            background-color: #2a2a2a;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
-        body.dark-mode .programa-section,
-        body.dark-mode .formato-section,
-        body.dark-mode .talento-section {
-            background-color: #2a2a2a;
-        }
-
-        body.dark-mode .footer-brand-section {
-            background-color: #FF5722;
-            border-top: 2px solid #1a0066;
-            border-bottom: 2px solid #1a0066;
-        }
-
-        body.dark-mode .cursos-section {
-            background-color: #FF5722;
-        }
-
-        body.dark-mode .programa-content h2,
-        body.dark-mode .formato-item p,
-        body.dark-mode .talento-section h2 {
-            color: white;
-        }
-
-        body.dark-mode .footer-brand-left,
-        body.dark-mode .footer-brand-right {
-            color: #1a0066;
-        }
-
-        body.dark-mode .curso-tag {
-            border-color: #1a0066;
-            color: #1a0066;
-        }
-
-        body.dark-mode .curso-title {
-            color: #1a0066;
-        }
-
-        body.dark-mode .curso-link {
-            background-color: #1a0066;
-            color: white;
-        }
-
-        body.dark-mode .curso-link:hover {
-            background-color: #2a0088;
-        }
-
-        body.dark-mode .formato-item h4 {
-            color: #999;
-        }
-
-        body.dark-mode .mobile-menu {
-            background-color: #2a2a2a;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #FF5722;
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
-        .logot{
-            width: 15%;
-        }
-        .nav-menu {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            color: #FF5722;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-menu a:hover {
-            opacity: 0.7;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #FF5722;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 75px;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 20px;
-            z-index: 999;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .mobile-menu a {
-            color: #FF5722;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: block;
-            padding: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                padding: 20px 30px;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .theme-toggle {
-                order: -1;
-            }
-
-            .nav-wrapper {
-                gap: 20px;
-            }
-        }
-
-        /* Primera Sección: Hero */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            margin-top: 75px;
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                margin-top: 0;
-            }
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-
-        .hero-fallback {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a0066 0%, #FF5722 100%);
-            display: none;
-        }
-
-        .hero-video:not([src]) ~ .hero-fallback,
-        .hero-video[src=""]:not([poster]) ~ .hero-fallback {
-            display: block;
-        }
-
-      
-
-        .hero-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 2;
-            padding: 100px 0px;
-            
-        }
-
-        .hero-content h1 {
-            color: white;
-            font-size: 6rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            line-height: 1;
-            margin: 0;
-        }
-
-        /* Segunda Sección */
-        .programa-section {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 80px;
-            background-color: #f5f5f5;
-        }
-
-        .programa-content {
-            max-width: 800px;
-        }
-
-        .programa-content h2 {
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            color: #FF5722;
-            margin-bottom: 40px;
-        }
-
-        .btn-saber-mas {
-            display: inline-block;
-            padding: 18px 45px;
-            background-color: #1a1a1a;
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .btn-saber-mas:hover {
-            background-color: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        /* Tercera Sección */
-        .analisis-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px;
-            background-color: #FF5722;
-        }
-
-        .analisis-section h2 {
-            font-size: 5.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            color: #1a0066;
-            margin-bottom: 50px;
-            max-width: 100%;
-        }
-
-        .btn-ver-programa {
-            display: inline-block;
-            padding: 18px 45px;
-            background-color: transparent;
-            color: #1a0066;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: 3px solid #1a0066;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            margin-bottom: 60px;
-            width: fit-content;
-        }
-
-        .btn-ver-programa:hover {
-            background-color: #1a0066;
-            color: #FF5722;
-            transform: translateY(-2px);
-        }
-
-        .analisis-description {
-            font-size: 2.8rem;
-            line-height: 1.4;
-            color: #1a0066;
-            font-weight: 400;
-            max-width: 100%;
-        }
-
-        /* Cuarta Sección: Contenido del Programa */
-        .contenido-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px;
-            background-color: #FF5722;
-        }
-
-        .contenido-header {
-            border-top: 3px solid #1a0066;
-            padding-top: 40px;
-            margin-bottom: 30px;
-        }
-
-        .contenido-header h3 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #1a0066;
-            margin-bottom: 40px;
-        }
-
-        .contenido-intro {
-            font-size: 2rem;
-            line-height: 1.4;
-            color: #1a0066;
-            margin-bottom: 60px;
-            max-width: 90%;
-        }
-
-        .accordion-item {
-            border-bottom: 2px solid #1a0066;
-            padding: 30px 0;
-        }
-
-        .accordion-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .accordion-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a0066;
-            min-width: 80px;
-        }
-
-        .accordion-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a0066;
-            flex-grow: 1;
-        }
-
-        .accordion-icon {
-            font-size: 3rem;
-            color: #1a0066;
-            font-weight: 300;
-            transition: transform 0.3s ease;
-            min-width: 50px;
-            text-align: center;
-        }
-
-        .accordion-header:hover .accordion-title {
-            opacity: 0.7;
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding-left: 80px;
-        }
-
-        .accordion-content.active {
-            max-height: 500px;
-            padding-top: 20px;
-        }
-
-        .accordion-content p {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            color: #1a0066;
-        }
-
-        .accordion-item.active .accordion-icon {
-            transform: rotate(45deg);
-        }
-
-        /* Quinta Sección: Formato del Programa */
-        .formato-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px;
-            background-color: #f5f5f5;
-        }
-
-        .formato-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
-            margin-top: 80px;
-        }
-
-        .formato-item {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .formato-icon {
-            font-size: 3rem;
-            color: #FF5722;
-        }
-
-        .formato-item h4 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .formato-item p {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            line-height: 1.3;
-        }
-
-        /* Sexta Sección: Inscripción */
-        .inscripcion-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 80px;
-            background-color: #FF5722;
-        }
-
-        .inscripcion-content {
-            max-width: 60%;
-        }
-
-        .inscripcion-content h2 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            color: #1a0066;
-            line-height: 1.1;
-        }
-
-        .inscripcion-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #1a0066;
-            font-size: 1.8rem;
-            font-weight: 600;
-            border-bottom: 2px solid #1a0066;
-            padding-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .inscripcion-link:hover {
-            opacity: 0.7;
-            transform: translateX(5px);
-        }
-
-        .inscripcion-arrow {
-            font-size: 2.5rem;
-            margin-left: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .inscripcion-link:hover .inscripcion-arrow {
-            transform: translateX(10px) translateY(-10px);
-        }
-
-        /* Séptima Sección: Talento */
-        .talento-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 40px;
-            background-color: #fff;
-        }
-
-        .talento-section h2 {
-            font-size: 6rem;
-            font-weight: 800;
-            color: #FF5722;
-            text-align: center;
-            margin-bottom: 100px;
-            letter-spacing: 4px;
-        }
-
-        .talento-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .talento-card {
-            flex: 1 1 300px;
-            max-width: 320px;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease, box-shadow 0.4s ease;
-            cursor: pointer;
-            background: #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .talento-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            opacity: 0;
-            transform: translateX(-100%);
-            transition: opacity 0.3s ease, transform 0.8s ease;
-        }
-
-        .talento-card:hover::after {
-            opacity: 1;
-            transform: translateX(100%);
-        }
-
-        .talento-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform: translateZ(0);
-        }
-
-        .talento-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 2;
-            padding: 20px;
-        }
-
-        .talento-info h3 {
-            margin: 0 0 10px 0;
-            font-size: 24px;
-            color: #FF5722;
-            font-weight: 700;
-            transform: translateZ(80px);
-            text-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
-        }
-
-        .talento-info p {
-            margin: 0;
-            font-size: 16px;
-            color: #FF5722;
-            font-weight: 600;
-            transform: translateZ(60px);
-            text-shadow: 0 2px 8px rgba(255, 87, 34, 0.3);
-        }
-
-        /* Posiciones iniciales inclinadas */
-        .talento-card:nth-child(1) { 
-            transform: rotateY(-12deg); 
-        }
-        
-        .talento-card:nth-child(2) { 
-            transform: rotateY(0deg); 
-        }
-        
-        .talento-card:nth-child(3) { 
-            transform: rotateY(12deg); 
-        }
-
-        /* Efecto al pasar el mouse */
-        .talento-card:hover {
-            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
-            box-shadow: 0 25px 60px rgba(255, 87, 34, 0.25);
-        }
-
-        /* Media Queries */
-        @media (max-width: 1024px) {
-            .talento-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content {
-                padding: 30px 20px;
-            }
-
-            .hero-content h1 {
-                font-size: 3.5rem;
-                letter-spacing: 8px;
-            }
-
-            .programa-section {
-                padding: 0 30px;
-            }
-
-            .programa-content h2 {
-                font-size: 2.5rem;
-            }
-
-            .btn-saber-mas {
-                padding: 15px 35px;
-                font-size: 1rem;
-            }
-
-            .analisis-section {
-                padding: 50px 30px;
-            }
-
-            .analisis-section h2 {
-                font-size: 2.8rem;
-                margin-bottom: 30px;
-            }
-
-            .btn-ver-programa {
-                padding: 15px 35px;
-                font-size: 1rem;
-                margin-bottom: 40px;
-            }
-
-            .analisis-description {
-                font-size: 1.4rem;
-            }
-
-            .contenido-section {
-                padding: 50px 30px;
-            }
-
-            .contenido-header h3 {
-                font-size: 2rem;
-            }
-
-            .contenido-intro {
-                font-size: 1.3rem;
-            }
-
-            .accordion-number {
-                font-size: 1.5rem;
-                min-width: 50px;
-            }
-
-            .accordion-title {
-                font-size: 1.5rem;
-            }
-
-            .accordion-icon {
-                font-size: 2rem;
-            }
-
-            .accordion-content {
-                padding-left: 50px;
-            }
-
-            .accordion-content p {
-                font-size: 1.1rem;
-            }
-
-            .formato-section {
-                padding: 50px 30px;
-            }
-
-            .formato-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                margin-top: 50px;
-            }
-
-            .formato-item h4 {
-                font-size: 1.1rem;
-            }
-
-            .formato-item p {
-                font-size: 1.8rem;
-            }
-
-            .inscripcion-section {
-                padding: 50px 30px;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .inscripcion-content {
-                max-width: 100%;
-            }
-
-            .inscripcion-content h2 {
-                font-size: 2.5rem;
-                margin-bottom: 40px;
-            }
-
-            .inscripcion-link {
-                font-size: 1.3rem;
-            }
-
-            .inscripcion-arrow {
-                font-size: 2rem;
-            }
-
-            .talento-section {
-                padding: 60px 30px;
-            }
-
-            .talento-section h2 {
-                font-size: 3rem;
-                margin-bottom: 60px;
-            }
-
-            .talento-card {
-                max-width: 90%;
-                height: 350px;
-            }
-
-            .talento-info h3 {
-                font-size: 20px;
-            }
-
-            .talento-info p {
-                font-size: 14px;
-            }
-        }
-
-        /* Octava Sección: Footer Brand */
-        .footer-brand-section {
-            width: 100%;
-            padding: 60px 80px;
-            background-color: #fff;
-            border-top: 2px solid #1a1a1a;
-            border-bottom: 2px solid #1a1a1a;
-        }
-
-        .footer-brand-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-brand-left {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #1a1a1a;
-            letter-spacing: 2px;
-        }
-
-        .footer-brand-right {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            text-align: right;
-        }
-
-        @media (max-width: 768px) {
-            .footer-brand-section {
-                padding: 40px 30px;
-            }
-
-            .footer-brand-content {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
-
-            .footer-brand-left,
-            .footer-brand-right {
-                font-size: 1.8rem;
-                text-align: center;
-            }
-        }
-
-        /* Novena Sección: Cursos */
-        /*.cursos-section {
-            width: 100%;
-            min-height: 100vh;
-            padding: 100px 80px;
-            background-color: #f5f5f5;
-        }
-
-        .cursos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .curso-item {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .curso-image {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 20px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #FF5722 0%, #ff7849 100%);
-            transition: transform 0.3s ease;
-        }
-
-        .curso-item:hover .curso-image {
-            transform: scale(1.02);
-        }
-
-        .curso-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .curso-content {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .curso-tag {
-            display: inline-block;
-            width: fit-content;
-            padding: 8px 20px;
-            border: 2px solid #1a0066;
-            border-radius: 25px;
-            color: #1a0066;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: capitalize;
-        }
-
-        .curso-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            line-height: 1.3;
-            margin: 0;
-        }
-
-        .curso-link {
-            display: inline-block;
-            width: fit-content;
-            padding: 12px 30px;
-            background-color: #1a0066;
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .curso-link:hover {
-            background-color: #FF5722;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 1024px) {
-            .cursos-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .cursos-section {
-                padding: 60px 30px;
-            }
-
-            .cursos-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .curso-title {
-                font-size: 1.5rem;
-            }
-        }*/
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 30px 60px 30px;
-        }
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .course-card {
-            background: #1a1a1a;
-            border-radius: 24px;
-            overflow: hidden;
-            position: relative;
-            height: 500px;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .course-card.collapsed {
-            flex: 0.5;
-            filter: brightness(0.6);
-        }
-
-        .course-card.expanded {
-            flex: 2;
-            filter: brightness(1);
-        }
-
-        .card-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        .card-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /*background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(255, 87, 34, 0.4) 100%);*/
-            z-index: 2;
-        }
-
-        .card-content {
-            position: relative;
-            z-index: 3;
-            padding: 40px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            color: white;
-        }
-
-        .course-tag {
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-            transition: all 0.5s ease;
-        }
-
-        .course-card.collapsed .course-tag {
-            font-size: 1.4rem;
-        }
-
-        .course-subtitle {
-            font-size: 2.2rem;
-            font-weight: 300;
-            font-style: italic;
-            margin-bottom: 25px;
-            letter-spacing: -0.5px;
-            opacity: 0.95;
-            transition: all 0.5s ease;
-        }
-
-        .course-card.collapsed .course-subtitle {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-        }
-
-        .course-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            opacity: 1;
-            max-height: 200px;
-            transition: all 0.5s ease;
-        }
-
-        .course-card.collapsed .course-description {
-            opacity: 0;
-            max-height: 0;
-            margin-bottom: 0;
-            overflow: hidden;
-        }
-
-        .course-features {
-            list-style: none;
-            margin-bottom: 30px;
-            opacity: 1;
-            max-height: 200px;
-            transition: all 0.5s ease;
-        }
-
-        .course-card.collapsed .course-features {
-            opacity: 0;
-            max-height: 0;
-            margin-bottom: 0;
-            overflow: hidden;
-        }
-
-        .course-features li {
-            padding: 6px 0;
-            font-size: 0.95rem;
-            position: relative;
-            padding-left: 20px;
-            font-weight: 300;
-        }
-
-        .course-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            font-weight: 400;
-        }
-
-        .btn-learn {
-            background: white;
-            color: #1a1a1a;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            width: fit-content;
-            font-weight: 500;
-            opacity: 1;
-            max-height: 50px;
-        }
-
-        .course-card.collapsed .btn-learn {
-            opacity: 0;
-            max-height: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .btn-learn:hover {
-            background: #f0f0f0;
-            gap: 15px;
-        }
-
-        .btn-learn::after {
-            content: "→";
-            font-size: 1.2rem;
-        }
-
-                /* Imágenes de fondo para cada curso */
-        .python-bg {
-            background-image: url('https://fmcn.org/uploads/project/nt0agebqo8z8se35f3sqbihtzycp6ezq.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .geometria-bg {
-            background-image: url('https://www.gob.mx/cms/uploads/article/main_image/65513/Jaguar_-_Selva__CONANP.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .diferencial-bg {
-            background-image: url('https://www.lobomexicano.org.mx/images/lobo021.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .integral-bg {
-            background-image: url('https://www.gob.mx/cms/uploads/article/main_image/65513/Jaguar_-_Selva__CONANP.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .ecuaciones-bg {
-            background-image: url('https://mxc.com.mx/wp-content/uploads/2024/08/Calupoh-perro-lobo-mexicano-e1625204396297.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .algebra-bg {
-            background-image: url('https://www.gob.mx/cms/uploads/article/main_image/66871/quetzal.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .estadistica-bg {
-            background-image: url('https://content-historia.nationalgeographic.com.es/medio/2024/04/16/un-quetzal-macho-vuela-en-las-selvas-de-costa-rica-luciendo-su-hermoso-plumaje-verde-y-rojo-tan-apreciado-por-mayas-y-aztecas_c3f9f800_240416122154_1280x853.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .taller-bg {
-            background-image: url('https://images.pexels.com/photos/33349105/pexels-photo-33349105.jpeg?_gl=1*v8ux1v*_ga*MTc1OTczMzI5OS4xNzc0MTA1NjE3*_ga_8JE65Q40S6*czE3NzcwNjUxMzgkbzYkZzEkdDE3NzcwNjU0NDckajM1JGwwJGgw');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .ia-ninos-bg {
-            background-image: url('https://images.telediario.mx/eh_CU4Aof8p8ijzQSdeApelH3Qg=/948x533/uploads/media/2023/10/11/vista-de-una-pantera-negra.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Tarjeta destacada */
-        .featured-card {
-            background: #1a1a1a;
-            border-radius: 24px;
-            overflow: hidden;
-            position: relative;
-            height: 500px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            height: 700px;
-            margin: 0 auto 40px auto;
-        }
-
-        .featured-card:hover {
-            transform: scale(1.02);
-        }
-
-        /* Responsive para fila 1 (3 cards) */
-        .row {
-            display: flex;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        @media (max-width: 1200px) {
-            .courses-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-
-            .row {
-                flex-direction: column;
-            }
-            .featured-card {
-                width: 100%;
-            }
-           .course-card {
-                height: 450px;
-            }
-
-            .course-card.collapsed {
-                flex: 1;
-                height: 150px;
-            }
-
-            .course-card.expanded {
-                flex: 1;
-                height: 500px;
-            }
-        }
-        /* Footer */
-        .footer {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 80px 80px 40px 80px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            max-width: 1400px;
-            margin: 0 auto 60px;
-        }
-
-        .footer-about h3 {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .footer-about p {
-            color: #bbb;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .footer-section h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #FF5722;
-            text-transform: uppercase;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-section a {
-            color: #bbb;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #FF5722;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: #FF5722;
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #333;
-            padding-top: 30px;
-            text-align: center;
-            color: #777;
-        }
-
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .footer {
-                padding: 50px 30px 30px 30px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
-
-        /* Tarjeta emergente lateral */
-        .popup-card {
-            position: fixed;
-            left: -400px;
-            bottom: 20px;
-            width: 350px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-
-        .popup-card.show {
-            left: 20px;
-        }
-
-        .popup-header {
-            background: linear-gradient(135deg, #1A0066 0%, #FF5722 100%);
-            padding: 20px;
-            position: relative;
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
-
-        .popup-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .popup-title {
-            color: white;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .popup-subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9rem;
-        }
-
-        .popup-body {
-            padding: 20px;
-        }
-
-        .popup-text {
-            color: #333;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .countdown-item {
-            text-align: center;
-            background: #f5f5f5;
-            padding: 12px 8px;
-            border-radius: 8px;
-        }
-
-        .countdown-value {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1A0066;
-            line-height: 1;
-        }
-
-        .countdown-label {
-            display: block;
-            font-size: 0.7rem;
-            color: #666;
-            margin-top: 5px;
-            text-transform: uppercase;
-        }
-
-        .popup-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #1A0066 0%, #FF5722 100%);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-        }
-
-        .popup-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 1200px) {
-            .courses-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .row {
-                flex-direction: column;
-            }
-
-            .course-card {
-                height: 450px;
-            }
-
-            .course-card.collapsed {
-                flex: 1;
-                height: 150px;
-            }
-
-            .course-card.expanded {
-                flex: 1;
-                height: 500px;
-            }
-        }
-    </style>
+  <style>
+    :root {
+      --red:    #B21E3B;
+      --cream:  #F0EDE8;
+      --white:  #FFFFFF;
+      --black:  #000000;
+      --red-dim:   rgba(178,30,59,0.12);
+      --cream-dim: rgba(240,237,232,0.5);
+      --cream-low: rgba(240,237,232,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    /* scroll suave en todos los navegadores */
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Syne', sans-serif;
+      font-size: 16px; line-height: 1.5;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CURSOR ── */
+    .cursor { position: fixed; top:0; left:0; z-index:9999; pointer-events:none; mix-blend-mode:difference; }
+    .cursor__dot  { position:absolute; width:7px; height:7px; background:var(--white); border-radius:50%; transform:translate(-50%,-50%); transition:width .2s,height .2s; }
+    .cursor__ring { position:absolute; width:34px; height:34px; border:1px solid var(--white); border-radius:50%; transform:translate(-50%,-50%); transition:width .3s,height .3s,opacity .3s; }
+    body:has(a:hover) .cursor__ring,
+    body:has(button:hover) .cursor__ring { width:54px; height:54px; }
+
+    /* ── SHADER CANVAS ── */
+    #shader-canvas { position:fixed; inset:0; z-index:0; width:100%; height:100%; pointer-events:none; }
+
+    /* ── GRAIN ── */
+    .grain {
+      position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.04;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:200px 200px; mix-blend-mode:overlay;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:500;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 3rem; height:70px;
+    }
+    nav::before { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%); pointer-events:none; }
+    nav::after  { content:''; position:absolute; bottom:0; left:3rem; right:3rem; height:1px; background:linear-gradient(to right,transparent,rgba(178,30,59,.25),transparent); }
+    .nav__brand { display:flex; align-items:center; gap:.8rem; text-decoration:none; position:relative; z-index:1; }
+    .nav__logo  { display:flex; align-items:center; flex-shrink:0; }
+    .nav__logo img { width:52px; height:52px; }
+    .nav__name  { font-weight:700; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream); line-height:1.3; }
+    .nav__name em { display:block; font-style:normal; font-size:.52rem; letter-spacing:.28em; color:var(--red); font-weight:300; }
+    .nav__right { display:flex; align-items:stretch; gap:0; position:relative; z-index:1; height:42px; }
+    .nav__login {
+      display:flex; align-items:center; padding:0 1.6rem;
+      font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--black); background:var(--cream); text-decoration:none;
+      clip-path:polygon(10px 0%,100% 0%,100% 100%,0% 100%);
+      transition:background .25s;
+    }
+    .nav__login:hover { background:#ddd9d3; }
+    .nav__menu-btn {
+      display:flex; align-items:center; gap:.55rem; padding:0 1.6rem;
+      background:var(--red); color:var(--white);
+      font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.14em; text-transform:uppercase;
+      border:none; cursor:none; transition:background .25s;
+    }
+    .nav__menu-btn:hover { background:#96192f; }
+    .ham { display:flex; flex-direction:column; gap:3.5px; }
+    .ham span { display:block; width:16px; height:1px; background:var(--white); }
+
+    /* ── MAIN ── */
+    main { position:relative; z-index:10; }
+
+    /* ── REVEAL ANIMATION — estilo Korowa (clip puro, sin opacity) ── */
+    .reveal-wrap  { overflow:hidden; display:block; padding-bottom:.15em; margin-bottom:-.15em; }
+    .reveal-inner { display:block; transform:translateY(105%); }
+    .rv-1 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .25s; }
+    .rv-2 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .42s; }
+    .rv-3 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .58s; }
+    .rv-4 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .72s; }
+    .rv-5 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .86s; }
+    .rv-6 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards 1.0s; }
+    @keyframes clipUp { to { transform:translateY(0); } }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
+
+    /* ── SCROLL TRIGGER ── */
+    .iv { opacity:0; transform:translateY(28px); transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1); }
+    .iv.visible { opacity:1; transform:translateY(0); }
+    .iv.d1 { transition-delay:.1s; }
+    .iv.d2 { transition-delay:.22s; }
+    .iv.d3 { transition-delay:.34s; }
+    .iv.d4 { transition-delay:.46s; }
+
+    /* ── SCENE BASE ── */
+    .scene { position:relative; min-height:100vh; display:flex; overflow:hidden; }
+    .scene-divider { position:relative; height:1px; margin:0 3rem; background:linear-gradient(to right,transparent,rgba(240,237,232,.08),transparent); }
+
+    /* ══════════════════════════════
+       SCENE 1 — HERO
+    ══════════════════════════════ */
+    #scene-hero { align-items:stretch; padding:0; }
+
+    .hero__left {
+      flex:1; display:flex; flex-direction:column;
+      justify-content:center;
+      padding:8vh 0 8vh 5vw;
+    }
+
+    /* TEOCALLI LAB / SCHOOL — izquierda abajo */
+    .hero__brand-title { text-align:left; }
+    .hero__brand-title .line1 {
+      display:block;
+      font-size:clamp(3.2rem,5vw,5rem);
+      font-weight:800; letter-spacing:-.04em; line-height:.9;
+      color:var(--white);
+    }
+    .hero__brand-title .lab{
+      color:var(--red);
+      padding-left:40%;
+    }
+
+    .hero__brand-title .line2 {
+      display:block;
+      font-size:clamp(3.2rem,5vw,5rem);
+      font-weight:800; letter-spacing:-.04em; line-height:.9;
+      color:var(--white); padding-left:45%;
+    }
+
+    /* redes sociales verticales — mitad izquierda */
+    .hero__socials {
+      display:flex; flex-direction:column;
+      align-items:flex-start; gap:1.8rem;
+      padding-top:72px; /* debajo del nav */
+    }
+    .hero__social-link {
+      display:flex; align-items:center; gap:.7rem;
+      font-family:'DM Mono',monospace; font-size:.52rem;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(240,237,232,.3); text-decoration:none;
+      writing-mode:vertical-rl; text-orientation:mixed;
+      transition:color .3s, transform .3s;
+      opacity:0; animation:fadeUp .8s ease forwards;
+    }
+    .hero__social-link:nth-child(1) { animation-delay:.6s; }
+    .hero__social-link:nth-child(2) { animation-delay:.75s; }
+    .hero__social-link:nth-child(3) { animation-delay:.9s; }
+    .hero__social-link:hover { color:var(--red); transform:translateX(3px); }
+    .hero__social-icon { width:16px; height:16px; fill:currentColor; flex-shrink:0; }
+
+    /* línea decorativa entre redes y laboratory */
+    .hero__side-line {
+      width:1px; height:60px;
+      background:linear-gradient(to bottom, rgba(178,30,59,.4), transparent);
+      margin:0 .5rem;
+    }
+
+    /* LABORATORY link bottom-left */
+    .hero__lab {
+      font-family:'DM Mono',monospace; font-size:.56rem;
+      letter-spacing:.3em; text-transform:uppercase;
+      color:rgba(240,237,232,.3); text-decoration:none;
+      display:inline-flex; align-items:center; gap:.6rem;
+      transition:color .3s;
+      opacity:0; animation:fadeUp .8s ease forwards 1.1s;
+    }
+    .hero__lab::before { content:''; width:18px; height:1px; background:var(--red); transition:width .3s; }
+    .hero__lab:hover { color:var(--red); }
+    .hero__lab:hover::before { width:28px; }
+
+    /* RIGHT: brand title */
+    .hero__right {
+      width:40%; display:flex; flex-direction:column;
+      justify-content:space-between; align-items:flex-end;
+      padding:8vh 5vw 8vh 0;
+      position:relative;
+    }
+
+    /* scroll indicator */
+    .scroll-ind {
+      position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:.5rem;
+      opacity:0; animation:fadeUp 1s ease forwards 2s;
+    }
+    .scroll-ind span { font-family:'DM Mono',monospace; font-size:.48rem; letter-spacing:.24em; color:var(--cream-low); text-transform:uppercase; }
+    .scroll-line { width:1px; height:44px; background:linear-gradient(to bottom,var(--red),transparent); animation:scrollP 2s ease-in-out infinite; }
+    @keyframes scrollP { 0%,100%{opacity:.5;transform:scaleY(1);}50%{opacity:1;transform:scaleY(.6);} }
+
+    /* ══════════════════════════════
+       SCENE 2 — INTRO
+    ══════════════════════════════ */
+    #scene-intro {
+      align-items:center; justify-content:center;
+      flex-direction:column; text-align:center;
+      padding:16vh 10vw;
+    }
+    .intro__label {
+      font-family:'DM Mono',monospace; font-size:.8rem;
+      letter-spacing:.28em; color:var(--red); text-transform:uppercase;
+      margin-bottom:2.5rem;
+    }
+    .intro__title {
+      font-size:clamp(2.2rem,4vw,4rem); font-weight:800;
+      letter-spacing:-.03em; line-height:1; color:var(--white);
+      margin-bottom:2rem; max-width:700px;
+    }
+    .intro__body {
+      font-family:'DM Mono',monospace; font-size:.8rem;
+      color:var(--cream-dim); line-height:1.9; max-width:600px; margin-bottom:3rem;
+    }
+    /* BUTTON — doble cortina vertical (estilo codepen btn-style506) */
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-family:'DM Mono',monospace; font-size:.7rem;
+      letter-spacing:.14em; text-transform:uppercase;
+      padding:1rem 2.6rem; border-radius:100px;
+      text-decoration:none; position:relative; overflow:hidden;
+      transition:color .4s ease, border-color .4s ease;
+    }
+    .btn span { position:relative; z-index:2; }
+    /* ::before entra desde abajo */
+    .btn::before {
+      content:''; position:absolute; inset:0;
+      transform:translateY(100%);
+      transition:transform .4s cubic-bezier(.76,0,.24,1);
+      border-radius:inherit; z-index:1;
+    }
+    /* ::after sale por arriba */
+    .btn::after {
+      content:''; position:absolute; inset:0;
+      transform:translateY(0);
+      transition:transform .4s cubic-bezier(.76,0,.24,1) .05s;
+      border-radius:inherit; z-index:1;
+    }
+    .btn:hover::before { transform:translateY(0); }
+    .btn:hover::after  { transform:translateY(-100%); }
+
+    .btn-red { background:var(--red); color:var(--white); border:1px solid var(--red); }
+    .btn-red::before { background:#96192f; }
+    .btn-red::after  { background:var(--red); }
+    .btn-red:hover   { color:var(--white); }
+
+    .btn-outline { background:transparent; color:var(--cream); border:1px solid rgba(240,237,232,.25); }
+    .btn-outline::before { background:var(--red); }
+    .btn-outline::after  { background:transparent; }
+    .btn-outline:hover   { color:var(--white); border-color:var(--red); }
+
+    /* ══════════════════════════════
+       SCENE 3 — POR QUÉ
+    ══════════════════════════════ */
+    #scene-why {
+      flex-direction:column; padding:14vh 6vw; align-items:flex-start;
+    }
+    .why__wrap { display:grid; grid-template-columns:1fr 1.5fr; gap:6vw; width:100%; align-items:start; }
+    .why__left { position:sticky; top:20vh; }
+    .why__label {
+      font-family:'DM Mono',monospace; font-size:.55rem;
+      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
+      margin-bottom:2rem; display:flex; align-items:center; gap:.8rem;
+    }
+    .why__label::before { content:''; width:28px; height:1px; background:var(--red); }
+    .why__title {
+      font-size:clamp(2.8rem,4vw,4rem); font-weight:800;
+      letter-spacing:-.04em; line-height:.95; color:var(--white);
+    }
+    .why__title em { display:block; font-style:normal; color:var(--red); }
+    .why__p {
+      font-family:'DM Mono',monospace; font-size:.78rem;
+      color:var(--cream-dim); line-height:1.95; margin-bottom:1.6rem;
+    }
+    .why__p strong { color:var(--cream); font-weight:400; }
+    .why__stats { display:flex; gap:3rem; margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(240,237,232,.07); }
+    .why__stat-num { display:block; font-size:2.2rem; font-weight:800; color:var(--white); letter-spacing:-.03em; line-height:1; }
+    .why__stat-label { display:block; font-family:'DM Mono',monospace; font-size:.52rem; letter-spacing:.2em; color:var(--red); text-transform:uppercase; margin-top:.3rem; }
+
+    /* ══════════════════════════════
+       SCENE 4 — FRASE
+    ══════════════════════════════ */
+    #scene-phrase {
+      align-items:center; justify-content:center;
+      padding:18vh 10vw;
+    }
+    .phrase__text {
+      font-size:clamp(2rem,4vw,4rem); font-weight:800;
+      letter-spacing:-.03em; line-height:1.05;
+      color:var(--white); text-align:center; max-width:900px;
+    }
+    .phrase__text em { font-style:normal; color:var(--red); }
+
+    /* ══════════════════════════════
+       SCENE 5 — CTA SECTION
+    ══════════════════════════════ */
+    #scene-cta-mid {
+      flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; padding:14vh 6vw;
+    }
+    .cta-mid__title {
+      font-size:clamp(2rem,4vw,4rem); font-weight:800;
+      letter-spacing:-.03em; line-height:1.05; color:var(--white);
+      margin-bottom:1.5rem; max-width:760px;
+    }
+    .cta-mid__body {
+      font-family:'DM Mono',monospace; font-size:.78rem;
+      color:var(--cream-dim); line-height:1.85;
+      max-width:540px; margin-bottom:3rem;
+    }
+
+    /* ══════════════════════════════
+       SCENE 6 — CURSOS
+    ══════════════════════════════ */
+    #scene-courses { flex-direction:column; justify-content:center; padding:12vh 6vw; }
+    .courses__label {
+      font-family:'DM Mono',monospace; font-size:.55rem;
+      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
+      margin-bottom:5rem; display:flex; align-items:center; gap:.8rem;
+    }
+    .courses__label::before { content:''; width:28px; height:1px; background:var(--red); }
+    .course-item {
+      position:relative; border-top:1px solid rgba(240,237,232,.07);
+      display:grid; grid-template-columns:3.5rem 1fr auto;
+      align-items:center; gap:2rem; padding:2.8rem 0;
+      cursor:none; overflow:hidden; text-decoration:none; color:inherit;
+      transition:border-color .3s;
+    }
+    .course-item:last-child { border-bottom:1px solid rgba(240,237,232,.07); }
+    .course-item::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to right,rgba(178,30,59,.05),transparent);
+      transform:translateX(-100%); transition:transform .5s cubic-bezier(.16,1,.3,1);
+    }
+    .course-item:hover::before { transform:translateX(0); }
+    .course-item:hover { border-color:rgba(178,30,59,.3); }
+    .course-item__num {
+      font-family:'DM Mono',monospace; font-size:.6rem;
+      letter-spacing:.1em; color:var(--red); opacity:.7; align-self:flex-start; padding-top:.4rem;
+    }
+    .course-item__body { position:relative; z-index:1; }
+    .course-item__tag {
+      font-family:'DM Mono',monospace; font-size:.52rem;
+      letter-spacing:.22em; text-transform:uppercase; color:var(--red);
+      margin-bottom:.6rem; display:block;
+    }
+    .course-item__tag-cream { color:var(--cream-dim); }
+    .course-item__title {
+      font-weight:700; font-size:clamp(1.5rem,3.2vw,2.8rem);
+      letter-spacing:-.02em; color:var(--white); line-height:1.1; margin-bottom:.7rem;
+    }
+    .course-item__desc {
+      font-family:'DM Mono',monospace; font-size:.68rem;
+      color:var(--cream-dim); line-height:1.7; max-width:480px;
+    }
+    .course-item__arrow {
+      font-size:1.4rem; color:rgba(240,237,232,.2); position:relative; z-index:1; align-self:center;
+      transition:transform .4s cubic-bezier(.16,1,.3,1), color .25s;
+    }
+    .course-item:hover .course-item__arrow { transform:translate(6px,-4px); color:var(--red); }
+
+    /* ══════════════════════════════
+       MARQUEE
+    ══════════════════════════════ */
+    .marquee-section { padding:5rem 0; overflow:hidden; }
+    .marquee-track { display:flex; gap:0; white-space:nowrap; }
+    .marquee-track--fwd  { animation:marqueeL 28s linear infinite; }
+    .marquee-track--rev  { animation:marqueeR 28s linear infinite; margin-top:1.2rem; }
+    @keyframes marqueeL { from{transform:translateX(0);}  to{transform:translateX(-50%);} }
+    @keyframes marqueeR { from{transform:translateX(-50%);} to{transform:translateX(0);} }
+    .marquee-item {
+      display:inline-flex; align-items:center; gap:2.2rem;
+      font-family:'DM Mono',monospace; font-size:.72rem;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:var(--cream-dim); padding:0 2.2rem;
+    }
+    .marquee-item .dot { width:5px; height:5px; border-radius:50%; background:var(--red); flex-shrink:0; }
+    .marquee-item--accent { color:var(--red); }
+
+    /* ══════════════════════════════
+       SCENE — TEAM
+    ══════════════════════════════ */
+    #scene-team { flex-direction:column; padding:12vh 6vw; align-items:flex-start; }
+    .team__label {
+      font-family:'DM Mono',monospace; font-size:.55rem;
+      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
+      margin-bottom:4rem; display:flex; align-items:center; gap:.8rem; width:100%;
+    }
+    .team__label::before { content:''; width:28px; height:1px; background:var(--red); }
+    .team__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; width:100%; }
+    .team__card { position:relative; cursor:none; aspect-ratio:3/4; overflow:hidden; }
+    .team__card-inner { position:relative; width:100%; height:100%; }
+    .team__card-front { position:absolute; inset:0; transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1); }
+    .team__card:hover .team__card-front { opacity:0; transform:scale(1.04); }
+    .team__img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter:grayscale(40%) contrast(1.1); transition:filter .5s ease;
+    }
+    .team__card:hover .team__img { filter:grayscale(0%) contrast(1); }
+    .team__card-gradient { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.25) 45%,transparent 70%); }
+    .team__card-bottom { position:absolute; bottom:0; left:0; right:0; padding:2rem 1.8rem; }
+    .team__name { font-weight:700; font-size:1.1rem; color:var(--white); letter-spacing:-.01em; }
+    .team__role { font-family:'DM Mono',monospace; font-size:.55rem; letter-spacing:.16em; color:var(--red); text-transform:uppercase; margin-top:.3rem; }
+    .team__card-back {
+      position:absolute; inset:0;
+      background:#0a0a0a; border:1px solid rgba(178,30,59,.2);
+      display:flex; align-items:flex-end;
+      transform:translateY(100%); transition:transform .55s cubic-bezier(.16,1,.3,1);
+    }
+    .team__card:hover .team__card-back { transform:translateY(0); }
+    .team__card-back::before {
+      content:''; position:absolute; top:0; left:2rem; width:1px; height:0;
+      background:var(--red); transition:height .5s ease .3s;
+    }
+    .team__card:hover .team__card-back::before { height:3.5rem; }
+    .team__card-back-content { padding:2.2rem 1.8rem; width:100%; }
+    .team__back-role {
+      font-family:'DM Mono',monospace; font-size:.5rem; letter-spacing:.24em;
+      color:var(--red); text-transform:uppercase; margin-bottom:.6rem;
+      opacity:0; transform:translateY(10px); transition:opacity .4s ease .25s,transform .4s ease .25s;
+    }
+    .team__card:hover .team__back-role { opacity:1; transform:translateY(0); }
+    .team__back-name {
+      font-weight:700; font-size:1.35rem; color:var(--white);
+      letter-spacing:-.02em; margin-bottom:1rem; line-height:1;
+      opacity:0; transform:translateY(12px); transition:opacity .4s ease .32s,transform .4s ease .32s;
+    }
+    .team__card:hover .team__back-name { opacity:1; transform:translateY(0); }
+    .team__back-bio {
+      font-family:'DM Mono',monospace; font-size:.63rem;
+      color:var(--cream-dim); line-height:1.75;
+      opacity:0; transform:translateY(12px); transition:opacity .4s ease .40s,transform .4s ease .40s;
+    }
+    .team__card:hover .team__back-bio { opacity:1; transform:translateY(0); }
+    .team__back-links {
+      margin-top:1.4rem;
+      opacity:0; transform:translateY(10px); transition:opacity .4s ease .48s,transform .4s ease .48s;
+    }
+    .team__card:hover .team__back-links { opacity:1; transform:translateY(0); }
+    .team__back-link {
+      font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--red); text-decoration:none; border-bottom:1px solid rgba(178,30,59,.35); padding-bottom:2px;
+      transition:color .2s,border-color .2s;
+    }
+    .team__back-link:hover { color:var(--cream); border-color:var(--cream-dim); }
+
+    /* ══════════════════════════════
+       SCENE — METODOLOGÍA
+    ══════════════════════════════ */
+    #scene-method { flex-direction:column; padding:14vh 6vw; }
+    .method__label {
+      font-family:'DM Mono',monospace; font-size:.55rem;
+      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
+      margin-bottom:5rem; display:flex; align-items:center; gap:.8rem;
+    }
+    .method__label::before { content:''; width:28px; height:1px; background:var(--red); }
+    .method__title { font-size:clamp(2rem,4vw,3.8rem); font-weight:800; letter-spacing:-.03em; color:var(--white); margin-bottom:6rem; }
+
+    .method__steps { width:100%; }
+    .method__step {
+      display:grid; grid-template-columns:5rem 1fr 1.4fr;
+      gap:3rem; align-items:start;
+      padding:4rem 0; border-top:1px solid rgba(240,237,232,.07);
+    }
+    .method__step:last-child { border-bottom:1px solid rgba(240,237,232,.07); }
+
+    /* stagger: odd left, even right */
+    .method__step:nth-child(2) { margin-left:12%; }
+    .method__step:nth-child(3) { margin-left:24%; }
+
+    .method__num {
+      font-family:'DM Mono',monospace; font-size:.62rem;
+      letter-spacing:.1em; color:var(--red); padding-top:.4rem;
+    }
+    .method__step-title {
+      font-size:clamp(1.8rem,3vw,2.8rem); font-weight:800;
+      letter-spacing:-.03em; color:var(--white); line-height:1;
+    }
+    .method__step-sub {
+      font-family:'DM Mono',monospace; font-size:.7rem;
+      color:var(--red); letter-spacing:.06em; margin-top:.5rem;
+    }
+    .method__step-body {
+      font-family:'DM Mono',monospace; font-size:.74rem;
+      color:var(--cream-dim); line-height:1.9;
+    }
+
+    @media (max-width:768px) {
+      .method__step { grid-template-columns:3rem 1fr; grid-template-rows:auto auto; }
+      .method__step-body { grid-column:2; }
+      .method__step:nth-child(2),
+      .method__step:nth-child(3) { margin-left:0; }
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      position:relative; z-index:10;
+      padding:6rem 6vw 3rem;
+      border-top:1px solid var(--cream-dim);
+    }
+    .footer__top {
+      display:grid; grid-template-columns:1fr 1fr; gap:4rem;
+      margin-bottom:5rem; align-items:start;
+    }
+    .footer__phrase {
+      font-size:clamp(1.4rem,2vw,2rem); font-weight:800;
+      letter-spacing:-.03em; line-height:1.15; color:var(--white);
+    }
+    .footer__phrase em { font-style:normal; color:var(--red); }
+    .footer__contact { display:flex; flex-direction:column; gap:1rem; align-items:flex-end; }
+    .footer__logo img { width:60px; height:60px; margin-bottom:1rem; }
+    .footer__contact-link {
+      font-family:'DM Mono',monospace; font-size:.68rem;
+      letter-spacing:.12em; color:var(--cream-dim); text-decoration:none;
+      transition:color .2s; display:flex; align-items:center; gap:.5rem;
+    }
+    .footer__contact-link:hover { color:var(--red); }
+    .footer__bottom {
+      display:flex; justify-content:space-between; align-items:center;
+      padding-top:2rem; border-top:1px solid rgba(240,237,232,.06); flex-wrap:wrap; gap:1rem;
+    }
+    .footer__copy { font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.14em; color:var(--cream-dim); }
+
+    /* ══════════════════════════════
+       MENU OVERLAY
+    ══════════════════════════════ */
+    .menu-overlay {
+      position:fixed; inset:0; z-index:800;
+      display:grid; grid-template-columns:1fr 300px;
+      background:#050505; transform:translateX(100%);
+      transition:transform .7s cubic-bezier(.76,0,.24,1);
+    }
+    .menu-overlay.is-open { transform:translateX(0); }
+    .menu-main {
+      padding:8rem 6vw 4rem; display:flex; flex-direction:column; justify-content:center;
+      border-right:1px solid rgba(240,237,232,.04);
+    }
+    .menu-section { margin-bottom:3.2rem; }
+    .menu-section__label {
+      font-family:'DM Mono',monospace; font-size:.52rem; letter-spacing:.3em; text-transform:uppercase;
+      color:var(--red); margin-bottom:1.2rem; display:flex; align-items:center; gap:.6rem;
+      opacity:0; transform:translateY(12px); transition:opacity .5s,transform .5s;
+    }
+    .menu-section__label::before { content:''; width:16px; height:1px; background:var(--red); }
+    .menu-links { list-style:none; display:flex; flex-direction:column; gap:.2rem; }
+    .menu-links li { opacity:0; transform:translateY(18px); transition:opacity .5s,transform .5s; }
+    .menu-links a {
+      font-weight:700; font-size:clamp(1.8rem,3.8vw,3.2rem);
+      color:var(--cream); text-decoration:none; letter-spacing:-.025em; line-height:1.15;
+      display:inline-block; position:relative; transition:color .2s;
+    }
+    .menu-links a::after { content:''; position:absolute; left:0; bottom:-1px; width:0; height:1.5px; background:var(--red); transition:width .35s ease; }
+    .menu-links a:hover { color:var(--red); }
+    .menu-links a:hover::after { width:100%; }
+    .menu-tag {
+      display:inline-block; font-family:'DM Mono',monospace; font-size:.48rem;
+      letter-spacing:.14em; text-transform:uppercase; color:var(--white);
+      background:var(--red); padding:.12rem .45rem;
+      margin-left:.6rem; vertical-align:middle; position:relative; top:-4px;
+    }
+    .menu-tag-cream { background:rgba(240,237,232,.2); color:var(--cream); }
+    .menu-aside {
+      padding:8rem 2.5rem 4rem; display:flex; flex-direction:column; justify-content:space-between;
+      background:rgba(0,0,0,.4);
+    }
+    .menu-aside__title {
+      font-family:'DM Mono',monospace; font-size:.52rem; letter-spacing:.28em; text-transform:uppercase;
+      color:rgba(240,237,232,.25); margin-bottom:1.2rem;
+      opacity:0; transform:translateY(12px); transition:opacity .5s,transform .5s;
+    }
+    .menu-quick { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
+    .menu-quick li { opacity:0; transform:translateY(10px); transition:opacity .45s,transform .45s; }
+    .menu-quick a {
+      font-family:'DM Mono',monospace; font-size:.75rem;
+      color:rgba(240,237,232,.4); text-decoration:none; transition:color .2s;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .menu-quick a::before { content:'→'; color:var(--red); opacity:0; transform:translateX(-6px); transition:opacity .2s,transform .2s; }
+    .menu-quick a:hover { color:var(--cream); }
+    .menu-quick a:hover::before { opacity:1; transform:translateX(0); }
+    .menu-aside__bottom p { font-family:'DM Mono',monospace; font-size:.58rem; color:rgba(240,237,232,.18); line-height:1.7; }
+    .menu-aside__bottom a { color:var(--red); text-decoration:none; }
+    .menu-close {
+      position:absolute; top:1.8rem; right:2rem;
+      display:flex; align-items:center; gap:.55rem;
+      background:none; border:none; cursor:none;
+      font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(240,237,232,.4); padding:.5rem; transition:color .2s;
+    }
+    .menu-close:hover { color:var(--cream); }
+    .menu-close__x { width:20px; height:20px; position:relative; }
+    .menu-close__x::before,.menu-close__x::after { content:''; position:absolute; top:50%; left:0; width:100%; height:1px; background:currentColor; }
+    .menu-close__x::before { transform:rotate(45deg); }
+    .menu-close__x::after  { transform:rotate(-45deg); }
+    .menu-overlay.is-open .menu-section__label,
+    .menu-overlay.is-open .menu-aside__title  { opacity:1; transform:translateY(0); }
+    .menu-overlay.is-open .menu-links li,
+    .menu-overlay.is-open .menu-quick li      { opacity:1; transform:translateY(0); }
+    .menu-overlay.is-open .dl-1 { transition-delay:.18s !important; }
+    .menu-overlay.is-open .dl-2 { transition-delay:.26s !important; }
+    .menu-overlay.is-open .dl-3 { transition-delay:.34s !important; }
+    .menu-overlay.is-open .dl-4 { transition-delay:.42s !important; }
+    .menu-overlay.is-open .dl-5 { transition-delay:.50s !important; }
+    .menu-overlay.is-open .dl-6 { transition-delay:.58s !important; }
+    .menu-overlay.is-open .dl-7 { transition-delay:.66s !important; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:768px) {
+      nav { padding:0 1.5rem; }
+      .nav__name { display:none; }
+      /* hero igual que desktop — no se apila */
+      .hero__right { width:45%; }
+      .why__wrap { grid-template-columns:1fr; }
+      .why__left { position:static; }
+      .team__grid { grid-template-columns:1fr; }
+      .team__card { aspect-ratio:4/3; }
+      .footer__top { grid-template-columns:1fr; }
+      .footer__contact { align-items:flex-start; }
+      .menu-overlay { grid-template-columns:1fr; }
+      .menu-aside { display:none; }
+      .menu-main { padding:6rem 1.5rem 3rem; }
+      .scene-divider { margin:0 1.5rem; }
+      #scene-courses, #scene-team, #scene-method, #scene-why { padding:10vh 1.5rem; }
+      /* tamaño de fuente del hero adaptado a móvil */
+      .hero__brand-title .line1,
+      .hero__brand-title .line2 { font-size:clamp(2rem,10vw,3.5rem); }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <a href="#" class="logo"><img src="img/logo_teocali_lab_school.png" alt="" class="logot"></a>
-            <div class="nav-wrapper">
-                <nav>
-                    <ul class="nav-menu">
-                        <li><a href="#programa">Programa</a></li>
-                        <li><a href="#contenido">Contenido</a></li>
-                        <li><a href="#talento">Talento</a></li>
-                        <li><a href="#cursos">Cursos</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </nav>
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-                    <i class="bi bi-sun-fill theme-icon sun-icon"></i>
-                    <i class="bi bi-moon-fill theme-icon moon-icon"></i>
-                </button>
-                <button class="menu-toggle" onclick="toggleMobileMenu()">
-                    <i class="bi bi-list"></i>
-                </button>
-            </div>
-        </div>
-    </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul>
-            <li><a href="#programa" onclick="toggleMobileMenu()">Programa</a></li>
-            <li><a href="#contenido" onclick="toggleMobileMenu()">Contenido</a></li>
-            <li><a href="#talento" onclick="toggleMobileMenu()">Talento</a></li>
-            <li><a href="#cursos" onclick="toggleMobileMenu()">Cursos</a></li>
-            <li><a href="#contacto" onclick="toggleMobileMenu()">Contacto</a></li>
-        </ul>
+<div class="grain"></div>
+<div class="cursor"><div class="cursor__dot"></div><div class="cursor__ring"></div></div>
+<canvas id="shader-canvas"></canvas>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav__brand" href="/">
+    <div class="nav__logo"><img src="logoblanco.png" alt="Teocalli Lab"/></div>
+    <div class="nav__name">Teocalli Lab<em>School</em></div>
+  </a>
+  <div class="nav__right">
+    <a href="/login" class="nav__login">Login</a>
+    <button class="nav__menu-btn" id="menuBtn">
+      <div class="ham"><span></span><span></span><span></span></div>Menú
+    </button>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- HERO -->
+  <section class="scene" id="scene-hero">
+
+    <!-- LEFT: brand title -->
+    <div class="hero__left">
+      <div></div>
+      <div class="hero__brand-title">
+        <div class="reveal-wrap rv-1"><span class="reveal-inner line1">Teocalli</span></div>
+        <div class="reveal-wrap rv-1"><span class="reveal-inner line1 lab">Lab</span></div>
+        <div class="reveal-wrap rv-2"><span class="reveal-inner line2">School</span></div>
+      </div>
     </div>
 
-    <section class="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="t.mp4" type="video/mp4">
-            <!-- https://developers.google.com/machine-learning/crash-course/images/landing-hero-video.webm -->
-        </video>
-        
-        <div class="hero-overlay"></div>
-        
-        <div class="hero-content">
-            <h1>TEOCALLI LAB School</h1>
-        </div>
-    </section>
-
-    <section class="programa-section" id="programa">
-        <div class="programa-content">
-            <h2>Programa de Análisis y<br>Visualización de Datos.</h2>
-            <a href="#" class="btn-saber-mas">Saber más</a>
-        </div>
-    </section>
-
-    <section class="analisis-section">
-        <h2>Programa de Análisis y<br>Visualización de Datos</h2>
-        <a href="#" class="btn-ver-programa">Ver programa</a>
-        <p class="analisis-description">
-            Un programa diseñado para introducirte en el mundo del análisis y visualización de datos. Aprende paso a paso las herramientas y el pensamiento analítico que utilizan los profesionales en ciencia de datos.
-        </p>
-    </section>
-
-    <section class="contenido-section" id="contenido">
-        <div class="contenido-header">
-            <h3>TEOCALLI LAB</h3>
-        </div>
-        
-        <p class="contenido-intro">
-            Transforma datos en conocimiento. Aprende las herramientas y técnicas esenciales para el análisis profesional de datos.
-        </p>
-
-        <div class="accordion">
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-number">01</span>
-                    <span class="accordion-title">Pensamiento estadístico</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Desarrolla tu capacidad analítica con fundamentos estadísticos sólidos. Aprende a interpretar datos, identificar patrones y tomar decisiones basadas en evidencia cuantitativa.</p>
-                </div>
-            </div>
-
-            <!--div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-number">02</span>
-                    <span class="accordion-title">Excel</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Domina Excel más allá de lo básico. Fórmulas avanzadas, tablas dinámicas, visualizaciones y automatización con macros para análisis de datos profesional.</p>
-                </div>
-            </div-->
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-number">02</span>
-                    <span class="accordion-title">Base de Datos SQL</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Aprende a consultar, manipular y gestionar bases de datos relacionales. Desde queries básicos hasta optimización de consultas complejas.</p>
-                </div>
-            </div>
-
-            <!--div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-number">04</span>
-                    <span class="accordion-title">Tableau</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Crea visualizaciones de datos impactantes e interactivas. Aprende a contar historias con datos y crear dashboards profesionales.</p>
-                </div>
-            </div-->
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-number">03</span>
-                    <span class="accordion-title">Introducción a Python</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Aprende las bases de la programación en Python. Sintaxis, estructuras de control y funciones.</p>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-number">04</span>
-                    <span class="accordion-title">Python para Análisis de Datos</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Aprende Python para el análisis de datos. Pandas, NumPy y Matplotlib.</p>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span class="accordion-number">05</span>
-                    <span class="accordion-title">R Studio</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Programa en R para análisis estadístico avanzado. Manipulación de datos, modelado predictivo y visualizaciones con ggplot2.</p>
-                </div>
-            </div>
-
-            
-        </div>
-    </section>
-
-    <section class="formato-section">
-        <div class="formato-grid">
-            <div class="formato-item">
-                <h4>Formato</h4>
-                <p>En línea, vía Google Meet</p>
-            </div>
-            <div class="formato-item">
-                <h4>Duración</h4>
-                <p>5 meses</p>
-            </div>
-            <div class="formato-item">
-                <h4>Modalidad</h4>
-                <p>Clases en vivo</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="inscripcion-section" id="contacto">
-        <div class="inscripcion-content">
-            <h2>Inscríbete ahora y comienza tu camino en el análisis de datos.</h2>
-        </div>
-        <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20inscribirme%20al%20programa%20de%20análisis%20de%20datos" class="inscripcion-link" target="_blank">
-            Inscríbete vía WhatsApp
-            <span class="inscripcion-arrow">↗</span>
+    <!-- RIGHT: redes sociales + laboratory -->
+    <div class="hero__right">
+      <div class="hero__socials">
+        <!-- TikTok -->
+        <a href="https://tiktok.com/@teocallilab" class="hero__social-link" target="_blank" rel="noopener" title="TikTok">
+          <svg class="hero__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
+          </svg>
+          TikTok
         </a>
-    </section>
-
-    <section class="talento-section" id="talento">
-        <h2>Talento</h2>
-        
-        <div class="talento-grid">
-            <div class="talento-card">
-                <img src="img/FILM.jpg" alt="Ing. Israel Lueza">
-                <div class="talento-info">
-                    <h3>MCC. Israel Lueza</h3>
-                    <p>Instructor</p>
-                </div>
-            </div>
-
-            <div class="talento-card">
-                <img src="img/Myr_Arroyo.jpg" alt="Dra. María González">
-                <div class="talento-info">
-                    <h3>Mtra. Myriam Arroyo</h3>
-                    <p>Coordinadora de admisiones</p>
-                </div>
-            </div>
-
-            <div class="talento-card">
-                <img src="img/Alberto.jpg" alt="Mtro. Carlos Ramírez">
-                <div class="talento-info">
-                    <h3>Dr. Alberto Quezada Téllez</h3>
-                    <p>Invitado especial</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Octava Sección: Footer Brand -->
-    <section class="footer-brand-section" id="cursos">
-        <div class="footer-brand-content">
-            <div class="footer-brand-left">TEOCALLI LAB SCHOOL</div>
-            <div class="footer-brand-right">Más cursos</div>
-        </div>
-    </section>
-
-    <!-- Novena Sección: Cursos -->
-    <!--section class="cursos-section" id="cursos">
-        <div class="cursos-grid">
-            <div class="curso-item">
-                <div class="curso-image">
-                    <img src="https://images.pexels.com/photos/1198828/pexels-photo-1198828.jpeg?_gl=1*icn5zm*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjM1MDg1NjYkbzUyJGcxJHQxNzYzNTA5MDkzJGo0NCRsMCRoMA.." alt="Taller de matemáticas">
-                </div>
-                <div class="curso-content">
-                    <span class="curso-tag">Curso</span>
-                    <h3 class="curso-title">Taller de matemáticas</h3>
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20el%20Taller%20de%20matemáticas" class="curso-link" target="_blank">Más información</a>
-                </div>
-            </div>
-
-            <div class="curso-item">
-                <div class="curso-image">
-                    <img src="https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?_gl=1*1knv0sw*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjM1MDg1NjYkbzUyJGcxJHQxNzYzNTA4Njg2JGo1OSRsMCRoMA.." alt="Estadística Descriptiva">
-                </div>
-                <div class="curso-content">
-                    <span class="curso-tag">Curso</span>
-                    <h3 class="curso-title">Estadística Descriptiva con Python</h3>
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Estadística%20Descriptiva%20con%20Python" class="curso-link" target="_blank">Más información</a>
-                </div>
-            </div>
-
-            <div class="curso-item">
-                <div class="curso-image">
-                    <img src="https://images.pexels.com/photos/17484901/pexels-photo-17484901.png?_gl=1*1ipydhv*_ga*MTM2MzkyMTI1OC4xNzQ0MzI0ODk1*_ga_8JE65Q40S6*czE3NjM1MDg1NjYkbzUyJGcxJHQxNzYzNTA4NTg3JGozOSRsMCRoMA.." alt="Matemáticas para Ciencia de Datos">
-                </div>
-                <div class="curso-content">
-                    <span class="curso-tag">Curso</span>
-                    <h3 class="curso-title">Matemáticas para Ciencia de Datos</h3>
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Matemáticas%20para%20Ciencia%20de%20Datos" class="curso-link" target="_blank">Más información</a>
-                </div>
-            </div>
-        </div>
-    </section-->
-    <div class="container">
-        <!--h1>Cursos Especializados</h1-->
-        <!-- Tarjeta destacada: Taller de Matemáticas -->
-        <div class="featured-card">
-            <div class="card-image taller-bg"></div>
-            <div class="card-overlay"></div>
-            <div class="card-content">
-                <div class="course-tag">Taller de</div>
-                <div class="course-subtitle">Matemáticas</div>
-                <!--p class="course-description">Refuerza tus conocimientos matemáticos con ejercicios prácticos y resolución de problemas. Ideal para estudiantes que buscan mejorar sus habilidades fundamentales.</p>
-                <ul class="course-features">
-                    <li>Aritmética y álgebra básica</li>
-                    <li>Resolución de problemas paso a paso</li>
-                    <li>Ejercicios prácticos y aplicados</li>
-                </ul-->
-                <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20el%20Taller%20de%20Matemáticas" class="btn-learn">Más información</a>
-            </div>
-        </div>
-        <!-- Fila 1: Python, Geometría, Cálculo Diferencial -->
-        <div class="row" id="row1">
-            <div class="course-card expanded" onclick="expandCard(this, 'row1')">
-                <div class="card-image diferencial-bg"></div>
-                <div class="card-overlay"></div>
-                <div class="card-content">
-                    <div class="course-tag">Cálculo</div>
-                    <div class="course-subtitle">Diferencial</div>
-                    <!--p class="course-description">Aprende los fundamentos de la programación con uno de los lenguajes más versátiles y demandados del mercado.</p>
-                    <ul class="course-features">
-                        <li>Sintaxis y estructuras de datos</li>
-                        <li>Control de flujo y funciones</li>
-                        <li>Programación orientada a objetos</li>
-                    </ul-->
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Cálculo%20Diferencial" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
-                </div>
-            </div>
-
-            <div class="course-card collapsed" onclick="expandCard(this, 'row1')">
-                <div class="card-image integral-bg"></div>
-                <div class="card-overlay"></div>
-                <div class="card-content">
-                    <div class="course-tag">Cálculo</div>
-                    <div class="course-subtitle">Integral</div>
-                    <!--p class="course-description">Comprende los conceptos de límites, continuidad y derivadas para modelar y resolver problemas reales.</p>
-                    <ul class="course-features">
-                        <li>Límites y continuidad</li>
-                        <li>Derivadas y aplicaciones</li>
-                        <li>Optimización de funciones</li>
-                    </ul-->
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Cálculo%20Integral" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
-                </div>
-            </div>
-
-            <div class="course-card collapsed" onclick="expandCard(this, 'row1')">
-                <div class="card-image algebra-bg"></div>
-                <div class="card-overlay"></div>
-                <div class="card-content">
-                    <div class="course-tag">Álgebra</div>
-                    <div class="course-subtitle">Líneal</div>
-                    <!--p class="course-description">Domina los conceptos fundamentales de la geometría analítica y su aplicación en el análisis de datos.</p>
-                    <ul class="course-features">
-                        <li>Sistemas de coordenadas</li>
-                        <li>Ecuaciones de rectas y curvas</li>
-                        <li>Cónicas y transformaciones</li>
-                    </ul-->
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Álgebra%20Lineal" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
-                </div>
-			</div>
-        </div>
-
-        <!-- Fila 2: Cálculo Integral, Ecuaciones, Álgebra -->
-        <!--div class="row" id="row2">
-            <div class="course-card expanded" onclick="expandCard(this, 'row2')">
-                <div class="card-image integral-bg"></div>
-                <div class="card-overlay"></div>
-                <div class="card-content">
-                    <div class="course-tag">Cálculo</div>
-                    <div class="course-subtitle">Integral</div>
-                    <p class="course-description">Explora las técnicas de integración y su aplicación en el cálculo de áreas, volúmenes y probabilidades.</p>
-                    <ul class="course-features">
-                        <li>Integrales definidas e indefinidas</li>
-                        <li>Técnicas de integración</li>
-                        <li>Aplicaciones en ciencia de datos</li>
-                    </ul>
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Cálculo%20Integral" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
-                </div>
-            </div>
-
-			 <div class="course-card collapsed" onclick="expandCard(this, 'row2')">
-                <div class="card-image algebra-bg"></div>
-                <div class="card-overlay"></div>
-                <div class="card-content">
-                    <div class="course-tag">Álgebra</div>
-                    <div class="course-subtitle">Lineal</div>
-                    <p class="course-description">Fundamentos esenciales del álgebra lineal aplicados a la ciencia de datos y machine learning.</p>
-                    <ul class="course-features">
-                        <li>Vectores y matrices</li>
-                        <li>Sistemas de ecuaciones lineales</li>
-                        <li>Valores y vectores propios</li>
-                    </ul>
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Álgebra%20Lineal" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
-                </div>
-            </div>
-			
-            <div class="course-card collapsed" onclick="expandCard(this, 'row2')">
-                <div class="card-image ecuaciones-bg"></div>
-                <div class="card-overlay"></div>
-                <div class="card-content">
-                    <div class="course-tag">Ecuaciones</div>
-                    <div class="course-subtitle">Diferenciales Ordinarias</div>
-                    <p class="course-description">Aprende a modelar fenómenos dinámicos y sistemas complejos mediante ecuaciones diferenciales.</p>
-                    <ul class="course-features">
-                        <li>Ecuaciones de primer orden</li>
-                        <li>Ecuaciones lineales superiores</li>
-                        <li>Modelado de fenómenos reales</li>
-                    </ul>
-                    <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Ecuaciones%20Diferenciales" class="btn-learn" onclick="event.stopPropagation()">Más información</a>
-                </div>
-            </div>
-			
-        </div-->
-
-        
-        <!-- Tarjeta destacada: IA para niños -->
-        <div class="featured-card">
-            <div class="card-image ia-ninos-bg"></div>
-            <div class="card-overlay"></div>
-            <div class="card-content">
-                <div class="course-tag">Ecuaciones</div>
-                <div class="course-subtitle">Diferenciales</div>
-                <!--p class="course-description">Introducción divertida y educativa al mundo de la Inteligencia Artificial, diseñada especialmente para niños de 11 a 14 años. Aprende sobre IA de forma práctica y creativa.</p>
-                <ul class="course-features">
-                    <li>¿Qué es la Inteligencia Artificial?</li>
-                    <li>Proyectos interactivos y juegos</li>
-                    <li>Ética y uso responsable de la IA</li>
-                </ul-->
-                <a href="https://wa.me/5215529033828?text=Hola,%20quiero%20más%20información%20sobre%20Ecuaciones%20Diferenciales" class="btn-learn">Más información</a>
-            </div>
-		</div>
+        <!-- Instagram -->
+        <a href="https://instagram.com/teocallilab" class="hero__social-link" target="_blank" rel="noopener" title="Instagram">
+          <svg class="hero__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+          Instagram
+        </a>
+        <!-- Facebook -->
+        <a href="https://facebook.com/teocallilab" class="hero__social-link" target="_blank" rel="noopener" title="Facebook">
+          <svg class="hero__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Facebook
+        </a>
+      </div>
+      <div>
+        <div class="hero__side-line"></div>
+        <a href="/laboratory" class="hero__lab">Laboratory</a>
+      </div>
     </div>
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-about">
-                <h3>TEOCALLI LAB</h3>
-                <p>Transformamos datos en conocimiento. Somos especialistas en análisis y visualización de datos, ofreciendo programas educativos de alta calidad.</p>
-                <div class="social-links">
-                    <!--a href="#" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a-->
-                </div>
-            </div>
 
-            <div class="footer-section">
-                <h4>Navegación</h4>
-                <ul>
-                    <li><a href="#programa">Programa</a></li>
-                    <li><a href="#contenido">Contenido</a></li>
-                    <li><a href="#talento">Talento</a></li>
-                    <li><a href="#cursos">Cursos</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Contacto</h4>
-                <ul>
-                    <li><a href="mailto:teocallilab@gmail.com"><i class="bi bi-envelope"></i> teocallilab@gmail.com</a></li>
-                    <li><a href="tel:5529033828"><i class="bi bi-telephone"></i> +52 55 2903 3828</a></li>
-                    <li><a href="https://wa.me/5215529033828" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Horarios</h4>
-                <ul>
-                    <li>Lunes a Viernes</li>
-                    <li>9:00 AM - 6:00 PM</li>
-                    <li>Sábados</li>
-                    <li>10:00 AM - 2:00 PM</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 TEOCALLI LAB. Todos los derechos reservados. | <a href="#" style="color: #777;">Política de Privacidad</a> | <a href="#" style="color: #777;">Términos y Condiciones</a></p>
-        </div>
-    </footer>
-<!-- Tarjeta emergente -->
-    <div class="popup-card" id="popupCard">
-        <div class="popup-header">
-            <button class="popup-close" onclick="closePopup()">×</button>
-            <div class="popup-title">¡Próximo Inicio!</div>
-            <div class="popup-subtitle">Programa de Análisis y Visualización de Datos</div>
-        </div>
-        <div class="popup-body">
-            <p class="popup-text">
-                El registro para nuestra próxima generación abre el <strong>1 de junio de 2026</strong>. ¡Asegura tu lugar en la lista de espera!
-            </p>
-            <div class="countdown" id="countdown">
-                <div class="countdown-item">
-                    <span class="countdown-value" id="days">0</span>
-                    <span class="countdown-label">Días</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value" id="hours">0</span>
-                    <span class="countdown-label">Horas</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value" id="minutes">0</span>
-                    <span class="countdown-label">Min</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value" id="seconds">0</span>
-                    <span class="countdown-label">Seg</span>
-                </div>
-            </div>
-            <a href="URL_DE_TU_FORMULARIO" class="popup-btn" target="_blank">Unirme a la lista de espera</a>
-        </div>
+    <div class="scroll-ind">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
-    <script>
-        function toggleAccordion(element) {
-            const item = element.parentElement;
-            const content = item.querySelector('.accordion-content');
-            
-            document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    otherItem.querySelector('.accordion-content').classList.remove('active');
-                }
-            });
-            
-            item.classList.toggle('active');
-            content.classList.toggle('active');
-        }
+  </section>
 
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const icon = menuToggle.querySelector('i');
-            
-            mobileMenu.classList.toggle('active');
-            
-            // Cambiar icono entre hamburguesa y X
-            if (mobileMenu.classList.contains('active')) {
-                icon.className = 'bi bi-x';
-            } else {
-                icon.className = 'bi bi-list';
-            }
-        }
+  <div class="scene-divider"></div>
 
-        function toggleTheme() {
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
-            
-            body.classList.toggle('dark-mode');
-            themeToggle.classList.toggle('dark');
-            
-            // Guardar preferencia en localStorage
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        }
+  <!-- INTRO -->
+  <section class="scene" id="scene-intro">
+    <div class="intro__label iv">Matemáticas · Python · Analítica de Datos</div>
+    <h2 class="intro__title iv d1">Aprende a pensar de forma analítica</h2>
+    <p class="intro__body iv d2">Desarrolla las habilidades necesarias para comprender datos, resolver problemas y tomar decisiones fundamentadas mediante matemáticas, programación y análisis de datos.</p>
+    <div class="iv d3">
+      <a href="#scene-courses" class="btn btn-red"><span>Cursos</span></a>
+    </div>
+  </section>
 
-        // Cargar tema guardado al iniciar
-        window.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme');
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
-            
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-mode');
-                themeToggle.classList.add('dark');
-            }
+  <div class="scene-divider"></div>
+
+  <!-- POR QUÉ -->
+  <section class="scene" id="scene-why">
+    <div class="why__wrap">
+      <div class="why__left">
+        <div class="why__label iv">Nuestra razón de ser</div>
+        <h2 class="why__title iv d1">¿Por qué existe<br><em>Teocalli Lab School?</em></h2>
+        <div class="why__stats iv d2">
+          <!--div><span class="why__stat-num">500+</span><span class="why__stat-label">Estudiantes</span></div-->
+          <div><span class="why__stat-num">3</span><span class="why__stat-label">Cursos</span></div>
+          <div><span class="why__stat-num">100%</span><span class="why__stat-label">En vivo</span></div>
+        </div>
+      </div>
+      <div class="why__right">
+        <p class="why__p iv d1">Porque creemos que el <strong>pensamiento analítico no debería ser un privilegio</strong> reservado para quienes tuvieron una formación técnica desde temprana edad.</p>
+        <p class="why__p iv d2">Teocalli Lab School fue creada para ayudar a personas sin experiencia previa a desarrollar habilidades en matemáticas, programación y análisis de datos mediante un proceso de aprendizaje claro, accesible y progresivo.</p>
+        <p class="why__p iv d3">Nuestro propósito es que cada estudiante construya confianza para resolver problemas complejos, comprendiendo no solo qué hacer, sino <strong>por qué hacerlo</strong>. Para lograrlo, diseñamos contenidos basados en ejemplos reales, ejercicios estructurados y metodologías que favorecen la comprensión profunda por encima de la memorización.</p>
+        <p class="why__p iv d4">Creemos que cuando una persona aprende a pensar de forma analítica, adquiere una habilidad que trasciende cualquier tecnología o herramienta: la capacidad de entender problemas, evaluar alternativas y construir soluciones de manera sistemática. <strong>Esa es la razón de ser de Teocalli Lab School.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="scene-divider"></div>
+
+  <!-- FRASE -->
+  <section class="scene" id="scene-phrase">
+    <p class="phrase__text iv">No enseñamos <em>herramientas.</em><br>Enseñamos a <em>pensar.</em></p>
+  </section>
+
+  <div class="scene-divider"></div>
+
+  <!-- CTA MID -->
+  <section class="scene" id="scene-cta-mid">
+    <h2 class="cta-mid__title iv">Aprende a pensar.<br>Aprende a construir.</h2>
+    <p class="cta-mid__body iv d1">Desarrolla las bases en matemáticas, programación y análisis de datos para comprender problemas complejos y crear soluciones con criterio propio.</p>
+    <div class="iv d2">
+      <a href="#scene-courses" class="btn btn-outline"><span>Explorar cursos →</span></a>
+    </div>
+  </section>
+
+  <div class="scene-divider"></div>
+
+  <!-- CURSOS -->
+  <section class="scene" id="scene-courses">
+    <div class="courses__label iv">Nuestros Cursos</div>
+    <div class="courses__list" style="width:100%">
+      <a href="python-datos.html" class="course-item iv d1">
+        <span class="course-item__num">01</span>
+        <div class="course-item__body">
+          <span class="course-item__tag">Curso · En vivo</span>
+          <div class="course-item__title">Python para Análisis de Datos</div>
+          <p class="course-item__desc">De cero a profesional. Pandas, NumPy, visualización y proyectos reales con datos.</p>
+        </div>
+        <span class="course-item__arrow">↗</span>
+      </a>
+      <a href="matematicas-cds.html" class="course-item iv d2">
+        <span class="course-item__num">02</span>
+        <div class="course-item__body">
+          <span class="course-item__tag">Curso · En vivo</span>
+          <div class="course-item__title">Matemáticas para Ciencia de Datos</div>
+          <p class="course-item__desc">Cálculo, Álgebra Lineal, Estadística y Ecuaciones Diferenciales aplicadas a ML y datos.</p>
+        </div>
+        <span class="course-item__arrow">↗</span>
+      </a>
+      <a href="taller-matematicas.html" class="course-item iv d3">
+        <span class="course-item__num">03</span>
+        <div class="course-item__body">
+          <span class="course-item__tag course-item__tag-cream">Taller · Gratuito</span>
+          <div class="course-item__title">Taller de Matemáticas</div>
+          <p class="course-item__desc">Gratis con tu inscripción a Matemáticas para CDS. Una sesión intensiva de fundamentos.</p>
+        </div>
+        <span class="course-item__arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track marquee-track--fwd">
+      <!-- duplicated for seamless loop -->
+      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
+      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
+      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
+      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
+      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
+      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
+      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
+      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
+    </div>
+    <div class="marquee-track marquee-track--rev">
+      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
+      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
+      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
+      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
+      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
+      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
+      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
+      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
+      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
+      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <section class="scene" id="scene-team">
+    <div class="team__label iv">El equipo</div>
+    <div class="team__grid">
+      <div class="team__card iv d1">
+        <div class="team__card-inner">
+          <div class="team__card-front">
+            <img src="https://teocallilab.github.io/img/FILM.jpg" alt="Israel Lueza" class="team__img"/>
+            <div class="team__card-gradient"></div>
+            <div class="team__card-bottom">
+              <div class="team__name">Israel Lueza</div>
+              <div class="team__role">Python · Data Science</div>
+            </div>
+          </div>
+          <div class="team__card-back">
+            <div class="team__card-back-content">
+              <div class="team__back-role">Python · Data Science</div>
+              <div class="team__back-name">Israel Lueza</div>
+              <p class="team__back-bio">Ingeniero Físico por la UAM AZC y Maestro en Ciencias de la Complejidad por la UACM, 
+                con especialización en análisis de datos. Pienso firmemente que cualquier persona con la guía adecuada puede 
+                aprender matemáticas y programación.</p>
+              <div class="team__back-links"><a href="#" class="team__back-link">LinkedIn ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team__card iv d2">
+        <div class="team__card-inner">
+          <div class="team__card-front">
+            <img src="https://teocallilab.github.io/img/Myr_Arroyo.jpg" alt="Psc. Myriam Arroyo" class="team__img"/>
+            <div class="team__card-gradient"></div>
+            <div class="team__card-bottom">
+              <div class="team__name">Psc. Myriam Arroyo</div>
+              <div class="team__role">Coordinadora de admisiones</div>
+            </div>
+          </div>
+          <div class="team__card-back">
+            <div class="team__card-back-content">
+              <div class="team__back-role">Coordinadora de admisiones</div>
+              <div class="team__back-name">Psc. Myriam Arroyo</div>
+              <p class="team__back-bio">Coordinadora de admisiones con amplia experiencia en el proceso de selección y orientación de estudiantes. Apasionada por facilitar el acceso a la educación superior.</p>
+              <div class="team__back-links"><a href="#" class="team__back-link">LinkedIn ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="team__card iv d3">
+        <div class="team__card-inner">
+          <div class="team__card-front">
+            <img src="https://teocallilab.github.io/img/Alberto.jpg" alt="Alberto Quezada" class="team__img"/>
+            <div class="team__card-gradient"></div>
+            <div class="team__card-bottom">
+              <div class="team__name">Alberto Quezada</div>
+              <div class="team__role">Matemáticas para Ciencia de Datos</div>
+            </div>
+          </div>
+          <div class="team__card-back">
+            <div class="team__card-back-content">
+              <div class="team__back-role">Profesor invitado</div>
+              <div class="team__back-name">Alberto Quezada</div>
+              <p class="team__back-bio">Dr. en Ciencias e Investigador de la UAEH. Convencido de que las matemáticas bien enseñadas cambia cómo ves el mundo.</p>
+              <div class="team__back-links"><a href="#" class="team__back-link">LinkedIn ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="scene-divider"></div>
+
+  <!-- METODOLOGÍA -->
+  <section class="scene" id="scene-method">
+    <div class="method__label iv">Cómo aprendemos</div>
+    <h2 class="method__title iv d1">Nuestra Metodología</h2>
+    <div class="method__steps">
+      <div class="method__step iv d1">
+        <div class="method__num">01</div>
+        <div>
+          <div class="method__step-title">Comprender</div>
+          <div class="method__step-sub">Todo comienza por entender los fundamentos.</div>
+        </div>
+        <p class="method__step-body">Antes de escribir código o analizar datos, nuestros estudiantes construyen una comprensión sólida de los conceptos matemáticos, estadísticos y computacionales que les permitirán razonar cada solución con criterio.</p>
+      </div>
+      <div class="method__step iv d2">
+        <div class="method__num">02</div>
+        <div>
+          <div class="method__step-title">Practicar</div>
+          <div class="method__step-sub">El conocimiento se fortalece mediante la aplicación.</div>
+        </div>
+        <p class="method__step-body">Cada tema está acompañado de ejercicios cuidadosamente diseñados para desarrollar habilidades analíticas, fomentar la resolución estructurada de problemas y convertir la teoría en experiencia práctica.</p>
+      </div>
+      <div class="method__step iv d3">
+        <div class="method__num">03</div>
+        <div>
+          <div class="method__step-title">Construir</div>
+          <div class="method__step-sub">Aprender implica crear.</div>
+        </div>
+        <p class="method__step-body">Al finalizar su formación, los estudiantes desarrollan un proyecto propio en el que integran matemáticas, programación y análisis de datos para resolver un problema de manera autónoma y demostrar lo aprendido.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer__top">
+    <div class="footer__phrase iv">
+      Las herramientas cambian.<br>
+      La capacidad de <em>comprender problemas</em><br>
+      y construir soluciones <em>permanece.</em>
+    </div>
+    <div class="footer__contact iv d1">
+      <div class="footer__logo"><img src="logoblanco.png" alt="Teocalli Lab School"/></div>
+      <a href="https://wa.me/5215529033828" class="footer__contact-link" target="_blank" rel="noopener">WhatsApp →</a>
+      <a href="mailto:hola@teocallilab.com" class="footer__contact-link">hola@teocallilab.com →</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© 2026 Teocalli Lab School. Todos los derechos reservados.</p>
+    <p class="footer__copy">Ciudad de México, México</p>
+  </div>
+</footer>
+
+<!-- MENU -->
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose"><span class="menu-close__x"></span>Cerrar</button>
+  <div class="menu-main">
+    <div class="menu-section">
+      <div class="menu-section__label dl-1">Cursos</div>
+      <ul class="menu-links">
+        <li class="dl-2"><a href="python-datos.html">Python para Análisis<span class="menu-tag">Nuevo</span></a></li>
+        <li class="dl-3"><a href="matematicas-cds.html">Matemáticas para CDS</a></li>
+      </ul>
+    </div>
+    <div class="menu-section">
+      <div class="menu-section__label dl-4">Taller</div>
+      <ul class="menu-links">
+        <li class="dl-5"><a href="taller-matematicas.html">Taller de Matemáticas<span class="menu-tag menu-tag-cream">Gratis</span></a></li>
+      </ul>
+    </div>
+    <div class="menu-section">
+      <div class="menu-section__label dl-6">Plataforma</div>
+      <ul class="menu-links">
+        <li class="dl-7"><a href="/laboratory">Laboratory</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="menu-aside">
+    <div>
+      <div class="menu-aside__title dl-2">Accesos rápidos</div>
+      <ul class="menu-quick">
+        <li class="dl-3"><a href="/login">Iniciar sesión</a></li>
+        <li class="dl-4"><a href="#scene-courses">Ver cursos</a></li>
+        <li class="dl-5"><a href="taller-matematicas.html">Taller gratuito</a></li>
+        <li class="dl-6"><a href="https://wa.me/5215529033828" target="_blank">WhatsApp</a></li>
+      </ul>
+    </div>
+    <div class="menu-aside__bottom">
+      <p>Teocalli Lab School<br><a href="https://wa.me/5215529033828">Contáctanos</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Three.js shader -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var canvas=document.getElementById('shader-canvas');
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setClearColor(0x000000,1);
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight,.1,1000);
+  camera.position.set(0,0,55);
+  function onResize(){ renderer.setSize(window.innerWidth,window.innerHeight); camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); }
+  onResize(); window.addEventListener('resize',onResize);
+  var geo=new THREE.SphereGeometry(22,128,128);
+  var vert=`
+    uniform float uTime;
+    varying vec3 vNormal; varying vec3 vPos; varying float vDisplace;
+    void main(){
+      vPos=position; vNormal=normalize(normal);
+      float d =sin(position.x*.20+uTime*.70)*cos(position.y*.18-uTime*.55)*2.8;
+            d+=sin(position.y*.28+uTime*.50)*cos(position.z*.22+uTime*.65)*1.6;
+            d+=sin(position.z*.35-uTime*.90)*cos(position.x*.16-uTime*.40)*1.1;
+            d+=sin((position.x+position.z)*.12+uTime*.35)*.9;
+      vDisplace=d;
+      gl_Position=projectionMatrix*modelViewMatrix*vec4(position+normal*d,1.0);
+    }`;
+  var frag=`
+    uniform float uTime;
+    varying vec3 vNormal; varying vec3 vPos; varying float vDisplace;
+    void main(){
+      vec3 n=normalize(vNormal);
+      vec3 lA=normalize(vec3(.6,.8,1.)); vec3 lB=normalize(vec3(-.7,-.4,.6)); vec3 lC=normalize(vec3(0.,-.9,.3));
+      float dA=max(dot(n,lA),0.); float dB=max(dot(n,lB),0.); float dC=max(dot(n,lC),0.);
+      /* palette: red #B21E3B, cream #F0EDE8 */
+      vec3 cRed=vec3(.698,.118,.231); vec3 cCream=vec3(.941,.929,.910); vec3 cDark=vec3(.12,.04,.06);
+      vec3 col=vec3(.01,.005,.008);
+      col+=cRed*pow(dA,1.3)*1.0;
+      col+=cCream*pow(dB,2.2)*.35;
+      col+=cDark*pow(dC,2.2)*.6;
+      vec3 view=normalize(-vPos); vec3 hv=normalize(lA+view);
+      float spec=pow(max(dot(n,hv),0.),80.);
+      col+=cCream*spec*.4;
+      float t=clamp((vDisplace+3.5)/7.,0.,1.);
+      col+=mix(cRed,cCream,t)*.1;
+      float edge=1.-max(dot(n,view),0.);
+      col*=1.-edge*edge*.5;
+      col=pow(col,vec3(.88));
+      gl_FragColor=vec4(col,1.);
+    }`;
+  var uniforms={uTime:{value:0}};
+  var mat=new THREE.ShaderMaterial({vertexShader:vert,fragmentShader:frag,uniforms:uniforms});
+  var sphere=new THREE.Mesh(geo,mat);
+  scene.add(sphere);
+  var clock=new THREE.Clock();
+  var mx=0,my=0;
+  document.addEventListener('mousemove',function(e){ mx=(e.clientX/window.innerWidth-.5)*2; my=(e.clientY/window.innerHeight-.5)*2; });
+  function animate(){
+    requestAnimationFrame(animate);
+    var t=clock.getElapsedTime();
+    uniforms.uTime.value=t;
+    sphere.rotation.y=t*.10+mx*.18;
+    sphere.rotation.x=Math.sin(t*.07)*.12+my*.12;
+    /* lerp más rápido: .08 → .12 */
+    camera.position.x+=(mx*6-camera.position.x)*.09;
+    camera.position.y+=(-my*5-camera.position.y)*.09;
+    camera.lookAt(scene.position);
+    renderer.render(scene,camera);
+  }
+  animate();
+})();
+</script>
+
+<script>
+/* CURSOR */
+(function(){
+  var dot=document.querySelector('.cursor__dot'),ring=document.querySelector('.cursor__ring');
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+  function loop(){ requestAnimationFrame(loop); rx+=(mx-rx)*.22; ry+=(my-ry)*.22; dot.style.left=mx+'px'; dot.style.top=my+'px'; ring.style.left=rx+'px'; ring.style.top=ry+'px'; }
+  loop();
+})();
+
+/* SCROLL REVEAL — clip reveal en todos los textos */
+(function(){
+  /* Elementos con clip reveal (títulos, labels) */
+  var clipEls = document.querySelectorAll(
+    '.iv, .courses__label, .team__label, .method__label, .why__label, .intro__label'
+  );
+
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+
+      /* Si ya tiene la clase visible no hacer nada */
+      if(el.classList.contains('visible')) return;
+
+      /* Wrap automático: si el elemento tiene texto directo, envolverlo */
+      if(!el.querySelector('.reveal-wrap')){
+        /* Animar con translateY desde abajo */
+        el.style.transition = 'transform 1s cubic-bezier(.16,1,.3,1), opacity .01s';
+        el.style.transform  = 'translateY(32px)';
+        el.style.opacity    = '0';
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            el.style.transform = 'translateY(0)';
+            el.style.opacity   = '1';
+          });
         });
+      }
 
-        // Cerrar menú móvil al hacer scroll
-        window.addEventListener('scroll', function() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-            }
-        });
+      el.classList.add('visible');
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.12 });
 
-        // Smooth scroll para los enlaces de navegación
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  clipEls.forEach(function(el){ obs.observe(el); });
+})();
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        function expandCard(card, rowId) {
-            const row = document.getElementById(rowId);
-            const cards = row.querySelectorAll('.course-card');
-            
-            cards.forEach(c => {
-                if (c === card) {
-                    c.classList.remove('collapsed');
-                    c.classList.add('expanded');
-                } else {
-                    c.classList.remove('expanded');
-                    c.classList.add('collapsed');
-                }
-            });
-        }
-        // Fecha objetivo: 1 de junio de 2026
-        const targetDate = new Date('June 1, 2026 00:00:00').getTime();
-
-        // Actualizar contador cada segundo
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
-
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<p style="text-align: center; color: #667eea; font-weight: 600;">¡El registro ya está abierto!</p>';
-            }
-        }
-
-        // Actualizar cada segundo
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Mostrar popup
-        let popupClosed = false;
-        
-        function showPopup() {
-            if (!popupClosed) {
-                document.getElementById('popupCard').classList.add('show');
-            }
-        }
-
-        function closePopup() {
-            document.getElementById('popupCard').classList.remove('show');
-            popupClosed = true;
-            
-            // Reaparecer después de 30 segundos
-            setTimeout(() => {
-                popupClosed = false;
-                showPopup();
-            }, 30000);
-        }
-
-        // Mostrar el popup después de 3 segundos al cargar la página
-        setTimeout(showPopup, 3000);
-
-    </script>
+/* MENU */
+(function(){
+  var btn=document.getElementById('menuBtn'),overlay=document.getElementById('menuOverlay'),close=document.getElementById('menuClose');
+  function open(){overlay.classList.add('is-open');document.body.style.overflow='hidden';}
+  function shut(){overlay.classList.remove('is-open');document.body.style.overflow='';}
+  btn.addEventListener('click',open); close.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')shut();});
+})();
+</script>
 </body>
 </html>
