@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEOCALLI LAB SCHOOL - Data Analysis and Visualization</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@300;400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="img/LogoColor.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Urbanist:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBX24SMFX"></script>
 	<script>
@@ -18,1132 +22,595 @@
 	
 	  gtag('config', 'G-DMBX24SMFX');
 	</script>
-  <style>
-    :root {
-      --red:    #B21E3B;
-      --cream:  #F0EDE8;
-      --white:  #FFFFFF;
-      --black:  #000000;
-      --red-dim:   rgba(178,30,59,0.12);
-      --cream-dim: rgba(240,237,232,0.5);
-      --cream-low: rgba(240,237,232,0.15);
-    }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    /* scroll suave en todos los navegadores */
-    @media (prefers-reduced-motion: no-preference) {
-      html { scroll-behavior: smooth; }
-    }
-    body {
-      background: var(--black);
-      color: var(--cream);
-      font-family: 'Syne', sans-serif;
-      font-size: 16px; line-height: 1.5;
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* ── CURSOR ── */
-    .cursor { position: fixed; top:0; left:0; z-index:9999; pointer-events:none; mix-blend-mode:difference; }
-    .cursor__dot  { position:absolute; width:7px; height:7px; background:var(--white); border-radius:50%; transform:translate(-50%,-50%); transition:width .2s,height .2s; }
-    .cursor__ring { position:absolute; width:34px; height:34px; border:1px solid var(--white); border-radius:50%; transform:translate(-50%,-50%); transition:width .3s,height .3s,opacity .3s; }
-    body:has(a:hover) .cursor__ring,
-    body:has(button:hover) .cursor__ring { width:54px; height:54px; }
-
-    /* ── SHADER CANVAS ── */
-    #shader-canvas { position:fixed; inset:0; z-index:0; width:100%; height:100%; pointer-events:none; }
-
-    /* ── GRAIN ── */
-    .grain {
-      position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.04;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size:200px 200px; mix-blend-mode:overlay;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:500;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 3rem; height:70px;
-    }
-    nav::before { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%); pointer-events:none; }
-    nav::after  { content:''; position:absolute; bottom:0; left:3rem; right:3rem; height:1px; background:linear-gradient(to right,transparent,rgba(178,30,59,.25),transparent); }
-    .nav__brand { display:flex; align-items:center; gap:.8rem; text-decoration:none; position:relative; z-index:1; }
-    .nav__logo  { display:flex; align-items:center; flex-shrink:0; }
-    .nav__logo img { width:52px; height:52px; }
-    .nav__name  { font-weight:700; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream); line-height:1.3; }
-    .nav__name em { display:block; font-style:normal; font-size:.52rem; letter-spacing:.28em; color:var(--red); font-weight:300; }
-    .nav__right { display:flex; align-items:stretch; gap:0; position:relative; z-index:1; height:42px; }
-    .nav__login {
-      display:flex; align-items:center; padding:0 1.6rem;
-      font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.14em; text-transform:uppercase;
-      color:var(--black); background:var(--cream); text-decoration:none;
-      clip-path:polygon(10px 0%,100% 0%,100% 100%,0% 100%);
-      transition:background .25s;
-    }
-    .nav__login:hover { background:#ddd9d3; }
-    .nav__menu-btn {
-      display:flex; align-items:center; gap:.55rem; padding:0 1.6rem;
-      background:var(--red); color:var(--white);
-      font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.14em; text-transform:uppercase;
-      border:none; cursor:none; transition:background .25s;
-    }
-    .nav__menu-btn:hover { background:#96192f; }
-    .ham { display:flex; flex-direction:column; gap:3.5px; }
-    .ham span { display:block; width:16px; height:1px; background:var(--white); }
-
-    /* ── MAIN ── */
-    main { position:relative; z-index:10; }
-
-    /* ── REVEAL ANIMATION — estilo Korowa (clip puro, sin opacity) ── */
-    .reveal-wrap  { overflow:hidden; display:block; padding-bottom:.15em; margin-bottom:-.15em; }
-    .reveal-inner { display:block; transform:translateY(105%); }
-    .rv-1 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .25s; }
-    .rv-2 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .42s; }
-    .rv-3 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .58s; }
-    .rv-4 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .72s; }
-    .rv-5 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards .86s; }
-    .rv-6 .reveal-inner { animation:clipUp 1s cubic-bezier(.16,1,.3,1) forwards 1.0s; }
-    @keyframes clipUp { to { transform:translateY(0); } }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
-
-    /* ── SCROLL TRIGGER ── */
-    .iv { opacity:0; transform:translateY(28px); transition:opacity .9s ease,transform .9s cubic-bezier(.16,1,.3,1); }
-    .iv.visible { opacity:1; transform:translateY(0); }
-    .iv.d1 { transition-delay:.1s; }
-    .iv.d2 { transition-delay:.22s; }
-    .iv.d3 { transition-delay:.34s; }
-    .iv.d4 { transition-delay:.46s; }
-
-    /* ── SCENE BASE ── */
-    .scene { position:relative; min-height:100vh; display:flex; overflow:hidden; }
-    .scene-divider { position:relative; height:1px; margin:0 3rem; background:linear-gradient(to right,transparent,rgba(240,237,232,.08),transparent); }
-
-    /* ══════════════════════════════
-       SCENE 1 — HERO
-    ══════════════════════════════ */
-    #scene-hero { align-items:stretch; padding:0; }
-
-    .hero__left {
-      flex:1; display:flex; flex-direction:column;
-      justify-content:center;
-      padding:8vh 0 8vh 5vw;
-    }
-
-    /* TEOCALLI LAB / SCHOOL — izquierda abajo */
-    .hero__brand-title { text-align:left; }
-    .hero__brand-title .line1 {
-      display:block;
-      font-size:clamp(3.2rem,5vw,5rem);
-      font-weight:800; letter-spacing:-.04em; line-height:.9;
-      color:var(--white);
-    }
-    .hero__brand-title .lab{
-      color:var(--red);
-      padding-left:40%;
-    }
-
-    .hero__brand-title .line2 {
-      display:block;
-      font-size:clamp(3.2rem,5vw,5rem);
-      font-weight:800; letter-spacing:-.04em; line-height:.9;
-      color:var(--white); padding-left:45%;
-    }
-
-    /* redes sociales verticales — mitad izquierda */
-    .hero__socials {
-      display:flex; flex-direction:column;
-      align-items:flex-start; gap:1.8rem;
-      padding-top:72px; /* debajo del nav */
-    }
-    .hero__social-link {
-      display:flex; align-items:center; gap:.7rem;
-      font-family:'DM Mono',monospace; font-size:.52rem;
-      letter-spacing:.22em; text-transform:uppercase;
-      color:rgba(240,237,232,.3); text-decoration:none;
-      writing-mode:vertical-rl; text-orientation:mixed;
-      transition:color .3s, transform .3s;
-      opacity:0; animation:fadeUp .8s ease forwards;
-    }
-    .hero__social-link:nth-child(1) { animation-delay:.6s; }
-    .hero__social-link:nth-child(2) { animation-delay:.75s; }
-    .hero__social-link:nth-child(3) { animation-delay:.9s; }
-    .hero__social-link:hover { color:var(--red); transform:translateX(3px); }
-    .hero__social-icon { width:16px; height:16px; fill:currentColor; flex-shrink:0; }
-
-    /* línea decorativa entre redes y laboratory */
-    .hero__side-line {
-      width:1px; height:60px;
-      background:linear-gradient(to bottom, rgba(178,30,59,.4), transparent);
-      margin:0 .5rem;
-    }
-
-    /* LABORATORY link bottom-left */
-    .hero__lab {
-      font-family:'DM Mono',monospace; font-size:.56rem;
-      letter-spacing:.3em; text-transform:uppercase;
-      color:rgba(240,237,232,.3); text-decoration:none;
-      display:inline-flex; align-items:center; gap:.6rem;
-      transition:color .3s;
-      opacity:0; animation:fadeUp .8s ease forwards 1.1s;
-    }
-    .hero__lab::before { content:''; width:18px; height:1px; background:var(--red); transition:width .3s; }
-    .hero__lab:hover { color:var(--red); }
-    .hero__lab:hover::before { width:28px; }
-
-    /* RIGHT: brand title */
-    .hero__right {
-      width:40%; display:flex; flex-direction:column;
-      justify-content:space-between; align-items:flex-end;
-      padding:8vh 5vw 8vh 0;
-      position:relative;
-    }
-
-    /* scroll indicator */
-    .scroll-ind {
-      position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
-      display:flex; flex-direction:column; align-items:center; gap:.5rem;
-      opacity:0; animation:fadeUp 1s ease forwards 2s;
-    }
-    .scroll-ind span { font-family:'DM Mono',monospace; font-size:.48rem; letter-spacing:.24em; color:var(--cream-low); text-transform:uppercase; }
-    .scroll-line { width:1px; height:44px; background:linear-gradient(to bottom,var(--red),transparent); animation:scrollP 2s ease-in-out infinite; }
-    @keyframes scrollP { 0%,100%{opacity:.5;transform:scaleY(1);}50%{opacity:1;transform:scaleY(.6);} }
-
-    /* ══════════════════════════════
-       SCENE 2 — INTRO
-    ══════════════════════════════ */
-    #scene-intro {
-      align-items:center; justify-content:center;
-      flex-direction:column; text-align:center;
-      padding:16vh 10vw;
-    }
-    .intro__label {
-      font-family:'DM Mono',monospace; font-size:.8rem;
-      letter-spacing:.28em; color:var(--red); text-transform:uppercase;
-      margin-bottom:2.5rem;
-    }
-    .intro__title {
-      font-size:clamp(2.2rem,4vw,4rem); font-weight:800;
-      letter-spacing:-.03em; line-height:1; color:var(--white);
-      margin-bottom:2rem; max-width:700px;
-    }
-    .intro__body {
-      font-family:'DM Mono',monospace; font-size:.8rem;
-      color:var(--cream-dim); line-height:1.9; max-width:600px; margin-bottom:3rem;
-    }
-    /* BUTTON — doble cortina vertical (estilo codepen btn-style506) */
-    .btn {
-      display:inline-flex; align-items:center; gap:.5rem;
-      font-family:'DM Mono',monospace; font-size:.7rem;
-      letter-spacing:.14em; text-transform:uppercase;
-      padding:1rem 2.6rem; border-radius:100px;
-      text-decoration:none; position:relative; overflow:hidden;
-      transition:color .4s ease, border-color .4s ease;
-    }
-    .btn span { position:relative; z-index:2; }
-    /* ::before entra desde abajo */
-    .btn::before {
-      content:''; position:absolute; inset:0;
-      transform:translateY(100%);
-      transition:transform .4s cubic-bezier(.76,0,.24,1);
-      border-radius:inherit; z-index:1;
-    }
-    /* ::after sale por arriba */
-    .btn::after {
-      content:''; position:absolute; inset:0;
-      transform:translateY(0);
-      transition:transform .4s cubic-bezier(.76,0,.24,1) .05s;
-      border-radius:inherit; z-index:1;
-    }
-    .btn:hover::before { transform:translateY(0); }
-    .btn:hover::after  { transform:translateY(-100%); }
-
-    .btn-red { background:var(--red); color:var(--white); border:1px solid var(--red); }
-    .btn-red::before { background:#96192f; }
-    .btn-red::after  { background:var(--red); }
-    .btn-red:hover   { color:var(--white); }
-
-    .btn-outline { background:transparent; color:var(--cream); border:1px solid rgba(240,237,232,.25); }
-    .btn-outline::before { background:var(--red); }
-    .btn-outline::after  { background:transparent; }
-    .btn-outline:hover   { color:var(--white); border-color:var(--red); }
-
-    /* ══════════════════════════════
-       SCENE 3 — POR QUÉ
-    ══════════════════════════════ */
-    #scene-why {
-      flex-direction:column; padding:14vh 6vw; align-items:flex-start;
-    }
-    .why__wrap { display:grid; grid-template-columns:1fr 1.5fr; gap:6vw; width:100%; align-items:start; }
-    .why__left { position:sticky; top:20vh; }
-    .why__label {
-      font-family:'DM Mono',monospace; font-size:.55rem;
-      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
-      margin-bottom:2rem; display:flex; align-items:center; gap:.8rem;
-    }
-    .why__label::before { content:''; width:28px; height:1px; background:var(--red); }
-    .why__title {
-      font-size:clamp(2.8rem,4vw,4rem); font-weight:800;
-      letter-spacing:-.04em; line-height:.95; color:var(--white);
-    }
-    .why__title em { display:block; font-style:normal; color:var(--red); }
-    .why__p {
-      font-family:'DM Mono',monospace; font-size:.78rem;
-      color:var(--cream-dim); line-height:1.95; margin-bottom:1.6rem;
-    }
-    .why__p strong { color:var(--cream); font-weight:400; }
-    .why__stats { display:flex; gap:3rem; margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(240,237,232,.07); }
-    .why__stat-num { display:block; font-size:2.2rem; font-weight:800; color:var(--white); letter-spacing:-.03em; line-height:1; }
-    .why__stat-label { display:block; font-family:'DM Mono',monospace; font-size:.52rem; letter-spacing:.2em; color:var(--red); text-transform:uppercase; margin-top:.3rem; }
-
-    /* ══════════════════════════════
-       SCENE 4 — FRASE
-    ══════════════════════════════ */
-    #scene-phrase {
-      align-items:center; justify-content:center;
-      padding:18vh 10vw;
-    }
-    .phrase__text {
-      font-size:clamp(2rem,4vw,4rem); font-weight:800;
-      letter-spacing:-.03em; line-height:1.05;
-      color:var(--white); text-align:center; max-width:900px;
-    }
-    .phrase__text em { font-style:normal; color:var(--red); }
-
-    /* ══════════════════════════════
-       SCENE 5 — CTA SECTION
-    ══════════════════════════════ */
-    #scene-cta-mid {
-      flex-direction:column; align-items:center; justify-content:center;
-      text-align:center; padding:14vh 6vw;
-    }
-    .cta-mid__title {
-      font-size:clamp(2rem,4vw,4rem); font-weight:800;
-      letter-spacing:-.03em; line-height:1.05; color:var(--white);
-      margin-bottom:1.5rem; max-width:760px;
-    }
-    .cta-mid__body {
-      font-family:'DM Mono',monospace; font-size:.78rem;
-      color:var(--cream-dim); line-height:1.85;
-      max-width:540px; margin-bottom:3rem;
-    }
-
-    /* ══════════════════════════════
-       SCENE 6 — CURSOS
-    ══════════════════════════════ */
-    #scene-courses { flex-direction:column; justify-content:center; padding:12vh 6vw; }
-    .courses__label {
-      font-family:'DM Mono',monospace; font-size:.55rem;
-      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
-      margin-bottom:5rem; display:flex; align-items:center; gap:.8rem;
-    }
-    .courses__label::before { content:''; width:28px; height:1px; background:var(--red); }
-    .course-item {
-      position:relative; border-top:1px solid rgba(240,237,232,.07);
-      display:grid; grid-template-columns:3.5rem 1fr auto;
-      align-items:center; gap:2rem; padding:2.8rem 0;
-      cursor:none; overflow:hidden; text-decoration:none; color:inherit;
-      transition:border-color .3s;
-    }
-    .course-item:last-child { border-bottom:1px solid rgba(240,237,232,.07); }
-    .course-item::before {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(to right,rgba(178,30,59,.05),transparent);
-      transform:translateX(-100%); transition:transform .5s cubic-bezier(.16,1,.3,1);
-    }
-    .course-item:hover::before { transform:translateX(0); }
-    .course-item:hover { border-color:rgba(178,30,59,.3); }
-    .course-item__num {
-      font-family:'DM Mono',monospace; font-size:.6rem;
-      letter-spacing:.1em; color:var(--red); opacity:.7; align-self:flex-start; padding-top:.4rem;
-    }
-    .course-item__body { position:relative; z-index:1; }
-    .course-item__tag {
-      font-family:'DM Mono',monospace; font-size:.52rem;
-      letter-spacing:.22em; text-transform:uppercase; color:var(--red);
-      margin-bottom:.6rem; display:block;
-    }
-    .course-item__tag-cream { color:var(--cream-dim); }
-    .course-item__title {
-      font-weight:700; font-size:clamp(1.5rem,3.2vw,2.8rem);
-      letter-spacing:-.02em; color:var(--white); line-height:1.1; margin-bottom:.7rem;
-    }
-    .course-item__desc {
-      font-family:'DM Mono',monospace; font-size:.68rem;
-      color:var(--cream-dim); line-height:1.7; max-width:480px;
-    }
-    .course-item__arrow {
-      font-size:1.4rem; color:rgba(240,237,232,.2); position:relative; z-index:1; align-self:center;
-      transition:transform .4s cubic-bezier(.16,1,.3,1), color .25s;
-    }
-    .course-item:hover .course-item__arrow { transform:translate(6px,-4px); color:var(--red); }
-
-    /* ══════════════════════════════
-       MARQUEE
-    ══════════════════════════════ */
-    .marquee-section { padding:5rem 0; overflow:hidden; }
-    .marquee-track { display:flex; gap:0; white-space:nowrap; }
-    .marquee-track--fwd  { animation:marqueeL 28s linear infinite; }
-    .marquee-track--rev  { animation:marqueeR 28s linear infinite; margin-top:1.2rem; }
-    @keyframes marqueeL { from{transform:translateX(0);}  to{transform:translateX(-50%);} }
-    @keyframes marqueeR { from{transform:translateX(-50%);} to{transform:translateX(0);} }
-    .marquee-item {
-      display:inline-flex; align-items:center; gap:2.2rem;
-      font-family:'DM Mono',monospace; font-size:.72rem;
-      letter-spacing:.22em; text-transform:uppercase;
-      color:var(--cream-dim); padding:0 2.2rem;
-    }
-    .marquee-item .dot { width:5px; height:5px; border-radius:50%; background:var(--red); flex-shrink:0; }
-    .marquee-item--accent { color:var(--red); }
-
-    /* ══════════════════════════════
-       SCENE — TEAM
-    ══════════════════════════════ */
-    #scene-team { flex-direction:column; padding:12vh 6vw; align-items:flex-start; }
-    .team__label {
-      font-family:'DM Mono',monospace; font-size:.55rem;
-      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
-      margin-bottom:4rem; display:flex; align-items:center; gap:.8rem; width:100%;
-    }
-    .team__label::before { content:''; width:28px; height:1px; background:var(--red); }
-    .team__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; width:100%; }
-    .team__card { position:relative; cursor:none; aspect-ratio:3/4; overflow:hidden; }
-    .team__card-inner { position:relative; width:100%; height:100%; }
-    .team__card-front { position:absolute; inset:0; transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1); }
-    .team__card:hover .team__card-front { opacity:0; transform:scale(1.04); }
-    .team__img {
-      width:100%; height:100%; object-fit:cover; display:block;
-      filter:grayscale(40%) contrast(1.1); transition:filter .5s ease;
-    }
-    .team__card:hover .team__img { filter:grayscale(0%) contrast(1); }
-    .team__card-gradient { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.25) 45%,transparent 70%); }
-    .team__card-bottom { position:absolute; bottom:0; left:0; right:0; padding:2rem 1.8rem; }
-    .team__name { font-weight:700; font-size:1.1rem; color:var(--white); letter-spacing:-.01em; }
-    .team__role { font-family:'DM Mono',monospace; font-size:.55rem; letter-spacing:.16em; color:var(--red); text-transform:uppercase; margin-top:.3rem; }
-    .team__card-back {
-      position:absolute; inset:0;
-      background:#0a0a0a; border:1px solid rgba(178,30,59,.2);
-      display:flex; align-items:flex-end;
-      transform:translateY(100%); transition:transform .55s cubic-bezier(.16,1,.3,1);
-    }
-    .team__card:hover .team__card-back { transform:translateY(0); }
-    .team__card-back::before {
-      content:''; position:absolute; top:0; left:2rem; width:1px; height:0;
-      background:var(--red); transition:height .5s ease .3s;
-    }
-    .team__card:hover .team__card-back::before { height:3.5rem; }
-    .team__card-back-content { padding:2.2rem 1.8rem; width:100%; }
-    .team__back-role {
-      font-family:'DM Mono',monospace; font-size:.5rem; letter-spacing:.24em;
-      color:var(--red); text-transform:uppercase; margin-bottom:.6rem;
-      opacity:0; transform:translateY(10px); transition:opacity .4s ease .25s,transform .4s ease .25s;
-    }
-    .team__card:hover .team__back-role { opacity:1; transform:translateY(0); }
-    .team__back-name {
-      font-weight:700; font-size:1.35rem; color:var(--white);
-      letter-spacing:-.02em; margin-bottom:1rem; line-height:1;
-      opacity:0; transform:translateY(12px); transition:opacity .4s ease .32s,transform .4s ease .32s;
-    }
-    .team__card:hover .team__back-name { opacity:1; transform:translateY(0); }
-    .team__back-bio {
-      font-family:'DM Mono',monospace; font-size:.63rem;
-      color:var(--cream-dim); line-height:1.75;
-      opacity:0; transform:translateY(12px); transition:opacity .4s ease .40s,transform .4s ease .40s;
-    }
-    .team__card:hover .team__back-bio { opacity:1; transform:translateY(0); }
-    .team__back-links {
-      margin-top:1.4rem;
-      opacity:0; transform:translateY(10px); transition:opacity .4s ease .48s,transform .4s ease .48s;
-    }
-    .team__card:hover .team__back-links { opacity:1; transform:translateY(0); }
-    .team__back-link {
-      font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase;
-      color:var(--red); text-decoration:none; border-bottom:1px solid rgba(178,30,59,.35); padding-bottom:2px;
-      transition:color .2s,border-color .2s;
-    }
-    .team__back-link:hover { color:var(--cream); border-color:var(--cream-dim); }
-
-    /* ══════════════════════════════
-       SCENE — METODOLOGÍA
-    ══════════════════════════════ */
-    #scene-method { flex-direction:column; padding:14vh 6vw; }
-    .method__label {
-      font-family:'DM Mono',monospace; font-size:.55rem;
-      letter-spacing:.3em; color:var(--red); text-transform:uppercase;
-      margin-bottom:5rem; display:flex; align-items:center; gap:.8rem;
-    }
-    .method__label::before { content:''; width:28px; height:1px; background:var(--red); }
-    .method__title { font-size:clamp(2rem,4vw,3.8rem); font-weight:800; letter-spacing:-.03em; color:var(--white); margin-bottom:6rem; }
-
-    .method__steps { width:100%; }
-    .method__step {
-      display:grid; grid-template-columns:5rem 1fr 1.4fr;
-      gap:3rem; align-items:start;
-      padding:4rem 0; border-top:1px solid rgba(240,237,232,.07);
-    }
-    .method__step:last-child { border-bottom:1px solid rgba(240,237,232,.07); }
-
-    /* stagger: odd left, even right */
-    .method__step:nth-child(2) { margin-left:12%; }
-    .method__step:nth-child(3) { margin-left:24%; }
-
-    .method__num {
-      font-family:'DM Mono',monospace; font-size:.62rem;
-      letter-spacing:.1em; color:var(--red); padding-top:.4rem;
-    }
-    .method__step-title {
-      font-size:clamp(1.8rem,3vw,2.8rem); font-weight:800;
-      letter-spacing:-.03em; color:var(--white); line-height:1;
-    }
-    .method__step-sub {
-      font-family:'DM Mono',monospace; font-size:.7rem;
-      color:var(--red); letter-spacing:.06em; margin-top:.5rem;
-    }
-    .method__step-body {
-      font-family:'DM Mono',monospace; font-size:.74rem;
-      color:var(--cream-dim); line-height:1.9;
-    }
-
-    @media (max-width:768px) {
-      .method__step { grid-template-columns:3rem 1fr; grid-template-rows:auto auto; }
-      .method__step-body { grid-column:2; }
-      .method__step:nth-child(2),
-      .method__step:nth-child(3) { margin-left:0; }
-    }
-
-    /* ══════════════════════════════
-       FOOTER
-    ══════════════════════════════ */
-    footer {
-      position:relative; z-index:10;
-      padding:6rem 6vw 3rem;
-      border-top:1px solid var(--cream-dim);
-    }
-    .footer__top {
-      display:grid; grid-template-columns:1fr 1fr; gap:4rem;
-      margin-bottom:5rem; align-items:start;
-    }
-    .footer__phrase {
-      font-size:clamp(1.4rem,2vw,2rem); font-weight:800;
-      letter-spacing:-.03em; line-height:1.15; color:var(--white);
-    }
-    .footer__phrase em { font-style:normal; color:var(--red); }
-    .footer__contact { display:flex; flex-direction:column; gap:1rem; align-items:flex-end; }
-    .footer__logo img { width:60px; height:60px; margin-bottom:1rem; }
-    .footer__contact-link {
-      font-family:'DM Mono',monospace; font-size:.68rem;
-      letter-spacing:.12em; color:var(--cream-dim); text-decoration:none;
-      transition:color .2s; display:flex; align-items:center; gap:.5rem;
-    }
-    .footer__contact-link:hover { color:var(--red); }
-    .footer__bottom {
-      display:flex; justify-content:space-between; align-items:center;
-      padding-top:2rem; border-top:1px solid rgba(240,237,232,.06); flex-wrap:wrap; gap:1rem;
-    }
-    .footer__copy { font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.14em; color:var(--cream-dim); }
-
-    /* ══════════════════════════════
-       MENU OVERLAY
-    ══════════════════════════════ */
-    .menu-overlay {
-      position:fixed; inset:0; z-index:800;
-      display:grid; grid-template-columns:1fr 300px;
-      background:#050505; transform:translateX(100%);
-      transition:transform .7s cubic-bezier(.76,0,.24,1);
-    }
-    .menu-overlay.is-open { transform:translateX(0); }
-    .menu-main {
-      padding:8rem 6vw 4rem; display:flex; flex-direction:column; justify-content:center;
-      border-right:1px solid rgba(240,237,232,.04);
-    }
-    .menu-section { margin-bottom:3.2rem; }
-    .menu-section__label {
-      font-family:'DM Mono',monospace; font-size:.52rem; letter-spacing:.3em; text-transform:uppercase;
-      color:var(--red); margin-bottom:1.2rem; display:flex; align-items:center; gap:.6rem;
-      opacity:0; transform:translateY(12px); transition:opacity .5s,transform .5s;
-    }
-    .menu-section__label::before { content:''; width:16px; height:1px; background:var(--red); }
-    .menu-links { list-style:none; display:flex; flex-direction:column; gap:.2rem; }
-    .menu-links li { opacity:0; transform:translateY(18px); transition:opacity .5s,transform .5s; }
-    .menu-links a {
-      font-weight:700; font-size:clamp(1.8rem,3.8vw,3.2rem);
-      color:var(--cream); text-decoration:none; letter-spacing:-.025em; line-height:1.15;
-      display:inline-block; position:relative; transition:color .2s;
-    }
-    .menu-links a::after { content:''; position:absolute; left:0; bottom:-1px; width:0; height:1.5px; background:var(--red); transition:width .35s ease; }
-    .menu-links a:hover { color:var(--red); }
-    .menu-links a:hover::after { width:100%; }
-    .menu-tag {
-      display:inline-block; font-family:'DM Mono',monospace; font-size:.48rem;
-      letter-spacing:.14em; text-transform:uppercase; color:var(--white);
-      background:var(--red); padding:.12rem .45rem;
-      margin-left:.6rem; vertical-align:middle; position:relative; top:-4px;
-    }
-    .menu-tag-cream { background:rgba(240,237,232,.2); color:var(--cream); }
-    .menu-aside {
-      padding:8rem 2.5rem 4rem; display:flex; flex-direction:column; justify-content:space-between;
-      background:rgba(0,0,0,.4);
-    }
-    .menu-aside__title {
-      font-family:'DM Mono',monospace; font-size:.52rem; letter-spacing:.28em; text-transform:uppercase;
-      color:rgba(240,237,232,.25); margin-bottom:1.2rem;
-      opacity:0; transform:translateY(12px); transition:opacity .5s,transform .5s;
-    }
-    .menu-quick { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
-    .menu-quick li { opacity:0; transform:translateY(10px); transition:opacity .45s,transform .45s; }
-    .menu-quick a {
-      font-family:'DM Mono',monospace; font-size:.75rem;
-      color:rgba(240,237,232,.4); text-decoration:none; transition:color .2s;
-      display:flex; align-items:center; gap:.5rem;
-    }
-    .menu-quick a::before { content:'→'; color:var(--red); opacity:0; transform:translateX(-6px); transition:opacity .2s,transform .2s; }
-    .menu-quick a:hover { color:var(--cream); }
-    .menu-quick a:hover::before { opacity:1; transform:translateX(0); }
-    .menu-aside__bottom p { font-family:'DM Mono',monospace; font-size:.58rem; color:rgba(240,237,232,.18); line-height:1.7; }
-    .menu-aside__bottom a { color:var(--red); text-decoration:none; }
-    .menu-close {
-      position:absolute; top:1.8rem; right:2rem;
-      display:flex; align-items:center; gap:.55rem;
-      background:none; border:none; cursor:none;
-      font-family:'DM Mono',monospace; font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(240,237,232,.4); padding:.5rem; transition:color .2s;
-    }
-    .menu-close:hover { color:var(--cream); }
-    .menu-close__x { width:20px; height:20px; position:relative; }
-    .menu-close__x::before,.menu-close__x::after { content:''; position:absolute; top:50%; left:0; width:100%; height:1px; background:currentColor; }
-    .menu-close__x::before { transform:rotate(45deg); }
-    .menu-close__x::after  { transform:rotate(-45deg); }
-    .menu-overlay.is-open .menu-section__label,
-    .menu-overlay.is-open .menu-aside__title  { opacity:1; transform:translateY(0); }
-    .menu-overlay.is-open .menu-links li,
-    .menu-overlay.is-open .menu-quick li      { opacity:1; transform:translateY(0); }
-    .menu-overlay.is-open .dl-1 { transition-delay:.18s !important; }
-    .menu-overlay.is-open .dl-2 { transition-delay:.26s !important; }
-    .menu-overlay.is-open .dl-3 { transition-delay:.34s !important; }
-    .menu-overlay.is-open .dl-4 { transition-delay:.42s !important; }
-    .menu-overlay.is-open .dl-5 { transition-delay:.50s !important; }
-    .menu-overlay.is-open .dl-6 { transition-delay:.58s !important; }
-    .menu-overlay.is-open .dl-7 { transition-delay:.66s !important; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width:768px) {
-      nav { padding:0 1.5rem; }
-      .nav__name { display:none; }
-      /* hero igual que desktop — no se apila */
-      .hero__right { width:45%; }
-      .why__wrap { grid-template-columns:1fr; }
-      .why__left { position:static; }
-      .team__grid { grid-template-columns:1fr; }
-      .team__card { aspect-ratio:4/3; }
-      .footer__top { grid-template-columns:1fr; }
-      .footer__contact { align-items:flex-start; }
-      .menu-overlay { grid-template-columns:1fr; }
-      .menu-aside { display:none; }
-      .menu-main { padding:6rem 1.5rem 3rem; }
-      .scene-divider { margin:0 1.5rem; }
-      #scene-courses, #scene-team, #scene-method, #scene-why { padding:10vh 1.5rem; }
-      /* tamaño de fuente del hero adaptado a móvil */
-      .hero__brand-title .line1,
-      .hero__brand-title .line2 { font-size:clamp(2rem,10vw,3.5rem); }
-    }
-  </style>
 </head>
 <body>
 
-<div class="grain"></div>
-<div class="cursor"><div class="cursor__dot"></div><div class="cursor__ring"></div></div>
-<canvas id="shader-canvas"></canvas>
+    <div id="canvas-container"></div>
+    <div class="noise-overlay"></div>
 
-<!-- ── NAV ── -->
-<nav>
-  <a class="nav__brand" href="/">
-    <div class="nav__logo"><img src="logoblanco.png" alt="Teocalli Lab"/></div>
-    <div class="nav__name">Teocalli Lab<em>School</em></div>
-  </a>
-  <div class="nav__right">
-    <a href="/login" class="nav__login">Login</a>
-    <button class="nav__menu-btn" id="menuBtn">
-      <div class="ham"><span></span><span></span><span></span></div>Menú
-    </button>
-  </div>
-</nav>
-
-<!-- ── MAIN ── -->
-<main>
-
-  <!-- HERO -->
-  <section class="scene" id="scene-hero">
-
-    <!-- LEFT: brand title -->
-    <div class="hero__left">
-      <div></div>
-      <div class="hero__brand-title">
-        <div class="reveal-wrap rv-1"><span class="reveal-inner line1">Teocalli</span></div>
-        <div class="reveal-wrap rv-1"><span class="reveal-inner line1 lab">Lab</span></div>
-        <div class="reveal-wrap rv-2"><span class="reveal-inner line2">School</span></div>
-      </div>
-    </div>
-
-    <!-- RIGHT: redes sociales + laboratory -->
-    <div class="hero__right">
-      <div class="hero__socials">
-        <!-- TikTok -->
-        <a href="https://tiktok.com/@teocallilab" class="hero__social-link" target="_blank" rel="noopener" title="TikTok">
-          <svg class="hero__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
-          </svg>
-          TikTok
-        </a>
-        <!-- Instagram -->
-        <a href="https://instagram.com/teocallilab" class="hero__social-link" target="_blank" rel="noopener" title="Instagram">
-          <svg class="hero__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-          </svg>
-          Instagram
-        </a>
-        <!-- Facebook -->
-        <a href="https://facebook.com/teocallilab" class="hero__social-link" target="_blank" rel="noopener" title="Facebook">
-          <svg class="hero__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-          Facebook
-        </a>
-      </div>
-      <div>
-        <div class="hero__side-line"></div>
-        <a href="/laboratory" class="hero__lab">Laboratory</a>
-      </div>
-    </div>
-
-    <div class="scroll-ind">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <div class="scene-divider"></div>
-
-  <!-- INTRO -->
-  <section class="scene" id="scene-intro">
-    <div class="intro__label iv">Matemáticas · Python · Analítica de Datos</div>
-    <h2 class="intro__title iv d1">Aprende a pensar de forma analítica</h2>
-    <p class="intro__body iv d2">Desarrolla las habilidades necesarias para comprender datos, resolver problemas y tomar decisiones fundamentadas mediante matemáticas, programación y análisis de datos.</p>
-    <div class="iv d3">
-      <a href="#scene-courses" class="btn btn-red"><span>Cursos</span></a>
-    </div>
-  </section>
-
-  <div class="scene-divider"></div>
-
-  <!-- POR QUÉ -->
-  <section class="scene" id="scene-why">
-    <div class="why__wrap">
-      <div class="why__left">
-        <div class="why__label iv">Nuestra razón de ser</div>
-        <h2 class="why__title iv d1">¿Por qué existe<br><em>Teocalli Lab School?</em></h2>
-        <div class="why__stats iv d2">
-          <!--div><span class="why__stat-num">500+</span><span class="why__stat-label">Estudiantes</span></div-->
-          <div><span class="why__stat-num">3</span><span class="why__stat-label">Cursos</span></div>
-          <div><span class="why__stat-num">100%</span><span class="why__stat-label">En vivo</span></div>
-        </div>
-      </div>
-      <div class="why__right">
-        <p class="why__p iv d1">Porque creemos que el <strong>pensamiento analítico no debería ser un privilegio</strong> reservado para quienes tuvieron una formación técnica desde temprana edad.</p>
-        <p class="why__p iv d2">Teocalli Lab School fue creada para ayudar a personas sin experiencia previa a desarrollar habilidades en matemáticas, programación y análisis de datos mediante un proceso de aprendizaje claro, accesible y progresivo.</p>
-        <p class="why__p iv d3">Nuestro propósito es que cada estudiante construya confianza para resolver problemas complejos, comprendiendo no solo qué hacer, sino <strong>por qué hacerlo</strong>. Para lograrlo, diseñamos contenidos basados en ejemplos reales, ejercicios estructurados y metodologías que favorecen la comprensión profunda por encima de la memorización.</p>
-        <p class="why__p iv d4">Creemos que cuando una persona aprende a pensar de forma analítica, adquiere una habilidad que trasciende cualquier tecnología o herramienta: la capacidad de entender problemas, evaluar alternativas y construir soluciones de manera sistemática. <strong>Esa es la razón de ser de Teocalli Lab School.</strong></p>
-      </div>
-    </div>
-  </section>
-
-  <div class="scene-divider"></div>
-
-  <!-- FRASE -->
-  <section class="scene" id="scene-phrase">
-    <p class="phrase__text iv">No enseñamos <em>herramientas.</em><br>Enseñamos a <em>pensar.</em></p>
-  </section>
-
-  <div class="scene-divider"></div>
-
-  <!-- CTA MID -->
-  <section class="scene" id="scene-cta-mid">
-    <h2 class="cta-mid__title iv">Aprende a pensar.<br>Aprende a construir.</h2>
-    <p class="cta-mid__body iv d1">Desarrolla las bases en matemáticas, programación y análisis de datos para comprender problemas complejos y crear soluciones con criterio propio.</p>
-    <div class="iv d2">
-      <a href="#scene-courses" class="btn btn-outline"><span>Explorar cursos →</span></a>
-    </div>
-  </section>
-
-  <div class="scene-divider"></div>
-
-  <!-- CURSOS -->
-  <section class="scene" id="scene-courses">
-    <div class="courses__label iv">Nuestros Cursos</div>
-    <div class="courses__list" style="width:100%">
-      <a href="python-datos.html" class="course-item iv d1">
-        <span class="course-item__num">01</span>
-        <div class="course-item__body">
-          <span class="course-item__tag">Curso · En vivo</span>
-          <div class="course-item__title">Python para Análisis de Datos</div>
-          <p class="course-item__desc">De cero a profesional. Pandas, NumPy, visualización y proyectos reales con datos.</p>
-        </div>
-        <span class="course-item__arrow">↗</span>
-      </a>
-      <a href="matematicas-cds.html" class="course-item iv d2">
-        <span class="course-item__num">02</span>
-        <div class="course-item__body">
-          <span class="course-item__tag">Curso · En vivo</span>
-          <div class="course-item__title">Matemáticas para Ciencia de Datos</div>
-          <p class="course-item__desc">Cálculo, Álgebra Lineal, Estadística y Ecuaciones Diferenciales aplicadas a ML y datos.</p>
-        </div>
-        <span class="course-item__arrow">↗</span>
-      </a>
-      <a href="taller-matematicas.html" class="course-item iv d3">
-        <span class="course-item__num">03</span>
-        <div class="course-item__body">
-          <span class="course-item__tag course-item__tag-cream">Taller · Gratuito</span>
-          <div class="course-item__title">Taller de Matemáticas</div>
-          <p class="course-item__desc">Gratis con tu inscripción a Matemáticas para CDS. Una sesión intensiva de fundamentos.</p>
-        </div>
-        <span class="course-item__arrow">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-section">
-    <div class="marquee-track marquee-track--fwd">
-      <!-- duplicated for seamless loop -->
-      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
-      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
-      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
-      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
-      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
-      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
-      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
-      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
-    </div>
-    <div class="marquee-track marquee-track--rev">
-      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
-      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
-      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
-      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
-      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">TOMA DE DECISIONES<span class="dot"></span></span>
-      <span class="marquee-item">RESOLUCIÓN DE PROBLEMAS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PENSAMIENTO ANALÍTICO<span class="dot"></span></span>
-      <span class="marquee-item">VISUALIZACIÓN<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">ESTADÍSTICA<span class="dot"></span></span>
-      <span class="marquee-item">ANALÍTICA DE DATOS<span class="dot"></span></span>
-      <span class="marquee-item marquee-item--accent">PYTHON<span class="dot"></span></span>
-      <span class="marquee-item">MATEMÁTICAS<span class="dot"></span></span>
-    </div>
-  </div>
-
-  <!-- TEAM -->
-  <section class="scene" id="scene-team">
-    <div class="team__label iv">El equipo</div>
-    <div class="team__grid">
-      <div class="team__card iv d1">
-        <div class="team__card-inner">
-          <div class="team__card-front">
-            <img src="https://teocallilab.github.io/img/FILM.jpg" alt="Israel Lueza" class="team__img"/>
-            <div class="team__card-gradient"></div>
-            <div class="team__card-bottom">
-              <div class="team__name">Israel Lueza</div>
-              <div class="team__role">Python · Data Science</div>
+    <section class="hero-section">
+        
+        <header>
+            <a href="#" class="logo-container">
+                <img src="LogColor.png" alt="Logo Teocalli Lab School" class="logo-image">
+                <div class="logo-text">Teocalli Lab<br>School</div>
+            </a>
+            
+            <div class="nav-actions">
+                <a href="#" class="login-btn">Login</a>
+                <button class="menu-btn">Menu <i class="fa-solid fa-bars-staggered"></i></button>
             </div>
-          </div>
-          <div class="team__card-back">
-            <div class="team__card-back-content">
-              <div class="team__back-role">Python · Data Science</div>
-              <div class="team__back-name">Israel Lueza</div>
-              <p class="team__back-bio">Ingeniero Físico por la UAM AZC y Maestro en Ciencias de la Complejidad por la UACM, 
-                con especialización en análisis de datos. Pienso firmemente que cualquier persona con la guía adecuada puede 
-                aprender matemáticas y programación.</p>
-              <div class="team__back-links"><a href="#" class="team__back-link">LinkedIn ↗</a></div>
+        </header>
+
+        <div class="hero-content">
+            <!--span class="hero-title-small">Teocalli Lab School</span-->
+            <h1>Teocalli Lab School</h1>
+            <p>No enseñamos herramientas.</p>
+            <p class="highlight">Enseñamos a pensar.</p>
+            
+            <p class="hero-live-text">Nuestros cursos de Análisis de Datos, Matemáticas para Ciencia de Datos y el Taller de Matemáticas 
+                están diseñados con una metodología que combina teoria con ejercicios prácticos estructurados.
+                <strong>Con las clases en vivo</strong>, tendrás la oportunidad de interactuar con instructores y compañeros, resolver dudas al instante 
+                y participar en discusiones que enriquecerán tu aprendizaje.</p>
+            
+            <!--div class="hero-courses">
+                <span class="course-tag">Python para Análisis de Datos</span>
+                <span class="course-tag">Matemáticas para Ciencia de Datos</span>
+                <span class="course-tag">Taller de Matemáticas</span>
+            </div-->
+        </div>
+
+        <aside class="social-sidebar">
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </aside>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+
+    </section>
+
+    <section class="content-section" id="seccion-analitica">
+        <div class="section-container">
+            <span class="tags">Matemáticas &middot; Python &middot; Analítica de Datos</span>
+            <h2>Aprende a pensar de forma analítica</h2>
+            <p>Desarrolla las habilidades necesarias para comprender datos, resolver problemas y tomar decisiones fundamentadas mediante matemáticas, programación y análisis de datos.</p>
+        </div>
+    </section>
+
+    <section class="content-section" id="seccion-proposito">
+        <div class="manifesto-container">
+            <h2 class="manifesto-title">¿Por qué existe<br><span class="highlight-serif">Teocalli Lab School?</span></h2>
+            
+            <div class="manifesto-grid">
+                <div class="manifesto-col">
+                    <p class="lead-text">Porque creemos que el pensamiento analítico no debería ser un privilegio reservado para quienes tuvieron una formación técnica desde temprana edad.</p>
+                    <p>Teocalli Lab School fue creada para ayudar a personas sin experiencia previa a desarrollar habilidades en matemáticas, programación y análisis de datos mediante un proceso de aprendizaje claro, accesible y progresivo.</p>
+                </div>
+                <div class="manifesto-col">
+                    <p>Nuestro propósito es que cada estudiante construya confianza para resolver problemas complejos, comprendiendo no solo qué hacer, sino por qué hacerlo. Para lograrlo, diseñamos contenidos basados en ejemplos reales, ejercicios estructurados y metodologías que favorecen la comprensión profunda por encima de la memorización.</p>
+                    <p>Creemos que cuando una persona aprende a pensar de forma analítica, adquiere una habilidad que trasciende cualquier tecnología o herramienta: la capacidad de entender problemas, evaluar alternativas y construir soluciones de manera sistemática. <strong>Esa es la razón de ser de Teocalli Lab School.</strong></p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="team__card iv d2">
-        <div class="team__card-inner">
-          <div class="team__card-front">
-            <img src="https://teocallilab.github.io/img/Myr_Arroyo.jpg" alt="Psc. Myriam Arroyo" class="team__img"/>
-            <div class="team__card-gradient"></div>
-            <div class="team__card-bottom">
-              <div class="team__name">Psc. Myriam Arroyo</div>
-              <div class="team__role">Coordinadora de admisiones</div>
+    </section>
+
+    <section class="content-section" id="seccion-cta">
+        <div class="cta-container">
+            <h2 class="cta-title">Aprende a pensar.<br><span class="highlight-serif">Aprende a construir.</span></h2>
+            <p>Desarrolla las bases en matemáticas, programación y análisis de datos para comprender problemas complejos y crear soluciones con criterio propio.</p>
+            
+            <a href="#seccion-cursos" class="scroll-arrow-btn" aria-label="Ver cursos">
+                <i class="fa-solid fa-arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="content-section" id="seccion-cursos">
+        <div class="courses-container">
+            
+            <div class="courses-list">
+                
+                <a href="#" class="course-row">
+                    <div class="course-index">01</div>
+                    <div class="course-info">
+                        <span class="course-meta">CURSO &middot; EN VIVO</span>
+                        <h3 class="course-title">Python para Análisis de Datos</h3>
+                        <p class="course-desc">De cero a profesional. Domina la limpieza de datos, estadística descriptiva y Análisis Exploratorio (EDA) usando Pandas y NumPy. Culmina con visualización y un proyecto integrador.</p>
+                    </div>
+                    <div class="course-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <a href="#" class="course-row">
+                    <div class="course-index">02</div>
+                    <div class="course-info">
+                        <span class="course-meta">CURSO &middot; EN VIVO</span>
+                        <h3 class="course-title">Matemáticas para Ciencia de Datos</h3>
+                        <p class="course-desc">El rigor analítico detrás de la Inteligencia Artificial. Fundamentos de Álgebra Lineal, Cálculo Diferencial e Integral, y Ecuaciones Diferenciales aplicadas a modelos de Machine Learning.</p>
+                    </div>
+                    <div class="course-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <a href="#" class="course-row">
+                    <div class="course-index">03</div>
+                    <div class="course-info">
+                        <span class="course-meta">TALLER &middot; GRATUITO</span>
+                        <h3 class="course-title">Taller de Matemáticas</h3>
+                        <p class="course-desc">Gratis con tu inscripción a cualquier curso. Una sesión intensiva de álgebra y nivelación de conocimientos previos para que enfrentes retos analíticos sin frustraciones.</p>
+                    </div>
+                    <div class="course-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
             </div>
-          </div>
-          <div class="team__card-back">
-            <div class="team__card-back-content">
-              <div class="team__back-role">Coordinadora de admisiones</div>
-              <div class="team__back-name">Psc. Myriam Arroyo</div>
-              <p class="team__back-bio">Coordinadora de admisiones con amplia experiencia en el proceso de selección y orientación de estudiantes. Apasionada por facilitar el acceso a la educación superior.</p>
-              <div class="team__back-links"><a href="#" class="team__back-link">LinkedIn ↗</a></div>
+        </div>
+    </section>
+    <section class="content-section" id="seccion-marquee" style="min-height: auto; padding: 100px 0;">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span>Matemáticas</span><span class="separator">&middot;</span>
+                <span class="outline-text">Python</span><span class="separator">&middot;</span>
+                <span>Análisis de Datos</span><span class="separator">&middot;</span>
+                <span class="outline-text">Visualización de datos</span><span class="separator">&middot;</span>
+                <span>Estadística</span><span class="separator">&middot;</span>
+                <span class="outline-text">Toma de decisiones</span><span class="separator">&middot;</span>
+                <span>Pensamiento analítico</span><span class="separator">&middot;</span>
+                <span class="outline-text">Resolución de problemas</span><span class="separator">&middot;</span>
+                
+                <span>Matemáticas</span><span class="separator">&middot;</span>
+                <span class="outline-text">Python</span><span class="separator">&middot;</span>
+                <span>Análisis de Datos</span><span class="separator">&middot;</span>
+                <span class="outline-text">Visualización de datos</span><span class="separator">&middot;</span>
+                <span>Estadística</span><span class="separator">&middot;</span>
+                <span class="outline-text">Toma de decisiones</span><span class="separator">&middot;</span>
+                <span>Pensamiento analítico</span><span class="separator">&middot;</span>
+                <span class="outline-text">Resolución de problemas</span><span class="separator">&middot;</span>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="team__card iv d3">
-        <div class="team__card-inner">
-          <div class="team__card-front">
-            <img src="https://teocallilab.github.io/img/Alberto.jpg" alt="Alberto Quezada" class="team__img"/>
-            <div class="team__card-gradient"></div>
-            <div class="team__card-bottom">
-              <div class="team__name">Alberto Quezada</div>
-              <div class="team__role">Matemáticas para Ciencia de Datos</div>
+    </section>
+    <section class="content-section" id="seccion-equipo">
+        <div class="team-container">
+            <h2 class="section-heading dark-text">El Equipo</h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <img src="img/FILM.jpg" alt="MCC Israel Lueza" class="team-photo">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">MCC Israel Lueza</h3>
+                        <span class="team-role">Data Science & Inteligencia Artificial</span>
+                        <p class="team-bio">Lidera la visión tecnológica de Teocalli Lab. Especialista en la aplicación de modelos analíticos avanzados en Python y el desarrollo de arquitecturas de IA, fusionando el rigor técnico con la innovación educativa.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <img src="img/Myriam_Arroyo.jpg" alt="Mtra. Myriam Arroyo" class="team-photo">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Mtra. Myriam Arroyo</h3>
+                        <span class="team-role">Directora Académica</span>
+                        <p class="team-bio">Experta en diseño curricular y metodologías de enseñanza progresiva. Asegura que cada programa traduzca la complejidad técnica en un aprendizaje accesible, estructurado y profundamente significativo.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo-wrapper">
+                        <img src="img/Alberto.jpg" alt="Dr. Alberto Quezada" class="team-photo">
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Dr. Alberto Quezada</h3>
+                        <span class="team-role">Matemáticas Aplicadas</span>
+                        <p class="team-bio">Su enfoque se centra en dotar a los estudiantes de los fundamentos lógicos necesarios para el modelado de sistemas complejos. Transforma conceptos matemáticos abstractos en herramientas de solución de problemas.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="team__card-back">
-            <div class="team__card-back-content">
-              <div class="team__back-role">Profesor invitado</div>
-              <div class="team__back-name">Alberto Quezada</div>
-              <p class="team__back-bio">Dr. en Ciencias e Investigador de la UAEH. Convencido de que las matemáticas bien enseñadas cambia cómo ves el mundo.</p>
-              <div class="team__back-links"><a href="#" class="team__back-link">LinkedIn ↗</a></div>
+        </div>
+    </section>
+    <section class="content-section" id="seccion-metodologia">
+        <div class="methodology-container">
+            <div class="methodology-list">
+                
+                <div class="methodology-row">
+                    <div class="method-index">01</div>
+                    <div class="method-title-block">
+                        <h3 class="method-title">Comprender</h3>
+                        <span class="method-subtitle">Todo comienza por entender los fundamentos.</span>
+                    </div>
+                    <div class="method-desc">
+                        <p>Antes de escribir código o analizar datos, nuestros estudiantes construyen una comprensión sólida de los conceptos matemáticos, estadísticos y computacionales que les permitirán razonar cada solución con criterio.</p>
+                    </div>
+                </div>
+
+                <div class="methodology-row">
+                    <div class="method-index">02</div>
+                    <div class="method-title-block">
+                        <h3 class="method-title">Practicar</h3>
+                        <span class="method-subtitle">El conocimiento se fortalece mediante la aplicación.</span>
+                    </div>
+                    <div class="method-desc">
+                        <p>Cada tema está acompañado de ejercicios cuidadosamente diseñados para desarrollar habilidades analíticas, fomentar la resolución estructurada de problemas y convertir la teoría en experiencia práctica.</p>
+                    </div>
+                </div>
+
+                <div class="methodology-row">
+                    <div class="method-index">03</div>
+                    <div class="method-title-block">
+                        <h3 class="method-title">Construir</h3>
+                        <span class="method-subtitle">Aprender implica crear.</span>
+                    </div>
+                    <div class="method-desc">
+                        <p>Al finalizar su formación, los estudiantes desarrollan un proyecto propio en el que integran matemáticas, programación y análisis de datos para resolver un problema de manera autónoma y demostrar lo aprendido.</p>
+                    </div>
+                </div>
+
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
+    <section class="content-section" id="seccion-faq">
+        <div class="faq-container">
+            <h2 class="section-heading dark-text" style="text-align: center; margin-bottom: 20px;">Preguntas Frecuentes</h2>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="faq-question">¿Necesito conocimientos previos para inscribirme?</span>
+                        <i class="fa-solid fa-plus faq-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>En absoluto. Diseñamos nuestros programas asumiendo que partes desde cero. Nuestra prioridad es enseñarte a pensar antes que a programar o calcular, llevándote paso a paso por los fundamentos hasta alcanzar conceptos avanzados.</p>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="scene-divider"></div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="faq-question">¿En qué formato se imparten los cursos?</span>
+                        <i class="fa-solid fa-plus faq-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Todas nuestras sesiones son <strong>100% en vivo</strong>. Creemos en el valor de la interacción directa, donde puedes resolver dudas al instante, debatir metodologías y analizar datos en tiempo real junto a tus profesores y compañeros.</p>
+                        </div>
+                    </div>
+                </div>
 
-  <!-- METODOLOGÍA -->
-  <section class="scene" id="scene-method">
-    <div class="method__label iv">Cómo aprendemos</div>
-    <h2 class="method__title iv d1">Nuestra Metodología</h2>
-    <div class="method__steps">
-      <div class="method__step iv d1">
-        <div class="method__num">01</div>
-        <div>
-          <div class="method__step-title">Comprender</div>
-          <div class="method__step-sub">Todo comienza por entender los fundamentos.</div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="faq-question">¿Qué hace diferente a Teocalli Lab School?</span>
+                        <i class="fa-solid fa-plus faq-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>La mayoría de las plataformas te enseñan a copiar código o a memorizar fórmulas de una herramienta temporal. Nosotros nos enfocamos en el "por qué". Desarrollamos tu pensamiento analítico y criterio propio para que seas adaptable a cualquier tecnología futura.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="faq-question">¿Cómo obtengo acceso al Taller de Matemáticas gratuito?</span>
+                        <i class="fa-solid fa-plus faq-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>El taller intensivo de nivelación se desbloquea automáticamente al confirmar tu inscripción en el curso de <em>Python para Análisis de Datos</em> o en el de <em>Matemáticas para Ciencia de Datos</em>. Es nuestro compromiso para que inicies tu formación con bases sólidas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="faq-question">¿Recibiré algún certificado al finalizar?</span>
+                        <i class="fa-solid fa-plus faq-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Sí. Al completar la currícula y presentar con éxito tu proyecto integrador final (donde demostrarás tu dominio sobre los datos o los modelos matemáticos), recibirás un certificado de aprobación expedido por Teocalli Lab School.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <p class="method__step-body">Antes de escribir código o analizar datos, nuestros estudiantes construyen una comprensión sólida de los conceptos matemáticos, estadísticos y computacionales que les permitirán razonar cada solución con criterio.</p>
-      </div>
-      <div class="method__step iv d2">
-        <div class="method__num">02</div>
-        <div>
-          <div class="method__step-title">Practicar</div>
-          <div class="method__step-sub">El conocimiento se fortalece mediante la aplicación.</div>
+    </section>
+    <footer class="site-footer" id="seccion-footer">
+        <div class="footer-container">
+            
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo-container footer-logo-container">
+                        <img src="LogColor.png" alt="Logo Teocalli Lab School" class="logo-image">
+                        <div class="logo-text">Teocalli Lab<br>School</div>
+                    </a>
+                    <p class="footer-tagline">No enseñamos herramientas.<br>Enseñamos a pensar.</p>
+                </div>
+
+                <div class="footer-nav">
+                    <div class="footer-nav-col">
+                        <h4 class="footer-heading">Programas</h4>
+                        <ul>
+                            <li><a href="#">Python para Análisis de Datos</a></li>
+                            <li><a href="#">Matemáticas para Ciencia de Datos</a></li>
+                            <li><a href="#">Taller de Matemáticas</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-col">
+                        <h4 class="footer-heading">Escuela</h4>
+                        <ul>
+                            <li><a href="#seccion-proposito">Manifiesto</a></li>
+                            <li><a href="#seccion-equipo">El Equipo</a></li>
+                            <li><a href="#seccion-metodologia">Metodología</a></li>
+                            <li><a href="#seccion-faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contacto</h4>
+                    <a href="mailto:hola@teocallilab.edu" class="footer-email">hola@teocallilab.edu</a>
+                    
+                    <div class="footer-socials">
+                        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 Teocalli Lab School. Todos los derechos reservados.</p>
+                <div class="legal-links">
+                    <a href="#">Aviso de Privacidad</a>
+                    <a href="#">Términos y Condiciones</a>
+                </div>
+            </div>
+
         </div>
-        <p class="method__step-body">Cada tema está acompañado de ejercicios cuidadosamente diseñados para desarrollar habilidades analíticas, fomentar la resolución estructurada de problemas y convertir la teoría en experiencia práctica.</p>
-      </div>
-      <div class="method__step iv d3">
-        <div class="method__num">03</div>
-        <div>
-          <div class="method__step-title">Construir</div>
-          <div class="method__step-sub">Aprender implica crear.</div>
-        </div>
-        <p class="method__step-body">Al finalizar su formación, los estudiantes desarrollan un proyecto propio en el que integran matemáticas, programación y análisis de datos para resolver un problema de manera autónoma y demostrar lo aprendido.</p>
-      </div>
+    </footer>
+    <div id="cookie-banner" class="cookie-banner">
+        <p>Usamos cookies para mejorar tu experiencia en Teocalli Lab School. <br> 
+           Al continuar navegando, aceptas nuestra <a href="#">Política de Privacidad</a>.</p>
+        <button id="accept-cookies" class="cookie-btn">Aceptar</button>
     </div>
-  </section>
 
-</main>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer__top">
-    <div class="footer__phrase iv">
-      Las herramientas cambian.<br>
-      La capacidad de <em>comprender problemas</em><br>
-      y construir soluciones <em>permanece.</em>
+    <div id="nav-overlay" class="nav-overlay">
+        <button id="close-menu" class="close-menu">&times;</button>
+        <nav class="nav-links">
+            <a href="#seccion-analitica">Analítica</a>
+            <a href="#seccion-proposito">Manifiesto</a>
+            <a href="#seccion-cursos">Programas</a>
+            <a href="#seccion-equipo">El Equipo</a>
+            <a href="#seccion-metodologia">Metodología</a>
+            <a href="#seccion-faq">FAQ</a>
+            <a href="mailto:hola@teocallilab.edu" class="menu-email">hola@teocallilab.edu</a>
+        </nav>
     </div>
-    <div class="footer__contact iv d1">
-      <div class="footer__logo"><img src="logoblanco.png" alt="Teocalli Lab School"/></div>
-      <a href="https://wa.me/5215529033828" class="footer__contact-link" target="_blank" rel="noopener">WhatsApp →</a>
-      <a href="mailto:hola@teocallilab.com" class="footer__contact-link">hola@teocallilab.com →</a>
-    </div>
-  </div>
-  <div class="footer__bottom">
-    <p class="footer__copy">© 2026 Teocalli Lab School. Todos los derechos reservados.</p>
-    <p class="footer__copy">Ciudad de México, México</p>
-  </div>
-</footer>
 
-<!-- MENU -->
-<div class="menu-overlay" id="menuOverlay">
-  <button class="menu-close" id="menuClose"><span class="menu-close__x"></span>Cerrar</button>
-  <div class="menu-main">
-    <div class="menu-section">
-      <div class="menu-section__label dl-1">Cursos</div>
-      <ul class="menu-links">
-        <li class="dl-2"><a href="python-datos.html">Python para Análisis<span class="menu-tag">Nuevo</span></a></li>
-        <li class="dl-3"><a href="matematicas-cds.html">Matemáticas para CDS</a></li>
-      </ul>
-    </div>
-    <div class="menu-section">
-      <div class="menu-section__label dl-4">Taller</div>
-      <ul class="menu-links">
-        <li class="dl-5"><a href="taller-matematicas.html">Taller de Matemáticas<span class="menu-tag menu-tag-cream">Gratis</span></a></li>
-      </ul>
-    </div>
-    <div class="menu-section">
-      <div class="menu-section__label dl-6">Plataforma</div>
-      <ul class="menu-links">
-        <li class="dl-7"><a href="/laboratory">Laboratory</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="menu-aside">
-    <div>
-      <div class="menu-aside__title dl-2">Accesos rápidos</div>
-      <ul class="menu-quick">
-        <li class="dl-3"><a href="/login">Iniciar sesión</a></li>
-        <li class="dl-4"><a href="#scene-courses">Ver cursos</a></li>
-        <li class="dl-5"><a href="taller-matematicas.html">Taller gratuito</a></li>
-        <li class="dl-6"><a href="https://wa.me/5215529033828" target="_blank">WhatsApp</a></li>
-      </ul>
-    </div>
-    <div class="menu-aside__bottom">
-      <p>Teocalli Lab School<br><a href="https://wa.me/5215529033828">Contáctanos</a></p>
-    </div>
-  </div>
-</div>
 
-<!-- Three.js shader -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-(function(){
-  var canvas=document.getElementById('shader-canvas');
-  var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.setClearColor(0x000000,1);
-  var scene=new THREE.Scene();
-  var camera=new THREE.PerspectiveCamera(65,window.innerWidth/window.innerHeight,.1,1000);
-  camera.position.set(0,0,55);
-  function onResize(){ renderer.setSize(window.innerWidth,window.innerHeight); camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); }
-  onResize(); window.addEventListener('resize',onResize);
-  var geo=new THREE.SphereGeometry(22,128,128);
-  var vert=`
-    uniform float uTime;
-    varying vec3 vNormal; varying vec3 vPos; varying float vDisplace;
-    void main(){
-      vPos=position; vNormal=normalize(normal);
-      float d =sin(position.x*.20+uTime*.70)*cos(position.y*.18-uTime*.55)*2.8;
-            d+=sin(position.y*.28+uTime*.50)*cos(position.z*.22+uTime*.65)*1.6;
-            d+=sin(position.z*.35-uTime*.90)*cos(position.x*.16-uTime*.40)*1.1;
-            d+=sin((position.x+position.z)*.12+uTime*.35)*.9;
-      vDisplace=d;
-      gl_Position=projectionMatrix*modelViewMatrix*vec4(position+normal*d,1.0);
-    }`;
-  var frag=`
-    uniform float uTime;
-    varying vec3 vNormal; varying vec3 vPos; varying float vDisplace;
-    void main(){
-      vec3 n=normalize(vNormal);
-      vec3 lA=normalize(vec3(.6,.8,1.)); vec3 lB=normalize(vec3(-.7,-.4,.6)); vec3 lC=normalize(vec3(0.,-.9,.3));
-      float dA=max(dot(n,lA),0.); float dB=max(dot(n,lB),0.); float dC=max(dot(n,lC),0.);
-      /* palette: red #B21E3B, cream #F0EDE8 */
-      vec3 cRed=vec3(.698,.118,.231); vec3 cCream=vec3(.941,.929,.910); vec3 cDark=vec3(.12,.04,.06);
-      vec3 col=vec3(.01,.005,.008);
-      col+=cRed*pow(dA,1.3)*1.0;
-      col+=cCream*pow(dB,2.2)*.35;
-      col+=cDark*pow(dC,2.2)*.6;
-      vec3 view=normalize(-vPos); vec3 hv=normalize(lA+view);
-      float spec=pow(max(dot(n,hv),0.),80.);
-      col+=cCream*spec*.4;
-      float t=clamp((vDisplace+3.5)/7.,0.,1.);
-      col+=mix(cRed,cCream,t)*.1;
-      float edge=1.-max(dot(n,view),0.);
-      col*=1.-edge*edge*.5;
-      col=pow(col,vec3(.88));
-      gl_FragColor=vec4(col,1.);
-    }`;
-  var uniforms={uTime:{value:0}};
-  var mat=new THREE.ShaderMaterial({vertexShader:vert,fragmentShader:frag,uniforms:uniforms});
-  var sphere=new THREE.Mesh(geo,mat);
-  scene.add(sphere);
-  var clock=new THREE.Clock();
-  var mx=0,my=0;
-  document.addEventListener('mousemove',function(e){ mx=(e.clientX/window.innerWidth-.5)*2; my=(e.clientY/window.innerHeight-.5)*2; });
-  function animate(){
-    requestAnimationFrame(animate);
-    var t=clock.getElapsedTime();
-    uniforms.uTime.value=t;
-    sphere.rotation.y=t*.10+mx*.18;
-    sphere.rotation.x=Math.sin(t*.07)*.12+my*.12;
-    /* lerp más rápido: .08 → .12 */
-    camera.position.x+=(mx*6-camera.position.x)*.09;
-    camera.position.y+=(-my*5-camera.position.y)*.09;
-    camera.lookAt(scene.position);
-    renderer.render(scene,camera);
-  }
-  animate();
-})();
-</script>
+    <script>
+    // --- 1. CONFIGURACIÓN BASE DE THREE.JS ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
 
-<script>
-/* CURSOR */
-(function(){
-  var dot=document.querySelector('.cursor__dot'),ring=document.querySelector('.cursor__ring');
-  var mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
-  function loop(){ requestAnimationFrame(loop); rx+=(mx-rx)*.22; ry+=(my-ry)*.22; dot.style.left=mx+'px'; dot.style.top=my+'px'; ring.style.left=rx+'px'; ring.style.top=ry+'px'; }
-  loop();
-})();
+        // --- 2. PALETAS CLARAS "PREMIUM" (Transiciones visibles y elegantes) ---
+    
+        // --- 2. PALETAS CLARAS "PREMIUM" (Transiciones visibles y elegantes) ---
+        // Ahora los colores cambian entre tonos sutiles pero distintos para que notes el scroll
+       // --- PALETAS DISPONIBLES ---
+        
+       // --- PALETAS CON CONTRASTE DE TEMPERATURA (Visibles al cambiar) ---
+        // --- PALETAS "TIERRA Y PROFUNDIDAD" (Contraste Federico Pian Style) ---
+        const palettes = [
+            // 0. Hero: fondo crema cálido + rojo y dorado del logo
+            { bg: new THREE.Color("#f5f0e8"), c1: new THREE.Color("#F5C842"), c2: new THREE.Color("#E8651A"), c3: new THREE.Color("#C0271A") },
+            // 1. Analítica: fondo claro + verde oscuro y turquesa
+            { bg: new THREE.Color("#eef4f0"), c1: new THREE.Color("#2A9BA8"), c2: new THREE.Color("#2D6B35"), c3: new THREE.Color("#7AB334") },
+            // 2. Propósito: fondo cálido + naranja y amarillo
+            { bg: new THREE.Color("#f7f2e8"), c1: new THREE.Color("#F5C842"), c2: new THREE.Color("#E8651A"), c3: new THREE.Color("#7AB334") },
+            // 3. CTA: fondo neutro + turquesa y verde
+            { bg: new THREE.Color("#edf4f4"), c1: new THREE.Color("#2A9BA8"), c2: new THREE.Color("#7AB334"), c3: new THREE.Color("#2D6B35") },
+            // 4. Cursos: fondo crema + rojo y naranja vibrante
+            { bg: new THREE.Color("#f5eeea"), c1: new THREE.Color("#E8651A"), c2: new THREE.Color("#C0271A"), c3: new THREE.Color("#F5C842") },
+            // 5. Equipo: fondo claro + verde lima y turquesa
+            { bg: new THREE.Color("#eef5ee"), c1: new THREE.Color("#7AB334"), c2: new THREE.Color("#2A9BA8"), c3: new THREE.Color("#F5C842") },
+            // 6. Metodología: fondo suave + dorado y verde oscuro
+            { bg: new THREE.Color("#f5f0e0"), c1: new THREE.Color("#F5C842"), c2: new THREE.Color("#2D6B35"), c3: new THREE.Color("#E8651A") },
+            // 7. FAQ/Footer: fondo cálido + todos los colores del logo
+            { bg: new THREE.Color("#f2ece4"), c1: new THREE.Color("#C0271A"), c2: new THREE.Color("#2A9BA8"), c3: new THREE.Color("#F5C842") }
+        ];
+        let currentPaletteIndex = 0;
 
-/* SCROLL REVEAL — clip reveal en todos los textos */
-(function(){
-  /* Elementos con clip reveal (títulos, labels) */
-  var clipEls = document.querySelectorAll(
-    '.iv, .courses__label, .team__label, .method__label, .why__label, .intro__label'
-  );
+        const uniforms = {
+            u_time: { value: 0.0 },
+            u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+            u_bg: { value: palettes[0].bg.clone() },
+            u_color1: { value: palettes[0].c1.clone() },
+            u_color2: { value: palettes[0].c2.clone() },
+            u_color3: { value: palettes[0].c3.clone() }
+        };
 
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting) return;
-      var el = e.target;
+        // --- 3. SHADER: EL FRACTAL DE JULIA (Adaptado a tonos claros) ---
+        const vertexShader = `void main() { gl_Position = vec4(position, 1.0); }`;
 
-      /* Si ya tiene la clase visible no hacer nada */
-      if(el.classList.contains('visible')) return;
+        const fragmentShader = `
+            uniform vec2 u_resolution;
+            uniform float u_time;
+            uniform vec3 u_bg;
+            uniform vec3 u_color1;
+            uniform vec3 u_color2;
+            uniform vec3 u_color3;
 
-      /* Wrap automático: si el elemento tiene texto directo, envolverlo */
-      if(!el.querySelector('.reveal-wrap')){
-        /* Animar con translateY desde abajo */
-        el.style.transition = 'transform 1s cubic-bezier(.16,1,.3,1), opacity .01s';
-        el.style.transform  = 'translateY(32px)';
-        el.style.opacity    = '0';
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            el.style.transform = 'translateY(0)';
-            el.style.opacity   = '1';
-          });
+            void main() {
+                float zoom = 1.0;
+                vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / (u_resolution.y * zoom) + vec2(-0.9, 0.0);
+                vec2 z = uv;
+                
+                // Movimiento oscilante del fractal
+                vec2 c = vec2(0.4 * cos(u_time * 0.3), 0.6 * sin(u_time * 0.3));
+                
+                float maxIter = 100.0;
+                float iter = 0.0;
+                
+                // Cálculo de iteraciones
+                for (float i = 0.0; i < 100.0; i++) {
+                    if (iter >= maxIter) break;
+                    z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
+                    if (dot(z, z) > 4.0) {
+                        iter = i;
+                        break;
+                    }
+                }
+                
+                vec3 col = u_bg; 
+                
+                if (iter < maxIter) {
+                    float t = iter / maxIter;
+                    // Generación de bandas de color orgánicas
+                    float wave1 = 0.5 + 0.5 * cos(3.0 + t * 25.0);
+                    float wave2 = 0.5 + 0.5 * cos(3.0 + t * 25.0 + 0.6);
+                    float wave3 = 0.5 + 0.5 * cos(3.0 + t * 25.0 + 1.0);
+                    
+                    vec3 paletteColor = mix(u_color1, u_color2, wave1);
+                    paletteColor = mix(paletteColor, u_color3, wave2);
+                    col = paletteColor;
+                }
+                
+                // IMPORTANTE: Mezclamos el fractal con el color de fondo (u_bg) al 40%
+                // Esto hace que se vea como una "marca de agua" y la tipografía negra resalte perfecto.
+                // En lugar de mezclar al 45%, mezclamos al 25% para que sea una marca de agua muy delicada
+                vec3 finalColor = mix(u_bg, col, 0.75); 
+                
+                // Aplicamos un contraste suave para que los oscuros sean más profundos
+                finalColor = pow(finalColor, vec3(1.1)); 
+                
+                gl_FragColor = vec4(finalColor, 1.0);   
+            }
+        `;
+
+        const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms });
+        const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+        scene.add(mesh);
+
+        // --- 4. OBSERVADOR DE SCROLL (Cambio de Paletas) ---
+        const observerOptions = { root: null, threshold: 0.35 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    
+                    // Asignamos una paleta distinta a cada sección
+                    if (entry.target.classList.contains('hero-section')) currentPaletteIndex = 0;
+                    else if (id === 'seccion-analitica') currentPaletteIndex = 1;
+                    else if (id === 'seccion-proposito') currentPaletteIndex = 2;
+                    else if (id === 'seccion-cta') currentPaletteIndex = 3;
+                    else if (id === 'seccion-cursos') currentPaletteIndex = 4;
+                    else if (id === 'seccion-marquee' || id === 'seccion-equipo') currentPaletteIndex = 5;
+                    else if (id === 'seccion-metodologia') currentPaletteIndex = 6;
+                    else if (id === 'seccion-faq' || id === 'seccion-footer') currentPaletteIndex = 7; 
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las secciones para que el color cambie
+        document.querySelectorAll('section, footer').forEach(el => observer.observe(el));
+
+        // --- 5. RENDER Y ANIMACIÓN DE COLORES ---
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
         });
-      }
 
-      el.classList.add('visible');
-      obs.unobserve(el);
-    });
-  }, { threshold: 0.12 });
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            uniforms.u_time.value = clock.getElapsedTime();
 
-  clipEls.forEach(function(el){ obs.observe(el); });
-})();
+            // Interpolar (cambiar suavemente) hacia la paleta de la sección actual
+            const targetPalette = palettes[currentPaletteIndex];
+            const lerpSpeed = 0.06; 
 
-/* MENU */
-(function(){
-  var btn=document.getElementById('menuBtn'),overlay=document.getElementById('menuOverlay'),close=document.getElementById('menuClose');
-  function open(){overlay.classList.add('is-open');document.body.style.overflow='hidden';}
-  function shut(){overlay.classList.remove('is-open');document.body.style.overflow='';}
-  btn.addEventListener('click',open); close.addEventListener('click',shut);
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')shut();});
-})();
-</script>
+            uniforms.u_bg.value.lerp(targetPalette.bg, lerpSpeed);
+            uniforms.u_color1.value.lerp(targetPalette.c1, lerpSpeed);
+            uniforms.u_color2.value.lerp(targetPalette.c2, lerpSpeed);
+            uniforms.u_color3.value.lerp(targetPalette.c3, lerpSpeed);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // --- 6. INTERFAZ (Menú, FAQ, Cookies) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica del Menú Overlay
+            const menuBtn = document.querySelector('.menu-btn');
+            const closeBtn = document.getElementById('close-menu');
+            const navOverlay = document.getElementById('nav-overlay');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            if (menuBtn && navOverlay) {
+                const toggleMenu = (e) => {
+                    if(e) e.preventDefault();
+                    navOverlay.classList.toggle('active');
+                };
+                menuBtn.addEventListener('click', toggleMenu);
+                if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+                navLinks.forEach(link => link.addEventListener('click', toggleMenu));
+            }
+
+            // Lógica del Acordeón (FAQ)
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const content = header.nextElementSibling;
+                    const isActive = item.classList.contains('active');
+
+                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        if (otherItem.querySelector('.accordion-content')) {
+                            otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        }
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // Lógica del Banner de Cookies
+            const cookieBanner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('accept-cookies');
+            if (cookieBanner && acceptBtn) {
+                if (localStorage.getItem('cookiesAccepted') === 'true') {
+                    cookieBanner.style.display = 'none';
+                }
+                acceptBtn.addEventListener('click', () => {
+                    cookieBanner.style.opacity = '0';
+                    setTimeout(() => cookieBanner.style.display = 'none', 500);
+                    localStorage.setItem('cookiesAccepted', 'true');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
