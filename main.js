@@ -1,3 +1,53 @@
+// =========================================================================
+// ── REPARACIÓN DE EMERGENCIA: ACORDEÓN Y MENÚ ────────────────────────────
+// =========================================================================
+(function() {
+    const initInteractivity = () => {
+        // ACORDEÓN
+        const headers = document.querySelectorAll('.accordion-header');
+        headers.forEach(header => {
+            // Usamos un nombre de función en lugar de arrow function para evitar problemas con 'this'
+            header.onclick = function(e) {
+                e.preventDefault(); 
+                
+                const item = this.parentElement;
+                const content = this.nextElementSibling;
+                const isActive = item.classList.contains('active');
+
+                // Cierra los demás
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                    const c = i.querySelector('.accordion-content');
+                    if (c) c.style.maxHeight = null;
+                });
+
+                // Abre este
+                if (!isActive) {
+                    item.classList.add('active');
+                    if (content) content.style.maxHeight = content.scrollHeight + "px";
+                }
+            };
+        });
+
+        // MENÚ (Solo si existe)
+        const menuBtn = document.getElementById('menu-btn') || document.querySelector('.menu-toggle');
+        const navOverlay = document.getElementById('nav-overlay');
+        if (menuBtn && navOverlay) {
+            menuBtn.onclick = (e) => { e.preventDefault(); navOverlay.classList.add('active'); };
+            const closeBtn = document.getElementById('close-menu');
+            if (closeBtn) closeBtn.onclick = (e) => { e.preventDefault(); navOverlay.classList.remove('active'); };
+        }
+    };
+
+    // Lanzar apenas cargue el DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initInteractivity);
+    } else {
+        initInteractivity();
+    }
+})();
+
+
 // --- 1. CONFIGURACIÓN BASE DE THREE.JS ---
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
@@ -8,14 +58,8 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // --- 2. PALETAS CLARAS "PREMIUM" (Transiciones visibles y elegantes) ---
-    
-        // --- 2. PALETAS CLARAS "PREMIUM" (Transiciones visibles y elegantes) ---
-        // Ahora los colores cambian entre tonos sutiles pero distintos para que notes el scroll
-       // --- PALETAS DISPONIBLES ---
-        
-       // --- PALETAS CON CONTRASTE DE TEMPERATURA (Visibles al cambiar) ---
-        // --- PALETAS "TIERRA Y PROFUNDIDAD" (Contraste Federico Pian Style) ---
+        // --- 2. PALETAS  ---
+
         const palettes = [
             // 0. Hero: fondo crema cálido + rojo y dorado del logo
             { bg: new THREE.Color("#f5f0e8"), c1: new THREE.Color("#F5C842"), c2: new THREE.Color("#E8651A"), c3: new THREE.Color("#C0271A") },
@@ -239,6 +283,116 @@ window.addEventListener('load', () => {
                 start: 'top 90%',
                 toggleActions: 'play none none reset'
             }
+        });
+    });
+});
+
+
+
+// =========================================================================
+// 1. LÓGICA DE INTERACTIVIDAD (MENÚ Y ACORDEÓN) - Se ejecuta rápido
+// =========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    // MENÚ
+    const menuBtn = document.getElementById('menu-btn') || document.querySelector('.menu-toggle');
+    const closeBtn = document.getElementById('close-menu');
+    const navOverlay = document.getElementById('nav-overlay');
+
+    if (menuBtn && navOverlay) {
+        menuBtn.addEventListener('click', (e) => { e.preventDefault(); navOverlay.classList.add('active'); });
+        if (closeBtn) closeBtn.addEventListener('click', (e) => { e.preventDefault(); navOverlay.classList.remove('active'); });
+    }
+
+    // ACORDEÓN (Corrección de selección)
+    const headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(header => {
+        header.addEventListener('click', function() {
+            const item = this.parentElement;
+            const content = this.nextElementSibling;
+            const isActive = item.classList.contains('active');
+
+            // Cierra otros
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+                const c = i.querySelector('.accordion-content');
+                if (c) c.style.maxHeight = null;
+            });
+
+            // Abre este
+            if (!isActive) {
+                item.classList.add('active');
+                if (content) content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    });
+});
+
+// =========================================================================
+// ── 2. ANIMACIONES GSAP (Preloader + Hero + Scroll) - Window Load
+// =========================================================================
+window.addEventListener('load', () => {
+    // Registro de plugins
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    // Esperar fuentes para evitar saltos de texto
+    document.fonts.ready.then(() => {
+        
+        // --- LIMPIEZA INICIAL ---
+        gsap.set(['.hero-eyebrow', '.hero-title', '.hero-description', '.hero-highlight'], { autoAlpha: 0 });
+        gsap.set('.hero-title', { autoAlpha: 1, visibility: 'visible' });
+
+        const titleSplit = new SplitText(".hero-title", { type: "lines, words, chars" });
+        const count = { val: 0 };
+        const counterElement = document.getElementById("counter");
+        const masterTl = gsap.timeline();
+
+        // --- MASTER TIMELINE ---
+        masterTl
+            // 1. Logo
+            .to(".preloader-logo", { autoAlpha: 1, duration: 0.8, ease: "power2.out" })
+            // 2. Contador
+            .to(count, {
+                val: 100,
+                roundProps: "val",
+                duration: 2,
+                ease: "power3.inOut",
+                onUpdate: () => { if (counterElement) counterElement.innerText = count.val + "%"; }
+            })
+            // 3. Salida preloader
+            .to("#preloader", { yPercent: -100, duration: 1.2, ease: "expo.inOut" })
+            .add(() => { document.body.classList.remove("loading"); })
+            
+            // 4. Hero Animation
+            .fromTo('.hero-eyebrow', { y: 15, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6 }, "-=0.8")
+            .fromTo(titleSplit.chars, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.02 }, "-=0.6")
+            .fromTo(['.hero-description', '.hero-highlight'], { y: 15, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.15 }, "-=0.5");
+
+        // --- ANIMACIONES DE SCROLL ---
+        // Títulos (Words)
+        document.querySelectorAll('.section-heading, h2.iv').forEach(h => {
+            const split = new SplitText(h, { type: 'words' });
+            gsap.fromTo(split.words, { x: -40, autoAlpha: 0 }, {
+                x: 0, autoAlpha: 1, duration: 0.8, stagger: 0.05,
+                scrollTrigger: { trigger: h, start: 'top 85%', toggleActions: 'play none none reset' }
+            });
+        });
+
+        // Máscaras (Lines)
+        document.querySelectorAll('.manifesto-title, .cta-title').forEach(el => {
+            SplitText.create(el, { type: 'lines', mask: 'lines', autoSplit: true, onSplit: (self) => {
+                gsap.fromTo(self.lines, { y: 100, autoAlpha: 0 }, {
+                    y: 0, autoAlpha: 1, duration: 1.1, stagger: 0.1,
+                    scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none reset' }
+                });
+            }});
+        });
+
+        // Elementos genéricos
+        gsap.utils.toArray('section p, .tags, .d2, .course-row, .team-card, .methodology-row, .accordion-item').forEach(el => {
+            gsap.fromTo(el, { y: 30, autoAlpha: 0 }, {
+                y: 0, autoAlpha: 1, duration: 0.8,
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none reset' }
+            });
         });
     });
 });
