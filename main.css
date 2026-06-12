@@ -7,6 +7,40 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
+        /* === PRELOADER === */
+body.loading {
+    overflow: hidden; /* Bloquea el scroll mientras carga */
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Degradado radial: comienza cálido desde el centro y se funde a negro oscuro */
+    background: linear-gradient(135deg, #2A9BA8 0%, #E8651A 50%, #7AB334 100%);
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.preloader-logo {
+    width: 300px; /* Ajusta según el tamaño deseado de tu logo */
+    margin-bottom: 20px;
+    opacity: 0; /* GSAP lo hará aparecer */
+}
+
+.preloader-counter {
+    text-align: center;
+    font-family: 'FuenteTitulos', sans-serif;
+    font-size: 2.5rem;
+    color: #f5f0e8;
+    font-weight: 500;
+    text-shadow: 0px 4px 10px rgba(0,0,0,0.5); /* Sombra suave para separar del gradiente */
+}
         /* ── FUENTES LOCALES ── */
 
         /* Fuente 1: Para los Títulos Principales */
