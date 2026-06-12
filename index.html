@@ -10,8 +10,10 @@
     <link rel="shortcut icon" href="img/LogoColor.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Urbanist:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="teocalli.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBX24SMFX"></script>
+    <link rel="preload" href="fonts/safiro-regular-i.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/safiro-regular.woff2" as="font" type="font/woff2" crossorigin>
 
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,8 +22,13 @@
       gtag('config', 'G-DMBX24SMFX');
     </script>
 </head>
-<body>
-
+<body class="loading">
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="LogColor.png" alt="Teocalli Lab Logo" class="preloader-logo">
+            <div class="preloader-counter" id="counter">0%</div>
+        </div>
+    </div>  
     <div id="canvas-container"></div>
     <div class="noise-overlay"></div>
 
@@ -433,34 +440,65 @@ window.addEventListener('load', () => {
             clearProps: 'transform'
         });
 
-        // ── 1. HERO ANIMATION (Cascada descendente estricta) ──
+        
+
+        // ── 1. PRELOADER Y HERO ANIMATION (Cadena maestra) ──
         (function() {
-            // 1. Ocultamos los elementos secundarios
-            gsap.set(['.hero-eyebrow', '.hero-description', '.hero-highlight'], { autoAlpha: 0 });
-            
-            // 2. OBLIGAMOS al contenedor del título a ser visible (por si el CSS lo había ocultado)
+            // Preparamos los elementos del Hero ocultándolos
+            gsap.set(['.hero-eyebrow', '.hero-title', '.hero-description', '.hero-highlight'], { autoAlpha: 0 });
             gsap.set('.hero-title', { autoAlpha: 1, visibility: 'visible' });
 
-            // 3. Dividimos el título (respetando los saltos de línea)
             const titleSplit = new SplitText(".hero-title", { type: "lines, words, chars" });
-            const heroTl = gsap.timeline({ delay: 0.1 });
+            
+            // Objeto para llevar el conteo numérico
+            const count = { val: 0 };
+            const counterElement = document.getElementById("counter");
 
-            // Paso A: Etiqueta superior
-            heroTl.fromTo('.hero-eyebrow', 
+            // Creamos una línea de tiempo maestra
+            const masterTl = gsap.timeline();
+
+            // PASO 1: Aparece el Logo
+            masterTl.to(".preloader-logo", { 
+                autoAlpha: 1, 
+                duration: 0.8, 
+                ease: "power2.out" 
+            })
+            // PASO 2: Animar contador de 0 a 100
+            .to(count, {
+                val: 100,
+                roundProps: "val", // Para que no haya decimales
+                duration: 2,       // Duración del preloader en segundos
+                ease: "power3.inOut",
+                onUpdate: function() {
+                    if (counterElement) {
+                        counterElement.innerText = count.val + "%";
+                    }
+                }
+            })
+            // PASO 3: Deslizar preloader hacia arriba y desbloquear scroll
+            .to("#preloader", {
+                yPercent: -100, // Hace que se levante como una cortina
+                duration: 1.2,
+                ease: "expo.inOut",
+                onComplete: () => {
+                    document.body.classList.remove("loading"); // Devuelve el scroll al sitio
+                }
+            })
+            // PASO 4: Inicia el Hero (Se engancha cuando la "cortina" va subiendo)
+            .fromTo('.hero-eyebrow', 
                 { y: 15, autoAlpha: 0 }, 
-                { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }
+                { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
+                "-=0.6" // Arranca un poco antes de que la cortina termine de subir
             )
-            // Paso B: Título principal carácter por carácter (el fromTo oculta las letras al inicio)
             .fromTo(titleSplit.chars, 
                 { y: 40, autoAlpha: 0 }, 
                 { y: 0, autoAlpha: 1, duration: 0.8, ease: 'expo.out', stagger: 0.02 },
-                "-=0.3"
+                "-=0.4"
             )
-            // Paso C: Descripción inferior y Highlight
             .fromTo(['.hero-description', '.hero-highlight'],
                 { y: 15, autoAlpha: 0 },
                 { y: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out', stagger: 0.15 },
-                "-=0.4"
+                "-=0.5"
             );
         })();
         // ── 2. SECCIONES: Títulos por PALABRAS (words) ──
