@@ -3,40 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEOCALLI LAB SCHOOL - Data Analysis and Visualization</title>
-    
+    <title>Teocalli Lab School | Ciencias de la Computación, Python y Análisis de Datos.</title>
+    <meta name="description" content="Domina los fundamentos reales de la tecnología. Aprende Matemáticas para Data Science, Python y Algoritmos. No enseñamos herramientas, enseñamos a pensar.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="shortcut icon" href="img/LogoColor.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,700&family=Urbanist:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="teocalli.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBX24SMFX"></script>
 
-    <!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBX24SMFX"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-DMBX24SMFX');
-	</script>
-
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DMBX24SMFX');
+    </script>
 </head>
 <body>
 
     <div id="canvas-container"></div>
     <div class="noise-overlay"></div>
 
+    <!-- HERO -->
     <section class="hero-section">
-        
         <header>
             <a href="#" class="logo-container">
                 <img src="LogColor.png" alt="Logo Teocalli Lab School" class="logo-image">
                 <div class="logo-text">Teocalli Lab<br>School</div>
             </a>
-            
             <div class="nav-actions">
                 <a href="#" class="login-btn">Login</a>
                 <button class="menu-btn">Menu <i class="fa-solid fa-bars-staggered"></i></button>
@@ -44,21 +39,10 @@
         </header>
 
         <div class="hero-content">
-            <!--span class="hero-title-small">Teocalli Lab School</span-->
-            <h1>Teocalli Lab School</h1>
-            <p>No enseñamos herramientas.</p>
-            <p class="highlight">Enseñamos a pensar.</p>
-            
-            <p class="hero-live-text">Nuestros cursos de Análisis de Datos, Matemáticas para Ciencia de Datos y el Taller de Matemáticas 
-                están diseñados con una metodología que combina teoria con ejercicios prácticos estructurados.
-                <strong>Con las clases en vivo</strong>, tendrás la oportunidad de interactuar con instructores y compañeros, resolver dudas al instante 
-                y participar en discusiones que enriquecerán tu aprendizaje.</p>
-            
-            <!--div class="hero-courses">
-                <span class="course-tag">Python para Análisis de Datos</span>
-                <span class="course-tag">Matemáticas para Ciencia de Datos</span>
-                <span class="course-tag">Taller de Matemáticas</span>
-            </div-->
+            <h2 class="hero-eyebrow">Teocalli Lab School</h2>
+            <h1 class="hero-title">Curso en Análisis de Datos<br> y Matemáticas</h1>
+            <p class="hero-description">Formación online en vivo en Matemáticas para Ciencia de Datos, algoritmos y programación con Python para el Análisis de Datos.</p>
+            <p class="hero-highlight">No enseñamos herramientas. <strong>Enseñamos a pensar.</strong></p>
         </div>
 
         <aside class="social-sidebar">
@@ -71,27 +55,27 @@
             <span class="scroll-text">Scroll</span>
             <div class="scroll-line"></div>
         </div>
-
     </section>
 
+    <!-- ANALÍTICA -->
     <section class="content-section" id="seccion-analitica">
         <div class="section-container">
-            <span class="tags">Matemáticas &middot; Python &middot; Analítica de Datos</span>
-            <h2>Aprende a pensar de forma analítica</h2>
-            <p>Desarrolla las habilidades necesarias para comprender datos, resolver problemas y tomar decisiones fundamentadas mediante matemáticas, programación y análisis de datos.</p>
+            <span class="tags iv">Matemáticas &middot; Python &middot; Analítica de Datos</span>
+            <h2 class="iv d1">Aprende a pensar de forma analítica</h2>
+            <p class="iv d2">Desarrolla las habilidades necesarias para comprender datos, resolver problemas y tomar decisiones fundamentadas mediante matemáticas, programación y análisis de datos.</p>
         </div>
     </section>
 
+    <!-- POR QUÉ -->
     <section class="content-section" id="seccion-proposito">
         <div class="manifesto-container">
-            <h2 class="manifesto-title">¿Por qué existe<br><span class="highlight-serif">Teocalli Lab School?</span></h2>
-            
+            <h2 class="manifesto-title iv">¿Por qué existe<br><span class="highlight-serif">Teocalli Lab School?</span></h2>
             <div class="manifesto-grid">
-                <div class="manifesto-col">
+                <div class="manifesto-col iv d1">
                     <p class="lead-text">Porque creemos que el pensamiento analítico no debería ser un privilegio reservado para quienes tuvieron una formación técnica desde temprana edad.</p>
                     <p>Teocalli Lab School fue creada para ayudar a personas sin experiencia previa a desarrollar habilidades en matemáticas, programación y análisis de datos mediante un proceso de aprendizaje claro, accesible y progresivo.</p>
                 </div>
-                <div class="manifesto-col">
+                <div class="manifesto-col iv d2">
                     <p>Nuestro propósito es que cada estudiante construya confianza para resolver problemas complejos, comprendiendo no solo qué hacer, sino por qué hacerlo. Para lograrlo, diseñamos contenidos basados en ejemplos reales, ejercicios estructurados y metodologías que favorecen la comprensión profunda por encima de la memorización.</p>
                     <p>Creemos que cuando una persona aprende a pensar de forma analítica, adquiere una habilidad que trasciende cualquier tecnología o herramienta: la capacidad de entender problemas, evaluar alternativas y construir soluciones de manera sistemática. <strong>Esa es la razón de ser de Teocalli Lab School.</strong></p>
                 </div>
@@ -99,61 +83,53 @@
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="content-section" id="seccion-cta">
         <div class="cta-container">
-            <h2 class="cta-title">Aprende a pensar.<br><span class="highlight-serif">Aprende a construir.</span></h2>
-            <p>Desarrolla las bases en matemáticas, programación y análisis de datos para comprender problemas complejos y crear soluciones con criterio propio.</p>
-            
-            <a href="#seccion-cursos" class="scroll-arrow-btn" aria-label="Ver cursos">
+            <h2 class="cta-title iv">Aprende a pensar.<br><span class="highlight-serif">Aprende a construir.</span></h2>
+            <p class="iv d1">Desarrolla las bases en matemáticas, programación y análisis de datos para comprender problemas complejos y crear soluciones con criterio propio.</p>
+            <a href="#seccion-cursos" class="scroll-arrow-btn iv d2" aria-label="Ver cursos">
                 <i class="fa-solid fa-arrow-down"></i>
             </a>
         </div>
     </section>
 
+    <!-- CURSOS -->
     <section class="content-section" id="seccion-cursos">
         <div class="courses-container">
-            
             <div class="courses-list">
-                
-                <a href="#" class="course-row">
+                <a href="#" class="course-row iv">
                     <div class="course-index">01</div>
                     <div class="course-info">
                         <span class="course-meta">CURSO &middot; EN VIVO</span>
                         <h3 class="course-title">Python para Análisis de Datos</h3>
                         <p class="course-desc">De cero a profesional. Domina la limpieza de datos, estadística descriptiva y Análisis Exploratorio (EDA) usando Pandas y NumPy. Culmina con visualización y un proyecto integrador.</p>
                     </div>
-                    <div class="course-arrow">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </div>
+                    <div class="course-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
-
-                <a href="#" class="course-row">
+                <a href="#" class="course-row iv d1">
                     <div class="course-index">02</div>
                     <div class="course-info">
                         <span class="course-meta">CURSO &middot; EN VIVO</span>
                         <h3 class="course-title">Matemáticas para Ciencia de Datos</h3>
                         <p class="course-desc">El rigor analítico detrás de la Inteligencia Artificial. Fundamentos de Álgebra Lineal, Cálculo Diferencial e Integral, y Ecuaciones Diferenciales aplicadas a modelos de Machine Learning.</p>
                     </div>
-                    <div class="course-arrow">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </div>
+                    <div class="course-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
-
-                <a href="#" class="course-row">
+                <a href="#" class="course-row iv d2">
                     <div class="course-index">03</div>
                     <div class="course-info">
                         <span class="course-meta">TALLER &middot; GRATUITO</span>
                         <h3 class="course-title">Taller de Matemáticas</h3>
                         <p class="course-desc">Gratis con tu inscripción a cualquier curso. Una sesión intensiva de álgebra y nivelación de conocimientos previos para que enfrentes retos analíticos sin frustraciones.</p>
                     </div>
-                    <div class="course-arrow">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </div>
+                    <div class="course-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
                 </a>
-
             </div>
         </div>
     </section>
+
+    <!-- MARQUEE -->
     <section class="content-section" id="seccion-marquee" style="min-height: auto; padding: 100px 0;">
         <div class="marquee-container">
             <div class="marquee-content">
@@ -165,7 +141,6 @@
                 <span class="outline-text">Toma de decisiones</span><span class="separator">&middot;</span>
                 <span>Pensamiento analítico</span><span class="separator">&middot;</span>
                 <span class="outline-text">Resolución de problemas</span><span class="separator">&middot;</span>
-                
                 <span>Matemáticas</span><span class="separator">&middot;</span>
                 <span class="outline-text">Python</span><span class="separator">&middot;</span>
                 <span>Análisis de Datos</span><span class="separator">&middot;</span>
@@ -177,12 +152,13 @@
             </div>
         </div>
     </section>
+
+    <!-- EQUIPO -->
     <section class="content-section" id="seccion-equipo">
         <div class="team-container">
-            <h2 class="section-heading dark-text">El Equipo</h2>
-            
+            <h2 class="section-heading dark-text iv">El Equipo</h2>
             <div class="team-grid">
-                <div class="team-card">
+                <div class="team-card iv d1">
                     <div class="team-photo-wrapper">
                         <img src="img/FILM.jpg" alt="MCC Israel Lueza" class="team-photo">
                     </div>
@@ -192,8 +168,7 @@
                         <p class="team-bio">Lidera la visión tecnológica de Teocalli Lab. Especialista en la aplicación de modelos analíticos avanzados en Python y el desarrollo de arquitecturas de IA, fusionando el rigor técnico con la innovación educativa.</p>
                     </div>
                 </div>
-
-                <div class="team-card">
+                <div class="team-card iv d2">
                     <div class="team-photo-wrapper">
                         <img src="img/Myr_Arroyo.jpg" alt="Mtra. Myriam Arroyo" class="team-photo">
                     </div>
@@ -203,8 +178,7 @@
                         <p class="team-bio">Experta en diseño curricular y metodologías de enseñanza progresiva. Asegura que cada programa traduzca la complejidad técnica en un aprendizaje accesible, estructurado y profundamente significativo.</p>
                     </div>
                 </div>
-
-                <div class="team-card">
+                <div class="team-card iv d3">
                     <div class="team-photo-wrapper">
                         <img src="img/Alberto.jpg" alt="Dr. Alberto Quezada" class="team-photo">
                     </div>
@@ -217,11 +191,12 @@
             </div>
         </div>
     </section>
+
+    <!-- METODOLOGÍA -->
     <section class="content-section" id="seccion-metodologia">
         <div class="methodology-container">
             <div class="methodology-list">
-                
-                <div class="methodology-row">
+                <div class="methodology-row iv">
                     <div class="method-index">01</div>
                     <div class="method-title-block">
                         <h3 class="method-title">Comprender</h3>
@@ -231,8 +206,7 @@
                         <p>Antes de escribir código o analizar datos, nuestros estudiantes construyen una comprensión sólida de los conceptos matemáticos, estadísticos y computacionales que les permitirán razonar cada solución con criterio.</p>
                     </div>
                 </div>
-
-                <div class="methodology-row">
+                <div class="methodology-row iv d1">
                     <div class="method-index">02</div>
                     <div class="method-title-block">
                         <h3 class="method-title">Practicar</h3>
@@ -242,8 +216,7 @@
                         <p>Cada tema está acompañado de ejercicios cuidadosamente diseñados para desarrollar habilidades analíticas, fomentar la resolución estructurada de problemas y convertir la teoría en experiencia práctica.</p>
                     </div>
                 </div>
-
-                <div class="methodology-row">
+                <div class="methodology-row iv d2">
                     <div class="method-index">03</div>
                     <div class="method-title-block">
                         <h3 class="method-title">Construir</h3>
@@ -253,16 +226,16 @@
                         <p>Al finalizar su formación, los estudiantes desarrollan un proyecto propio en el que integran matemáticas, programación y análisis de datos para resolver un problema de manera autónoma y demostrar lo aprendido.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
+
+    <!-- FAQ -->
     <section class="content-section" id="seccion-faq">
         <div class="faq-container">
-            <h2 class="section-heading dark-text" style="text-align: center; margin-bottom: 20px;">Preguntas Frecuentes</h2>
-            
+            <h2 class="section-heading dark-text iv" style="text-align: center; margin-bottom: 20px;">Preguntas Frecuentes</h2>
             <div class="accordion">
-                <div class="accordion-item">
+                <div class="accordion-item iv d1">
                     <button class="accordion-header">
                         <span class="faq-question">¿Necesito conocimientos previos para inscribirme?</span>
                         <i class="fa-solid fa-plus faq-icon"></i>
@@ -273,8 +246,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="accordion-item">
+                <div class="accordion-item iv d2">
                     <button class="accordion-header">
                         <span class="faq-question">¿En qué formato se imparten los cursos?</span>
                         <i class="fa-solid fa-plus faq-icon"></i>
@@ -285,8 +257,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="accordion-item">
+                <div class="accordion-item iv d3">
                     <button class="accordion-header">
                         <span class="faq-question">¿Qué hace diferente a Teocalli Lab School?</span>
                         <i class="fa-solid fa-plus faq-icon"></i>
@@ -297,47 +268,44 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="accordion-item">
+                <div class="accordion-item iv d4">
                     <button class="accordion-header">
                         <span class="faq-question">¿Cómo obtengo acceso al Taller de Matemáticas gratuito?</span>
                         <i class="fa-solid fa-plus faq-icon"></i>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-inner">
-                            <p>El taller intensivo de nivelación se desbloquea automáticamente al confirmar tu inscripción en el curso de <em>Python para Análisis de Datos</em> o en el de <em>Matemáticas para Ciencia de Datos</em>. Es nuestro compromiso para que inicies tu formación con bases sólidas.</p>
+                            <p>El taller intensivo de nivelación se desbloquea automáticamente al confirmar tu inscripción en el curso de <em>Python para Análisis de Datos</em> o en el de <em>Matemáticas para Ciencia de Datos</em>.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="accordion-item">
+                <div class="accordion-item iv d4">
                     <button class="accordion-header">
                         <span class="faq-question">¿Recibiré algún certificado al finalizar?</span>
                         <i class="fa-solid fa-plus faq-icon"></i>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-inner">
-                            <p>Sí. Al completar la currícula y presentar con éxito tu proyecto integrador final (donde demostrarás tu dominio sobre los datos o los modelos matemáticos), recibirás un certificado de aprobación expedido por Teocalli Lab School.</p>
+                            <p>Sí. Al completar la currícula y presentar con éxito tu proyecto integrador final, recibirás un certificado de aprobación expedido por Teocalli Lab School.</p>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
+
+    <!-- FOOTER -->
     <footer class="site-footer" id="seccion-footer">
         <div class="footer-container">
-            
             <div class="footer-top">
-                <div class="footer-brand">
+                <div class="footer-brand iv">
                     <a href="#" class="logo-container footer-logo-container">
                         <img src="LogColor.png" alt="Logo Teocalli Lab School" class="logo-image">
                         <div class="logo-text">Teocalli Lab<br>School</div>
                     </a>
                     <p class="footer-tagline">No enseñamos herramientas.<br>Enseñamos a pensar.</p>
                 </div>
-
-                <div class="footer-nav">
+                <div class="footer-nav iv d1">
                     <div class="footer-nav-col">
                         <h4 class="footer-heading">Programas</h4>
                         <ul>
@@ -346,7 +314,6 @@
                             <li><a href="#">Taller de Matemáticas</a></li>
                         </ul>
                     </div>
-                    
                     <div class="footer-nav-col">
                         <h4 class="footer-heading">Escuela</h4>
                         <ul>
@@ -357,11 +324,9 @@
                         </ul>
                     </div>
                 </div>
-
-                <div class="footer-contact">
+                <div class="footer-contact iv d2">
                     <h4 class="footer-heading">Contacto</h4>
-                    <a href="mailto:hola@teocallilab.edu" class="footer-email">hola@teocallilab.edu</a>
-                    
+                    <a href="mailto:hola@teocallilabschool.com" class="footer-email">hola@teocallilabschool.com</a>
                     <div class="footer-socials">
                         <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -369,7 +334,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p class="copyright">&copy; 2026 Teocalli Lab School. Todos los derechos reservados.</p>
                 <div class="legal-links">
@@ -377,15 +341,17 @@
                     <a href="#">Términos y Condiciones</a>
                 </div>
             </div>
-
         </div>
     </footer>
+
+    <!-- COOKIE BANNER -->
     <div id="cookie-banner" class="cookie-banner">
-        <p>Usamos cookies para mejorar tu experiencia en Teocalli Lab School. <br> 
+        <p>Usamos cookies para mejorar tu experiencia en Teocalli Lab School.<br>
            Al continuar navegando, aceptas nuestra <a href="#">Política de Privacidad</a>.</p>
         <button id="accept-cookies" class="cookie-btn">Aceptar</button>
     </div>
 
+    <!-- MENU OVERLAY -->
     <div id="nav-overlay" class="nav-overlay">
         <button id="close-menu" class="close-menu">&times;</button>
         <nav class="nav-links">
@@ -395,222 +361,175 @@
             <a href="#seccion-equipo">El Equipo</a>
             <a href="#seccion-metodologia">Metodología</a>
             <a href="#seccion-faq">FAQ</a>
-            <a href="mailto:hola@teocallilab.edu" class="menu-email">hola@teocallilab.edu</a>
+            <a href="mailto:hola@teocallilabschool.com" class="menu-email">hola@teocallilabschool.com</a>
         </nav>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script src="gsap.min.js"></script>
+    <script src="ScrollTrigger.min.js"></script>
+    <script src="SplitText.min.js"></script>
+    <script src="main.js"></script>
 
 
     <script>
-    // --- 1. CONFIGURACIÓN BASE DE THREE.JS ---
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+    // =========================================================================
+// ── INTERACTIVIDAD BÁSICA (Menú y Acordeón) ──────────────────────────────
+// =========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('menu-btn') || document.querySelector('.menu-toggle');
+    const closeBtn = document.getElementById('close-menu');
+    const navOverlay = document.getElementById('nav-overlay');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-        // --- 2. PALETAS CLARAS "PREMIUM" (Transiciones visibles y elegantes) ---
-    
-        // --- 2. PALETAS CLARAS "PREMIUM" (Transiciones visibles y elegantes) ---
-        // Ahora los colores cambian entre tonos sutiles pero distintos para que notes el scroll
-       // --- PALETAS DISPONIBLES ---
-        
-       // --- PALETAS CON CONTRASTE DE TEMPERATURA (Visibles al cambiar) ---
-        // --- PALETAS "TIERRA Y PROFUNDIDAD" (Contraste Federico Pian Style) ---
-        const palettes = [
-            // 0. Hero: fondo crema cálido + rojo y dorado del logo
-            { bg: new THREE.Color("#f5f0e8"), c1: new THREE.Color("#F5C842"), c2: new THREE.Color("#E8651A"), c3: new THREE.Color("#C0271A") },
-            // 1. Analítica: fondo claro + verde oscuro y turquesa
-            { bg: new THREE.Color("#eef4f0"), c1: new THREE.Color("#2A9BA8"), c2: new THREE.Color("#2D6B35"), c3: new THREE.Color("#7AB334") },
-            // 2. Propósito: fondo cálido + naranja y amarillo
-            { bg: new THREE.Color("#f7f2e8"), c1: new THREE.Color("#F5C842"), c2: new THREE.Color("#E8651A"), c3: new THREE.Color("#7AB334") },
-            // 3. CTA: fondo neutro + turquesa y verde
-            { bg: new THREE.Color("#edf4f4"), c1: new THREE.Color("#2A9BA8"), c2: new THREE.Color("#7AB334"), c3: new THREE.Color("#2D6B35") },
-            // 4. Cursos: fondo crema + rojo y naranja vibrante
-            { bg: new THREE.Color("#f5eeea"), c1: new THREE.Color("#E8651A"), c2: new THREE.Color("#C0271A"), c3: new THREE.Color("#F5C842") },
-            // 5. Equipo: fondo claro + verde lima y turquesa
-            { bg: new THREE.Color("#eef5ee"), c1: new THREE.Color("#7AB334"), c2: new THREE.Color("#2A9BA8"), c3: new THREE.Color("#F5C842") },
-            // 6. Metodología: fondo suave + dorado y verde oscuro
-            { bg: new THREE.Color("#f5f0e0"), c1: new THREE.Color("#F5C842"), c2: new THREE.Color("#2D6B35"), c3: new THREE.Color("#E8651A") },
-            // 7. FAQ/Footer: fondo cálido + todos los colores del logo
-            { bg: new THREE.Color("#f2ece4"), c1: new THREE.Color("#C0271A"), c2: new THREE.Color("#2A9BA8"), c3: new THREE.Color("#F5C842") }
-        ];
-        let currentPaletteIndex = 0;
-
-        const uniforms = {
-            u_time: { value: 0.0 },
-            u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-            u_bg: { value: palettes[0].bg.clone() },
-            u_color1: { value: palettes[0].c1.clone() },
-            u_color2: { value: palettes[0].c2.clone() },
-            u_color3: { value: palettes[0].c3.clone() }
+    if (menuBtn && navOverlay) {
+        const toggleMenu = (e) => {
+            if (e) e.preventDefault();
+            navOverlay.classList.toggle('active');
         };
+        menuBtn.addEventListener('click', toggleMenu);
+        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+        navLinks.forEach(link => link.addEventListener('click', toggleMenu));
+    }
 
-        // --- 3. SHADER: EL FRACTAL DE JULIA (Adaptado a tonos claros) ---
-        const vertexShader = `void main() { gl_Position = vec4(position, 1.0); }`;
+    // Lógica del Acordeón (FAQ)
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const content = header.nextElementSibling;
+            const isActive = item.classList.contains('active');
 
-        const fragmentShader = `
-            uniform vec2 u_resolution;
-            uniform float u_time;
-            uniform vec3 u_bg;
-            uniform vec3 u_color1;
-            uniform vec3 u_color2;
-            uniform vec3 u_color3;
-
-            void main() {
-                float zoom = 1.0;
-                vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / (u_resolution.y * zoom) + vec2(-0.9, 0.0);
-                vec2 z = uv;
-                
-                // Movimiento oscilante del fractal
-                vec2 c = vec2(0.4 * cos(u_time * 0.3), 0.6 * sin(u_time * 0.3));
-                
-                float maxIter = 100.0;
-                float iter = 0.0;
-                
-                // Cálculo de iteraciones
-                for (float i = 0.0; i < 100.0; i++) {
-                    if (iter >= maxIter) break;
-                    z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
-                    if (dot(z, z) > 4.0) {
-                        iter = i;
-                        break;
-                    }
-                }
-                
-                vec3 col = u_bg; 
-                
-                if (iter < maxIter) {
-                    float t = iter / maxIter;
-                    // Generación de bandas de color orgánicas
-                    float wave1 = 0.5 + 0.5 * cos(3.0 + t * 25.0);
-                    float wave2 = 0.5 + 0.5 * cos(3.0 + t * 25.0 + 0.6);
-                    float wave3 = 0.5 + 0.5 * cos(3.0 + t * 25.0 + 1.0);
-                    
-                    vec3 paletteColor = mix(u_color1, u_color2, wave1);
-                    paletteColor = mix(paletteColor, u_color3, wave2);
-                    col = paletteColor;
-                }
-                
-                // IMPORTANTE: Mezclamos el fractal con el color de fondo (u_bg) al 40%
-                // Esto hace que se vea como una "marca de agua" y la tipografía negra resalte perfecto.
-                // En lugar de mezclar al 45%, mezclamos al 25% para que sea una marca de agua muy delicada
-                vec3 finalColor = mix(u_bg, col, 0.75); 
-                
-                // Aplicamos un contraste suave para que los oscuros sean más profundos
-                finalColor = pow(finalColor, vec3(1.1)); 
-                
-                gl_FragColor = vec4(finalColor, 1.0);   
-            }
-        `;
-
-        const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms });
-        const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
-        scene.add(mesh);
-
-        // --- 4. OBSERVADOR DE SCROLL (Cambio de Paletas) ---
-        const observerOptions = { root: null, threshold: 0.35 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    
-                    // Asignamos una paleta distinta a cada sección
-                    if (entry.target.classList.contains('hero-section')) currentPaletteIndex = 0;
-                    else if (id === 'seccion-analitica') currentPaletteIndex = 1;
-                    else if (id === 'seccion-proposito') currentPaletteIndex = 2;
-                    else if (id === 'seccion-cta') currentPaletteIndex = 3;
-                    else if (id === 'seccion-cursos') currentPaletteIndex = 4;
-                    else if (id === 'seccion-marquee' || id === 'seccion-equipo') currentPaletteIndex = 5;
-                    else if (id === 'seccion-metodologia') currentPaletteIndex = 6;
-                    else if (id === 'seccion-faq' || id === 'seccion-footer') currentPaletteIndex = 7; 
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                otherItem.classList.remove('active');
+                if (otherItem.querySelector('.accordion-content')) {
+                    otherItem.querySelector('.accordion-content').style.maxHeight = null;
                 }
             });
-        }, observerOptions);
 
-        // Observar todas las secciones para que el color cambie
-        document.querySelectorAll('section, footer').forEach(el => observer.observe(el));
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    });
+});
 
-        // --- 5. RENDER Y ANIMACIÓN DE COLORES ---
-        window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+// =========================================================================
+// ── SCRIPT DE ANIMACIONES GSAP (Aislado del flujo principal) ─────────────
+// =========================================================================
+window.addEventListener('load', () => {
+    document.fonts.ready.then(() => {
+        if (typeof gsap === 'undefined' || typeof SplitText === 'undefined') return;
+
+        gsap.registerPlugin(ScrollTrigger, SplitText);
+
+        // Ajuste automático de visibilidad para limpiar cualquier rastro de CSS conflictivo
+        const allSelectors = 'h2, h3, h2.iv, .tags, .d2, .course-row, .team-card, .methodology-row, .accordion-item, .manifesto-title, .cta-title';
+        gsap.set(allSelectors, { 
+            opacity: 1, 
+            visibility: 'visible',
+            clearProps: 'transform'
         });
 
-        const clock = new THREE.Clock();
-        function animate() {
-            requestAnimationFrame(animate);
-            uniforms.u_time.value = clock.getElapsedTime();
+        // ── 1. HERO ANIMATION (Cascada descendente estricta) ──
+        (function() {
+            // 1. Ocultamos los elementos secundarios
+            gsap.set(['.hero-eyebrow', '.hero-description', '.hero-highlight'], { autoAlpha: 0 });
+            
+            // 2. OBLIGAMOS al contenedor del título a ser visible (por si el CSS lo había ocultado)
+            gsap.set('.hero-title', { autoAlpha: 1, visibility: 'visible' });
 
-            // Interpolar (cambiar suavemente) hacia la paleta de la sección actual
-            const targetPalette = palettes[currentPaletteIndex];
-            const lerpSpeed = 0.06; 
+            // 3. Dividimos el título (respetando los saltos de línea)
+            const titleSplit = new SplitText(".hero-title", { type: "lines, words, chars" });
+            const heroTl = gsap.timeline({ delay: 0.1 });
 
-            uniforms.u_bg.value.lerp(targetPalette.bg, lerpSpeed);
-            uniforms.u_color1.value.lerp(targetPalette.c1, lerpSpeed);
-            uniforms.u_color2.value.lerp(targetPalette.c2, lerpSpeed);
-            uniforms.u_color3.value.lerp(targetPalette.c3, lerpSpeed);
+            // Paso A: Etiqueta superior
+            heroTl.fromTo('.hero-eyebrow', 
+                { y: 15, autoAlpha: 0 }, 
+                { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' }
+            )
+            // Paso B: Título principal carácter por carácter (el fromTo oculta las letras al inicio)
+            .fromTo(titleSplit.chars, 
+                { y: 40, autoAlpha: 0 }, 
+                { y: 0, autoAlpha: 1, duration: 0.8, ease: 'expo.out', stagger: 0.02 },
+                "-=0.3"
+            )
+            // Paso C: Descripción inferior y Highlight
+            .fromTo(['.hero-description', '.hero-highlight'],
+                { y: 15, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out', stagger: 0.15 },
+                "-=0.4"
+            );
+        })();
+        // ── 2. SECCIONES: Títulos por PALABRAS (words) ──
+        document.querySelectorAll('.section-heading, h2.iv').forEach(h => {
+            const split = new SplitText(h, { type: 'words' });
+            gsap.fromTo(split.words, 
+                { x: -40, autoAlpha: 0 },
+                {
+                    x: 0,
+                    autoAlpha: 1,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    stagger: 0.05,
+                    scrollTrigger: {
+                        trigger: h,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reset'
+                    }
+                }
+            );
+        });
 
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // --- 6. INTERFAZ (Menú, FAQ, Cookies) ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Lógica del Menú Overlay
-            const menuBtn = document.querySelector('.menu-btn');
-            const closeBtn = document.getElementById('close-menu');
-            const navOverlay = document.getElementById('nav-overlay');
-            const navLinks = document.querySelectorAll('.nav-links a');
-
-            if (menuBtn && navOverlay) {
-                const toggleMenu = (e) => {
-                    if(e) e.preventDefault();
-                    navOverlay.classList.toggle('active');
-                };
-                menuBtn.addEventListener('click', toggleMenu);
-                if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
-                navLinks.forEach(link => link.addEventListener('click', toggleMenu));
-            }
-
-            // Lógica del Acordeón (FAQ)
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const content = header.nextElementSibling;
-                    const isActive = item.classList.contains('active');
-
-                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                        otherItem.classList.remove('active');
-                        if (otherItem.querySelector('.accordion-content')) {
-                            otherItem.querySelector('.accordion-content').style.maxHeight = null;
+        // ── 3. SECCIONES: Títulos con MÁSCARA DE LÍNEAS ──
+        document.querySelectorAll('.manifesto-title, .cta-title').forEach(el => {
+            SplitText.create(el, {
+                type: 'lines',
+                mask: 'lines',
+                autoSplit: true,
+                onSplit(self) {
+                    gsap.fromTo(self.lines, 
+                        { y: 100, autoAlpha: 0 },
+                        {
+                            y: 0,
+                            autoAlpha: 1,
+                            duration: 1.1,
+                            ease: 'expo.out',
+                            stagger: 0.1,
+                            scrollTrigger: {
+                                trigger: el,
+                                start: 'top 80%',
+                                toggleActions: 'play none none reset'
+                            }
                         }
-                    });
-
-                    if (!isActive) {
-                        item.classList.add('active');
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
-            });
-
-            // Lógica del Banner de Cookies
-            const cookieBanner = document.getElementById('cookie-banner');
-            const acceptBtn = document.getElementById('accept-cookies');
-            if (cookieBanner && acceptBtn) {
-                if (localStorage.getItem('cookiesAccepted') === 'true') {
-                    cookieBanner.style.display = 'none';
+                    );
                 }
-                acceptBtn.addEventListener('click', () => {
-                    cookieBanner.style.opacity = '0';
-                    setTimeout(() => cookieBanner.style.display = 'none', 500);
-                    localStorage.setItem('cookiesAccepted', 'true');
-                });
-            }
+            });
         });
+
+        // ── 4. TEXTOS Y ELEMENTOS SECUNDARIOS (Aislados del Hero) ──
+        const contentElements = gsap.utils.toArray('section p, .tags, .d2, .course-row, .team-card, .methodology-row, .accordion-item');
+        contentElements.forEach(el => {
+            gsap.fromTo(el, 
+                { y: 30, autoAlpha: 0 },
+                {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reset'
+                    }
+                }
+            );
+        });
+    });
+});
     </script>
+
 </body>
 </html>
