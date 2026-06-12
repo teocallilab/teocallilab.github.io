@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="main.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBX24SMFX"></script>
-    <link rel="preload" href="fonts/safiro-regular-i.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/safiro-regular.woff2" as="font" type="font/woff2" crossorigin>
+  
 
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -171,8 +170,8 @@
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">MCC Israel Lueza</h3>
-                        <span class="team-role">Data Science & Inteligencia Artificial</span>
-                        <p class="team-bio">Lidera la visión tecnológica de Teocalli Lab. Especialista en la aplicación de modelos analíticos avanzados en Python y el desarrollo de arquitecturas de IA, fusionando el rigor técnico con la innovación educativa.</p>
+                        <span class="team-role">Matemáticas Aplicadas</span>
+                        <!-- <p class="team-bio">Lidera la visión tecnológica de Teocalli Lab. Especialista en la aplicación de modelos analíticos avanzados en Python y el desarrollo de arquitecturas de IA, fusionando el rigor técnico con la innovación educativa.</p> -->
                     </div>
                 </div>
                 <div class="team-card iv d2">
@@ -182,7 +181,7 @@
                     <div class="team-info">
                         <h3 class="team-name">Mtra. Myriam Arroyo</h3>
                         <span class="team-role">Directora Académica</span>
-                        <p class="team-bio">Experta en diseño curricular y metodologías de enseñanza progresiva. Asegura que cada programa traduzca la complejidad técnica en un aprendizaje accesible, estructurado y profundamente significativo.</p>
+                        <!-- <p class="team-bio">Experta en diseño curricular y metodologías de enseñanza progresiva. Asegura que cada programa traduzca la complejidad técnica en un aprendizaje accesible, estructurado y profundamente significativo.</p> -->
                     </div>
                 </div>
                 <div class="team-card iv d3">
@@ -192,7 +191,7 @@
                     <div class="team-info">
                         <h3 class="team-name">Dr. Alberto Quezada</h3>
                         <span class="team-role">Matemáticas Aplicadas</span>
-                        <p class="team-bio">Su enfoque se centra en dotar a los estudiantes de los fundamentos lógicos necesarios para el modelado de sistemas complejos. Transforma conceptos matemáticos abstractos en herramientas de solución de problemas.</p>
+                        <!-- <p class="team-bio">Su enfoque se centra en dotar a los estudiantes de los fundamentos lógicos necesarios para el modelado de sistemas complejos. Transforma conceptos matemáticos abstractos en herramientas de solución de problemas.</p> -->
                     </div>
                 </div>
             </div>
@@ -377,197 +376,6 @@
     <script src="ScrollTrigger.min.js"></script>
     <script src="SplitText.min.js"></script>
     <script src="main.js"></script>
-
-
-    <script>
-    gsap.registerPlugin(SplitText, ScrollTrigger);
-    // =========================================================================
-// ── INTERACTIVIDAD BÁSICA (Menú y Acordeón) ──────────────────────────────
-// =========================================================================
-document.addEventListener('DOMContentLoaded', () => {
-    const menuBtn = document.getElementById('menu-btn') || document.querySelector('.menu-toggle');
-    const closeBtn = document.getElementById('close-menu');
-    const navOverlay = document.getElementById('nav-overlay');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    if (menuBtn && navOverlay) {
-        const toggleMenu = (e) => {
-            if (e) e.preventDefault();
-            navOverlay.classList.toggle('active');
-        };
-        menuBtn.addEventListener('click', toggleMenu);
-        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
-        navLinks.forEach(link => link.addEventListener('click', toggleMenu));
-    }
-
-    // Lógica del Acordeón (FAQ)
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const item = header.parentElement;
-            const content = header.nextElementSibling;
-            const isActive = item.classList.contains('active');
-
-            document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                otherItem.classList.remove('active');
-                if (otherItem.querySelector('.accordion-content')) {
-                    otherItem.querySelector('.accordion-content').style.maxHeight = null;
-                }
-            });
-
-            if (!isActive) {
-                item.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    });
-});
-
-// =========================================================================
-// ── SCRIPT DE ANIMACIONES GSAP (Aislado del flujo principal) ─────────────
-// =========================================================================
-window.addEventListener('load', () => {
-    document.fonts.ready.then(() => {
-        if (typeof gsap === 'undefined' || typeof SplitText === 'undefined') return;
-
-        gsap.registerPlugin(ScrollTrigger, SplitText);
-
-        // Ajuste automático de visibilidad para limpiar cualquier rastro de CSS conflictivo
-        const allSelectors = 'h2, h3, h2.iv, .tags, .d2, .course-row, .team-card, .methodology-row, .accordion-item, .manifesto-title, .cta-title';
-        gsap.set(allSelectors, { 
-            opacity: 1, 
-            visibility: 'visible',
-            clearProps: 'transform'
-        });
-
-        
-
-        // ── 1. PRELOADER Y HERO ANIMATION (Cadena maestra) ──
-        (function() {
-            // Preparamos los elementos del Hero ocultándolos
-            gsap.set(['.hero-eyebrow', '.hero-title', '.hero-description', '.hero-highlight'], { autoAlpha: 0 });
-            gsap.set('.hero-title', { autoAlpha: 1, visibility: 'visible' });
-
-            const titleSplit = new SplitText(".hero-title", { type: "lines, words, chars" });
-            
-            // Objeto para llevar el conteo numérico
-            const count = { val: 0 };
-            const counterElement = document.getElementById("counter");
-
-            // Creamos una línea de tiempo maestra
-            const masterTl = gsap.timeline();
-
-            // PASO 1: Aparece el Logo
-            masterTl.to(".preloader-logo", { 
-                autoAlpha: 1, 
-                duration: 0.8, 
-                ease: "power2.out" 
-            })
-            // PASO 2: Animar contador de 0 a 100
-            .to(count, {
-                val: 100,
-                roundProps: "val", // Para que no haya decimales
-                duration: 2,       // Duración del preloader en segundos
-                ease: "power3.inOut",
-                onUpdate: function() {
-                    if (counterElement) {
-                        counterElement.innerText = count.val + "%";
-                    }
-                }
-            })
-            // PASO 3: Deslizar preloader hacia arriba y desbloquear scroll
-            .to("#preloader", {
-                yPercent: -100, // Hace que se levante como una cortina
-                duration: 1.2,
-                ease: "expo.inOut",
-                onComplete: () => {
-                    document.body.classList.remove("loading"); // Devuelve el scroll al sitio
-                }
-            })
-            // PASO 4: Inicia el Hero (Se engancha cuando la "cortina" va subiendo)
-            .fromTo('.hero-eyebrow', 
-                { y: 15, autoAlpha: 0 }, 
-                { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' },
-                "-=0.6" // Arranca un poco antes de que la cortina termine de subir
-            )
-            .fromTo(titleSplit.chars, 
-                { y: 40, autoAlpha: 0 }, 
-                { y: 0, autoAlpha: 1, duration: 0.8, ease: 'expo.out', stagger: 0.02 },
-                "-=0.4"
-            )
-            .fromTo(['.hero-description', '.hero-highlight'],
-                { y: 15, autoAlpha: 0 },
-                { y: 0, autoAlpha: 1, duration: 0.7, ease: 'power2.out', stagger: 0.15 },
-                "-=0.5"
-            );
-        })();
-        // ── 2. SECCIONES: Títulos por PALABRAS (words) ──
-        document.querySelectorAll('.section-heading, h2.iv').forEach(h => {
-            const split = new SplitText(h, { type: 'words' });
-            gsap.fromTo(split.words, 
-                { x: -40, autoAlpha: 0 },
-                {
-                    x: 0,
-                    autoAlpha: 1,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    stagger: 0.05,
-                    scrollTrigger: {
-                        trigger: h,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reset'
-                    }
-                }
-            );
-        });
-
-        // ── 3. SECCIONES: Títulos con MÁSCARA DE LÍNEAS ──
-        document.querySelectorAll('.manifesto-title, .cta-title').forEach(el => {
-            SplitText.create(el, {
-                type: 'lines',
-                mask: 'lines',
-                autoSplit: true,
-                onSplit(self) {
-                    gsap.fromTo(self.lines, 
-                        { y: 100, autoAlpha: 0 },
-                        {
-                            y: 0,
-                            autoAlpha: 1,
-                            duration: 1.1,
-                            ease: 'expo.out',
-                            stagger: 0.1,
-                            scrollTrigger: {
-                                trigger: el,
-                                start: 'top 80%',
-                                toggleActions: 'play none none reset'
-                            }
-                        }
-                    );
-                }
-            });
-        });
-
-        // ── 4. TEXTOS Y ELEMENTOS SECUNDARIOS (Aislados del Hero) ──
-        const contentElements = gsap.utils.toArray('section p, .tags, .d2, .course-row, .team-card, .methodology-row, .accordion-item');
-        contentElements.forEach(el => {
-            gsap.fromTo(el, 
-                { y: 30, autoAlpha: 0 },
-                {
-                    y: 0,
-                    autoAlpha: 1,
-                    duration: 0.8,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 90%',
-                        toggleActions: 'play none none reset'
-                    }
-                }
-            );
-        });
-    });
-});
-    </script>
 
 </body>
 </html>
