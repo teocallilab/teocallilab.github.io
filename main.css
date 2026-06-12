@@ -509,7 +509,7 @@
         .method-index { font-family: monospace; font-size: 1rem; color: #1a1a1a; align-self: start; margin-top: 10px; }
         .method-title-block { display: flex; flex-direction: column; gap: 15px; align-items: flex-start; }
         .method-title {
-            font-family: 'Urbanist', sans-serif; font-size: clamp(3rem, 3vw, 4rem); font-weight: 900;
+            font-family: 'Urbanist', sans-serif; font-size: clamp(3rem, 4vw, 5rem); font-weight: 900;
             text-transform: uppercase; color: #1a1a1a; line-height: 1; display: inline-block;
             transform: scaleX(1.4); transform-origin: left; margin-bottom: 10px; letter-spacing: -2px;
         }
@@ -610,4 +610,9 @@
             .methodology-row { grid-template-columns: 1fr; gap: 20px; }
             .method-index { margin-bottom: -10px; }
             .method-desc { grid-column: 1; }
+               .method-title {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+                transform: scaleX(1.1);
+                letter-spacing: -1px;
+            }
         }
