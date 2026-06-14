@@ -204,7 +204,7 @@
             const menuBtn = document.querySelector('.menu-btn');
             const closeBtn = document.getElementById('close-menu');
             const navOverlay = document.getElementById('nav-overlay');
-            const navLinks = document.querySelectorAll('.nav-links a');
+            
 
             if (menuBtn && navOverlay) {
                 const toggleMenu = (e) => {
