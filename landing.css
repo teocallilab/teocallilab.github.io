@@ -1,0 +1,555 @@
+/* ── FUENTES LOCALES ── */
+
+/* Fuente 1: Para los Títulos Principales */
+@font-face {
+    font-family: 'FuenteTitulos'; /* El nombre que usarás en tu CSS */
+    src: url('fonts/safiro-regular-i.woff2') format('woff2'); /* Ajusta la ruta y extensión */
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Fuente 2: Para los Textos y Párrafos */
+@font-face {
+    font-family: 'FuenteTextos';
+    src: url('fonts/safiro-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Fuente 3: Para Detalles o Cursivas (Si aplica) */
+@font-face {
+    font-family: 'FuenteAcentos';
+    src: url('fonts/safiro-regular.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+/* ========================================== */
+/* ── RESET Y CONFIGURACIÓN EDITORIAL ─────── */
+/* ========================================== */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+
+/* ── CONFIGURACIÓN FONDO BLANCO / TEXTO NEGRO ── */
+:root {
+    --bg-main: #ffffff;      /* Fondo Blanco */
+    --text-pure: #000000;    /* Texto Negro Puro */
+    --text-body: #333333;    /* Gris muy oscuro para párrafos */
+    --brand-orange: #E8651A;
+    --brand-teal: #2A9BA8;
+}
+
+/* ── Aseguramos que el contenido deje ver el fondo animado ── */
+html {
+    background-color: #ffffff; 
+}
+
+body {
+    background-color: transparent; 
+    position: relative;
+}
+
+/* ========================================== */
+/* ── ANIMACIÓN: GRADIENTE LÍQUIDO ────────── */
+/* ========================================== */
+.liquid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; 
+    overflow: hidden;
+    pointer-events: none; 
+    background-color: #ffffff; 
+}
+
+/* Las "manchas" de color base */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px); 
+    opacity: 0.12; /* Muy tenue para no estorbar la lectura */
+    animation: floatBlob 25s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+.blob-teal {
+    width: 55vw;
+    height: 55vw;
+    background-color: var(--brand-teal);
+    top: -10%;
+    left: -10%;
+}
+
+.blob-orange {
+    width: 45vw;
+    height: 45vw;
+    background-color: var(--brand-orange);
+    bottom: -15%;
+    left: 20%;
+    animation-delay: -8s; 
+}
+
+.blob-green {
+    width: 50vw;
+    height: 50vw;
+    background-color: var(--brand-green);
+    top: 10%;
+    right: -15%;
+    animation-delay: -16s; 
+}
+
+/* Movimiento orgánico */
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(8vw, 12vh) scale(1.1) rotate(15deg); }
+    100% { transform: translate(-5vw, 8vh) scale(0.95) rotate(-5deg); }
+}
+
+/* Para celulares */
+@media (max-width: 768px) {
+    .blob { filter: blur(60px); }
+    .blob-teal { width: 80vw; height: 80vw; }
+    .blob-orange { width: 70vw; height: 70vw; }
+    .blob-green { width: 75vw; height: 75vw; right: -25%; }
+}
+
+/* ── Estilos del Lienzo Animado ── */
+#data-grid-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Se queda completamente al fondo de la página */
+    pointer-events: none; /* Ignora los clics del mouse */
+    opacity: 0.8; /* Ajuste de intensidad */
+}
+
+
+
+/* ========================================== */
+/* ── TIPOGRAFÍA Y ENCABEZADOS ────────────── */
+/* ========================================== */
+h1, h2, h3, h4 {
+    /* Cambiado a tu fuente principal de títulos */
+    font-family: 'FuenteTitulos', serif; 
+    color: var(--text-pure);
+    font-weight: 700; 
+}
+
+em {
+    /* Cambiado a tu fuente de acentos/cursivas */
+    font-family: 'FuenteAcentos', serif; 
+    font-style: italic;
+    font-weight: 500;
+}
+
+.section-label {
+    font-family: 'FuenteTextos', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+.editorial-heading {
+    color: var(--text-pure);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+/* Contenedor Limpio (Sin marcos artificiales) */
+.container-editorial {
+    width: 88%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.max-width-700 { max-width: 700px; }
+.max-width-center { max-width: 750px; margin-left: auto; margin-right: auto; }
+.text-center { text-align: center; }
+.text-teal { color: var(--brand-teal); }
+.text-orange { color: var(--brand-orange); }
+.mb-large { margin-bottom: 3.5rem; }
+.mb-medium { margin-bottom: 2rem; }
+.mt-medium { margin-top: 2rem; }
+
+/* Líneas Divisoras Sutiles */
+.border-top { border-top: 1px solid #e0e0e0; }
+
+
+.editorial-lead {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    color: var(--text-body);
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+
+/* ========================================== */
+/* ── ESTRUCTURAS DE SECCIÓN (GRID ABIERTO) ─ */
+/* ========================================== */
+.editorial-section { padding: 80px 0; border-top: 1px solid #eeeeee; }
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.editorial-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.text-block p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-body);
+    font-weight: 300;
+}
+
+.text-block.font-large p {
+    font-size: 1.25rem;
+    color: var(--text-pure);
+}
+
+/* ========================================== */
+/* ── HEADER SUPERIOR ─────────────────────── */
+/* ========================================== */
+.editorial-header {
+    padding: 20px 0;
+}
+
+.editorial-logo {
+    height: 100px;
+    width: auto;
+    display: block;
+}
+
+/* ========================================== */
+/* ── HERO SECTION ────────────────────────── */
+/* ========================================== */
+.hero-editorial {
+    padding: 30px 0 30px 0;
+}
+
+.hero-title {
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin-bottom: 25px;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--text-muted);
+    max-width: 850px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+.hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.hero-meta span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--brand-teal);
+}
+
+.hero-meta span.separator {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================== */
+/* ── LISTAS EDITORIALES (SIN TARJETAS) ───── */
+/* ========================================== */
+.editorial-bullet-list {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.editorial-bullet-list li {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    padding-left: 25px;
+    position: relative;
+    font-weight: 300;
+}
+
+.editorial-bullet-list li::before {
+    color: var(--brand-orange);
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--brand-teal);
+    font-weight: bold;
+}
+
+.editorial-clean-list {
+    list-style: none;
+}
+
+.editorial-clean-list li {
+    font-size: 1.1rem;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-weight: 300;
+}
+
+.editorial-clean-list li strong {
+    color: var(--text-pure);
+    font-weight: 500;
+}
+
+.text-note {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* ========================================== */
+/* ── FILAS ACADÉMICAS (PLAN DE ESTUDIOS) ─── */
+/* ========================================== */
+.program-index {
+    margin-top: 2rem;
+}
+
+.program-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    align-items: baseline;
+}
+
+.program-row:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.row-num {
+    font-family: 'FuenteTitulos', serif;
+    font-style: italic;
+    font-size: 2rem;
+    color: var(--brand-orange);
+    line-height: 1;
+}
+
+.row-content h4 {
+    font-family: 'FuenteTextos', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-pure);
+    margin-bottom: 5px;
+}
+
+.row-content p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.editorial-actions {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Bloque destacado del proyecto */
+
+
+.editorial-badge {
+    margin-top: 40px;
+    display: inline-block;
+    padding: 15px 30px;
+    border-left: 2px solid var(--brand-orange);
+    background-color: rgba(232, 101, 26, 0.03);
+    font-size: 1.1rem;
+    text-align: left;
+    max-width: 800px;
+    font-weight: 300;
+}
+
+.editorial-badge span {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--brand-orange);
+    margin-right: 10px;
+    display: inline-block;
+}
+
+/* ========================================== */
+/* ── SECCIÓN DE PRECIO (MONUMENTAL) ──────── */
+/* ========================================== */
+.price-title {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.price-amount {
+    font-family: 'FuenteTextos', sans-serif;
+    font-size: clamp(4rem, 10vw, 6.5rem);
+    font-weight: 300;
+    color: var(--text-pure);
+    line-height: 1;
+    margin: 20px 0;
+    letter-spacing: -2px;
+}
+
+.price-amount .currency {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--brand-orange);
+    vertical-align: super;
+    margin-left: 5px;
+}
+
+.price-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+/* ========================================== */
+/* ── ACORDEÓN NATIVO (FAQ) ───────────────── */
+/* ========================================== */
+.accordion-container {
+    margin-top: 30px;
+}
+
+.accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 0;
+}
+
+.accordion-header {
+    font-family: 'FuenteTextos', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-pure);
+    padding: 20px 0;
+    cursor: pointer;
+    position: relative;
+    padding-right: 30px;
+    transition: color 0.3s;
+}
+
+.accordion-header::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    transition: transform 0.3s, color 0.3s;
+}
+
+.accordion-item.active .accordion-header {
+    color: var(--brand-teal);
+}
+
+.accordion-item.active .accordion-header::after {
+    content: "−";
+    transform: translateY(-50%) rotate(180deg);
+    color: var(--brand-teal);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content p {
+    padding: 0 0 25px 0;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* ========================================== */
+/* ── BOTONES / LLAMADOS A LA ACCIÓN ──────── */
+/* ========================================== */
+.cta-editorial {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-family: 'FuenteTextos', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.primary-btn {
+    background-color: var(--text-pure); /* Botón Negro */
+    color: #ffffff;
+    padding: 18px 38px;
+    border-radius: 0; /* Estética minimalista */
+}
+
+.primary-btn:hover {
+    background-color: #f7742a;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(232, 101, 26, 0.25);
+}
+
+.secondary-btn {
+    color: var(--text-pure);
+    border-bottom: 1px solid var(--brand-teal);
+    padding-bottom: 6px;
+}
+
+.secondary-btn:hover {
+    color: var(--brand-teal);
+    border-color: var(--text-pure);
+}
+
+.large-btn {
+    padding: 22px 50px;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.final-section {
+    padding: 140px 0;
+}
+
+/* ========================================== */
+/* ── RESPONSIVE RESPIRABLE ───────────────── */
+/* ========================================== */
+@media (min-width: 769px) {
+    .xl-padding-left { padding-left: 60px; }
+    .border-left-desktop { border-left: 1px solid rgba(255, 255, 255, 0.08); }
+}
+
+@media (max-width: 768px) {
+    .editorial-section { padding: 70px 0; }
+    .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+    .hero-meta { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .hero-meta span.separator { display: none; }
+    .program-row { grid-template-columns: 50px 1fr; padding: 25px 0; }
+    .row-num { font-size: 1.6rem; }
+    .price-amount { font-size: 4.5rem; }
+    .editorial-badge { padding: 20px; }
+}
