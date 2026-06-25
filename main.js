@@ -204,39 +204,16 @@
             const menuBtn = document.querySelector('.menu-btn');
             const closeBtn = document.getElementById('close-menu');
             const navOverlay = document.getElementById('nav-overlay');
-            
+            const navLinks = document.querySelectorAll('.nav-links a');
 
             if (menuBtn && navOverlay) {
                 const toggleMenu = (e) => {
-                    if(e) e.preventDefault();
                     navOverlay.classList.toggle('active');
                 };
-                menuBtn.addEventListener('click', toggleMenu);
-                if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
-                navLinks.forEach(link => link.addEventListener('click', toggleMenu));
+                menuBtn.addEventListener('click', (e) => { e.preventDefault(); toggleMenu(); });
+                if (closeBtn) closeBtn.addEventListener('click', (e) => { e.preventDefault(); toggleMenu(); });
+                navLinks.forEach(link => link.addEventListener('click', () => navOverlay.classList.remove('active')));
             }
-
-            // Lógica del Acordeón (FAQ)
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const content = header.nextElementSibling;
-                    const isActive = item.classList.contains('active');
-
-                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                        otherItem.classList.remove('active');
-                        if (otherItem.querySelector('.accordion-content')) {
-                            otherItem.querySelector('.accordion-content').style.maxHeight = null;
-                        }
-                    });
-
-                    if (!isActive) {
-                        item.classList.add('active');
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
-            });
 
 // --- INTEGRACIÓN GSAP PROTEGIDA ---
 window.addEventListener('load', () => {
@@ -288,44 +265,6 @@ window.addEventListener('load', () => {
 });
 
 
-
-// =========================================================================
-// 1. LÓGICA DE INTERACTIVIDAD (MENÚ Y ACORDEÓN) - Se ejecuta rápido
-// =========================================================================
-document.addEventListener('DOMContentLoaded', () => {
-    // MENÚ
-    const menuBtn = document.getElementById('menu-btn') || document.querySelector('.menu-toggle');
-    const closeBtn = document.getElementById('close-menu');
-    const navOverlay = document.getElementById('nav-overlay');
-
-    if (menuBtn && navOverlay) {
-        menuBtn.addEventListener('click', (e) => { e.preventDefault(); navOverlay.classList.add('active'); });
-        if (closeBtn) closeBtn.addEventListener('click', (e) => { e.preventDefault(); navOverlay.classList.remove('active'); });
-    }
-
-    // ACORDEÓN (Corrección de selección)
-    const headers = document.querySelectorAll('.accordion-header');
-    headers.forEach(header => {
-        header.addEventListener('click', function() {
-            const item = this.parentElement;
-            const content = this.nextElementSibling;
-            const isActive = item.classList.contains('active');
-
-            // Cierra otros
-            document.querySelectorAll('.accordion-item').forEach(i => {
-                i.classList.remove('active');
-                const c = i.querySelector('.accordion-content');
-                if (c) c.style.maxHeight = null;
-            });
-
-            // Abre este
-            if (!isActive) {
-                item.classList.add('active');
-                if (content) content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    });
-});
 
 // =========================================================================
 // ── 2. ANIMACIONES GSAP (Preloader + Hero + Scroll) - Window Load
