@@ -392,6 +392,14 @@ body.loading {
             font-weight: 700;
         }
         
+        .manifesto-col h3.CEO {
+            font-family: 'FuenteTitulos', serif;
+            font-size: clamp(1.5rem, 2.2vw, 2rem);
+            font-style: italic;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-top: 20px;
+        }
         /* === CTA === */
         .cta-container {
             max-width: 900px;
