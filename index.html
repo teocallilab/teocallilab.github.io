@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análisis de Datos con Python | Teocalli Lab School</title>
+    <meta name="description" content="Aprende análisis de datos con Python desde los fundamentos. Curso en vivo para estudiantes universitarios y profesionales que quieren desarrollar pensamiento analítico y resolver problemas con datos."/>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/LogColor.png" />
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://teocallilabschool.com/" />
+    
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://teocallilabschool.com/" />
+    <meta property="og:title" content="Análisis de Datos con Python | Teocalli Lab School" />
+    <meta property="og:description" content="Aprende análisis de datos con Python desde los fundamentos. Curso en vivo para estudiantes universitarios y profesionales que quieren desarrollar pensamiento analítico y resolver problemas con datos." />
+    <meta property="og:image" content="https://teocallilabschool.com/img/banner_teocalli_lab_school.png" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="Teocalli Lab School" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://teocallilabschool.com/" />
+    <meta name="twitter:title" content="Análisis de Datos con Python | Teocalli Lab School" />
+    <meta name="twitter:description" content="Aprende análisis de datos con Python desde los fundamentos. Curso en vivo para estudiantes universitarios y profesionales que quieren desarrollar pensamiento analítico y resolver problemas con datos." />
+    <meta name="twitter:image" content="https://teocallilabschool.com/img/banner_teocalli_lab_school.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Bungee+Spice&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="css/teocallilab.css" />
+  
+    <!-- Schema Markup para Resultados Enriquecidos de Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Teocalli Lab School",
+          "url": "https://teocallilabschool.com/",
+          "description": "Aprende análisis de datos con Python desde los fundamentos. Curso en vivo para estudiantes universitarios y profesionales que quieren desarrollar pensamiento analítico y resolver problemas con datos."
+        },
+        {
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "Course",
+                "url": "https://teocallilabschool.com/#seccion-programa",
+                "name": "Análisis de Datos con Python",
+                "description": "Aprende análisis de datos con Python desde los fundamentos. Curso en vivo para estudiantes universitarios y profesionales que quieren desarrollar pensamiento analítico y resolver problemas con datos.",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Teocalli Lab School",
+                  "sameAs": "https://teocallilabschool.com/"
+                }
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "Course",
+                "url": "https://teocallilabschool.com/#seccion-programa",
+                "name": "Matemáticas para Ciencia de Datos e IA",
+                "description": "Fundamentos matemáticos para la era de la inteligencia artificial. Domina álgebra lineal, cálculo diferencial y probabilidad con enfoque en programación.",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Teocalli Lab School",
+                  "sameAs": "https://teocallilabschool.com/"
+                }
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "@type": "Course",
+                "url": "https://teocallilabschool.com/#seccion-programa",
+                "name": "Taller de Matemáticas",
+                "description": "Fortalece tus fundamentos matemáticos como álgebra, funciones y geometría analítica. Taller gratuito incluido con la inscripción a otros programas.",
+                "provider": {
+                  "@type": "Organization",
+                  "name": "Teocalli Lab School",
+                  "sameAs": "https://teocallilabschool.com/"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+  </head>
+
+  <body>
+
+    <!-- COOKIE BANNER -->
+    <div id="cookie-banner" class="cookie-banner">
+      <div class="cookie-content">
+        <p class="cookie-text">Utilizamos cookies para mejorar tu experiencia en nuestra plataforma. Al continuar navegando, aceptas nuestro <a href="privacidad.html">Aviso de Privacidad</a>.</p>
+        <button id="accept-cookies" class="brutal-button-small">Entendido</button>
+      </div>
+    </div>
+
+    <div class="announcement-bar">
+      <p class="announcement-copy announcement-copy-wide">
+        Inscripciones abiertas · Iniciamos el 15 de enero de 2027 · 15 % de descuento de contado hasta el 9 de enero
+      </p>
+      <p class="announcement-copy announcement-copy-compact">
+        Inscripciones abiertas · 15 % hasta el 10 de enero · Inicio: 15 de enero de 2027
+      </p>
+      <a
+        class="announcement-cta"
+        href="https://wa.me/525529033828?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20programa%20de%20An%C3%A1lisis%20de%20Datos%20con%20Python%20y%20el%20descuento%20de%20inscripci%C3%B3n%20anticipada."
+        target="_blank"
+        rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        Escríbenos por WhatsApp
+      </a>
+    </div>
+
+    <!-- HEADER CON MENú Y LOGIN -->
+
+    <header class="site-header">
+      <div class="header-container">
+        <div class="header-right-actions">
+          <a href="login.php" class="login-btn"> Iniciar sesión </a>
+
+          <button class="hamburger-btn" aria-label="Abrir menú" id="openMenuBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MENú LATERAL (Oculto por defecto) -->
+
+    <div class="mobile-menu-overlay" id="mobileMenu">
+      <div class="mobile-menu-content">
+        <button class="close-menu-btn" aria-label="Cerrar menú" id="closeMenuBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <nav class="mobile-nav">
+          <a href="#seccion-programa" class="mobile-link">Programa principal</a>
+          <a href="#seccion-metodologia" class="mobile-link">Metodología</a>
+          <a href="#seccion-resultados" class="mobile-link">Resultados</a>
+          <a href="#seccion-inscribirse" class="mobile-link">Inscripciones</a>
+          <a href="#seccion-equipo" class="mobile-link">Equipo</a>
+          <a href="#cursos" class="mobile-link">Cursos OnDemand</a>
+          <a href="#seccion-faq" class="mobile-link">Preguntas Frecuentes</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div id="hero-particles"></div>
+      <div class="hero-left">
+        <div class="title-wrapper">
+          <img src="img/logoblanco.png" alt="Logo Teocalli Lab" class="logo" />
+          <h2 class="title">TEOCALLI LAB SCHOOL</h2>
+          <img src="img/el-dios-tlaloc-fragmento-de-pintura-mural-coleccion-de-arte-prehispanico-museo-amparo-puebla.jpg" alt="Mural Tlaloc" class="hero-tlaloc-img"/>
+
+          <p
+            class="image-reference"
+            style="
+              font-size: 0.75em;
+              color: #6ebcc2;
+              margin: -15px 0 20px 0;
+              text-align: left;
+              width: 100%;
+              font-family: &quot;FuenteTextos&quot;, sans-serif;
+            "
+          >
+            Pieza:
+            <a
+              href="https://museoamparo.com/colecciones/pieza/515/el-dios-tlaloc-fragmento-de-pintura-mural?page=1"
+              target="_blank"
+              style="color: #0f778e; text-decoration: none">El Dios Tlaloc (Fragmento de pintura mural) - Museo Amparo</a>
+          </p>
+          <p class="subtitle">Hecho en México</p>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-content-wrapper">
+          <h1 class="hero-top-text fuente-titulos-text">Programa online de<br /><span class="keyword-highlight">Análisis de Datos con Python</span><br />desde los fundamentos</h1>
+          <p class="hero-highlight">
+            Aprende a limpiar, analizar y visualizar datos reales, y a tomar decisiones basadas en lo que encuentras, aunque partas desde cero.
+          </p>
+          <p class="hero-highlight">
+            Para estudiantes universitarios y profesionales que quieren dejar de depender de tutoriales y empezar a resolver problemas con criterio propio.
+          </p>
+          <p class="hero-highlight">
+            No enseñamos herramientas. Enseñamos a <span class="keyword-highlight">pensar.</span>
+          </p>
+          <div class="hero-buttons">
+            <div class="button-borders">
+              <a href="#seccion-programa" class="primary-button">Conoce el programa</a>
+            </div>
+            <div class="button-borders">
+              <a href="#otros-cursos" class="primary-button secondary-button">Otros cursos</a>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-box">
+              <span class="stat-number">15 Semanas</span>
+              <span class="stat-label">Duración del programa</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">LIVE Online</span>
+              <span class="stat-label">Sesiones en vivo</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">15/Ene/27</span>
+              <span class="stat-label">Inicio de la primera generación</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARQUEE -->
+
+    <section class="marquee-section">
+      <div class="marquee-container">
+        <div class="marquee-content">
+          <span>Matemáticas</span><span class="separator">&middot;</span>
+          <span class="outline-text">Python</span><span class="separator">&middot;</span>
+          <span>Análisis de Datos</span><span class="separator">&middot;</span>
+          <span class="outline-text">Visualización de datos</span><span class="separator">&middot;</span>
+          <span>Estadística</span><span class="separator">&middot;</span>
+          <span class="outline-text">Toma de decisiones</span><span class="separator">&middot;</span>
+          <span>Pensamiento analítico</span><span class="separator">&middot;</span>
+          <span class="outline-text">Resolución de problemas</span><span class="separator">&middot;</span>
+          <span>Matemáticas</span><span class="separator">&middot;</span>
+          <span class="outline-text">Python</span><span class="separator">&middot;</span>
+          <span>Análisis de Datos</span><span class="separator">&middot;</span>
+          <span class="outline-text">Visualización de datos</span><span class="separator">&middot;</span>
+          <span>Estadística</span><span class="separator">&middot;</span>
+          <span class="outline-text">Toma de decisiones</span><span class="separator">&middot;</span>
+          <span>Pensamiento analítico</span><span class="separator">&middot;</span>
+          <span class="outline-text">Resolución de problemas</span><span class="separator">&middot;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCION WHY -->
+
+    <section class="why-section">
+      <div class="why-container">
+        <div class="why-image-col">
+          <img
+            src="img/museo_de_antopologia_e_historia.webp"
+            alt="Museo Nacional de Antropología e Historia"
+            class="why-image"/>
+          <p
+            style="
+              font-size: 0.8em;
+              color: #1a1a1a;
+              margin-top: 15px;
+              font-family: &quot;FuenteTextos&quot;, sans-serif;">
+            Fotografía:
+            <a
+              href="https://tierrasmayas.com/el-museo-nacional-de-antropologia-e-historia-de-cdmx/"
+              target="_blank"
+              style="color: #960018; font-weight: bold; text-decoration: none">Tierras Mayas</a>
+          </p>
+        </div>
+
+        <div class="why-text-col">
+          <h2 class="why-heading">¿Por qué existe<br />Teocalli Lab School?</h2>
+          <p class="why-text">
+            Teocalli Lab School nació de una inquietud: en muchos cursos se aprende a seguir pasos y
+            usar herramientas, pero queda poco espacio para entender cómo pensar un problema.
+          </p>
+          <p class="why-text">
+            En Teocalli Lab School enseñamos matemáticas, programación y análisis de datos conectando
+            los conceptos con preguntas y situaciones concretas. Queremos que aprendas no solo qué
+            herramienta usar, sino por qué usarla y cómo interpretar lo que obtienes.
+          </p>
+          <p class="why-text">
+            El programa está pensado para quienes empiezan su camino universitario y para
+            profesionales que quieren sumar habilidades analíticas a su experiencia.
+          </p>
+          <p class="why-author">CEO Israel Lueza</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRASE DE MARCA -->
+
+    <section class="statement-section">
+      <div class="statement-container">
+        <div class="statement-card brutal-card-wrapper">
+          <h2 class="statement-heading" style="font-style: italic">
+            Aprende a pensar.<br /><span style="color: #fdcf58">Aprende a construir.</span>
+          </h2>
+          <p class="statement-text">
+            Desarrolla bases en matemáticas, programación y análisis de datos para comprender
+            problemas, explorar soluciones y explicar tus decisiones.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMA PRINCIPAL -->
+
+    <section class="courses-section" id="cursos">
+      <div class="courses-container">
+        <h2 class="courses-heading">Programa principal</h2>
+        <h3 class="brutal-title">Análisis de Datos con Python</h3>
+        <p class="brutal-desc">
+          Aprende los fundamentos de Python y úsalos para preparar, explorar y visualizar datos. A lo largo del programa practicarás cómo formular preguntas, elegir métodos y comunicar conclusiones, y terminarás con un proyecto final con datos reales.
+        </p>
+        <p class="brutal-desc"><strong>Inicio: 15 de enero de 2027</strong><br /><strong>Cupo máximo: 25 lugares</strong></p>
+        <div class="program-details-grid">
+          <div class="program-includes">
+            <h4 class="program-details-heading">Lo que incluye</h4>
+            <ul class="syllabus-brutal-list">
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span>15 sesiones en vivo, sábados de 9:00 a 13:00 h (60 horas)</span></li>
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span>Aproximadamente 30 horas de práctica independiente</span></li>
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span>Grabación de todas las sesiones</span></li>
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span>Proyecto final integrador</span></li>
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span>Taller de Matemáticas incluido sin costo</span></li>
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span>Certificado de aprobación</span></li>
+            </ul>
+          </div>
+          <div class="program-investment">
+            <h4 class="program-details-heading">Inversión</h4>
+            <p class="brutal-desc">Precio regular: <s>$7,499 MXN</s></p>
+            <p class="brutal-desc"><strong>Preventa, hasta el 10 de enero:</strong></p>
+            <ul class="syllabus-brutal-list">
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span><strong>Pago único: $6,374 MXN</strong></span></li>
+              <li><i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i><span><strong>3 mensualidades de $2,200 MXN</strong> (total $6,600 MXN)</span></li>
+            </ul>
+            <p class="brutal-desc program-payment-note">Pago por transferencia bancaria. Tu lugar se confirma con el primer pago.</p>
+          </div>
+        </div>
+        <div class="program-actions">
+          <a href="https://wa.me/525529033828?text=Hola%2C%20quiero%20inscribirme%20al%20programa%20de%20An%C3%A1lisis%20de%20Datos%20con%20Python." target="_blank" rel="noopener noreferrer" class="brutal-button">Inscríbete ahora</a>
+          <a href="#seccion-programa" class="brutal-button">Ver temario completo &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="syllabus-section" id="seccion-programa">
+      <div class="syllabus-container">
+        <div class="syllabus-left">
+          <h2 class="syllabus-heading">Programa del curso de Análisis de Datos con Python</h2>
+          <p class="syllabus-text">
+            Empezarás con conceptos de algoritmos y Python. Después aprenderás a preparar, explorar y
+            visualizar datos, y a usar herramientas estadísticas para encontrar patrones y responder
+            preguntas. La práctica acompañará cada etapa para que entiendas qué haces, por qué lo
+            haces y cómo interpretar los resultados.
+          </p>
+          <div class="code-editor-wrapper">
+            <img src="img/LogColor.png" class="editor-mascot" alt="Teocalli Logo" />
+            <div class="code-editor-mockup">
+              <div class="editor-header">
+                <div class="editor-dots"><span></span><span></span><span></span></div>
+                <div class="editor-filename">analisis_datos.py</div>
+              </div>
+              <div class="editor-body">
+                <pre
+                  style="margin: 0"><code><span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="keyword">def</span> <span class="function">iniciar_curso</span>():
+    <span class="comment"># Aprende a pensar, aprende a construir</span>
+    datos = pd.<span class="function">read_csv</span>(<span class="string">"tu_futuro.csv"</span>)
+    <span class="function">print</span>(<span class="string">"¡Bienvenido a Teocalli Lab School!"</span>)
+    <span class="keyword">return</span> datos.<span class="function">analizar</span>()
+    
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    <span class="function">iniciar_curso</span>()</code>
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="syllabus-right">
+          <div class="brutal-card syllabus-brutal-card" style="position: relative">
+            <div
+              class="brutal-badge"
+              style="
+                background: #00b86b;
+                position: absolute;
+                top: -15px;
+                right: -15px;
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                transform: rotate(3deg);"> Precio promocional: $6,374 MXN
+            </div>
+            <h3
+              class="brutal-title"
+              style="margin-top: 0; margin-bottom: 20px; font-size: 2rem; color: #1a1a1a">
+              Temario del curso
+            </h3>
+            <p class="brutal-desc" style="margin-bottom: 20px">
+              Para dominar el análisis de datos estudiarás:
+            </p>
+            <ul class="syllabus-brutal-list">
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>01. ¿Qué es el Análisis de Datos?</span>
+              </li>
+
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>02. Fundamentos de Algoritmos</span>
+              </li>
+
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>03. Fundamentos de Python</span>
+              </li>
+
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>04. Estructuras de Control</span>
+              </li>
+
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>05. Funciones y estructuras de datos</span>
+              </li>
+
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>06. Numpy y Pandas</span>
+              </li>
+
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>07. Limpieza de Datos</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>08. Estadística Descriptiva e Inferencial</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>09. Análisis Exploratorio de Datos (EDA)</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>10. Visualización de Datos</span>
+              </li>
+            </ul>
+            <a
+              href="https://wa.me/525529033828?text=Hola%2C%20quiero%20postularme%20como%20alumno%20al%20curso%20de%20Python."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="brutal-button"
+              style="margin-top: 30px; width: 100%; justify-content: center; font-size: 1.2rem"
+              >Postular como alumno <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metodología -->
+
+    <section class="methodology-redesign-section" id="seccion-metodologia">
+      <div class="methodology-redesign-container">
+        <div class="meth-left-col">
+          <h2 class="meth-main-title">Nuestra metodología</h2>
+          <p class="meth-desc" style="font-size: 1.05rem; margin: -20px 0 25px">
+            Aprender análisis de datos requiere más que conocer funciones o memorizar pasos. Por eso,
+            trabajamos cada tema en tres momentos:
+          </p>
+
+          <div class="meth-cards-wrapper">
+            <div class="meth-card">
+              <div class="meth-badge">01</div>
+              <div class="meth-text-content">
+                <h3 class="meth-title">Comprender</h3>
+                <p class="meth-desc">
+                  Aclarar el problema y comprender los conceptos necesarios antes de elegir cómo
+                  abordarlo.
+                </p>
+              </div>
+            </div>
+            <div class="meth-card">
+              <div class="meth-badge">02</div>
+              <div class="meth-text-content">
+                <h3 class="meth-title">Practicar</h3>
+                <p class="meth-desc">
+                  Probar métodos y herramientas con acompañamiento, desarrollando el razonamiento
+                  paso a paso.
+                </p>
+              </div>
+            </div>
+            <div class="meth-card">
+              <div class="meth-badge">03</div>
+              <div class="meth-text-content">
+                <h3 class="meth-title">Construir</h3>
+                <p class="meth-desc">
+                  Aplicar lo aprendido a un problema y explicar las decisiones tomadas durante el
+                  proceso.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="meth-right-col">
+          <img src="img/LogColor.png" alt="Teocalli Mascot" class="meth-mascot-img" />
+          <p class="meth-terminal-text">
+            3 fases fundamentales + 1 proyecto final,<br />resolución de problemas complejos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: ¿QUÉ PODRÁS HACER? -->
+
+    <section class="outcomes-section" id="seccion-resultados">
+      <div class="outcomes-container">
+        <div class="outcomes-header">
+          <span
+            class="brutal-eyebrow"
+            style="
+              background: #1a1a1a;
+              color: #fff;
+              padding: 5px 15px;
+              border-radius: 20px;
+              font-weight: bold;
+              font-family: &quot;Courier New&quot;, monospace;
+              font-size: 0.85rem;
+              letter-spacing: 1px;
+            ">AL FINALIZAR TU FORMACIÓN</span>
+          <h2 class="outcomes-heading">¿Qué podrás hacer?</h2>
+          <p class="outcomes-intro">
+            No se trata solo de aprender Python. Desarrollarás las bases necesarias para analizar
+            información, resolver problemas y tomar decisiones a partir de datos.
+          </p>
+        </div>
+        <div class="outcomes-grid">
+          <div class="brutal-card outcome-card">
+            <span class="outcome-badge" style="background-color: #d9004c; color: #1a1a1a">01</span>
+            <h3 class="outcome-title">Analizar datos</h3>
+            <p class="outcome-desc">
+              Explorar conjuntos de datos, identificar patrones y obtener información útil para
+              comprender un problema.
+            </p>
+          </div>
+          <div class="brutal-card outcome-card">
+            <span class="outcome-badge" style="background-color: #fdcf58; color: #1a1a1a">02</span>
+            <h3 class="outcome-title">Limpiar información</h3>
+            <p class="outcome-desc">
+              Preparar datos para su análisis mediante procesos de limpieza, transformación y
+              organización.
+            </p>
+          </div>
+
+          <div class="brutal-card outcome-card">
+            <span class="outcome-badge" style="background-color: #497959; color: #ffffff">03</span>
+            <h3 class="outcome-title">Interpretar resultados</h3>
+            <p class="outcome-desc">
+              Utilizar estadística y razonamiento analítico para interpretar resultados y sustentar
+              tus conclusiones.
+            </p>
+          </div>
+
+          <div class="brutal-card outcome-card">
+            <span class="outcome-badge" style="background-color: #569eb5; color: #1a1a1a">04</span>
+            <h3 class="outcome-title">Visualizar información</h3>
+            <p class="outcome-desc">
+              Convertir datos en representaciones visuales que faciliten la comprensión y
+              comunicación de los resultados.
+            </p>
+          </div>
+
+          <div class="brutal-card outcome-card">
+            <span class="outcome-badge" style="background-color: #d9004c; color: #1a1a1a">05</span>
+            <h3 class="outcome-title">Resolver problemas</h3>
+            <p class="outcome-desc">
+              Aplicar pensamiento lógico y analítico para estructurar problemas y plantear
+              soluciones utilizando datos.
+            </p>
+          </div>
+
+          <div class="brutal-card outcome-card">
+            <span class="outcome-badge" style="background-color: #fdcf58; color: #1a1a1a">06</span>
+            <h3 class="outcome-title">Construir un proyecto</h3>
+            <p class="outcome-desc">
+              Integrar los conocimientos adquiridos en un proyecto práctico orientado a resolver un
+              problema mediante el análisis de datos.
+            </p>
+          </div>
+        </div>
+
+        <div class="outcomes-footer">
+          <p><strong>Aprende a pensar.</strong> Aprende a construir soluciones con datos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCION COMO INSCRIBIRSE -->
+
+    <section class="enroll-section" id="seccion-inscribirse">
+      <div class="enroll-container">
+        <h2 class="enroll-heading">Cómo inscribirse</h2>
+        <p class="enroll-subheading">Postula al programa</p>
+        <p class="syllabus-text" style="max-width: 850px; margin: 0 auto 40px; text-align: center">
+          Dirigido a estudiantes de los primeros semestres universitarios y a profesionales de 18 a 40 años que quieren adquirir habilidades de programación y análisis de datos. No necesitas experiencia previa en Python; sí disposición para practicar, preguntar y resolver problemas paso a paso.
+        </p>
+        <div class="enroll-cards-wrapper">
+          <!-- Tarjeta Alumno -->
+          <div class="brutal-card enroll-card">
+            <span class="enroll-eyebrow">SI QUIERES SER ALUMNO</span>
+            <h3 class="enroll-card-title">Postula como alumno</h3>
+            <p class="enroll-card-desc">Para participar como estudiante necesitas:</p>
+            <ul class="syllabus-brutal-list enroll-list">
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>
+                  Tener entre 18 y 40 años y ser estudiante de los primeros semestres universitarios
+                  o profesional interesado en adquirir estas habilidades.
+                </span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>
+                  Mostrar interés en la programación, la resolución de problemas y el pensamiento
+                  lógico.
+                </span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>
+                  Completar el formulario de inscripción en línea dentro del plazo
+                  establecido.
+                </span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>Contar con un computador con conexión a internet para los ejercicios.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>
+                  Comprometerte a asistir al menos al 80 % de las sesiones para obtener el
+                  certificado.
+                </span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>Hacer el mínimo de ejercicios pedidos por el nivel.</span>
+              </li>
+            </ul>
+            <a
+              href="https://wa.me/525529033828?text=Hola,%20quiero%20postularme%20como%20alumno"
+              target="_blank"
+              class="enroll-btn enroll-btn-pink">Postular como alumno</a>
+          </div>
+
+          <!-- Tarjeta Docente -->
+          <div class="brutal-card enroll-card">
+            <span class="enroll-eyebrow">SI QUIERES SER DOCENTE</span>
+            <h3 class="enroll-card-title">Postula como docente</h3>
+            <p class="enroll-card-desc">Para acompañar como docente necesitas:</p>
+            <ul class="syllabus-brutal-list enroll-list">
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>Experiencia en matemáticas y programación (Python u otro lenguaje).</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>Disponibilidad durante todo el período de clases.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>Interés por enseñar, acompañar procesos de aprendizaje y modelar un liderazgo
+                  inclusivo.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>Participar en las reuniones de coordinación y en las actividades del curso.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-square-check" style="color: #00b86b; font-size: 1.3rem"></i>
+                <span>Responder los cuestionarios correspondientes.</span>
+              </li>
+            </ul>
+            <a
+              href="https://wa.me/525529033828?text=Hola,%20quiero%20postularme%20como%20docente"
+              target="_blank"
+              class="enroll-btn enroll-btn-purple">Postular como docente</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- TESTIMONIOS -->
+
+    <!--section class="testimonials-section" id="seccion-testimonios">
+      <div class="testi-container">
+        <div class="testi-track" id="testi-track">
+          <div class="testi-slide">
+            <div class="testi-header">
+              <div class="testi-avatar-wrapper">
+                <div class="testi-avatar">
+                  <img src="img/Myr_Arroyo.jpg" alt="Avatar" />
+                </div>
+              </div>
+
+              <div class="testi-quote-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div class="testi-content">
+              <p>
+                "Teocalli Lab es lo mejor que le ha pasado a la enseñanza de datos. La metodología
+                de pensar antes de programar cambia por completo las reglas del juego."
+              </p>
+            </div>
+
+            <div class="testi-author">
+              <span class="testi-line"></span>
+
+              <span class="testi-name">Elena Gómez / Analista de Datos</span>
+            </div>
+          </div>
+
+          <div class="testi-slide">
+            <div class="testi-header">
+              <div class="testi-avatar-wrapper">
+                <div class="testi-avatar">
+                  <img src="img/Alberto.jpg" alt="Avatar" />
+                </div>
+              </div>
+
+              <div class="testi-quote-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div class="testi-content">
+              <p>
+                "¿¿Los cursos son increíblemente detallados y los profesores siempre están
+                dispuestos a ayudarte con ejercicios prácticos y casos reales."
+              </p>
+            </div>
+
+            <div class="testi-author">
+              <span class="testi-line"></span>
+              <span class="testi-name">Carlos Ruiz / Estudiante de Ingeniería</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-controls">
+          <div class="testi-dots">
+            <button class="testi-dot active" onclick="moveTesti(0)"></button>
+            <button class="testi-dot" onclick="moveTesti(1)"></button>
+          </div>
+
+          <div class="testi-arrows">
+            <button class="testi-arrow" onclick="moveTesti('prev')">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <button class="testi-arrow" onclick="moveTesti('next')">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section-->
+
+    <!-- EQUIPO -->
+
+    <!-- EQUIPO REDESIGN -->
+
+    <section class="team-redesign-section" id="seccion-equipo">
+      <div class="team-container">
+        <h2 class="section-heading dark-text" style="text-align: center; margin-bottom: 60px">
+          Equipo
+        </h2>
+        <div class="team-brutal-grid">
+          <!-- Miembro 1 -->
+          <div class="team-brutal-card" style="background-color: #d9004c">
+            <div class="team-brutal-photo">
+              <img src="img/FILM.jpg" alt="MCC Israel Lueza" />
+            </div>
+
+            <div class="team-brutal-info">
+              <h3 class="team-brutal-name">MCC Israel<br />Lueza</h3>
+
+              <p class="team-brutal-role">Matemáticas Aplicadas</p>
+              <p class="team-brutal-bio">
+                Conecta las matemáticas, la programación y el análisis de datos para enseñar a
+                abordar problemas con criterio.
+              </p>
+
+              <div class="team-brutal-pills">
+                <span class="team-brutal-pill">Python</span>
+
+                <span class="team-brutal-pill">SQL</span>
+
+                <span class="team-brutal-pill">Machine Learning</span>
+
+                <span class="team-brutal-pill">R Studio</span>
+
+                <span class="team-brutal-pill">Power BI</span>
+
+                <span class="team-brutal-pill">Excel</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Miembro 2 -->
+
+          <div class="team-brutal-card" style="background-color: #fdcf58">
+            <div class="team-brutal-photo">
+              <img src="img/Myr_Arroyo.jpeg" alt="Mtra. Myriam Arroyo" />
+            </div>
+
+            <div class="team-brutal-info">
+              <h3 class="team-brutal-name">Mtra. Myriam<br />Arroyo</h3>
+
+              <p class="team-brutal-role">Directora Académica</p>
+              <p class="team-brutal-bio">
+                Acompaña la planeación académica para que cada etapa del aprendizaje tenga objetivos
+                claros y una progresión coherente.
+              </p>
+            </div>
+          </div>
+
+          <!-- Miembro 3 -->
+
+          <div class="team-brutal-card" style="background-color: #497959">
+            <div class="team-brutal-photo">
+              <img src="img/Alberto.png" alt="Dr. Alberto Quezada" />
+            </div>
+
+            <div class="team-brutal-info">
+              <h3 class="team-brutal-name">Dr. Alberto<br />Quezada</h3>
+
+              <p class="team-brutal-role">Matemáticas Aplicadas</p>
+              <p class="team-brutal-bio">
+                Aporta una perspectiva aplicada de las matemáticas y ayuda a relacionar sus
+                conceptos con problemas concretos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OTROS CURSOS -->
+
+    <section class="courses-section" id="otros-cursos">
+      <div class="courses-container">
+        <h2 class="courses-heading">Otros cursos</h2>
+        <div class="courses-grid">
+          <div class="brutal-card">
+            <div class="brutal-badge" style="background: #c68a3c">GRATUITO</div>
+            <h3 class="brutal-title">Taller de Matemáticas</h3>
+            <p class="brutal-desc">
+              Refuerza tus fundamentos matemáticos y practica el razonamiento necesario para abordar
+              problemas académicos y profesionales.
+            </p>
+          </div>
+          <div class="brutal-card">
+            <div class="brutal-badge" style="background: #569eb5">PRÓXIMAMENTE</div>
+            <h3 class="brutal-title">Matemáticas para Ciencia de Datos e IA</h3>
+            <p class="brutal-desc">
+              Construye fundamentos matemáticos para estudiar ciencia de datos e inteligencia
+              artificial.
+            </p>
+          </div>
+          <div class="brutal-card">
+            <div class="brutal-badge" style="background: #0a6280">ONDEMAND</div>
+            <h3 class="brutal-title">Cálculo Diferencial</h3>
+            <p class="brutal-desc">Curso OnDemand de Cálculo Diferencial.</p>
+          </div>
+          <div class="brutal-card">
+            <div class="brutal-badge" style="background: #0a6280">ONDEMAND</div>
+            <h3 class="brutal-title">Cálculo Integral</h3>
+            <p class="brutal-desc">Curso OnDemand de Cálculo Integral.</p>
+          </div>
+          <div class="brutal-card">
+            <div class="brutal-badge" style="background: #0a6280">ONDEMAND</div>
+            <h3 class="brutal-title">Álgebra Lineal</h3>
+            <p class="brutal-desc">Curso OnDemand de Álgebra Lineal.</p>
+          </div>
+          <div class="brutal-card">
+            <div class="brutal-badge" style="background: #0a6280">ONDEMAND</div>
+            <h3 class="brutal-title">Ecuaciones Diferenciales</h3>
+            <p class="brutal-desc">Curso OnDemand de Ecuaciones Diferenciales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+
+    <section id="seccion-faq">
+      <div class="faq-container">
+        <h2 class="section-heading dark-text iv" style="text-align: center; margin-bottom: 20px">
+          Preguntas Frecuentes
+        </h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Para quién están dirigidos los cursos?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  Nuestros programas están dirigidos a estudiantes universitarios, recién egresados
+                  y profesionales de cualquier área que deseen desarrollar habilidades en
+                  Matemáticas, programación y análisis de datos. No importa si tu formación es en
+                  ingeniería, administración, ciencias sociales, humanidades, negocios o marketing;
+                  nuestros cursos están diseñados para ayudarte a construir una base sólida desde
+                  cero.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Necesito conocimientos previos para inscribirme?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  No. Nuestros cursos están diseñados para personas que comienzan desde cero.
+                  Iniciamos con los conceptos fundamentales y avanzamos de manera progresiva,
+                  permitiéndote desarrollar habilidades técÃšnicas y analíticas sin necesidad de
+                  experiencia previa.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Necesito saber Matemáticas para estudiar análisis de datos?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  No necesitas conocimientos avanzados, pero sí es recomendable contar con bases
+                  Matemáticas de nivel bachillerato. Si sientes que algunos conceptos están
+                  olvidados o necesitas reforzarlos, no te preocupes.
+                </p>
+                <p>
+                  Nuestro Taller de Matemáticas intensivo está diseñado precisamente para ayudarte a
+                  recuperar y fortalecer esos fundamentos antes de abordar temas más avanzados
+                  relacionados con programación, análisis de datos y ciencia de datos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Qué necesito para tomar los cursos?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  Únicamente una computadora con acceso a internet y disposición para aprender.
+                  Durante el curso te proporcionaremos las herramientas, recursos y orientación
+                  necesarios para que puedas seguir las clases y realizar las actividades prácticas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿En qué formato se imparten los cursos?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  Todos los cursos se imparten en modalidad 100% en vivo. Esto te permite
+                  interactuar directamente con el instructor, resolver dudas en tiempo real y
+                  participar activamente en ejercicios y actividades prácticas durante cada sesión.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Las clases quedan grabadas?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  Sí. Todas las sesiones son grabadas y estarán disponibles para su consulta
+                  posterior. Esto te permite repasar conceptos, reforzar temas importantes y avanzar
+                  a tu propio ritmo cuando necesites revisar algún contenido.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Los cursos incluyen ejercicios y proyectos prácticos?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  Sí. Nuestros programas combinan explicaciones teóricas con ejercicios guiados y
+                  actividades prácticas. Además, los cursos incluyen proyectos integradores que te
+                  permitirán aplicar los conocimientos adquiridos a situaciones reales.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Cómo obtengo acceso al Taller de Matemáticas gratuito?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  El Taller de Matemáticas se incluye sin costo adicional al inscribirte en los
+                  cursos de Python para Análisis de Datos o Matemáticas para Ciencia de Datos. El
+                  acceso se habilita automáticamente una vez confirmada tu inscripción.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Recibiré un certificado al finalizar?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  Sí. Al completar satisfactoriamente el curso y cumplir con los requisitos
+                  académicos establecidos, recibirás un certificado de aprobación emitido por
+                  Teocalli Lab School.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">
+              <span class="faq-question">¿Qué hace diferente a Teocalli Lab School?</span>
+              <i class="fa-solid fa-plus faq-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <p>
+                  Mientras muchos cursos se enfocan únicamente en enseñar herramientas o
+                  procedimientos específicos, nuestro enfoque está orientado al desarrollo del
+                  pensamiento analítico y la resolución de problemas. Buscamos que nuestros
+                  estudiantes comprendan los fundamentos detrás de los conceptos para que puedan
+                  adaptarse a nuevas tecnologías, aprender de forma autónoma y aplicar sus
+                  conocimientos en distintos contextos profesionales.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer-redesign">
+      <div class="footer-container-redesign">
+        <div class="footer-grid-redesign">
+          <div class="footer-col-1">
+            <img src="img/logoblanco.png" alt="Teocalli Lab" class="footer-logo" />
+          </div>
+
+          <div class="footer-col-2">
+            <h4 class="footer-title">¿CÓMO INSCRIBIRSE?</h4>
+            <ul class="footer-links">
+              <li><a href="#seccion-inscribirse">Como alumno</a></li>
+              <li><a href="#seccion-inscribirse">Como docente</a></li>
+              <li><a href="#seccion-equipo">Conocer al equipo</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col-3 footer-col-blue">
+            <h4 class="footer-title">PROGRAMAS</h4>
+            <div class="footer-pills">
+              <a href="#" class="footer-pill">Análisis de datos con Python</a>
+              <a href="#" class="footer-pill">Matemáticas para Ciencia de Datos e IA</a>
+            </div>
+          </div>
+
+          <div class="footer-col-4">
+            <h4 class="footer-title">SÍGUENOS</h4>
+            <div class="footer-pills footer-social-pills">
+              <a href="#" class="footer-pill">Instagram</a>
+              <!--a href="#" class="footer-pill">TikTok</a-->
+            </div>
+
+            <div class="footer-contact-info">
+              Preguntas:<br />
+              <a href="mailto:hola@teocallilabschool.com">hola@teocallilabschool.com</a>
+            </div>
+          </div>
+
+          <nav class="footer-legal-links" aria-label="Enlaces legales" style="grid-column: 1 / -1; display: flex; justify-content: center; flex-wrap: wrap; gap: 36px; text-align: center">
+            <a href="terminos.html" class="footer-underline-link" style="text-decoration: none">Términos y condiciones</a>
+            <a href="privacidad.html" class="footer-underline-link" style="text-decoration: none">Aviso de Privacidad</a>
+            <a href="agradecimientos.html" class="footer-underline-link" style="text-decoration: none">Agradecimientos</a>
+          </nav>
+        </div>
+
+        <div class="footer-bottom-redesign">
+          <p>&copy; 2026 Teocalli Lab School &middot; Hecho con pasi&oacute;n</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/teocalli.js"></script>
+  </body>
+</html>
